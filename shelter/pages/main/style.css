@@ -1,8 +1,96 @@
-* {
+*, 
+*::after, 
+*::before {
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--color-primary: #F1CDB3;
+	--color-light: #fff;
+	--color-dark: #cdcdcd;
 }
 
 ul {
 	margin: 0;
 	padding: 0;
+	list-style: none;
+}
+
+body {
+	font-family: Arial, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+	font-family: Georgia, serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.header {
+	padding: 60px 0;
+	background-color: #000;
+	border: 1px solid red;
+}
+
+.header > .container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid red;
+}
+
+.logo > h1 {
+	margin-bottom: 10px;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 110%;
+	letter-spacing: 0.06em;
+	color: var(--color-primary);
+}
+
+.logo > p {
+	font-size: 13px;
+	line-height: 15px;
+	letter-spacing: 0.1em;
+	color: var(--color-light);
+}
+
+.nav {
+	align-self: center;
+}
+
+.nav-list {
+	display: flex;
+	border: 1px solid red;
+	gap: 35px;
+}
+
+.nav-link {
+	font-size: 15px;
+	
+	line-height: 26px;
+	color: var(--color-dark);
+}
+
+.nav-link.active {
+	display: block;
+	border-bottom: 3px solid var(--color-primary);
+	color: var(--color-light);
 }
