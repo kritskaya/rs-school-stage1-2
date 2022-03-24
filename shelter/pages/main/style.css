@@ -9,7 +9,9 @@
 :root {
 	--color-primary: #F1CDB3;
 	--color-light: #fff;
-	--color-dark: #cdcdcd;
+	--color-dark-s: #cdcdcd;
+	--color-dark-l: #545454;
+	--color-dark-xl: #4C4C4C;
 }
 
 ul {
@@ -43,6 +45,14 @@ button {
 	margin: 0 auto;
 }
 
+.section-header{
+	font-style: normal;
+	font-weight: 400;
+	font-size: 35px;
+	line-height: 45px;
+	letter-spacing: 0.06em;
+	color: var(--color-dark-l);
+}
 /* header */
 
 .header {
@@ -95,7 +105,7 @@ button {
 	font-size: 15px;
 	
 	line-height: 26px;
-	color: var(--color-dark);
+	color: var(--color-dark-s);
 }
 
 .nav-link.active {
@@ -140,7 +150,7 @@ button {
 	text-align: justify;
 	font-size: 15px;
 	line-height: 160%;
-	color: var(--color-dark);
+	color: var(--color-dark-s);
 }
 
 .make-friend-btn {
@@ -150,4 +160,34 @@ button {
 	line-height: 22px;
 	letter-spacing: 0.06em;
 	background-color: var(--color-primary);
+}
+
+/* about section*/
+
+.about {
+	height: 588px;
+	padding: 80px 0 100px 0;
+}
+
+.about-content-block {
+	width: 100%;
+	padding: 0 175px;
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid red;
+}
+
+.about-content {
+	width: 430px;
+	height: 380px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-self: center;
+}
+
+.about-content > p {
+	font-size: 15px;
+	line-height: 160%;
+	color: var(--color-dark-xl);
 }
