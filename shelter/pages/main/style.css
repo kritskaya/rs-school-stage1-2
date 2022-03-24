@@ -32,14 +32,23 @@ a {
 	text-decoration: none;
 }
 
+button {
+	border: none;
+	outline: none;
+	border-radius: 26px;
+}
+
 .container {
 	width: 1200px;
 	margin: 0 auto;
 }
 
+/* header */
+
 .header {
+	position: absolute;
+	width: 100%;
 	padding: 60px 0;
-	background-color: #000;
 	border: 1px solid red;
 }
 
@@ -93,4 +102,52 @@ a {
 	display: block;
 	border-bottom: 3px solid var(--color-primary);
 	color: var(--color-light);
+}
+
+/* not-only section */
+
+.not-only {
+	height: 908px;
+	padding-top: 180px;
+	border: 1px solid blue;
+	background-image: url("../../assets/images/start-screen-background.jpg");
+	background-size: 100% 100%;
+}
+
+.start-screen-block {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.start-screen-content {
+	width: 460px;
+	margin-top: 163px;
+}
+
+.start-screen-title {
+	width: 310px;
+	margin-bottom: 42px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 44px;
+	line-height: 130%;
+	color: var(--color-light);
+}
+
+.start-screen-subtitle {
+	margin-bottom: 42px;
+	text-align: justify;
+	font-size: 15px;
+	line-height: 160%;
+	color: var(--color-dark);
+}
+
+.make-friend-btn {
+	width: 207px;
+	height: 52px;
+	font-size: 17px;
+	line-height: 22px;
+	letter-spacing: 0.06em;
+	background-color: var(--color-primary);
 }
