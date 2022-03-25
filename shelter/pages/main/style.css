@@ -286,3 +286,44 @@ button {
 	background-color: var(--color-primary);
 }
 
+/* help section */
+.help {
+	padding: 80px 87px 100px;
+}
+
+.help-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid red;
+}
+
+.help-header {
+	width: 310px;
+	margin-bottom: 60px;
+	text-align: center;
+}
+
+.help-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 55px;
+	justify-content: center;
+}
+
+.help-item {
+	margin-right: 65px;
+	border: 1px solid red;
+}
+
+.help-item:last-child {
+	margin-right: 0;
+}
+
+.help-item > figure {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	/* border: 1px solid red; */
+}
