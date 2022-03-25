@@ -18,14 +18,18 @@
 	--color-dark-3xl: #292929;
 }
 
-ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+html {
+	scroll-behavior: smooth;
 }
 
 body {
 	font-family: Arial, sans-serif;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 h1,
@@ -38,7 +42,9 @@ a {
 	text-decoration: none;
 }
 
-button {
+button,
+.button {
+	display: block;
 	height: 52px;
 	border: none;
 	outline: none;
@@ -166,6 +172,9 @@ button {
 .make-friend-btn {
 	width: 207px;
 	height: 52px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 17px;
 	line-height: 22px;
 	letter-spacing: 0.06em;
@@ -284,6 +293,9 @@ button {
 
 .get-rest-btn {
 	width: 261px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: var(--color-primary);
 }
 
