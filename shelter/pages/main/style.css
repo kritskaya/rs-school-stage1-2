@@ -391,3 +391,64 @@ button {
 	line-height: 18px;
 	color: var(--color-dark-m);
 }
+
+/* footer */
+
+.footer {
+	padding-top: 40px;
+	background: url(../../assets/images/footer-background.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+
+.footer-content {
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer a {
+	font-family: 'Georgia';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 23px;
+	letter-spacing: 0.06em;
+	color: var(--color-primary);
+}
+
+.footer h3 {
+	font-family: 'Georgia';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 35px;
+	line-height: 45px;
+	letter-spacing: 0.06em;
+	color: var(--color-light);
+}
+
+.contacts,
+.location {
+	margin-top: 15px;
+	margin-bottom: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.contacts {
+	width: 279px;
+}
+
+.location {
+	width: 302px;
+}
+
+.contact-link, 
+.location-link {
+	display: flex;
+	align-items: center;
+}
+
+.contact-icon,
+.location-icon {
+	margin-right: 20px;
+}
