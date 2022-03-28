@@ -155,7 +155,6 @@ button:hover,
 .not-only {
 	height: 908px;
 	padding-top: 180px;
-	/* border: 1px solid blue; */
 	background: url("../../assets/images/start-screen-background.jpg") no-repeat;
 	background-size: 100% 100%;
 }
@@ -177,13 +176,12 @@ button:hover,
 	font-style: normal;
 	font-weight: 400;
 	font-size: 44px;
-	line-height: 130%;
+	line-height: 57px;
 	color: var(--color-light);
 }
 
 .start-screen-subtitle {
 	margin-bottom: 42px;
-	text-align: justify;
 	font-size: 15px;
 	line-height: 160%;
 	color: var(--color-dark-s);
