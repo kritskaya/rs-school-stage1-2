@@ -86,6 +86,7 @@ button:hover,
 .header > .container {
 	display: flex;
 	justify-content: space-between;
+	/* border: 1px solid red; */
 }
 
 .logo {
@@ -102,6 +103,11 @@ button:hover,
 	font-weight: 400;
 	line-height: 110%;
 	letter-spacing: 0.06em;
+	/* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+	text-shadow: 	-1px 1px 0 #000,
+                	 1px 1px 0 #000,
+                   1px -1px 0 #000,
+                  -1px -1px 0 #000;
 	color: var(--color-primary);
 }
 
@@ -110,22 +116,31 @@ button:hover,
 	line-height: 15px;
 	letter-spacing: 0.1em;
 	color: var(--color-light);
+	text-shadow: 	-1px 1px 0 #000,
+                	 1px 1px 0 #000,
+                   1px -1px 0 #000,
+                  -1px -1px 0 #000;
 }
 
 .nav {
-	align-self: center;
+	margin-top: 16px;
 }
 
 .nav-list {
 	display: flex;
-	/* border: 1px solid red; */
+	justify-content: space-between;
 	gap: 35px;
+	width: 443px;
+	/* border: 1px solid red; */
+}
+
+.nav-item:last-child {
+	margin-right: 0;
 }
 
 .nav-link {
 	font-size: 15px;
-	
-	line-height: 26px;
+	line-height: 24px;
 	color: var(--color-dark-s);
 }
 
