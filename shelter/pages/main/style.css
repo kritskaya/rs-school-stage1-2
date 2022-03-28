@@ -351,10 +351,6 @@ button:hover,
 	/* border: 1px solid red; */
 }
 
-.help-item {
-	/* margin-right: 65px; */
-	/* border: 1px solid red; */
-}
 
 .help-item:last-child {
 	margin-right: 0;
@@ -389,7 +385,7 @@ button:hover,
 
 .donation-content {
 	display: flex;
-	width: 915px;
+	width: 914px;
 	height: 282px;
 	margin: 0 auto;
 	/* border: 1px solid red; */
@@ -426,10 +422,6 @@ button:hover,
 	background-color: var(--color-primary);
 	border-radius: 9px;
 	/* border: 1px solid red; */
-}
-
-.card-icon {
-	margin-right: ;
 }
 
 .card-number {
