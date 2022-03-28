@@ -80,7 +80,7 @@ button:hover,
 	position: absolute;
 	width: 100%;
 	padding: 60px 0;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .header > .container {
@@ -92,7 +92,7 @@ button:hover,
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .logo > h1 {
@@ -118,7 +118,7 @@ button:hover,
 
 .nav-list {
 	display: flex;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	gap: 35px;
 }
 
@@ -140,7 +140,7 @@ button:hover,
 .not-only {
 	height: 908px;
 	padding-top: 180px;
-	border: 1px solid blue;
+	/* border: 1px solid blue; */
 	background: url("../../assets/images/start-screen-background.jpg") no-repeat;
 	background-size: 100% 100%;
 }
@@ -198,7 +198,7 @@ button:hover,
 	padding: 0 175px;
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .about-content {
@@ -230,7 +230,7 @@ button:hover,
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .pets-header {
@@ -315,11 +315,10 @@ button:hover,
 }
 
 .help-content {
-	padding: 0 87px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .help-header {
@@ -329,15 +328,18 @@ button:hover,
 }
 
 .help-list {
+	width: 1029px;
+	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 55px;
+	gap: 55px 120px;
 	justify-content: center;
+	/* border: 1px solid red; */
 }
 
 .help-item {
-	margin-right: 65px;
-	border: 1px solid red;
+	/* margin-right: 65px; */
+	/* border: 1px solid red; */
 }
 
 .help-item:last-child {
@@ -350,19 +352,32 @@ button:hover,
 	align-items: center;
 }
 
+.help-item-icon {
+	margin-bottom: 30px;
+}
+
+.help-item-name {
+	font-family: 'Georgia', serif;
+	font-size: 20px;
+	line-height: 23px;
+	text-align: center;
+	letter-spacing: 0.06em;
+	color: var(--color-dark-l);
+}
+
 /* donation section */
 
 .donation {
 	padding: 80px 0 100px;
 	background-color: var(--color-light-l);
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .donation-content {
 	display: flex;
 	width: 915px;
 	margin: 0 auto;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .donation-img {
@@ -390,7 +405,7 @@ button:hover,
 	align-items: center;
 	background-color: var(--color-primary);
 	border-radius: 9px;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .card-icon {
