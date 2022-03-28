@@ -56,6 +56,11 @@ button,
 	color: var(--color-dark-3xl);
 }
 
+button:hover,
+.button:hover {
+	background-color: #FDDCC4;
+}
+
 .container {
 	width: 1200px;
 	margin: 0 auto;
@@ -275,6 +280,11 @@ button,
 	align-items: center;
 	border-radius: 9px;
 	background-color: var(--color-light-s);
+}
+
+.pet-card:hover {
+	background-color: var(--color-light);
+	cursor: pointer;
 }
 
 .pet-name {
