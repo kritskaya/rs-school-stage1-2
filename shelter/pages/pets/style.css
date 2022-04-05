@@ -1,0 +1,21 @@
+@import url(../main/style.css);
+
+.header {
+	position: static;
+}
+
+.logo > h1 {
+	color: var(--color-dark-l);
+}
+
+.logo > p {
+	color: var(--color-dark-3xl);
+}
+
+.nav-link {
+	color: var(--color-dark-l);
+}
+
+.nav-link.active {
+	color: var(--color-dark-3xl);
+}
