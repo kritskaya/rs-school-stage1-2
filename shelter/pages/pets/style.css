@@ -23,6 +23,7 @@
 /* our friends section */
 
 .our-friends {
+	padding: 80px 0 100px;
 	color: var(--color-light-l);
 }
 
@@ -48,13 +49,24 @@
 }
 
 .pagination {
-
+	width: 340px;
+	display: flex;
+	justify-content: space-between;
 }
 
-.slider-prev-btn,
-.slider-next-btn {
-	width: 52px;
-	height: 52px;
-	border: 2px solid var(--color-primary);
-	background-color: transparent;
+.first-page-btn,
+.previous-page-btn {
+	border-color: var(--color-dark-s);
+	color: var(--color-dark-s);
+}
+
+.current-page-btn {
+	background-color: var(--color-primary);
+	color: var(--color-dark-3xl);
+}
+
+.next-page-btn,
+.last-page-btn {
+	border-color: var(--color-primary);
+	color: var(--color-dark-3xl);
 }
