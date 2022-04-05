@@ -19,3 +19,42 @@
 .nav-link.active {
 	color: var(--color-dark-3xl);
 }
+
+/* our friends section */
+
+.our-friends {
+	color: var(--color-light-l);
+}
+
+.our-friends-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.our-friends-header {
+	margin-bottom: 45px;
+	text-align: center;
+}
+
+.cards-container {
+	display: grid;
+	grid-template-columns: repeat(4, 270px);
+	grid-template-rows: repeat(2, 435px);
+	column-gap: 40px;
+	row-gap: 30px;
+	margin: 15px 0;
+	margin-bottom: 45px;
+}
+
+.pagination {
+
+}
+
+.slider-prev-btn,
+.slider-next-btn {
+	width: 52px;
+	height: 52px;
+	border: 2px solid var(--color-primary);
+	background-color: transparent;
+}
