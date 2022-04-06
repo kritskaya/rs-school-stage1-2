@@ -86,7 +86,7 @@ button:hover,
 	padding: 60px 0;
 }
 
-.header > .container {
+.header-content {
 	display: flex;
 	justify-content: space-between;
 }
@@ -250,6 +250,9 @@ button:hover,
 	width: 52px;
 	height: 52px;
 	border: 2px solid var(--color-primary);
+	font-size: 20px;
+	line-height: 23px;
+	letter-spacing: 0.06em;
 	background-color: transparent;
 }
 
