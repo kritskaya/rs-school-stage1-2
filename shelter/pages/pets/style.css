@@ -20,6 +20,10 @@
 	color: var(--color-dark-l);
 }
 
+.nav-link:hover {
+	color: var(--color-dark-3xl);
+}
+
 .nav-link.active {
 	color: var(--color-dark-3xl);
 }

@@ -191,6 +191,10 @@ button:hover,
 	color: var(--color-dark-s);
 }
 
+.nav-link:hover {
+	color: var(--color-light);
+}
+
 .nav-link.active {
 	display: block;
 	border-bottom: 3px solid var(--color-primary);
