@@ -118,6 +118,7 @@ button:hover,
 .button:hover {
 	background-color: var(--color-primary-light);
 	border-color: var(--color-primary-light);
+	cursor: pointer;
 }
 
 .container {
