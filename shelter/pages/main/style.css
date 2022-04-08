@@ -152,7 +152,7 @@ button:hover,
 	align-items: center;
 }
 
-.logo > h1 {
+.logo h1 {
 	margin-bottom: 10px;
 	font-size: 32px;
 	font-style: normal;
@@ -162,7 +162,7 @@ button:hover,
 	color: var(--color-primary);
 }
 
-.logo > p {
+.logo p {
 	font-size: 13px;
 	line-height: 15px;
 	letter-spacing: 0.1em;

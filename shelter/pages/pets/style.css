@@ -6,11 +6,11 @@
 	padding: 30px 0;
 }
 
-.logo > h1 {
+.logo h1 {
 	color: var(--color-dark-l);
 }
 
-.logo > p {
+.logo p {
 	color: var(--color-dark-3xl);
 }
 
