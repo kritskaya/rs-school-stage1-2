@@ -1,0 +1,88 @@
+@import url(../main/style.css);
+
+.header {
+	position: fixed;
+	top: 0;
+	height: 120px;
+	padding: 30px 0;
+	background-color: var(--color-light);
+}
+
+.logo h1 {
+	color: var(--color-dark-l);
+}
+
+.logo p {
+	color: var(--color-dark-3xl);
+}
+
+.nav-link {
+	color: var(--color-dark-l);
+}
+
+.nav-link:hover {
+	color: var(--color-dark-3xl);
+}
+
+.nav-link.active {
+	color: var(--color-dark-3xl);
+}
+
+/* our friends section */
+
+.our-friends {
+	margin-top: 120px;
+	padding: 80px 0 100px;
+	color: var(--color-light-l);
+}
+
+.our-friends-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.our-friends-header {
+	margin: 1px -3px -1px 0;
+	margin-bottom: 44px;
+	text-align: center;
+}
+
+.cards-container {
+	display: grid;
+	grid-template-columns: repeat(4, 270px);
+	grid-template-rows: repeat(2, 435px);
+	column-gap: 40px;
+	row-gap: 30px;
+	padding: 15px 0;
+	margin-bottom: 45px;
+}
+
+.pagination {
+	width: 340px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.first-page-btn,
+.previous-page-btn {
+	border-color: var(--color-dark-s);
+	color: var(--color-dark-s);
+}
+
+.current-page-btn {
+	background-color: var(--color-primary);
+	color: var(--color-dark-3xl);
+}
+
+.next-page-btn,
+.last-page-btn {
+	border-color: var(--color-primary);
+	color: var(--color-dark-3xl);
+}
+
+button:disabled:hover {
+	background-color: transparent;
+	border-color: var(--color-dark-s);
+	cursor: default;
+}
