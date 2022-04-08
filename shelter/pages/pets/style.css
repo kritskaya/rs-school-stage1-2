@@ -5,6 +5,7 @@
 	top: 0;
 	height: 120px;
 	padding: 30px 0;
+	background-color: var(--color-light);
 }
 
 .logo h1 {
@@ -74,4 +75,10 @@
 .last-page-btn {
 	border-color: var(--color-primary);
 	color: var(--color-dark-3xl);
+}
+
+button:disabled:hover {
+	background-color: transparent;
+	border-color: var(--color-dark-s);
+	cursor: default;
 }
