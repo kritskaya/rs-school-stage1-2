@@ -367,6 +367,12 @@ button:hover,
 	background-color: transparent;
 }
 
+.pet-card:hover .pet-card-btn {
+	background-color: var(--color-primary-light);
+	border-color: var(--color-primary-light);
+	transition: 0.5s;
+}
+
 .get-rest-btn {
 	width: 261px;
 	display: flex;
