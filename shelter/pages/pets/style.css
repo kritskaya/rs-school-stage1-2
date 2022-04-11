@@ -33,7 +33,7 @@
 .our-friends {
 	margin-top: 120px;
 	padding: 80px 0 100px;
-	color: var(--color-light-l);
+	background-color: var(--color-light-l);
 }
 
 .our-friends-content {
