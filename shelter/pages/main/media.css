@@ -1,0 +1,51 @@
+
+@media (max-width: 1279px) {
+	.container {
+		width: 100%;
+		padding: 0 30px;
+	}
+	
+	.header {
+		padding: 30px 0;
+	}
+
+	.not-only {
+		height: 1165px;
+		padding-top: 150px;
+	}
+
+	.start-screen-block {
+		width: 569px;
+		height: 593px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.start-screen-content {
+		width: 460px;
+		height: 322px;
+		margin: 0 auto;
+		margin-bottom: 100px;
+	}
+
+	.start-screen-title {
+		margin-bottom: 42px;
+	}
+
+	.make-friend-btn {
+		margin: 0 auto;
+	}
+
+	.start-screen-img {
+		width: 569px;
+		align-self: flex-end;
+		margin-right: -69px;
+	}
+}
+
+@media (max-width: 767px) {
+
+}
+
