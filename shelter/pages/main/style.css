@@ -482,6 +482,11 @@ button:hover,
 	border-radius: 9px;
 }
 
+.credit-card:hover {
+	background-color: var(--color-primary-light);
+	cursor: pointer;
+}
+
 .card-number {
 	font-family: 'Georgia';
 	font-style: normal;
