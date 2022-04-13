@@ -95,6 +95,32 @@
 	.help-item {
 		width: 170px;
 	}
+	
+	.donation {
+		height: auto;
+	}
+
+	.donation-content {
+		width: 100%;
+		height: auto;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.donation-info {
+		width: 380px;
+		margin-bottom: 60px;
+		order: -1;
+		align-self: center;
+	}
+
+	.donation-img {
+		margin-top: 0;
+		margin-right: 0;
+		align-self: center;
+		order: 0;
+	}
 
 }
 
