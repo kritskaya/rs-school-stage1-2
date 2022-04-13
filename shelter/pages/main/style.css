@@ -201,6 +201,10 @@ button:hover,
 	color: var(--color-light);
 }
 
+.burger {
+	display: none;
+}
+
 /* not-only section */
 
 .not-only {

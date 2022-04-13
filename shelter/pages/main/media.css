@@ -148,6 +148,32 @@
 }
 
 @media (max-width: 767px) {
-	
+	.container {
+		padding: 0 10px;
+	}
+
+	.nav {
+		display: none;
+	}
+
+	.burger {
+		width: 30px;
+		height: 22px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.burger > span {
+		display: block;
+		height: 2px;
+		width: 100%;
+		background-color: var(--color-primary);
+	}
+
+	.burger {
+		margin-right: 43px;
+		align-self: center;
+	}
 }
 
