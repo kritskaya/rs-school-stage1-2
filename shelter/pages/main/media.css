@@ -43,9 +43,31 @@
 		align-self: flex-end;
 		margin-right: -69px;
 	}
+
+	.about {
+		height: auto;
+	}
+
+	.about-content-block {
+		width: 437px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.about-content {
+		order: -1;
+		margin-bottom: 80px;
+	}
+
+	.about-img {
+		width: 300px;
+		align-self: center;
+	}
+
 }
 
 @media (max-width: 767px) {
-
+	
 }
 

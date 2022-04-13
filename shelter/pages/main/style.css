@@ -308,7 +308,6 @@ button:hover,
 
 .slider {
 	display: flex;
-	justify-content: stretch;
 	align-items: center;
 }
 
