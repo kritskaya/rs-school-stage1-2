@@ -122,6 +122,29 @@
 		order: 0;
 	}
 
+	.footer {
+		padding-top: 30px;
+	}
+
+	.footer-content {
+		width: 100%;
+		padding: 0 34px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.contacts,
+	.location {
+		height: 234px;
+		margin-top: 0;
+		margin-bottom: 65px;
+	}
+
+	.footer-puppy {
+		margin: 0 auto;
+	}
+
 }
 
 @media (max-width: 767px) {
