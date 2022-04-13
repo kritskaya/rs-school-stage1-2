@@ -175,5 +175,38 @@
 		margin-right: 43px;
 		align-self: center;
 	}
+
+	.not-only {
+		height: auto;
+	}
+
+	.start-screen-block,
+	.start-screen-content {
+		width: 100%;
+		height: auto;
+	}
+
+	.start-screen-content {
+		margin-bottom: 105px;
+	}
+
+	.start-screen-title {
+		width: 100%;
+		padding: 0 50px;
+		font-size: 25px;
+		line-height: 32px;
+		text-align: center;
+		letter-spacing: 0.06em;
+	}
+
+	.start-screen-subtitle {
+		width: 100%;
+		text-align: center;
+	}
+
+	.start-screen-img {
+		width: 260px;
+		margin-right: 0px;
+	}
 }
 
