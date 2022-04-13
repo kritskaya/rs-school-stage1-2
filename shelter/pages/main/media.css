@@ -85,6 +85,17 @@
 		display: none;
 	}
 
+	.help-list {
+		display: grid;
+		grid-template-columns: repeat(3, 170px);
+		grid-template-rows: repeat(3, 113px);
+		column-gap: 60px;
+	}
+
+	.help-item {
+		width: 170px;
+	}
+
 }
 
 @media (max-width: 767px) {
