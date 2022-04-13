@@ -81,7 +81,7 @@
 		width: 580px;
 	}
 
-	.pet-card:nth-child(3) {
+	.about .pet-card:nth-child(3) {
 		display: none;
 	}
 
