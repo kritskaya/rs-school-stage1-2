@@ -290,6 +290,37 @@
 		margin-bottom: 0;
 	}
 
-	
+	.help {
+		padding: 42px 0;
+	}
+
+	.help-header {
+		margin-bottom: 42px;
+	}
+
+	.help-list {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(2, 130px);
+		grid-template-rows: repeat(5, 87px);
+		column-gap: 30px;
+		row-gap: 30px;
+	}
+
+	.help-item {
+		width: 130px;
+		height: 87px;
+	}
+
+	.help-item-icon {
+		width: 50px;
+		margin-bottom: 20px;
+	}
+
+	.help-item-name {
+		font-size: 15px;
+		line-height: 17px;
+	}
+
 }
 
