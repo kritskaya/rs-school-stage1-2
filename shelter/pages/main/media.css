@@ -322,5 +322,54 @@
 		line-height: 17px;
 	}
 
+	.donation {
+		padding: 42px 0;
+	}
+
+	.donation-info {
+		width: 100%;
+		height: 280px;
+		margin-bottom: 42px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.donation-header {
+		padding: 0 15%;
+		margin: 0;
+	}
+
+	.donation-subheader {
+		margin-bottom: 0;
+		font-size: 15px;
+		line-height: 24px;
+		letter-spacing: 0;
+		text-align: center;
+	}
+
+	.credit-card {
+		width: 281px;
+		margin-bottom: 0;
+		align-self: center;
+	}
+	
+	.card-number {
+		font-size: 15px;
+		line-height: 17px;
+	}
+
+	.add-info {
+		padding: 0 10px;
+		font-size: 12px;
+		line-height: 18px;
+		text-align: justify;
+		letter-spacing: 0;
+	}
+
+	.donation-img {
+		width: 260px;
+	}
+
 }
 
