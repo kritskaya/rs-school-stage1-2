@@ -201,6 +201,10 @@ button:hover,
 	color: var(--color-light);
 }
 
+.burger {
+	display: none;
+}
+
 /* not-only section */
 
 .not-only {
@@ -308,7 +312,6 @@ button:hover,
 
 .slider {
 	display: flex;
-	justify-content: stretch;
 	align-items: center;
 }
 
