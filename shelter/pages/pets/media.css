@@ -1,0 +1,71 @@
+@import url(../main/media.css);
+
+@media (max-width: 1279px) {
+	
+	.our-friends {
+		padding-bottom: 70px;
+	}
+
+	.our-friends-header {
+		margin-bottom: 29px;
+	}
+
+	.cards-container {
+		width: 580px;
+		grid-template-columns: repeat(2, 270px);
+		grid-template-rows: repeat(3, 435px);
+		padding: 0;
+		margin-bottom: 40px;
+	}
+
+	.our-friends .pet-card:nth-child(7),
+	.our-friends .pet-card:nth-child(8) {
+		display: none;
+	}
+
+	.pagination {
+		margin-bottom: 6px;
+	}
+}
+
+@media (max-width: 767px) {
+
+	.burger > span {
+		background-color: var(--color-dark-3xl);
+	}
+
+	.our-friends {
+		padding: 42px 0;
+	}
+
+	.cards-container {
+		width: 100%;
+		grid-template-columns: repeat(1, 270px);
+		grid-template-rows: repeat(3, 435px);
+		justify-content: center;
+	}
+
+	.our-friends .pet-card:nth-child(1),
+	.our-friends .pet-card:nth-child(2),
+	.our-friends .pet-card:nth-child(3) {
+		display: flex;
+	}
+
+	.our-friends .pet-card:nth-child(4),
+	.our-friends .pet-card:nth-child(5),
+	.our-friends .pet-card:nth-child(6),
+	.our-friends .pet-card:nth-child(7),
+	.our-friends .pet-card:nth-child(8) {
+		display: none;
+	}
+
+	.our-friends-header {
+		margin-bottom: 42px;
+	}
+
+	.pagination {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+}
