@@ -129,6 +129,7 @@
 
 	.footer-content {
 		width: 708px;
+		margin: 0 auto;
 		padding: 0 34px;
 		display: flex;
 		flex-wrap: wrap;
