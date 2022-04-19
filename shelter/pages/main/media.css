@@ -155,8 +155,16 @@
 	}
 
 	.header {
-		/* position: relative; */
 		overflow-x: hidden;
+	}
+
+	.header.on-menu {
+		width: 320px;
+		right: 0px;
+	}
+
+	.logo {
+		z-index: 100;
 	}
 
 	.nav {
@@ -180,7 +188,7 @@
 	.nav.opened + .burger {
 		transform: rotate(90deg);
 	}
-
+	
 	.nav-list {
 		width: 100%;
 		height: 327px;
@@ -196,7 +204,6 @@
 	}
 
 	.burger {
-		position: relative;
 		z-index: 100;
 		width: 30px;
 		height: 22px;
