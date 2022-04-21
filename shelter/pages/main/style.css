@@ -339,8 +339,53 @@ button:hover,
 
 .slider-cards {
 	display: flex;
-	justify-content: space-between;
 	width: 990px;
+	overflow: hidden;
+	/* border: 1px solid #000; */
+}
+
+.left-slider-block,
+.current-slider-block,
+.right-slider-block {
+	display: flex;
+	justify-content: space-between;
+	min-width: 990px;
+}
+
+.left-slider-block {
+	/* background-color: red; */
+	margin-left: -990px;
+}
+
+.right-slider-block {
+	/* background-color: blue; */
+}
+
+.left-slider-block.left-animated {
+	animation: move-left 3s;
+}
+
+.left-slider-block.right-animated {
+	animation: move-right 3s;
+}
+
+@keyframes move-left {
+	from {
+		margin-left: -990px;
+	}
+	to {
+		margin-left: 0;
+	}
+}
+
+@keyframes move-right {
+	from {
+		margin-left: -990px;
+	}
+
+	to {
+		margin-left: -1980px;
+	}
 }
 
 .pet-card {
