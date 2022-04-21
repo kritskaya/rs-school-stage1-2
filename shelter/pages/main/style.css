@@ -341,7 +341,6 @@ button:hover,
 	display: flex;
 	width: 990px;
 	overflow: hidden;
-	/* border: 1px solid #000; */
 }
 
 .left-slider-block,
@@ -353,12 +352,7 @@ button:hover,
 }
 
 .left-slider-block {
-	/* background-color: red; */
 	margin-left: -990px;
-}
-
-.right-slider-block {
-	/* background-color: blue; */
 }
 
 .left-slider-block.left-animated {
