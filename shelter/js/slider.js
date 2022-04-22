@@ -9,7 +9,6 @@ const currentSliderBlock = document.querySelector('.current-slider-block');
 
 let visibleCardsNumber = document.querySelectorAll('.pet-card').length / 3;
 let petsCount = petsData.length;
-alert(visibleCardsNumber + " " + petsCount);
 
 // left btn click
 export const prevBtnClickHandler = () => {
