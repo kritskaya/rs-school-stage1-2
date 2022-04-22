@@ -1,6 +1,6 @@
 import { petsData } from "./pets.js";
 
-const cardsBlock = document.querySelector(".slider-cards");
+const cardsBlock = document.querySelector(".slider-cards") ;
 
 export const cardClickHandler = () => {
 	cardsBlock.addEventListener("click", (event) => {
