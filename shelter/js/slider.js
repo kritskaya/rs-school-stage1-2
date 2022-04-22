@@ -73,6 +73,7 @@ const generateCardBlocks = (direction) => {
 const createPetCardBlock = (id) => {
 	let petCard = document.createElement('div');
 	petCard.classList.add('pet-card');
+	petCard.setAttribute('data-id', petsData[id].id);
 
 	let petImg = document.createElement('img');
 	petImg.src = petsData[id].img;
