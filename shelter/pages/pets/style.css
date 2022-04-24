@@ -66,9 +66,16 @@
 
 .first-page-btn,
 .previous-page-btn {
+	border-color: var(--color-primary);
+	color: var(--color-dark-3xl);
+}
+
+.pagination .round-btn:disabled {
 	border-color: var(--color-dark-s);
 	color: var(--color-dark-s);
 }
+
+
 
 .current-page-btn {
 	background-color: var(--color-primary);
