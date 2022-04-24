@@ -1,7 +1,7 @@
 import { burgerClickHandler } from '../../js/menu.js';
 import { prevBtnClickHandler, nextBtnClickHandler } from '../../js/slider.js';
 import { cardClickHandler } from '../../js/modal.js';
-import { lastPageBtnClickHandler } from '../../js/pagination.js';
+//import { lastPageBtnClickHandler } from '../../js/pagination.js';
 
 window.onload = () => {
 	burgerClickHandler();
@@ -11,5 +11,5 @@ window.onload = () => {
 
 	cardClickHandler();
 
-	lastPageBtnClickHandler();
+	//lastPageBtnClickHandler();
 }
