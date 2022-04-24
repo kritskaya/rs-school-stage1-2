@@ -552,6 +552,36 @@
 		width: 260px;
 	}
 
+	.modal-window {
+		width: 240px;
+		min-height: 341px;
+	}
+
+	.modal-img {
+		display: none;
+	}
+
+	.modal-content {
+		width: 220px;
+		margin: 10px;
+	}
+
+	.modal-title {
+		text-align: center;
+	}
+
+	.modal-subtitle {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	.modal-text {
+		margin-bottom: 24px;
+		text-align: justify;
+		font-size: 13px;
+		line-height: 14px;	
+		letter-spacing: 0.06em;
+	}
 }
 
 
