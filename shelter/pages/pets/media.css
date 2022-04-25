@@ -30,7 +30,7 @@
 
 @media (max-width: 767px) {
 
-	.header.on-menu {
+	/* .header.on-menu {
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -59,15 +59,19 @@
 	.header.on-menu .nav-link.active {
 		border-bottom: 3px solid var(--color-primary);
 		color: var(--color-light);
+	} */
+
+	.nav {
+		background-color: var(--color-light);
 	}
 	
 	.burger > span {
 		background-color: var(--color-dark-3xl);
 	}
 
-	.header.on-menu .burger>span {
+	/* .header.on-menu .burger>span {
 		background-color: var(--color-primary);
-	}
+	} */
 
 	.our-friends {
 		padding: 42px 0;
