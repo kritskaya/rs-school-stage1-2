@@ -9,7 +9,7 @@ export const menuCloseEventHandler = () => {
 		if (event.target.classList.contains('burger') ||
 			event.target.closest('.burger') ||
 			!event.target.closest('.nav') ||
-			event.target.classList.contains('.opened nav-link')) {
+			(event.target.classList.contains('nav-link') && event.target.closest('.opened'))) {
 			toggleMenu();
 		}
 	});
