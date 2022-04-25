@@ -257,19 +257,20 @@
 	.nav {
 		position: fixed;
 		top: 0;
-		right: 0;
+		right: -320px;
 		width: 320px;
 		height: 100%;
 		margin: 0;
-		margin-right: -320px;
+		margin-right: 0;
 		padding: 248px 38px 0 38px;
 		background-color: var(--color-dark-3xl);
-		transition: margin-right 0.5s;
+		transition: right 0.5s;
 	}
 
-	.nav.opened {
-		margin-right: 0;
+	.header.on-menu .nav {
+		right: 0;
 		z-index: 99;
+		
 	}
 
 	.nav.opened + .burger {
