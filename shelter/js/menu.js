@@ -8,8 +8,9 @@ export const menuCloseEventHandler = () => {
 	header.addEventListener('click', (event) => {
 		if (event.target.classList.contains('burger') ||
 			event.target.closest('.burger') ||
-			!event.target.closest('.nav') ||
-			(event.target.classList.contains('nav-link') && event.target.closest('.opened'))) {
+			(!event.target.closest('.nav.opened') && event.target.closest('.on-menu')) ||
+			(event.target.classList.contains('nav-link') && event.target.closest('.opened') &&
+			!event.target.closest('.logo'))) {
 			toggleMenu();
 		}
 	});
