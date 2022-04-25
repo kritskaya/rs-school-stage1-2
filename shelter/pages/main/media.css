@@ -189,6 +189,36 @@
 		margin: 0 auto;
 	}
 
+	.modal-window {
+		width: 630px;
+		min-height: 350px;
+	}
+	
+	.modal-img {
+		width: 350px;
+		height: 350px;
+	}
+	
+	.modal-content {
+		width: 262px;
+		margin: 10px 8px 10px 11px;
+	}
+	
+	.modal-subtitle {
+		margin-bottom: 20px;
+	}
+	
+	.modal-text {
+		margin-bottom: 20px;
+		font-size: 13px;
+		line-height: 14px;
+		letter-spacing: 0.06em;
+	}
+
+	.modal-list-item {
+		margin-bottom: 6px;
+	}
+
 }
 
 @media (max-width: 767px) {

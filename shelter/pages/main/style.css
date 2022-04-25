@@ -647,11 +647,20 @@ button:hover,
 	right: -42px;
 	width: 52px;
 	height: 52px;
-	border: 2px solid #F1CDB3;
+	border: 2px solid var(--color-primary);
 	border-radius: 50%;
 	background: url(../../assets/icons/close-btn-icon.png) no-repeat;
 	background-position: center;
 	cursor: pointer;
+	transition: 0.3s;
+}
+
+.modal-close-btn:hover {
+	background-color: var(--color-primary);
+}
+
+.overlay.hovered .modal-close-btn {
+	background-color: var(--color-primary);
 }
 
 .modal-img {

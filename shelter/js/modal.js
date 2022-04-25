@@ -13,11 +13,24 @@ export const cardClickHandler = () => {
 
 
 const showModal = (petId) => {
+	document.body.style.overflow = "hidden";
+	
 	let overlay = document.createElement('div');
 	overlay.classList.add('overlay');
 	overlay.addEventListener("click", (event) => {
 		if (event.target.classList.contains("overlay")) {
 			document.body.removeChild(overlay);
+			document.body.style.overflow = "auto";
+		}
+	});
+	overlay.addEventListener("mouseover", (event) => {
+		if (event.target.classList.contains("overlay")) {
+			document.querySelector('.overlay').classList.add('hovered');
+		}
+	});
+	overlay.addEventListener("mouseout", (event) => {
+		if (event.target.classList.contains("overlay")) {
+			document.querySelector('.overlay').classList.remove('hovered');
 		}
 	});
 
@@ -31,6 +44,7 @@ const showModal = (petId) => {
 	closeBtn.classList.add('modal-close-btn');
 	closeBtn.addEventListener("click", () => {
 		document.body.removeChild(overlay);
+		document.body.style.overflow = "auto";
 	});
 	
 	let image = document.createElement('img');
