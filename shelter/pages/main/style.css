@@ -146,7 +146,6 @@ button:hover,
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	transition: 0.3s;
 }
 
 .logo a {
