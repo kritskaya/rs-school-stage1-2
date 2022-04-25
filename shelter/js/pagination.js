@@ -115,6 +115,8 @@ const showPage = () => {
 		let name = card.querySelector(".pet-name");
 		name.textContent = petsData[allPagesCardsId[currentPage - 1][i] - 1].name;
 
+		card.setAttribute("data-id", petsData[allPagesCardsId[currentPage - 1][i] - 1].id);
+
 		i++;
 	})
 }
