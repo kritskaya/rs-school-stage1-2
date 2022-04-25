@@ -82,8 +82,50 @@
 		width: 580px;
 	}
 
-	.pets .pet-card:nth-child(3) {
+	.left-slider-block,
+	.current-slider-block,
+	.right-slider-block {
+		display: flex;
+		justify-content: space-between;
+		min-width: 580px;
+	}
+
+	.left-slider-block .pet-card:last-child,
+	.current-slider-block .pet-card:last-child,
+	.right-slider-block .pet-card:last-child {
 		display: none;
+	}
+
+	.left-slider-block {
+		margin-left: -580px;
+	}
+
+	.left-slider-block.left-animated {
+		animation: move-left 2s;
+	}
+	
+	.left-slider-block.right-animated {
+		animation: move-right 2s;
+	}
+	
+	@keyframes move-left {
+		from {
+			margin-left: -580px;
+		}
+	
+		to {
+			margin-left: 0;
+		}
+	}
+	
+	@keyframes move-right {
+		from {
+			margin-left: -580px;
+		}
+	
+		to {
+			margin-left: -1160px;
+		}
 	}
 
 	.help-list {
@@ -147,6 +189,36 @@
 		margin: 0 auto;
 	}
 
+	.modal-window {
+		width: 630px;
+		min-height: 350px;
+	}
+	
+	.modal-img {
+		width: 350px;
+		height: 350px;
+	}
+	
+	.modal-content {
+		width: 262px;
+		margin: 10px 8px 10px 11px;
+	}
+	
+	.modal-subtitle {
+		margin-bottom: 20px;
+	}
+	
+	.modal-text {
+		margin-bottom: 20px;
+		font-size: 13px;
+		line-height: 14px;
+		letter-spacing: 0.06em;
+	}
+
+	.modal-list-item {
+		margin-bottom: 6px;
+	}
+
 }
 
 @media (max-width: 767px) {
@@ -154,16 +226,82 @@
 		padding: 0 10px;
 	}
 
+	.header {
+		overflow-x: hidden;
+	}
+
+	.header.on-menu {
+		position: fixed;
+		left: 0;
+		top: 0;
+		content: '';
+		width: 100%;
+		height: 100%;
+		background-color: rgba(41, 41, 41, 0.6);
+	}
+
+	.header.on-menu .container {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.header.on-menu .header-content {
+		width: 300px;
+	}
+
+	.logo {
+		z-index: 100;
+	}
+
+
 	.nav {
-		display: none;
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 320px;
+		height: 100%;
+		margin: 0;
+		margin-right: -320px;
+		padding: 248px 38px 0 38px;
+		background-color: var(--color-dark-3xl);
+		transition: margin-right 0.5s;
+	}
+
+	.nav.opened {
+		margin-right: 0;
+		z-index: 99;
+	}
+
+	.nav.opened + .burger {
+		transform: rotate(90deg);
+	}
+	
+	
+	.nav-list {
+		width: 100%;
+		height: 327px;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.nav-link {
+		font-style: normal;
+		font-weight: 400;
+		font-size: 32px;
+		line-height: 51px;
 	}
 
 	.burger {
+		z-index: 100;
 		width: 30px;
 		height: 22px;
+		margin-right: 43px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		align-self: center;
+		cursor: pointer;
+		transition: transform 0.5s;
 	}
 
 	.burger > span {
@@ -171,11 +309,6 @@
 		height: 2px;
 		width: 100%;
 		background-color: var(--color-primary);
-	}
-
-	.burger {
-		margin-right: 43px;
-		align-self: center;
 	}
 
 	.not-only {
@@ -214,7 +347,6 @@
 	}
 
 	.start-screen-img {
-		/* width: 260px; */
 		width: 86.66%;
 		margin-right: 0px;
 	}
@@ -240,7 +372,6 @@
 	}
 
 	.about-content > p {
-		/* width: 270px; */
 		width: 100%;
 		margin-bottom: 22px;
 		text-align: justify;
@@ -265,23 +396,65 @@
 
 	.slider {
 		display: flex;
-		/* flex-direction: column; */
 		justify-content: center;
 		flex-wrap: wrap;
+		width: 270px;
 	}
 
 	.slider-cards {
-		width: 100%;
+		width: 270px;
+		margin: 0 auto;
 		margin-bottom: 20px;
-		justify-content: center;
+		justify-content: space-between;
 		order: -1;
+	}
+
+	.left-slider-block,
+	.current-slider-block,
+	.right-slider-block {
+		display: flex;
+		justify-content: space-between;
+		min-width: 270px;
+	}
+	
+	.left-slider-block {
+		margin-left: -270px;
+	}
+
+	.left-slider-block.left-animated {
+		animation: move-left 1s;
+	}
+	
+	.left-slider-block.right-animated {
+		animation: move-right 1s;
+	}
+	
+	@keyframes move-left {
+		from {
+			margin-left: -270px;
+		}
+	
+		to {
+			margin-left: 0;
+		}
+	}
+	
+	@keyframes move-right {
+		from {
+			margin-left: -270px;
+		}
+	
+		to {
+			margin-left: -540px;
+		}
 	}
 
 	.pet-card {
 		align-self: center;
 	}
 
-	.pet-card:nth-child(2) {
+	.pet-card:nth-child(2),
+	.pet-card:nth-child(3) {
 		display: none;
 	}
 
@@ -426,6 +599,36 @@
 		width: 260px;
 	}
 
+	.modal-window {
+		width: 240px;
+		min-height: 341px;
+	}
+
+	.modal-img {
+		display: none;
+	}
+
+	.modal-content {
+		width: 220px;
+		margin: 10px;
+	}
+
+	.modal-title {
+		text-align: center;
+	}
+
+	.modal-subtitle {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	.modal-text {
+		margin-bottom: 24px;
+		text-align: justify;
+		font-size: 13px;
+		line-height: 14px;	
+		letter-spacing: 0.06em;
+	}
 }
 
 
