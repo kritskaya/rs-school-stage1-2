@@ -30,8 +30,43 @@
 
 @media (max-width: 767px) {
 
+	.header.on-menu {
+		position: fixed;
+		left: 0;
+		top: 0;
+		content: '';
+		width: 100%;
+		height: 100%;
+		background-color: rgba(41, 41, 41, 0.6);
+	}
+
+	.header.on-menu .logo h1 {
+		color: var(--color-primary);
+	}
+
+	.header.on-menu .logo p {
+		color: var(--color-light);
+	}
+
+	.header.on-menu .nav-link {
+		color: var(--color-dark-s);
+	}
+	
+	.header.on-menu .nav-link:hover {
+		color: var(--color-light);
+	}
+
+	.header.on-menu .nav-link.active {
+		border-bottom: 3px solid var(--color-primary);
+		color: var(--color-light);
+	}
+	
 	.burger > span {
 		background-color: var(--color-dark-3xl);
+	}
+
+	.header.on-menu .burger>span {
+		background-color: var(--color-primary);
 	}
 
 	.our-friends {
