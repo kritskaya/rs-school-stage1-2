@@ -5,7 +5,8 @@ import {
 			firstPageBtnClickHandler,
 			nextPageBtnClickHandler,
 			previousPageBtnClickHandler,
-			firstCardsGenerate 
+			firstCardsGenerate,
+			resizeWindowHandler 
 		 } from '../../js/pagination.js';
 
 window.onload = () => {
@@ -18,4 +19,7 @@ window.onload = () => {
 	nextPageBtnClickHandler();
 	previousPageBtnClickHandler();
 	firstCardsGenerate();
+	
+
 }
+

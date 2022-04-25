@@ -14,6 +14,7 @@ const previousPageBtn = document.querySelector(".previous-page-btn");
 const firstPageBtn = document.querySelector(".first-page-btn");
 
 export const firstCardsGenerate = () => {
+	checkPages();
 	generatePageCardsId();
 	showPage();
 }
@@ -71,7 +72,7 @@ export const nextPageBtnClickHandler = () => {
 				lastPageBtn.setAttribute("disabled", true);
 			}
 
-			if (currentPage == 2) {
+			if (currentPage > 1) {
 				firstPageBtn.removeAttribute("disabled");
 				previousPageBtn.removeAttribute("disabled");
 			}
@@ -133,6 +134,8 @@ const generatePageCardsId = () => {
 
 		allPagesCardsId.push(generatedIds);
 	}
+
+	console.log(allPagesCardsId);
 }
 
 const generateNumber = (max) => {
@@ -150,5 +153,6 @@ const checkPages = () => {
 	
 	pagesAmount = 48 / visiblePageCards;
 }
+
 
 checkPages();
