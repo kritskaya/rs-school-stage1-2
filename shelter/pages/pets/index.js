@@ -23,3 +23,6 @@ window.onload = () => {
 
 }
 
+window.onresize = () => {
+	resizeWindowHandler();
+}

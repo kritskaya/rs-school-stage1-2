@@ -154,5 +154,15 @@ const checkPages = () => {
 	pagesAmount = 48 / visiblePageCards;
 }
 
+export const resizeWindowHandler = () => {
+	
+	checkPages();
+	if (currentPage >= pagesAmount) {
+		lastPageBtnClickHandler();
+	} else {
+		lastPageBtn.removeAttribute("disabled");
+		nextPageBtn.removeAttribute("disabled");
+	}
+}
 
 checkPages();
