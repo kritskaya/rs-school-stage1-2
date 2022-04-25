@@ -7,7 +7,7 @@ export const cardClickHandler = () => {
 		if (event.target.parentElement.classList.contains('pet-card') ||
 			 event.target.classList.contains('pet-card')) {
 			let id = event.target.parentElement.getAttribute('data-id') ||
-						event.target.classList.contains('pet-card');
+						event.target.getAttribute('data-id');
 			showModal(id);
 		}
 	})
