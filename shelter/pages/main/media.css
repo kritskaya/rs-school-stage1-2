@@ -258,11 +258,14 @@
 		position: fixed;
 		top: 0;
 		right: -320px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		width: 320px;
 		height: 100%;
 		margin: 0;
 		margin-right: 0;
-		padding: 248px 38px 0 38px;
+		padding: 0 38px 0 38px;
 		background-color: var(--color-dark-3xl);
 		transition: right 0.5s;
 	}
