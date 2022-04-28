@@ -50,7 +50,7 @@ const rightSliderBlockShow = () => {
 }
 
 // generate cards
-let currentCardsId = [];
+let currentCardsId = [5, 1, 3];
 
 const generateCardBlocks = (direction) => {
 	let cardsId = generateCardsId(visibleCardsNumber);
