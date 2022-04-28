@@ -4,8 +4,10 @@ const cardsBlock = document.querySelector(".slider-cards") || document.querySele
 
 export const cardClickHandler = () => {
 	cardsBlock.addEventListener("click", (event) => {
-		if (event.target.parentElement.classList.contains('pet-card')) {
-			let id = event.target.parentElement.getAttribute('data-id');
+		if (event.target.parentElement.classList.contains('pet-card') ||
+			 event.target.classList.contains('pet-card')) {
+			let id = event.target.parentElement.getAttribute('data-id') ||
+						event.target.getAttribute('data-id');
 			showModal(id);
 		}
 	})

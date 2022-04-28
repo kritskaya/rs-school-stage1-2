@@ -24,7 +24,7 @@ export const lastPageBtnClickHandler = () => {
 	lastPageBtn.addEventListener("click", () => {
 		checkPages();
 
-		if (currentPage < pagesAmount) {
+		// if (currentPage <= pagesAmount) {
 			currentPageBtn.textContent = pagesAmount;
 			currentPage = pagesAmount;
 
@@ -35,7 +35,7 @@ export const lastPageBtnClickHandler = () => {
 			
 			firstPageBtn.removeAttribute("disabled");
 			previousPageBtn.removeAttribute("disabled");
-		} 
+		// } 
 	});
 }
 
@@ -115,13 +115,15 @@ const showPage = () => {
 		let name = card.querySelector(".pet-name");
 		name.textContent = petsData[allPagesCardsId[currentPage - 1][i] - 1].name;
 
+		card.setAttribute("data-id", petsData[allPagesCardsId[currentPage - 1][i] - 1].id);
+
 		i++;
 	})
 }
 
 const generatePageCardsId = () => {
 	
-	for(let i = 0; i < pagesAmount; i++) {
+	for(let i = 0; i < 16; i++) {
 		let generatedIds = [];
 
 		while (generatedIds.length < 8) {
@@ -158,10 +160,16 @@ export const resizeWindowHandler = () => {
 	
 	checkPages();
 	if (currentPage >= pagesAmount) {
-		lastPageBtnClickHandler();
+		//currentPage = pagesAmount;
+		lastPageBtn.dispatchEvent(new Event('click'));
 	} else {
 		lastPageBtn.removeAttribute("disabled");
 		nextPageBtn.removeAttribute("disabled");
+
+		if (currentPage > 1) {
+			firstPageBtn.removeAttribute("disabled");
+			previousPageBtn.removeAttribute("disabled");
+		}
 	}
 }
 
