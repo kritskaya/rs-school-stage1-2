@@ -1,8 +1,8 @@
-export interface Request extends Partial<RequestOptParameters> {
+export interface RequestRequiredParameters {
 	apiKey: string;
 }
 
-interface RequestOptParameters  {
+export interface RequestOptParameters  {
 	q: string;
 	searchIn: string;
 	sources: string;
