@@ -1,3 +1,21 @@
+export interface Request extends Partial<RequestOptParameters> {
+	apiKey: string;
+}
+
+interface RequestOptParameters  {
+	q: string;
+	searchIn: string;
+	sources: string;
+	domains: string;
+	excludeDomains: string;
+	from: string;
+	to: string;
+	language: string;
+	sortBy: string;
+	pageSize: string;
+	page: string;
+}
+
 export interface SourcesData {
 	status: string;
 	sources: Source[];
