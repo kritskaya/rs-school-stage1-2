@@ -1,4 +1,4 @@
-export interface Sources {
+export interface SourcesData {
 	status: string;
 	sources: Source[];
 }
@@ -13,7 +13,7 @@ export interface Source {
 	country: string;
 }
 
-export interface Everything {
+export interface NewsData {
 	status: string;
 	totalResults: number;
 	articles: Article[];
