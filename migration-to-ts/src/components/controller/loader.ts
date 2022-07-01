@@ -1,9 +1,4 @@
-import { 
-    RequestOptParameters, 
-    RequestRequiredParameters,
-    SourcesData,
-    NewsData
-} from '../types/types';
+import { RequestOptParameters, RequestRequiredParameters, SourcesData, NewsData } from '../types/types';
 
 class Loader {
     private baseLink: string;
@@ -15,10 +10,12 @@ class Loader {
     }
 
     getResp(
-        { endpoint, options = {} }: 
-        {   
-            endpoint: string; 
-            options?: Partial<RequestOptParameters>; 
+        {
+            endpoint,
+            options = {},
+        }: {
+            endpoint: string;
+            options?: Partial<RequestOptParameters>;
         },
         callback = () => {
             console.error('No callback for GET response');
@@ -37,11 +34,11 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: {} | Partial<RequestOptParameters>, endpoint: string): string {
-        const urlOptions: { 
-            [index: string]: string; 
+    makeUrl(options: Record<string, never> | Partial<RequestOptParameters>, endpoint: string): string {
+        const urlOptions: {
+            [index: string]: string;
         } = { ...this.options, ...options };
-        
+
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {

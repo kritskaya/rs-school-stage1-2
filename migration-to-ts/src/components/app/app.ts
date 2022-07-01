@@ -13,7 +13,8 @@ class App {
 
     start() {
         document
-            .querySelector('.sources')?.addEventListener('click', (e) => 
+            .querySelector('.sources')
+            ?.addEventListener('click', (e) =>
                 this.controller.getNews(e, (data?: NewsData) => this.view.drawNews(data as NewsData))
             );
         this.controller.getSources((data?: SourcesData) => this.view.drawSources(data as SourcesData));
