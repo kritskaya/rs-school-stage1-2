@@ -53,6 +53,13 @@ class Sources {
                     content.innerHTML = '';
                     content.style.display = 'grid';
 
+                    if (!filtered.length) {
+                        const contentItem = document.createElement('li');
+                        contentItem.className = 'content__item';
+                        contentItem.textContent = "Sources not found";
+                        content.append(contentItem);
+                    }
+
                     filtered.forEach((item) => {
                         const contentItem = document.createElement('li');
                         contentItem.className = 'content__item';
