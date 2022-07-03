@@ -2,7 +2,7 @@ import './sources.css';
 import { Source } from '../../types/types';
 
 class Sources {
-    public draw(data: Source[]): void {
+    public draw(data: Pick<Source, 'id'|'name'>[]): void {
         const alphabet = {
             'A-D': ['a', 'b', 'c', 'd'],
             'E-H': ['e', 'f', 'g', 'h'],
