@@ -9,7 +9,7 @@ class Loader {
         this.options = options;
     }
 
-    getResp<T>(
+    public getResp<T>(
         {
             endpoint,
             options = {},
@@ -20,11 +20,11 @@ class Loader {
         callback = () => {
             console.error('No callback for GET response');
         }
-    ) {
+    ): void {
         this.load<T>('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: Response): Response {
+    private errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === StatusCode.Unauthorized || res.status === StatusCode.NotFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -34,7 +34,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: Record<string, never> | Partial<RequestOptParameters>, endpoint: string): string {
+    private makeUrl(options: Record<string, never> | Partial<RequestOptParameters>, endpoint: string): string {
         const urlOptions: {
             [index: string]: string;
         } = { ...this.options, ...options };
@@ -48,7 +48,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load<T>(method: string, endpoint: string, callback: (data?: T) => void, options = {}) {
+    private load<T>(method: string, endpoint: string, callback: (data?: T) => void, options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
