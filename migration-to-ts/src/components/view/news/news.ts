@@ -20,6 +20,12 @@ class News {
 
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
 
+        if (!news.length) {
+            const noNews = document.createElement('p');
+            noNews.textContent = 'No news found';
+            modal.append(noNews);
+        }
+
         news.forEach((item, idx) => {
             const newsClone = newsItemTemp?.content.cloneNode(true) as HTMLElement;
 
@@ -38,16 +44,12 @@ class News {
                 .join('-');
 
             (newsClone.querySelector('.news__description-title') as HTMLElement).textContent = item.title;
-           // (newsClone.querySelector('.news__description-source') as HTMLElement).textContent = item.source.name;
             (newsClone.querySelector('.news__description-content') as HTMLElement).textContent = item.description;
             (newsClone.querySelector('.news__read-more a') as HTMLElement).setAttribute('href', item.url);
 
-            // fragment.append(newsClone);
             modal.append(newsClone);
         });
 
-        // (document.querySelector('.news') as HTMLElement).innerHTML = '';
-        // document.querySelector('.news')?.appendChild(fragment);
         const closeBtn = document.createElement('div');
         closeBtn.className = 'close-btn';
         closeBtn.addEventListener('click', (event) => {
