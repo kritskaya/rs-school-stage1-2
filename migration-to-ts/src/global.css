@@ -1,8 +1,28 @@
-body {
-    color: #fff;
-    background: #17181c;
-    font-family: sans-serif;
+*, *::after, *::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
+
+body {
+    /* color: #fff; */
+    /* background: #17181c; */
+    /* font-family: sans-serif; */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* new */
+
+ul {
+	list-style: none;
+}
+
+.nav {
+	margin: 20px 50px;
+    background-color: #fff;
+}
+
+/* new end */
 
 header {
     padding: 10px 30px;

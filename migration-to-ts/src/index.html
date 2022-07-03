@@ -11,8 +11,10 @@
             <h1>News Portal</h1>
         </header>
         <main>
-            <div class="sources buttons"></div>
+            <!-- <div class="sources buttons"></div> -->
+            <nav class="nav sources"></nav>
             <div class="news"></div>
+            
         </main>
         <footer>
             <p class="copyright">
@@ -21,9 +23,23 @@
         </footer>
 
         <template id="sourceItemTemp">
-            <div class="source__item">
+            <!-- <div class="source__item">
                 <span class="source__item-name"></span>
-            </div>
+            </div> -->
+            <section class="nav__item">
+                <label class="nav__label" for=""></label>
+                <input class="nav__input" type="radio" name="item" id="">
+                <div class="nav__body">
+                    <ul class="nav__flags flags">
+                        <!-- <li class="nav__flag flag"></li> -->
+                    </ul>
+                    <ul class="nav__content content">
+                        <!-- <li class="content__item">
+                            <a href="#" class="content__link"></a>
+                        </li> -->
+                    </ul>
+                </div>
+            </section>
         </template>
 
         <template id="newsItemTemp">

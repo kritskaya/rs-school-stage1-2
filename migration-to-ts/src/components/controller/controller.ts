@@ -16,7 +16,8 @@ class AppController extends AppLoader {
         const newsContainer = e.currentTarget as HTMLElement;
 
         while (target !== newsContainer) {
-            if (target?.classList.contains('source__item')) {
+            // if (target?.classList.contains('source__item')) {
+            if (target?.classList.contains('content__link')) {
                 const sourceId = target?.getAttribute('data-source-id') as string;
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
@@ -25,6 +26,7 @@ class AppController extends AppLoader {
                             endpoint: 'everything',
                             options: {
                                 sources: sourceId,
+                                pageSize: "10",
                             },
                         },
                         callback
