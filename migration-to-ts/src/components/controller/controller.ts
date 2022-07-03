@@ -3,7 +3,7 @@ import { NewsData, SourcesData } from '../types/types';
 
 class AppController extends AppLoader {
     getSources(callback: (data?: SourcesData) => void): void {
-        super.getResp(
+        super.getResp<SourcesData>(
             {
                 endpoint: 'sources',
             },
@@ -16,12 +16,11 @@ class AppController extends AppLoader {
         const newsContainer = e.currentTarget as HTMLElement;
 
         while (target !== newsContainer) {
-            // if (target?.classList.contains('source__item')) {
             if (target?.classList.contains('content__link')) {
                 const sourceId = target?.getAttribute('data-source-id') as string;
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
+                    super.getResp<NewsData>(
                         {
                             endpoint: 'everything',
                             options: {
