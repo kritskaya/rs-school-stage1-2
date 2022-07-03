@@ -32,6 +32,17 @@ footer {
     align-items: center;
     justify-content: center;
 }
+
+footer > a,
+footer .year,
+footer img {
+    margin-right: 20px;
+}
+
+footer img {
+    width: 100px;
+}
+
 footer .copyright {
     font-size: 14px;
     color: #333;
