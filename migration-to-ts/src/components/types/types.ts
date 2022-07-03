@@ -52,3 +52,9 @@ type ArticleSource = {
     id: string;
     name: string;
 };
+
+export enum StatusCode {
+    Unauthorized = 401,
+    Forbidden = 403,
+    NotFound = 404
+}
