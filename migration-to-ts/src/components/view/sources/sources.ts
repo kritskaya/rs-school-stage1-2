@@ -16,21 +16,13 @@ class Sources {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
 
-        // data.forEach((item) => {
-        //     const sourceClone = sourceItemTemp?.content.cloneNode(true) as HTMLElement;
-
-        //     (sourceClone.querySelector('.source__item-name') as HTMLElement).textContent = item.name;
-        //     sourceClone.querySelector('.source__item')?.setAttribute('data-source-id', item.id);
-
-        //     fragment.append(sourceClone);
-        // });
-
         Object.entries(alphabet).forEach((entry) => {
             const sourceClone = sourceItemTemp?.content.cloneNode(true) as HTMLElement;
-            const label: HTMLElement = (sourceClone.querySelector('.nav__label') as HTMLElement);
             
+            const label: HTMLElement = (sourceClone.querySelector('.nav__label') as HTMLElement);
             label.textContent = entry[0];
             label.setAttribute('for', entry[0].toLowerCase());
+                        
             const input: HTMLElement = (sourceClone.querySelector('.nav__input') as HTMLElement);
             input.id = entry[0].toLowerCase();
 
@@ -42,10 +34,18 @@ class Sources {
 
                 const content: HTMLElement = (sourceClone.querySelector('.content') as HTMLElement);
 
+                label.addEventListener('click', () => {
+                    content.innerHTML = '';
+                    content.style.display = '';
+                    flags.querySelectorAll('.flag')?.forEach((item) => {
+                        item.classList.remove('active');
+                    });
+                });
+
                 flag.addEventListener('click', () => {
                     flags.querySelectorAll('.flag')?.forEach((item) => {
                         item.classList.remove('active');
-                    })
+                    });
                     flag.classList.add('active');
                     
                     const filtered = data.filter((item) => item.name[0].toLowerCase() === letter);
