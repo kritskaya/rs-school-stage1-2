@@ -6,6 +6,18 @@ class News {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
+        const overlay = document.createElement('div');
+        overlay.classList.add('overlay');
+        overlay.addEventListener("click", (event) => {
+            const target: HTMLElement = event.target as HTMLElement;
+            if (target.classList.contains("overlay")) {
+                document.body.removeChild(overlay);
+            }
+        });
+
+        let modal = document.createElement('div');
+	    modal.classList.add('news__window');
+
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
 
         news.forEach((item, idx) => {
@@ -26,15 +38,27 @@ class News {
                 .join('-');
 
             (newsClone.querySelector('.news__description-title') as HTMLElement).textContent = item.title;
-            (newsClone.querySelector('.news__description-source') as HTMLElement).textContent = item.source.name;
+           // (newsClone.querySelector('.news__description-source') as HTMLElement).textContent = item.source.name;
             (newsClone.querySelector('.news__description-content') as HTMLElement).textContent = item.description;
             (newsClone.querySelector('.news__read-more a') as HTMLElement).setAttribute('href', item.url);
 
-            fragment.append(newsClone);
+            // fragment.append(newsClone);
+            modal.append(newsClone);
         });
 
-        (document.querySelector('.news') as HTMLElement).innerHTML = '';
-        document.querySelector('.news')?.appendChild(fragment);
+        // (document.querySelector('.news') as HTMLElement).innerHTML = '';
+        // document.querySelector('.news')?.appendChild(fragment);
+        const closeBtn = document.createElement('div');
+        closeBtn.className = 'close-btn';
+        closeBtn.addEventListener('click', (event) => {
+            const target: HTMLElement = event.target as HTMLElement;
+            document.body.removeChild(overlay);
+        });
+
+        modal.append(closeBtn);
+
+        overlay.append(modal);
+        document.body.append(overlay);
     }
 }
 
