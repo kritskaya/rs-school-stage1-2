@@ -59,9 +59,9 @@ class Loader {
     ): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res) => res.json())
-            .then((data) => callback(data, source))
-            .catch((err) => console.error(err));
+            .then((res: Response): Promise<T> => res.json())
+            .then((data: T): void => callback(data, source))
+            .catch((err: Error): void => console.error(err));
     }
 }
 
