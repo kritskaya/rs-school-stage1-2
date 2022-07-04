@@ -12,6 +12,7 @@ class News {
             const target: HTMLElement = event.target as HTMLElement;
             if (target.classList.contains("overlay")) {
                 document.body.removeChild(overlay);
+                document.body.style.overflow = '';
             }
         });
 
@@ -31,6 +32,7 @@ class News {
         closeBtn.addEventListener('click', (event) => {
             const target: HTMLElement = event.target as HTMLElement;
             document.body.removeChild(overlay);
+            document.body.style.overflow = '';
         });
 
         header.append(closeBtn);
@@ -71,6 +73,8 @@ class News {
         
         overlay.append(modal);
         document.body.append(overlay);
+
+        document.body.style.overflow = 'hidden';
     }
 }
 
