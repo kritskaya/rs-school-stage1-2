@@ -2,7 +2,7 @@ import './sources.css';
 import { Source } from '../../types/types';
 
 class Sources {
-    public draw(data: Pick<Source, 'id'|'name'>[]): void {
+    public draw(data: Pick<Source, 'id' | 'name'>[]): void {
         const alphabet = {
             'A-D': ['a', 'b', 'c', 'd'],
             'E-H': ['e', 'f', 'g', 'h'],
@@ -18,21 +18,21 @@ class Sources {
 
         Object.entries(alphabet).forEach((entry) => {
             const sourceClone = sourceItemTemp?.content.cloneNode(true) as HTMLElement;
-            
-            const label: HTMLElement = (sourceClone.querySelector('.nav__label') as HTMLElement);
+
+            const label: HTMLElement = sourceClone.querySelector('.nav__label') as HTMLElement;
             label.textContent = entry[0];
             label.setAttribute('for', entry[0].toLowerCase());
-                        
-            const input: HTMLElement = (sourceClone.querySelector('.nav__input') as HTMLElement);
+
+            const input: HTMLElement = sourceClone.querySelector('.nav__input') as HTMLElement;
             input.id = entry[0].toLowerCase();
 
-            const flags: HTMLElement = (sourceClone.querySelector('.nav__flags') as HTMLElement);
+            const flags: HTMLElement = sourceClone.querySelector('.nav__flags') as HTMLElement;
             entry[1].forEach((letter) => {
                 const flag = document.createElement('li');
                 flag.className = 'nav__flag flag';
                 flag.textContent = letter;
 
-                const content: HTMLElement = (sourceClone.querySelector('.content') as HTMLElement);
+                const content: HTMLElement = sourceClone.querySelector('.content') as HTMLElement;
 
                 label.addEventListener('click', () => {
                     content.innerHTML = '';
@@ -47,7 +47,7 @@ class Sources {
                         item.classList.remove('active');
                     });
                     flag.classList.add('active');
-                    
+
                     const filtered = data.filter((item) => item.name[0].toLowerCase() === letter);
 
                     content.innerHTML = '';
@@ -56,7 +56,7 @@ class Sources {
                     if (!filtered.length) {
                         const contentItem = document.createElement('li');
                         contentItem.className = 'content__item';
-                        contentItem.textContent = "Sources not found";
+                        contentItem.textContent = 'Sources not found';
                         content.append(contentItem);
                     }
 
@@ -76,7 +76,7 @@ class Sources {
                 });
 
                 flags.append(flag);
-            })
+            });
 
             fragment.append(sourceClone);
         });

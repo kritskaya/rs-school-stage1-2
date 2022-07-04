@@ -5,19 +5,18 @@ class News {
     public draw(data: Article[], source: string): void {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
-        const fragment = document.createDocumentFragment();
         const overlay = document.createElement('div');
         overlay.classList.add('overlay');
-        overlay.addEventListener("click", (event) => {
+        overlay.addEventListener('click', (event) => {
             const target: HTMLElement = event.target as HTMLElement;
-            if (target.classList.contains("overlay")) {
+            if (target.classList.contains('overlay')) {
                 document.body.removeChild(overlay);
                 document.body.style.overflow = '';
             }
         });
 
-        let modal = document.createElement('div');
-	    modal.classList.add('news__window');
+        const modal = document.createElement('div');
+        modal.classList.add('news__window');
 
         const header = document.createElement('div');
         header.className = 'news__header';
@@ -29,8 +28,7 @@ class News {
 
         const closeBtn = document.createElement('div');
         closeBtn.className = 'close-btn';
-        closeBtn.addEventListener('click', (event) => {
-            const target: HTMLElement = event.target as HTMLElement;
+        closeBtn.addEventListener('click', () => {
             document.body.removeChild(overlay);
             document.body.style.overflow = '';
         });
@@ -53,7 +51,7 @@ class News {
             if (idx % 2) newsClone.querySelector('.news__item')?.classList.add('alt');
 
             (newsClone.querySelector('.news__meta-photo') as HTMLElement).style.backgroundImage = `url(${
-                item.urlToImage || './news_placeholder.jpg'
+                item.urlToImage || './img/news_placeholder.jpg'
             })`;
 
             (newsClone.querySelector('.news__meta-author') as HTMLElement).textContent =
@@ -70,7 +68,7 @@ class News {
 
             modal.append(newsClone);
         });
-        
+
         overlay.append(modal);
         document.body.append(overlay);
 

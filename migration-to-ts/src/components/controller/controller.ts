@@ -26,7 +26,7 @@ class AppController extends AppLoader {
                             endpoint: 'everything',
                             options: {
                                 sources: sourceId,
-                                pageSize: "10",
+                                pageSize: '10',
                             },
                             source: sourceName,
                         },

@@ -56,5 +56,5 @@ type ArticleSource = {
 export enum StatusCode {
     Unauthorized = 401,
     Forbidden = 403,
-    NotFound = 404
+    NotFound = 404,
 }

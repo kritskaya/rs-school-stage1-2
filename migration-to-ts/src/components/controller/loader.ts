@@ -1,4 +1,4 @@
-import { RequestOptParameters, RequestRequiredParameters, SourcesData, NewsData, StatusCode } from '../types/types';
+import { RequestOptParameters, RequestRequiredParameters, StatusCode } from '../types/types';
 
 class Loader {
     private baseLink: string;
@@ -13,7 +13,7 @@ class Loader {
         {
             endpoint,
             options = {},
-            source
+            source,
         }: {
             endpoint: string;
             options?: Partial<RequestOptParameters>;
@@ -50,7 +50,13 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load<T>(method: string, endpoint: string, callback: (data?: T, source?:string) => void, options = {}, source?: string): void {
+    private load<T>(
+        method: string,
+        endpoint: string,
+        callback: (data?: T, source?: string) => void,
+        options = {},
+        source?: string
+    ): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
