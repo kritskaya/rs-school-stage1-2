@@ -13,15 +13,17 @@ class Loader {
         {
             endpoint,
             options = {},
+            source
         }: {
             endpoint: string;
             options?: Partial<RequestOptParameters>;
+            source?: string;
         },
         callback = () => {
             console.error('No callback for GET response');
         }
     ): void {
-        this.load<T>('GET', endpoint, callback, options);
+        this.load<T>('GET', endpoint, callback, options, source);
     }
 
     private errorHandler(res: Response): Response {
@@ -48,11 +50,11 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load<T>(method: string, endpoint: string, callback: (data?: T) => void, options = {}): void {
+    private load<T>(method: string, endpoint: string, callback: (data?: T, source?:string) => void, options = {}, source?: string): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
-            .then((data) => callback(data))
+            .then((data) => callback(data, source))
             .catch((err) => console.error(err));
     }
 }

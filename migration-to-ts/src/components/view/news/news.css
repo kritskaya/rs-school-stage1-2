@@ -16,9 +16,23 @@
     max-width: 1000px;
     max-height: 80%;
 	min-height: 500px;
-    padding: 20px 0;
+    padding: 0 0 20px 0;
     overflow-y: scroll;
     background: #fff;
+}
+
+.news__header {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    padding: 20px 0;
+    z-index: 9999;
+    background-color: #fff;
+}
+
+.news__title {
+    text-align: center;
+    font-size: 32px;
 }
 
 .close-btn {
@@ -66,6 +80,7 @@
     font-family: Arial, sans-serif;
     border-radius: 5px;
     overflow: hidden;
+    z-index: 1;
 }
 
 .news__item:hover .news__meta-photo {

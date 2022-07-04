@@ -18,6 +18,7 @@ class AppController extends AppLoader {
         while (target !== newsContainer) {
             if (target?.classList.contains('content__link')) {
                 const sourceId = target?.getAttribute('data-source-id') as string;
+                const sourceName = target?.textContent as string;
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp<NewsData>(
@@ -27,6 +28,7 @@ class AppController extends AppLoader {
                                 sources: sourceId,
                                 pageSize: "10",
                             },
+                            source: sourceName,
                         },
                         callback
                     );

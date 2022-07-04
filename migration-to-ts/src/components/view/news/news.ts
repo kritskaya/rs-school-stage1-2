@@ -2,7 +2,7 @@ import './news.css';
 import { Article } from '../../types/types';
 
 class News {
-    public draw(data: Article[]): void {
+    public draw(data: Article[], source: string): void {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
@@ -17,6 +17,25 @@ class News {
 
         let modal = document.createElement('div');
 	    modal.classList.add('news__window');
+
+        const header = document.createElement('div');
+        header.className = 'news__header';
+
+        const title = document.createElement('h2');
+        title.className = 'news__title';
+        title.textContent = `${source} Top News`;
+        header.append(title);
+
+        const closeBtn = document.createElement('div');
+        closeBtn.className = 'close-btn';
+        closeBtn.addEventListener('click', (event) => {
+            const target: HTMLElement = event.target as HTMLElement;
+            document.body.removeChild(overlay);
+        });
+
+        header.append(closeBtn);
+
+        modal.append(header);
 
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
 
@@ -49,16 +68,7 @@ class News {
 
             modal.append(newsClone);
         });
-
-        const closeBtn = document.createElement('div');
-        closeBtn.className = 'close-btn';
-        closeBtn.addEventListener('click', (event) => {
-            const target: HTMLElement = event.target as HTMLElement;
-            document.body.removeChild(overlay);
-        });
-
-        modal.append(closeBtn);
-
+        
         overlay.append(modal);
         document.body.append(overlay);
     }
