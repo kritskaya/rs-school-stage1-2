@@ -228,6 +228,10 @@
 }
 
 @media (max-width: 727px) {
+    .news__title {
+        font-size: 26px;
+    }
+
     .news__item {
         max-width: 95%;
     }
@@ -246,6 +250,10 @@
 }
 
 @media (max-width: 480px) {
+    .news__title {
+        font-size: 20px;
+    }
+
     .news__item .news__description {
         padding: 7px;
     }
