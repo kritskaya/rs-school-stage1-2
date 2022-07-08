@@ -13,7 +13,15 @@ export class Order {
 		return this.products;
 	}
 
-	public setOrder(products: Product[]): void {
-		this.products = products;
+	public addItem(item: Product): void {
+		this.products.push(item);
+	}
+
+	public removeItem(id: string): void {
+		for(let i = 0; i < this.products.length; i++) {
+			if (this.products[i].getId() === id) {
+				this.products.splice(i, 1) ;
+			}
+		}
 	}
 }
