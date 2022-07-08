@@ -7,6 +7,71 @@
 	<title>Document</title>
 </head>
 <body>
+	<div class="root">
+		<header class="header">
+			<div class="wrapper">
+				<div class="header__container">
+					<div class="header__logo logo">
+						<img class="logo__img" src="./assets/img/ikea-logo.svg" alt="ikea logo">
+					</div>
+					<div class="header__search search">
+						<input class="search__input" type="text" placeholder="Что Вы ищите?">
+						<div class="search__btns">
+							<button class="search__btn">
+								<img class="search__img_clear" src="./assets/icon/close.png" alt="clear btn">
+							</button>
+							<div class="search__btns-separator"></div>
+							<button class="search__btn">
+								<img class="search__img_submit" src="./assets/icon/search.png" alt="search btn">
+							</button>
+						</div>
+					</div>
 	
+					<div class="header__cart cart">
+						<div class="cart__info">2</div>
+						<button class="cart__btn cart-btn">
+							<img class="cart-btn__img" src="./assets/icon/shopping-cart.png" alt="">
+						</button>
+					</div>
+				</div>
+			</div>
+		</header>
+	
+		<main class="main">
+			<div class="wrapper">
+				<section class="intro section">
+					<h1 class="intro__title">Кровати IKEA</h1>
+					<p class="intro__description">
+						С нашими прочными и удобными кроватями вы сможете каждый день просыпаться с улыбкой. У многих есть место
+						для хранения
+						белья или высота кровати, позволяющая разместить под ней ящик для хранения. Мы поможем вам выбрать и
+						купить кровать по вашему бюджету.
+					</p>
+				</section>
+	
+				<section class="actions section">
+					<button class="actions__item actions__sort">Сортировать</button>
+					<button class="actions__item actions__filter">Размер</button>
+					<button class="actions__item actions__filter">Цвет</button>
+					<button class="actions__item actions__filter">Цена</button>
+					<button class="actions__item actions__filter">Материал</button>
+					<button class="actions__item filter-clear-btn">Очистить фильтры</button>
+				</section>
+	
+				<section class="products section">
+					<div class="products__grid" id="product-container"></div>
+				</section>
+			</div>
+		</main>
+	
+		<footer class="footer">
+			<div class="wrapper">
+				<div class="footer__copyright">
+					Вся информация и фото используются исключительно в учебных целях. © Inter IKEA Systems
+				</div>
+				<div class="footer__project project"></div>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>
