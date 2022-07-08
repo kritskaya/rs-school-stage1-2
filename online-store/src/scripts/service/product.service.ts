@@ -16,8 +16,9 @@ export class ProductService {
 			const material = productsData[i].material;
 			const keywords = productsData[i].keywords;
 			const description = productsData[i].title;
+			const image = productsData[i].image;
 
-			const p = new Product(id, name, price, color, quantity, size, material, keywords, description);
+			const p = new Product(id, name, price, color, quantity, size, material, keywords, description, image);
 			this.products.push(p);
 		}
 	}

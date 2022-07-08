@@ -9,8 +9,9 @@ export class Product {
 	private material: string[];
 	private keywords: string[];
 	private description: string;
+	private image: string;
 
-	constructor(id: string, name: string, price: number, color: string, quantity: number, size: string, material: string[], keywords: string[], description: string) {
+	constructor(id: string, name: string, price: number, color: string, quantity: number, size: string, material: string[], keywords: string[], description: string, image: string) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -20,5 +21,46 @@ export class Product {
 		this.size = size;
 		this.keywords = keywords;
 		this.description = description;
+		this.image = image;
+	}
+
+	public getId():string {
+		return this.id;
+	}
+
+	public getName(): string {
+		return this.name;
+	}
+
+	public getPrice(): number {
+		return this.price;
+	}
+
+	public getColor(): string {
+		return this.color;
+	}
+
+	public getQuantity(): number {
+		return this.quantity;
+	}
+
+	public getMaterial(): string[] {
+		return this.material;
+	}
+
+	public getSize(): string {
+		return this.size;
+	}
+
+	public getKeywords(): string[] {
+		return this.keywords;
+	}
+
+	public getDescription(): string {
+		return this.description;
+	}
+
+	public getImage(): string {
+		return this.image;
 	}
 }

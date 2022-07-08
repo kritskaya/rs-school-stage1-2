@@ -1,8 +1,10 @@
 import { ProductService } from "./service/product.service";
+import { ProductView } from "./view/product.view";
 
 export class App {
 
 	public start(): void {
-		new ProductService();
+		const service = new ProductService();
+		new ProductView(service.getProducts());
 	}
 }
