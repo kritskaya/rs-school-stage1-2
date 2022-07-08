@@ -10,6 +10,10 @@ export class OrderService {
 		this.order = new Order();
 	}
 
+	public getOrder(): Order {
+		return this.order;
+	}
+	
 	public addProduct(item: Product) {
 		this.order.addItem(item);
 		this.save(this.order);
