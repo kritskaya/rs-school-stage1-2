@@ -1,3 +1,16 @@
+export type ProductPDO = {
+	id: string;
+	name: string;
+	size: string;
+	color: string;
+	price: string;
+	quantity: string;
+	material: string[];
+	keywords: string[];
+	title: string;
+	image: string;
+}
+
 export class Product {
 
 	private id: string;

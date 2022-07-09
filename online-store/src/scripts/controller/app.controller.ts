@@ -10,11 +10,15 @@ export class AppController {
 		this.orderController = new OrderController();
 	}
 
-	public getProductController(): ProductController {
-		return this.productContoller;
+	public toggleOrderList(): void {
+		this.orderController.toggleOrderList();
 	}
 
-	public getOrderController(): OrderController {
-		return this.orderController;
+	public addToOrder(event: Event): void {
+		this.orderController.addToOrder(event);
+	}
+
+	public removeFromOrder(event: Event): void {
+		this.orderController.removeFromOrder(event);
 	}
 }

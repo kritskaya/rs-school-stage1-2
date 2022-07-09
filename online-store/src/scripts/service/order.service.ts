@@ -1,10 +1,9 @@
 import { Order } from "../model/order.model";
-import { Product } from "../model/product.model";
+import { Product, ProductPDO } from "../model/product.model";
+import productsData from '../../assets/json/products.json';
 
 export class OrderService {
-
 	private order: Order;
-	private onOrderChanged: Function;
 
 	constructor() {
 		this.order = new Order();
@@ -14,22 +13,36 @@ export class OrderService {
 		return this.order;
 	}
 	
-	public addProduct(item: Product) {
+	public addProduct(productId: string): Product {
+		const product = productsData.find((item) => item.id === productId) as ProductPDO;
+
+		const id = product.id;
+		const name = product.name;
+		const price = parseInt(product.price);
+		const color = product.color;
+		const quantity = parseInt(product.quantity);
+		const size = product.size;
+		const material = product.material;
+		const keywords = product.keywords;
+		const description = product.title;
+		const image = product.image;
+
+		const item = new Product(id, name, price, color, quantity, size, material, 
+			keywords, description, image);
+
 		this.order.addItem(item);
 		this.save(this.order);
+		
+		return item;
 	}
 
-	public removeProduct(item: Product) {
-		this.order.removeItem(item.getId());
+	public removeProduct(id: string) {
+		this.order.removeItem(id);
 		this.save(this.order);
 	}
 
 	private save(order: Order) {
-		this.onOrderChanged(order);
 		localStorage.setItem('order', JSON.stringify(order));
 	}
 
-	bindOrderChanged(callback: Function) {
-		this.onOrderChanged = callback;
-	}
 }

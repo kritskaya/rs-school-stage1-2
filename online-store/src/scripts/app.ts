@@ -11,8 +11,18 @@ export class App {
 		document
 			.getElementById('cart-btn')
 			?.addEventListener('click', (e) => {
-				this.controller.getOrderController().toggleOrderList();
+				this.controller.toggleOrderList();
 				e.stopImmediatePropagation();
 			});
+
+		document
+			.querySelectorAll('.product__btn')
+			.forEach((btn) => 
+				btn.addEventListener('click', (e) => {
+					this.controller.addToOrder(e);
+				})
+			);
+
+		
 	}
 }

@@ -26,4 +26,8 @@ export class ProductService {
 	public getProducts(): Product[] {
 		return this.products;
 	} 
+
+	public getProduct(id: string) {
+		return this.products.find((i) => i.getId() === id);
+	}
 }
