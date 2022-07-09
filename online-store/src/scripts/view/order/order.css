@@ -1,0 +1,26 @@
+.cart__list {
+	position: absolute;
+	top: 60px;
+	right: 0;
+	display: none;
+	padding: 15px;
+	border: 1px solid #dfdfdf;
+	border-radius: 10px;
+	background-color: #fff;
+}
+
+.cart__list.active {
+	display: block;
+}
+
+.cart-item {
+	display: flex;
+	padding: 5px 0;
+	border-bottom: 1px solid #dfdfdf;
+	align-items: center;
+	gap: 15px;
+}
+
+.cart-item__img {
+	width: 40px;
+} 

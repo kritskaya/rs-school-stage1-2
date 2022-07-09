@@ -1,9 +1,10 @@
 import { Order } from "../../model/order.model";
 
 export class OrderView {
+	private root: HTMLElement;
 
 	constructor(order: Order) {
-		const root = document.getElementById('order-cart') as HTMLElement;
+		this.root = document.getElementById('cart-container') as HTMLElement;
 
 		const products = order.getOrder();
 
@@ -15,32 +16,32 @@ export class OrderView {
 		}
 
 		products.forEach((product) => {
-			const item = this.createElement('li', 'cart__item item');
+			const item = this.createElement('li', 'cart__item cart-item');
 			
-			const img = this.createElement('img', 'item__img') as HTMLImageElement;
+			const img = this.createElement('img', 'cart-item__img') as HTMLImageElement;
 			img.src = `./assets/img/products/${product.getImage}_hover.jpg`;
 			img.alt = 'order item img';
 
-			const description = this.createElement('div', 'item__description');
+			const description = this.createElement('div', 'cart-item__description');
 
-			const name = this.createElement('p', 'item__name');
+			const name = this.createElement('p', 'cart-item__name');
 			name.textContent = product.getName();
 
-			const title = this.createElement('p', 'item__title');
+			const title = this.createElement('p', 'cart-item__title');
 			title.textContent = product.getDescription();
 
 			description.append(name, title);
 
-			const price = this.createElement('p', 'item__price');
+			const price = this.createElement('p', 'cart-item__price');
 			price.textContent = product.getPrice().toString();
 
-			const removeBtn = this.createElement('button', 'item__remove-btn');
+			const removeBtn = this.createElement('button', 'cart-item__remove-btn');
 
 			item.append(img, description, price, removeBtn);
 			cartList.append(item);
 		});
 
-		root.append(cartList);
+		this.root.append(cartList);
 	}
 
 	protected createElement(tag: string, className: string): HTMLElement {
@@ -48,6 +49,9 @@ export class OrderView {
 		element.className = className;
 		return element
 	}
-
+	
+	public toggleOrderList(): void {
+		this.root.classList.toggle('active');
+	}
 
 }
