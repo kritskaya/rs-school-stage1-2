@@ -2,9 +2,10 @@ import { Product } from "../model/product.model";
 import './product.css';
 
 export class ProductView {
+	private root: HTMLElement;
 
 	constructor(products: Product[]) {
-		const root = document.getElementById('product-container') as HTMLElement;
+		this.root = document.getElementById('product-container') as HTMLElement;
 
 		for (let i = 0; i < products.length; i++) 	{
 			const productImgs = document.createElement('a');
@@ -60,11 +61,31 @@ export class ProductView {
 
 			const product = document.createElement('div');
 			product.className = 'products__item product';
+			product.dataset.id = products[i].getId();
 
 			product.append(productImgs, title, description, id);
 			product.append(quantity, materials, price, btn);
 
-			root.append(product);
+			this.root.append(product);
 		}
 	}
+
+	public toggleInCart(element: HTMLElement) {
+		let inCart = element.querySelector('.product__in-cart') as HTMLElement;
+
+		if (inCart) {
+			inCart.remove();
+		} else {
+			inCart = document.createElement('p');
+			inCart.className = 'product__in-cart';
+			inCart.textContent = 'Товар в корзине';
+			element.append(inCart);
+		}
+	}
+
+	public getRootContainer(): HTMLElement {
+		return this.root;
+	} 
+
+	
 }

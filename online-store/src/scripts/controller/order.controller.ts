@@ -11,16 +11,11 @@ export class OrderController {
 	constructor() {
 		this.service = new OrderService();
 		this.view = new OrderView(this.service.getOrder());
-
-		if (localStorage.getItem('order')) {
-			this.loadFromStorage();
-		}
 	}
 
-	private loadFromStorage(): void {
+	public loadFromStorage(): void {
 		const storage = JSON.parse(localStorage.getItem('order') as string);
-		console.log(storage);
-
+		
 		storage.forEach((item: ProductPDO) => {
 			const storageItem = this.service.addProduct(item.id);
 			const storageElement = this.view.addToOrder(storageItem);
@@ -49,7 +44,20 @@ export class OrderController {
 			this.view.toggleOrderList();
 			document.removeEventListener('click', this.clickHandler);
 		}
-		
+	}
+
+	public toggleOrderItem(event: Event): void {
+		const target = event.target as HTMLElement;
+
+		const isRemoveBtn = target.closest('.cart-btn_remove');
+		if (isRemoveBtn) {
+			this.removeFromOrder(event);
+			isRemoveBtn.classList.remove('cart-btn_remove');
+		} else {
+			this.addToOrder(event);
+			const isAddBtn = target.closest('.cart-btn') as HTMLElement;
+			isAddBtn.classList.add('cart-btn_remove');
+		}
 	}
 
 	public addToOrder(event: Event): void {
@@ -75,7 +83,16 @@ export class OrderController {
 	public removeFromOrder(event: Event): void {
 		
 		const target = event.target as HTMLElement;
-		const productElement = target.closest('.cart__item') as HTMLElement;
+		let productElement = target.closest('.cart__item') as HTMLElement;
+
+		if (!productElement) {
+			const productCard = target.closest('.products__item') as HTMLElement;
+			const productId = productCard.dataset.id;
+
+			const cartElement = this.view.getCartContainer();
+			productElement = cartElement.querySelector(`[data-id="${productId}"]`) as HTMLElement;
+		}
+
 		const id = productElement.dataset.id as string;
 
 		this.service.removeProduct(id);

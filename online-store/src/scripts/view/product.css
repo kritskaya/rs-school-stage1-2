@@ -1,6 +1,5 @@
 .products__item {
 	position: relative;
-	/* border: 1px solid #000; */
 }
 
 .product__imgs:hover>.product__img {
@@ -69,4 +68,13 @@
 
 .product__btn .cart-btn__img {
 	filter: invert(100%);
+}
+
+.cart-btn_remove {
+	background-color: red;
+}
+
+.product__in-cart {
+	margin-top: -50px;
+	margin-left: 50px;
 }

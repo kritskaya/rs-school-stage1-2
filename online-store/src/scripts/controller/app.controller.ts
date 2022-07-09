@@ -8,6 +8,11 @@ export class AppController {
 	constructor() {
 		this.productContoller = new ProductController();
 		this.orderController = new OrderController();
+
+		if (localStorage.getItem('order')) {
+			this.orderController.loadFromStorage();
+			this.productContoller.loadFromStorage();
+		}
 	}
 
 	public toggleOrderList(): void {
@@ -20,5 +25,10 @@ export class AppController {
 
 	public removeFromOrder(event: Event): void {
 		this.orderController.removeFromOrder(event);
+	}
+
+	public toogleOrderItem(event: Event): void {
+		this.orderController.toggleOrderItem(event);
+		this.productContoller.toggleInCart(event);
 	}
 }

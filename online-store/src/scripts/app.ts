@@ -19,7 +19,7 @@ export class App {
 			.querySelectorAll('.product__btn')
 			.forEach((btn) => 
 				btn.addEventListener('click', (e) => {
-					this.controller.addToOrder(e);
+					this.controller.toogleOrderItem(e);
 				})
 			);
 
