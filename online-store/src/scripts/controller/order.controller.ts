@@ -1,4 +1,4 @@
-import { Product } from "../model/product.model";
+import { Product, ProductPDO } from "../model/product.model";
 import { OrderService } from "../service/order.service";
 import { OrderView } from "../view/order/order.view";
 
@@ -11,14 +11,21 @@ export class OrderController {
 	constructor() {
 		this.service = new OrderService();
 		this.view = new OrderView(this.service.getOrder());
+
+		if (localStorage.getItem('order')) {
+			this.loadFromStorage();
+		}
 	}
 
-	public getService(): OrderService {
-		return this.service;
-	}
+	private loadFromStorage(): void {
+		const storage = JSON.parse(localStorage.getItem('order') as string);
+		console.log(storage);
 
-	public getView(): OrderView {
-		return this.view;
+		storage.forEach((item: ProductPDO) => {
+			const storageItem = this.service.addProduct(item.id);
+			const storageElement = this.view.addToOrder(storageItem);
+			this.clickRemoveCartBtnHandler(storageElement);
+		});
 	}
 
 	public toggleOrderList(): void {
@@ -55,7 +62,11 @@ export class OrderController {
 		const newItem = this.service.addProduct(id);
 		const newElement = this.view.addToOrder(newItem);
 
-		const removeBtn = newElement.querySelector('.cart-item__remove-btn') as HTMLElement;
+		this.clickRemoveCartBtnHandler(newElement);
+	}
+
+	private clickRemoveCartBtnHandler(element: HTMLElement) {
+		const removeBtn = element.querySelector('.cart-item__remove-btn') as HTMLElement;
 		removeBtn.addEventListener('click', (e) => {
 			this.removeFromOrder(e);
 		});

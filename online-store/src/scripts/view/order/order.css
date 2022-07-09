@@ -3,7 +3,7 @@
 	top: 60px;
 	right: 0;
 	display: none;
-	min-width: 200px;
+	min-width: 320px;
 	width: auto;
 	padding: 15px;
 	border: 1px solid #dfdfdf;
@@ -27,8 +27,12 @@
 	width: 40px;
 } 
 
+.cart-item__description {
+	flex-grow: 1;
+}
+
 .cart-item__title {
-	white-space: nowrap;
+	font-size: 12px;
 }
 
 .cart-item__remove-btn {

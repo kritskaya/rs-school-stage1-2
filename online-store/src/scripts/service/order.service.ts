@@ -31,18 +31,18 @@ export class OrderService {
 			keywords, description, image);
 
 		this.order.addItem(item);
-		this.save(this.order);
+		this.save();
 		
 		return item;
 	}
 
 	public removeProduct(id: string) {
 		this.order.removeItem(id);
-		this.save(this.order);
+		this.save();
 	}
 
-	private save(order: Order) {
-		localStorage.setItem('order', JSON.stringify(order));
+	private save() {
+		localStorage.setItem('order', JSON.stringify(this.order.getOrder()));
 	}
 
 }
