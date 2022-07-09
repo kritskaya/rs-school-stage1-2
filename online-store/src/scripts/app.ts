@@ -1,12 +1,18 @@
 import { AppController } from "./controller/app.controller";
-import { ProductService } from "./service/product.service";
-import { ProductView } from "./view/product.view";
 
 export class App {
-
 	private controller: AppController;
 
-	public start(): void {
+	constructor() {
 		this.controller = new AppController();
+	}
+
+	public start(): void {
+		document
+			.getElementById('cart-btn')
+			?.addEventListener('click', (e) => {
+				this.controller.getOrderController().toggleOrderList();
+				e.stopImmediatePropagation();
+			});
 	}
 }

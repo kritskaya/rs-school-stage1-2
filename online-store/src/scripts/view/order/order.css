@@ -3,6 +3,7 @@
 	top: 60px;
 	right: 0;
 	display: none;
+	min-width: 200px;
 	padding: 15px;
 	border: 1px solid #dfdfdf;
 	border-radius: 10px;

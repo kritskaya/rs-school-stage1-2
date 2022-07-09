@@ -1,18 +1,22 @@
 import { Order } from "../../model/order.model";
+import './order.css';
 
 export class OrderView {
 	private root: HTMLElement;
 
 	constructor(order: Order) {
-		this.root = document.getElementById('cart-container') as HTMLElement;
+		const parent = document.getElementById('cart-container') as HTMLElement;
 
 		const products = order.getOrder();
+		console.log(products);
 
 		const cartList = this.createElement('ul', 'cart__list');
+		this.root = cartList;
 		
 		if (!products.length) {
 			const noOrder = this.createElement('li', 'cart__item item');
 			noOrder.textContent = 'Корзина пуста';
+			cartList.append(noOrder);
 		}
 
 		products.forEach((product) => {
@@ -41,7 +45,7 @@ export class OrderView {
 			cartList.append(item);
 		});
 
-		this.root.append(cartList);
+		parent.append(cartList);
 	}
 
 	protected createElement(tag: string, className: string): HTMLElement {
@@ -52,6 +56,10 @@ export class OrderView {
 	
 	public toggleOrderList(): void {
 		this.root.classList.toggle('active');
+	}
+
+	public getCartContainer(): HTMLElement {
+		return this.root;
 	}
 
 }

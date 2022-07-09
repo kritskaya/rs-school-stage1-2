@@ -6,7 +6,7 @@ export class ProductView {
 	constructor(products: Product[]) {
 		const root = document.getElementById('product-container') as HTMLElement;
 
-		for (let i = 0; products.length; i++) 	{
+		for (let i = 0; i < products.length; i++) 	{
 			const productImgs = document.createElement('a');
 			productImgs.className = 'product__imgs';
 			productImgs.href = '#';
