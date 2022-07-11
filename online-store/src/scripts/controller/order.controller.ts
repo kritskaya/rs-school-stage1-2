@@ -46,19 +46,19 @@ export class OrderController {
 		}
 	}
 
-	public toggleOrderItem(event: Event): void {
-		const target = event.target as HTMLElement;
+	// public toggleOrderItem(event: Event): void {
+	// 	const target = event.target as HTMLElement;
 
-		const isRemoveBtn = target.closest('.cart-btn_remove');
-		if (isRemoveBtn) {
-			this.removeFromOrder(event);
-			isRemoveBtn.classList.remove('cart-btn_remove');
-		} else {
-			this.addToOrder(event);
-			const isAddBtn = target.closest('.cart-btn') as HTMLElement;
-			isAddBtn.classList.add('cart-btn_remove');
-		}
-	}
+	// 	const isRemoveBtn = target.closest('.cart-btn_remove');
+	// 	if (isRemoveBtn) {
+	// 		this.removeFromOrder(event);
+	// 		isRemoveBtn.classList.remove('cart-btn_remove');
+	// 	} else {
+	// 		this.addToOrder(event);
+	// 		const isAddBtn = target.closest('.cart-btn') as HTMLElement;
+	// 		isAddBtn.classList.add('cart-btn_remove');
+	// 	}
+	// }
 
 	public addToOrder(event: Event): void {
 		const target = event.currentTarget as HTMLElement;

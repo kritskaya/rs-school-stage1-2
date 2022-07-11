@@ -24,15 +24,28 @@ export class AppController {
 
 	public addToOrder(event: Event): void {
 		this.orderController.addToOrder(event);
+		this.productContoller.addInCartBadge(event);
 	}
 
 	public removeFromOrder(event: Event): void {
-		this.orderController.removeFromOrder(event);
+		const itemToRemoveBadge = this.orderController.removeFromOrder(event);
+		this.productContoller.removeInCartBadge(event);
 	}
 
 	public toogleOrderItem(event: Event): void {
-		this.orderController.toggleOrderItem(event);
-		this.productContoller.toggleInCart(event);
+		const target = event.target as HTMLElement;
+
+		const isRemoveBtn = target.closest('.cart-btn_remove');
+		if (isRemoveBtn) {
+			this.removeFromOrder(event);
+			isRemoveBtn.classList.remove('cart-btn_remove');
+			//this.productContoller.removeInCartBadge(event);
+		} else {
+			this.addToOrder(event);
+			const isAddBtn = target.closest('.cart-btn') as HTMLElement;
+			isAddBtn.classList.add('cart-btn_remove');
+		}
+		
 	}
 
 	public toggleSortList(event: Event): void {

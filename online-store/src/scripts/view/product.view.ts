@@ -70,22 +70,25 @@ export class ProductView {
 		}
 	}
 
-	public toggleInCart(element: HTMLElement) {
+	public addInCartBadge(element: HTMLElement): void {
+		let inCart = element.querySelector('.product__in-cart') as HTMLElement;
+		
+		inCart = document.createElement('p');
+		inCart.className = 'product__in-cart';
+		inCart.textContent = 'Товар в корзине';
+		element.append(inCart);
+	}
+
+	public removeInCartBadge(element: HTMLElement): void {
 		let inCart = element.querySelector('.product__in-cart') as HTMLElement;
 
 		if (inCart) {
 			inCart.remove();
-		} else {
-			inCart = document.createElement('p');
-			inCart.className = 'product__in-cart';
-			inCart.textContent = 'Товар в корзине';
-			element.append(inCart);
-		}
+		} 
 	}
 
 	public getRootContainer(): HTMLElement {
 		return this.root;
 	} 
-
 	
 }

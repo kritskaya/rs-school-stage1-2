@@ -21,14 +21,28 @@ export class ProductController {
 			const btn = element.querySelector('.product__btn') as HTMLElement;
 			btn.classList.add('cart-btn_remove');
 			
-			this.view.toggleInCart(element);
+			this.view.addInCartBadge(element);
 		});
 	}
 
-	public toggleInCart(event: Event) {
+	// public toggleInCart(event: Event) {
+	// 	const target = event.currentTarget as HTMLElement;
+	// 	const productElement = target.parentElement as HTMLElement;
+
+	// 	this.view.toggleInCart(productElement);
+	// }
+
+	public addInCartBadge(event: Event) {
 		const target = event.currentTarget as HTMLElement;
 		const productElement = target.parentElement as HTMLElement;
 
-		this.view.toggleInCart(productElement);
+		this.view.addInCartBadge(productElement);
+	}
+
+	public removeInCartBadge(event: Event) {
+		const target = event.currentTarget as HTMLElement;
+		const productElement = target.parentElement as HTMLElement;
+
+		this.view.removeInCartBadge(productElement);
 	}
 }
