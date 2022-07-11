@@ -184,11 +184,13 @@ input, button {
 }
 
 .actions {
+	position: relative;
 	display: flex;
 	column-gap: 20px;
 }
 
-.actions__item {
+.actions__item,
+.actions__btn {
 	position: relative;
 	padding: 13px 45px 13px 26px;
 	border: none;
@@ -199,12 +201,11 @@ input, button {
 	cursor: pointer;
 }
 
-.actions__item:last-child {
+.actions__btn {
 	padding-right: 26px;
 }
 
-.actions__sort::after,
-.actions__filter::after {
+.actions__item::after {
 	content: '';
 	position: absolute;
 	top: 13px;
@@ -212,6 +213,15 @@ input, button {
 	width: 20px;
 	height: 20px;
 	background: url(./assets/icon/down-arrow.png) no-repeat;
+	background-size: 70%;
+}
+
+.actions__item_active {
+	border: 1px solid #000;
+}
+
+.actions__item_active::after {
+	background: url(./assets/icon/up-arrow.png) no-repeat;
 	background-size: 70%;
 }
 
