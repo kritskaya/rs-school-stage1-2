@@ -23,6 +23,11 @@ export class App {
 				})
 			);
 
-		
+		document
+			.querySelector('.sort-btn')
+			?.addEventListener('click', (e) => {
+				this.controller.toggleSortList(e);
+				e.stopImmediatePropagation();
+			});
 	}
 }

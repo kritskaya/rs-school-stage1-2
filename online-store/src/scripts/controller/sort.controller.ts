@@ -10,4 +10,8 @@ export class SortController {
 		this.view = new SortView(this.service.getSorts());
 	}
 
+	public toggleSortList(event: Event): void {
+		this.view.toggleSortList(event);
+	}
+
 }

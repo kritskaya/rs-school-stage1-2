@@ -37,4 +37,7 @@ export class SortView {
 		return element
 	}
 
+	public toggleSortList(event: Event): void {
+		this.root.classList.toggle('active');
+	}
 }
