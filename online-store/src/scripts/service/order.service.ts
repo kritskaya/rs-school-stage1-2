@@ -26,9 +26,10 @@ export class OrderService {
 		const keywords = product.keywords;
 		const description = product.title;
 		const image = product.image;
+		const popular = product.popular;
 
 		const item = new Product(id, name, price, color, quantity, size, material, 
-			keywords, description, image);
+			keywords, description, image, popular);
 
 		this.order.addItem(item);
 		this.save();

@@ -1,6 +1,7 @@
 import { ProductPDO } from "../model/product.model";
+import { Sort } from "../model/sort.model";
 import { ProductService } from "../service/product.service";
-import { ProductView } from "../view/product.view";
+import { ProductView } from "../view/product/product.view";
 
 export class ProductController {
 
@@ -9,7 +10,7 @@ export class ProductController {
 
 	constructor() {
 		this.service = new ProductService();
-		this.view = new ProductView(this.service.getProducts());
+		this.view = new ProductView(this.service.getDisplayedProducts());
 	}
 
 	public loadFromStorage(): void {
@@ -25,13 +26,6 @@ export class ProductController {
 		});
 	}
 
-	// public toggleInCart(event: Event) {
-	// 	const target = event.currentTarget as HTMLElement;
-	// 	const productElement = target.parentElement as HTMLElement;
-
-	// 	this.view.toggleInCart(productElement);
-	// }
-
 	public addInCartBadge(event: Event) {
 		const target = event.currentTarget as HTMLElement;
 		const productElement = target.parentElement as HTMLElement;
@@ -44,5 +38,11 @@ export class ProductController {
 		const productElement = target.parentElement as HTMLElement;
 
 		this.view.removeInCartBadge(productElement);
+	}
+
+	public supplySort(sort: Sort): void {
+		this.service.supplySort(sort);
+
+		this.view.supplySort(this.service.getDisplayedProducts());
 	}
 }

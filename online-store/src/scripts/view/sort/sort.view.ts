@@ -12,7 +12,7 @@ export class SortView {
 		this.root = this.createElement('ul', 'actions__container action-list');
 
 		sorts.forEach((item, key) => {
-			const sortItem = this.createElement('ul', 'action-list__item');
+			const sortItem = this.createElement('li', 'action-list__item');
 
 			const sortRadio = this.createElement('input', 'action-list__input') as HTMLInputElement;
 			sortRadio.type = 'radio';
@@ -28,6 +28,9 @@ export class SortView {
 			this.root.append(sortItem);
 		});
 
+		// const firstRadioElement = this.root.children[0].querySelector(`[type="radio"]`) as HTMLInputElement;
+		// firstRadioElement.checked = true;
+
 		parent.append(this.root);
 	}
 
@@ -38,6 +41,15 @@ export class SortView {
 	}
 
 	public toggleSortList(event: Event): void {
+		const target = event.target as HTMLElement;
+		const sortBtn = target.closest('.sort-btn') as HTMLElement;
+		sortBtn.classList.toggle('actions__item_active');
+
 		this.root.classList.toggle('active');
+	}
+
+	public initialSort(): void {
+		const firstSortItem = document.querySelector(`.action-list__input[data-sort="0"]`) as HTMLInputElement;
+		firstSortItem.checked = true;
 	}
 }

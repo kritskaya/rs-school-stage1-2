@@ -9,6 +9,7 @@ export type ProductPDO = {
 	keywords: string[];
 	title: string;
 	image: string;
+	popular: string;
 }
 
 export class Product {
@@ -23,8 +24,9 @@ export class Product {
 	private keywords: string[];
 	private description: string;
 	private image: string;
+	private popular: string;
 
-	constructor(id: string, name: string, price: number, color: string, quantity: number, size: string, material: string[], keywords: string[], description: string, image: string) {
+	constructor(id: string, name: string, price: number, color: string, quantity: number, size: string, material: string[], keywords: string[], description: string, image: string, popular: string) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -35,6 +37,7 @@ export class Product {
 		this.keywords = keywords;
 		this.description = description;
 		this.image = image;
+		this.popular = popular;
 	}
 
 	public getId():string {
@@ -75,5 +78,9 @@ export class Product {
 
 	public getImage(): string {
 		return this.image;
+	}
+
+	public getPopular(): string {
+		return this.popular;
 	}
 }

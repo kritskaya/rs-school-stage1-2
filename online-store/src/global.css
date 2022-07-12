@@ -193,12 +193,13 @@ input, button {
 .actions__btn {
 	position: relative;
 	padding: 13px 45px 13px 26px;
-	border: none;
+	border: 1px solid transparent;
 	border-radius: 18px;
 	font-size: 12px;
 	font-weight: bold;
 	letter-spacing: 0.05em;
 	cursor: pointer;
+	transition: border 0.3s;
 }
 
 .actions__btn {
@@ -214,6 +215,7 @@ input, button {
 	height: 20px;
 	background: url(./assets/icon/down-arrow.png) no-repeat;
 	background-size: 70%;
+	transition: transform 0.4s;
 }
 
 .actions__item_active {
@@ -221,8 +223,7 @@ input, button {
 }
 
 .actions__item_active::after {
-	background: url(./assets/icon/up-arrow.png) no-repeat;
-	background-size: 70%;
+	transform: scale(1, -1) translateY(25%);
 }
 
 .products__grid {

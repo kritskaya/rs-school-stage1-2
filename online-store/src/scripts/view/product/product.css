@@ -46,7 +46,8 @@
 
 .product__id,
 .product__materials,
-.product__amount {
+.product__amount,
+.product__popular {
 	margin-bottom: 5px;
 	font-size: 14px;
 }

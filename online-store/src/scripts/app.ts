@@ -29,5 +29,13 @@ export class App {
 				this.controller.toggleSortList(e);
 				e.stopImmediatePropagation();
 			});
+
+		document
+			.querySelectorAll('.action-list__input')
+			.forEach((btn) =>
+				btn.addEventListener('input', (e) => {
+					this.controller.chooseSort(e);
+				})
+			);	
 	}
 }

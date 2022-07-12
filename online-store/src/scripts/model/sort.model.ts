@@ -1,8 +1,10 @@
+import { Product } from "./product.model";
+
 export class Sort {
 
 	constructor(
 		private title: string,
-		private field: string,
+		private field: keyof Product,
 		private asc: boolean
 	) {}
 

@@ -1,20 +1,26 @@
+import { Sort } from "../model/sort.model";
 import { OrderController } from "./order.controller";
 import { ProductController } from "./product.controller";
 import { SortController } from "./sort.controller";
 
 export class AppController {
-	private productContoller: ProductController;
+	private productController: ProductController;
 	private orderController: OrderController;
 	private sortController: SortController;
 
 	constructor() {
-		this.productContoller = new ProductController();
-		this.orderController = new OrderController();
 		this.sortController = new SortController();
+		this.productController = new ProductController();
+		this.orderController = new OrderController();
+
+		//this.productController.supplySort(this.sortController.getCurrentSort());
+
+		// const firstSortItem = document.querySelector(`.action-list__input[data-sort="0"]`) as HTMLInputElement;
+		// firstSortItem.checked = true;
 
 		if (localStorage.getItem('order')) {
 			this.orderController.loadFromStorage();
-			this.productContoller.loadFromStorage();
+			this.productController.loadFromStorage();
 		}
 	}
 
@@ -24,12 +30,12 @@ export class AppController {
 
 	public addToOrder(event: Event): void {
 		this.orderController.addToOrder(event);
-		this.productContoller.addInCartBadge(event);
+		this.productController.addInCartBadge(event);
 	}
 
 	public removeFromOrder(event: Event): void {
 		const itemToRemoveBadge = this.orderController.removeFromOrder(event);
-		this.productContoller.removeInCartBadge(event);
+		this.productController.removeInCartBadge(event);
 	}
 
 	public toogleOrderItem(event: Event): void {
@@ -45,10 +51,15 @@ export class AppController {
 			const isAddBtn = target.closest('.cart-btn') as HTMLElement;
 			isAddBtn.classList.add('cart-btn_remove');
 		}
-		
 	}
 
 	public toggleSortList(event: Event): void {
 		this.sortController.toggleSortList(event);
+	}
+
+	public chooseSort(event: Event): void {
+		this.sortController.chooseSort(event);
+		const sort = this.sortController.getCurrentSort();
+		this.productController.supplySort(sort);
 	}
 }

@@ -1,4 +1,4 @@
-import { Product } from "../model/product.model";
+import { Product } from "../../model/product.model";
 import './product.css';
 
 export class ProductView {
@@ -8,66 +8,63 @@ export class ProductView {
 		this.root = document.getElementById('product-container') as HTMLElement;
 
 		for (let i = 0; i < products.length; i++) 	{
-			const productImgs = document.createElement('a');
-			productImgs.className = 'product__imgs';
+			const productImgs = this.createElement('a', 'product__imgs') as HTMLAnchorElement;
 			productImgs.href = '#';
 			
-			const img = document.createElement('img');
-			img.className = 'product__img';
+			const img = this.createElement('img', 'product__img')  as HTMLImageElement;
 			img.src = `./assets/img/products/${products[i].getImage()}.jpg`;
 			img.alt = 'product image';
 
-			const img2 = document.createElement('img');
-			img2.className = 'product__img_hover';
+			const img2 = this.createElement('img', 'product__img_hover') as HTMLImageElement;
 			img2.src = `./assets/img/products/${products[i].getImage()}_hover.jpg`;
 			img2.alt = 'product image';
 
 			productImgs.append(img, img2);
 
-			const title = document.createElement('h3');
-			title.className = 'product__title';
+			const title = this.createElement('h3', 'product__title');
 			title.textContent = products[i].getName();
 
-			const description = document.createElement('p');
-			description.className = 'product__description';
+			const description = this.createElement('p', 'product__description');
 			description.textContent = `${products[i].getDescription()}, ${products[i].getColor()}, ${products[i].getSize()}`;
 
-			const id = document.createElement('p');
-			id.className = 'product__id';
+			const id = this.createElement('p', 'product__id');
 			id.textContent = `Артикул: ${products[i].getId()}`;
 
-			const quantity = document.createElement('p');
-			quantity.className = 'product__amount';
+			const quantity = this.createElement('p', 'product__amount');
 			quantity.textContent = `На складе: ${products[i].getQuantity()}`;
 
-			const materials = document.createElement('p');
-			materials.className = 'product__materials';
+			const popular = this.createElement('p', 'product__popular');
+			popular.textContent = `Популярный: ${products[i].getPopular()}`;
+
+			const materials = this.createElement('p', 'product__materials');
 			materials.textContent = `Материалы: ${products[i].getMaterial()}`;
 
-			const price = document.createElement('p');
-			price.className = 'product__price';
+			const price = this.createElement('p', 'product__price');
 			price.textContent = `${products[i].getPrice()}`;
 
-			const btn = document.createElement('button');
-			btn.className = 'product__btn cart-btn';
+			const btn = this.createElement('button', 'product__btn cart-btn');
 			btn.title = 'Добавить в корзину';
 
-			const btnImg = document.createElement('img');
-			btnImg.className = 'cart-btn__img';
+			const btnImg = this.createElement('img', 'cart-btn__img') as HTMLImageElement;
 			btnImg.src = './assets/icon/shopping-cart.png';
 			btnImg.alt = 'add to cart'
 
 			btn.append(btnImg);
 
-			const product = document.createElement('div');
-			product.className = 'products__item product';
+			const product = this.createElement('div', 'products__item product');
 			product.dataset.id = products[i].getId();
 
 			product.append(productImgs, title, description, id);
-			product.append(quantity, materials, price, btn);
+			product.append(quantity, popular, materials, price, btn);
 
 			this.root.append(product);
 		}
+	}
+
+	protected createElement(tag: string, className: string): HTMLElement {
+		const element = document.createElement(tag);
+		element.className = className;
+		return element
 	}
 
 	public addInCartBadge(element: HTMLElement): void {
@@ -90,5 +87,13 @@ export class ProductView {
 	public getRootContainer(): HTMLElement {
 		return this.root;
 	} 
+
+	public supplySort(sortProducts: Product[]) {
+		sortProducts.forEach((item) => {
+			const id = item.getId();
+			const displayedItem = this.root.querySelector(`.product[data-id="${id}"]`) as HTMLElement;
+			this.root.append(displayedItem);
+		})
+	}
 	
 }
