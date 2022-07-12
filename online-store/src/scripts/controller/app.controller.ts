@@ -1,17 +1,20 @@
 import { Sort } from "../model/sort.model";
 import { OrderController } from "./order.controller";
 import { ProductController } from "./product.controller";
+import { SearchController } from "./search.controller";
 import { SortController } from "./sort.controller";
 
 export class AppController {
 	private productController: ProductController;
 	private orderController: OrderController;
 	private sortController: SortController;
+	private searchController: SearchController;
 
 	constructor() {
 		this.sortController = new SortController();
 		this.productController = new ProductController();
 		this.orderController = new OrderController();
+		this.searchController = new SearchController();
 
 		//this.productController.supplySort(this.sortController.getCurrentSort());
 
@@ -61,5 +64,16 @@ export class AppController {
 		this.sortController.chooseSort(event);
 		const sort = this.sortController.getCurrentSort();
 		this.productController.supplySort(sort);
+	}
+
+	public search(): void {
+		const searchInput = document.querySelector('.search__input') as HTMLInputElement;
+		const request = searchInput.value;
+		console.log(request)
+
+		if (request) {
+			const displayedProducts = this.productController.getDisplayedProducts();
+			this.searchController.startSearch(request, displayedProducts);
+		}
 	}
 }

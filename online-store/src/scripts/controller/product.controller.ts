@@ -1,4 +1,4 @@
-import { ProductPDO } from "../model/product.model";
+import { Product, ProductPDO } from "../model/product.model";
 import { Sort } from "../model/sort.model";
 import { ProductService } from "../service/product.service";
 import { ProductView } from "../view/product/product.view";
@@ -45,4 +45,8 @@ export class ProductController {
 
 		this.view.supplySort(this.service.getDisplayedProducts());
 	}
+
+	public getDisplayedProducts(): Product[] {
+		return this.service.getDisplayedProducts();
+	} 
 }

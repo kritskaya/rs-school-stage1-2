@@ -37,5 +37,20 @@ export class App {
 					this.controller.chooseSort(e);
 				})
 			);	
+
+		document
+			.querySelector('.search__img_submit')
+			?.addEventListener('click', () => {
+				this.controller.search();
+			});
+
+		document
+			.querySelector('.search__input')
+			?.addEventListener('keydown', (e) => {
+				const event = e as KeyboardEvent;
+				if (event.key === 'Enter') {
+					this.controller.search();
+				}
+			});
 	}
 }
