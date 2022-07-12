@@ -8,7 +8,7 @@ export class SearchService {
 		this.currentSearch = new Search('');
 	}
 	
-	public search(products: Product[]): Product[] | string {
+	public search(products: Product[]): Product[] {
 		
 		return products.filter((item) => {
 			const request = this.currentSearch.getRequest().toLowerCase();
