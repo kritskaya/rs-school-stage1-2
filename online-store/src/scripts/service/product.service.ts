@@ -28,7 +28,6 @@ export class ProductService {
 		}
 
 		this.displayedProducts = this.products.slice();
-
 	}
 
 	public getProducts(): Product[] {
@@ -37,6 +36,10 @@ export class ProductService {
 
 	public getDisplayedProducts(): Product[] {
 		return this.displayedProducts;
+	}
+	
+	public setDisplayedProducts(products: Product[]): void {
+		this.displayedProducts = products;
 	} 
 
 	public getProduct(id: string): Product {

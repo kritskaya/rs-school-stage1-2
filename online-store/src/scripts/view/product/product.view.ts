@@ -88,12 +88,28 @@ export class ProductView {
 		return this.root;
 	} 
 
-	public supplySort(sortProducts: Product[]) {
+	public displayProducts(sortProducts: Product[]) {
+
+		// sort
 		sortProducts.forEach((item) => {
 			const id = item.getId();
 			const displayedItem = this.root.querySelector(`.product[data-id="${id}"]`) as HTMLElement;
 			this.root.append(displayedItem);
-		})
+		});
+
+		// search + filters
+		const allProducts = this.root.children;
+		Array.from(allProducts).forEach((product) => {
+			const element = product as HTMLElement;
+			const id = element.dataset.id;
+			const visibleElement = sortProducts.find((item) => item.getId() === id);
+			
+			if (visibleElement) {
+				element.style.display = 'block';
+			} else {
+				element.style.display = 'none';
+			}
+		});
 	}
 	
 }

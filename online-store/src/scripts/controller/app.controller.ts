@@ -16,11 +16,6 @@ export class AppController {
 		this.orderController = new OrderController();
 		this.searchController = new SearchController();
 
-		//this.productController.supplySort(this.sortController.getCurrentSort());
-
-		// const firstSortItem = document.querySelector(`.action-list__input[data-sort="0"]`) as HTMLInputElement;
-		// firstSortItem.checked = true;
-
 		if (localStorage.getItem('order')) {
 			this.orderController.loadFromStorage();
 			this.productController.loadFromStorage();
@@ -41,7 +36,7 @@ export class AppController {
 		this.productController.removeInCartBadge(event);
 	}
 
-	public toogleOrderItem(event: Event): void {
+	public toggleOrderItem(event: Event): void {
 		const target = event.target as HTMLElement;
 
 		const isRemoveBtn = target.closest('.cart-btn_remove');
@@ -73,7 +68,10 @@ export class AppController {
 
 		if (request) {
 			const displayedProducts = this.productController.getDisplayedProducts();
-			this.searchController.startSearch(request, displayedProducts);
+			const searchResult = this.searchController.startSearch(request, displayedProducts);
+
+			this.productController.setDisplayedProducts(searchResult);
+			this.productController.displayProducts();
 		}
 	}
 }

@@ -42,11 +42,18 @@ export class ProductController {
 
 	public supplySort(sort: Sort): void {
 		this.service.supplySort(sort);
+		this.displayProducts();
+	}
 
-		this.view.supplySort(this.service.getDisplayedProducts());
+	public displayProducts(): void {
+		this.view.displayProducts(this.service.getDisplayedProducts());
 	}
 
 	public getDisplayedProducts(): Product[] {
 		return this.service.getDisplayedProducts();
 	} 
+
+	public setDisplayedProducts(products: Product[]): void {
+		this.service.setDisplayedProducts(products);
+	}
 }
