@@ -7,9 +7,9 @@ export class SortView {
 	private root: HTMLElement;
 
 	constructor(sorts: Map<SortType, Sort>) {
-		const parent = document.querySelector('.actions') as HTMLElement;
+		const parent = document.getElementById('sort-container') as HTMLElement;
 
-		this.root = this.createElement('ul', 'actions__container action-list');
+		this.root = this.createElement('ul', 'action__container action-list');
 
 		sorts.forEach((item, key) => {
 			const sortItem = this.createElement('li', 'action-list__item');

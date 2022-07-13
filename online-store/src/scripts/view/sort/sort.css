@@ -1,4 +1,4 @@
-.actions__container {
+.action__container {
 	position: absolute;
 	top: 100px;
 	z-index: 999;
@@ -33,18 +33,15 @@
 	display: inline-block;
 	width: 20px;
 	height: 20px;
+}
+
+.sort-label::after {
 	border: 1px solid #000;
 	border-radius: 20px;
 }
 
-.action-list__input:checked+.action-list__label::after {
-	content: '';
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	padding: 2px;
-	border: 1px solid #000;
-	border-radius: 20px;
+.action-list__input:checked + .sort-label::after {
+	padding: 3px;
 	background-color: #000;
 	background-clip: content-box;
 }

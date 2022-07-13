@@ -1,0 +1,9 @@
+.filter-label::after {
+	border: 1px solid #000;
+}
+
+.action-list__input:checked + .filter-label::after {
+	padding: 4px;
+	background-color: #000;
+	background-clip: content-box;
+}
