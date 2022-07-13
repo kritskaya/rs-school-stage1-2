@@ -34,12 +34,12 @@ export class App {
 			.querySelectorAll('.action-list__input')
 			.forEach((btn) =>
 				btn.addEventListener('input', (e) => {
-					this.controller.chooseSort(e);
+					this.controller.selectSort(e);
 				})
 			);	
 
 		document
-			.querySelector('.search__img_submit')
+			.querySelector('.search__btn_start')
 			?.addEventListener('click', () => {
 				this.controller.search();
 			});
@@ -51,6 +51,12 @@ export class App {
 				if (event.key === 'Enter') {
 					this.controller.search();
 				}
+			});
+
+		document
+			.querySelector('.search__btn_clear')
+			?.addEventListener('click', () => {
+				this.controller.clearSearch();
 			});
 	}
 }

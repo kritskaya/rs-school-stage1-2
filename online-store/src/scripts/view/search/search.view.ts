@@ -3,13 +3,14 @@ import "./search.css";
 
 export class SearchView {
 	private root: HTMLElement;
+	private searchInput: HTMLInputElement;
 	private requestTitle: HTMLElement;
 	private result: HTMLElement;
 	private noFoundMessage: string = 'По Вашему запросу ничего не найдено';
 
 	constructor() {
 		this.root = document.getElementById('search-results') as HTMLElement;
-
+		this.searchInput = document.querySelector('.search__input') as HTMLInputElement;
 		this.requestTitle = this.createElement('h2', 'search-results__title');
 		this.result = this.createElement('p', 'search-results__info');
 	}
@@ -21,6 +22,7 @@ export class SearchView {
 	}
 
 	public clearSearchInfo(): void {
+		this.searchInput.value = '';
 		this.root.removeChild(this.requestTitle);
 		this.root.removeChild(this.result);
 	}

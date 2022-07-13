@@ -55,10 +55,19 @@ export class AppController {
 		this.sortController.toggleSortList(event);
 	}
 
-	public chooseSort(event: Event): void {
-		this.sortController.chooseSort(event);
+	public selectSort(event: Event): void {
+		this.sortController.selectSort(event);
 		const sort = this.sortController.getCurrentSort();
 		this.productController.supplySort(sort);
+	}
+
+	private supplySort(): void {
+		const sort = this.sortController.getCurrentSort();
+		this.productController.supplySort(sort);
+	}
+
+	public displayProducts(): void {
+		this.supplySort();
 	}
 
 	public search(): void {
@@ -73,5 +82,10 @@ export class AppController {
 			this.productController.setDisplayedProducts(searchResult);
 			this.productController.displayProducts();
 		}
+	}
+
+	public clearSearch(): void {
+		this.searchController.clearSearch();
+		this.displayProducts();
 	}
 }
