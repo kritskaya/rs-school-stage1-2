@@ -1,4 +1,5 @@
 import { Sort } from "../model/sort.model";
+import { FilterController } from "./filter.controller";
 import { OrderController } from "./order.controller";
 import { ProductController } from "./product.controller";
 import { SearchController } from "./search.controller";
@@ -9,12 +10,14 @@ export class AppController {
 	private orderController: OrderController;
 	private sortController: SortController;
 	private searchController: SearchController;
+	private filterController: FilterController;
 
 	constructor() {
 		this.sortController = new SortController();
 		this.productController = new ProductController();
 		this.orderController = new OrderController();
 		this.searchController = new SearchController();
+		this.filterController = new FilterController();
 
 		if (localStorage.getItem('order')) {
 			this.orderController.loadFromStorage();

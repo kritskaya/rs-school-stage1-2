@@ -2,11 +2,11 @@ import { Filter, FilterType, SizeFilterType } from "../../model/filter.model";
 
 export class FilterView {
 
-	constructor(filters: Map<FilterType, Filter<SizeFilterType>>) {
+	constructor(filters: Map<FilterType, Filter<FilterType>>) {
 		this.renderSizeFilter(filters);
 	}
 
-	private renderSizeFilter(filters: Map<FilterType, Filter<SizeFilterType>>) {
+	private renderSizeFilter(filters: Map<FilterType, Filter<FilterType>>) {
 		const parent = document.getElementById('size-container');
 		const root = this.createElement('ul', 'action__container action-list');
 
