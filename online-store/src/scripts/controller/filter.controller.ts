@@ -18,4 +18,8 @@ export class FilterController {
 	public getCurrentFilters(): Map<FilterType, Filter<FilterType>> {
 		return this.service.getCurrentFilters();
 	}
+
+	public toggleFilterList(event: Event): void {
+		this.view.toggleFilterList(event);
+	}
 }

@@ -91,4 +91,8 @@ export class AppController {
 		this.searchController.clearSearch();
 		this.displayProducts();
 	}
+
+	public toggleFilterList(event: Event): void {
+		this.filterController.toggleFilterList(event);
+	}
 }

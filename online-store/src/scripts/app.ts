@@ -58,5 +58,13 @@ export class App {
 			?.addEventListener('click', () => {
 				this.controller.clearSearch();
 			});
+
+		document
+			.querySelectorAll('.filter-btn')
+			.forEach((btn) =>
+				btn.addEventListener('click', (e) => {
+					this.controller.toggleFilterList(e);
+				})
+			);
 	}
 }
