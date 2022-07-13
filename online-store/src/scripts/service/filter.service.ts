@@ -1,36 +1,53 @@
-import { Filter, FilterType, SizeFilterType } from "../model/filter.model";
+import { ValueFilter, ValueFilterType, SizeFilterType} from "../model/value.filter.model";
+import { RangeFilterType, RangeFilter } from "../model/range.filter.model";
 import { Product } from "../model/product.model";
 
 export class FilterService {
-	private allFilters: Map<FilterType, Filter<FilterType>>;
-	private currentFilters: Map<FilterType, Filter<FilterType>>;
+	private allValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
+	private allRangeFilters: Map<RangeFilterType, RangeFilter>;
+	private currentValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
+	private currentRangeFilters: Map<RangeFilterType, RangeFilter>;
 
 	constructor() {
-		this.allFilters = new Map();
-		this.currentFilters = new Map();
+		this.allValueFilters = new Map();
+		this.allRangeFilters = new Map();
+		this.currentValueFilters = new Map();
+		this.currentRangeFilters = new Map();
 
 		// creating size filters
-		this.allFilters.set(SizeFilterType.Size60x120, 
-			new Filter('60 x 120 см', 'size' as keyof Product, SizeFilterType.Size60x120));
-		this.allFilters.set(SizeFilterType.Size80x200, 
-			new Filter('80 x 200 см', 'size' as keyof Product, SizeFilterType.Size80x200));
-		this.allFilters.set(SizeFilterType.Size90x200, 
-			new Filter('90 x 200 см', 'size' as keyof Product, SizeFilterType.Size90x200));
-		this.allFilters.set(SizeFilterType.Size160x200, 
-			new Filter('160 x 200 см', 'size' as keyof Product, SizeFilterType.Size160x200));
-		this.allFilters.set(SizeFilterType.Size180x200, 
-			new Filter('180 x 200 см', 'size' as keyof Product, SizeFilterType.Size180x200));
+		this.allValueFilters.set(SizeFilterType.Size60x120, 
+			new ValueFilter('60 x 120 см', 'size' as keyof Product, SizeFilterType.Size60x120));
+		this.allValueFilters.set(SizeFilterType.Size80x200, 
+			new ValueFilter('80 x 200 см', 'size' as keyof Product, SizeFilterType.Size80x200));
+		this.allValueFilters.set(SizeFilterType.Size90x200, 
+			new ValueFilter('90 x 200 см', 'size' as keyof Product, SizeFilterType.Size90x200));
+		this.allValueFilters.set(SizeFilterType.Size160x200, 
+			new ValueFilter('160 x 200 см', 'size' as keyof Product, SizeFilterType.Size160x200));
+		this.allValueFilters.set(SizeFilterType.Size180x200, 
+			new ValueFilter('180 x 200 см', 'size' as keyof Product, SizeFilterType.Size180x200));
 	}
 
-	public getAllFilters(): Map<FilterType, Filter<FilterType>> {
-		return this.allFilters;
+	public getAllValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
+		return this.allValueFilters;
 	}
 
-	public addCurrentFilter(filter: Filter<FilterType>): void {
-		this.currentFilters.set(filter.getValue(), filter);
+	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
+		this.currentValueFilters.set(filter.getValue(), filter);
 	}
 
-	public getCurrentFilters(): Map<FilterType, Filter<FilterType>> {
-		return this.currentFilters;
+	public getCurrentValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
+		return this.currentValueFilters;
+	}
+
+	public getAllRangeFilters(): Map<RangeFilterType, RangeFilter> {
+		return this.allRangeFilters;
+	}
+
+	public addCurrentRangeFilter(filter: RangeFilter): void {
+		this.currentRangeFilters.set(filter.getField() as RangeFilterType, filter);
+	}
+
+	public getCurrentRangeFilters(): Map<RangeFilterType, RangeFilter> {
+		return this.currentRangeFilters;
 	}
 }

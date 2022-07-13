@@ -1,20 +1,19 @@
-import { Filter, FilterType, SizeFilterType } from "../../model/filter.model";
+import { ValueFilter, ValueFilterType, SizeFilterType } from "../../model/value.filter.model";
 import './filter.css';
 
 export class FilterView {
 
-	constructor(filters: Map<FilterType, Filter<FilterType>>) {
+	constructor(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
 		this.renderSizeFilter(filters);
 	}
 
-	private renderSizeFilter(filters: Map<FilterType, Filter<FilterType>>) {
+	private renderSizeFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
 		const parent = document.getElementById('size-container') as HTMLElement;
 		const root = this.createElement('ul', 'action__container action-list');
 		
 		filters.forEach((item, key) => {	
 			const keyInType = (Object.values(SizeFilterType) as string[]).includes(key);	
 			if (keyInType) {
-				console.log("123")
 				const filterItem = this.createElement('li', 'action-list__item');
 
 				const filterChkbox = this.createElement('input', 'action-list__input') as HTMLInputElement;

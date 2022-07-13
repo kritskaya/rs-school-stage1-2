@@ -14,9 +14,18 @@ export enum MaterialFilterType {
 	Veneer = "шпон"
 }
 
-export type FilterType = SizeFilterType | MaterialFilterType;
+export enum ColorFilterType {
+	White = "белый",
+	Beige = "бежевый",
+	Rose = "розовый",
+	Grey = "серый",
+	Brown = "коричневый",
+	Black = "чёрный"
+}
 
-export class Filter<T> {
+export type ValueFilterType = SizeFilterType | MaterialFilterType | ColorFilterType;
+
+export class ValueFilter<T> {
 	constructor(
 		private title: string,
 		private field: string,
