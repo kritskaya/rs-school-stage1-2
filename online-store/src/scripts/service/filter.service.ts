@@ -5,14 +5,14 @@ import { Product } from "../model/product.model";
 export class FilterService {
 	private allValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
 	private allRangeFilters: Map<RangeFilterType, RangeFilter>;
-	private currentValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
-	private currentRangeFilters: Map<RangeFilterType, RangeFilter>;
+	// private currentValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
+	// private currentRangeFilters: Map<RangeFilterType, RangeFilter>;
 
 	constructor() {
 		this.allValueFilters = new Map();
 		this.allRangeFilters = new Map();
-		this.currentValueFilters = new Map();
-		this.currentRangeFilters = new Map();
+		// this.currentValueFilters = new Map();
+		// this.currentRangeFilters = new Map();
 
 		// creating size filters
 		this.allValueFilters.set(SizeFilterType.Size60x120, 
@@ -31,23 +31,11 @@ export class FilterService {
 		return this.allValueFilters;
 	}
 
-	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
-		this.currentValueFilters.set(filter.getValue(), filter);
+	public getValueFilter(type: ValueFilterType): ValueFilter<ValueFilterType> {
+		return this.allValueFilters.get(type) as ValueFilter<ValueFilterType>;
 	}
-
-	public getCurrentValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
-		return this.currentValueFilters;
-	}
-
+	
 	public getAllRangeFilters(): Map<RangeFilterType, RangeFilter> {
 		return this.allRangeFilters;
-	}
-
-	public addCurrentRangeFilter(filter: RangeFilter): void {
-		this.currentRangeFilters.set(filter.getField() as RangeFilterType, filter);
-	}
-
-	public getCurrentRangeFilters(): Map<RangeFilterType, RangeFilter> {
-		return this.currentRangeFilters;
 	}
 }

@@ -3,7 +3,7 @@ export enum SizeFilterType {
 	Size80x200 = "80x200",
 	Size90x200 = "90x200",
 	Size160x200 = "160x200",
-	Size180x200 = "200x200",
+	Size180x200 = "180x200",
 }
 
 export enum MaterialFilterType {

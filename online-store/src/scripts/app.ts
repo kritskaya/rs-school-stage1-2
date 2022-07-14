@@ -71,8 +71,7 @@ export class App {
 			.querySelectorAll('.action-list__input[type="checkbox"]')
 			.forEach((btn) =>
 				btn.addEventListener('input', (e) => {
-					this.controller.selectSortItem(e);
-					
+					this.controller.selectValueFilterItem(e);
 				})
 			);
 	}

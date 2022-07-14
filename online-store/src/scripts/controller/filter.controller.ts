@@ -12,23 +12,11 @@ export class FilterController {
 		this.view = new FilterView(this.service.getAllValueFilters());
 	}
 
-	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
-		this.service.addCurrentValueFilter(filter);
-	}
-
-	public getCurrentValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
-		return this.service.getCurrentValueFilters();
-	}
-
-	public addCurrentRangeFilter(filter: RangeFilter): void {
-		this.service.addCurrentRangeFilter(filter);
-	}
-
-	public getCurrentRangeFilters(): Map<RangeFilterType, RangeFilter> {
-		return this.service.getCurrentRangeFilters();
-	}
-
 	public toggleFilterList(event: Event): void {
 		this.view.toggleFilterList(event);
+	}
+
+	public getValueFilter(type: ValueFilterType): ValueFilter<ValueFilterType> {
+		return this.service.getValueFilter(type) as ValueFilter<ValueFilterType>;
 	}
 }

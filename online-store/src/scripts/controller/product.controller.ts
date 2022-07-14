@@ -1,4 +1,5 @@
 import { Product, ProductPDO } from "../model/product.model";
+import { RangeFilter, RangeFilterType } from "../model/range.filter.model";
 import { Sort } from "../model/sort.model";
 import { ValueFilter, ValueFilterType } from "../model/value.filter.model";
 import { ProductService } from "../service/product.service";
@@ -58,8 +59,25 @@ export class ProductController {
 		this.service.setDisplayedProducts(products);
 	}
 
-	public supplyFilters(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>): void {
-		this.service.supplyFilters(filters);
+	/* filters */
+
+	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
+		this.service.addCurrentValueFilter(filter);
 		this.displayProducts();
 	}
+
+	public removeCurrentValueFilter(filterType: ValueFilterType): void {
+		this.service.removeCurrentValueFilter(filterType);
+		this.displayProducts();
+	}
+
+	public getCurrentValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
+		return this.service.getCurrentValueFilters();
+	}
+
+	public addCurrentRangeFilter(filter: RangeFilter): void {
+		this.service.addCurrentRangeFilter(filter);
+	}
+
+	/* end filtrers*/
 }

@@ -74,34 +74,37 @@ export class AppController {
 		this.supplySort();
 	}
 
+	/* filters */
+
 	public toggleFilterList(event: Event): void {
 		this.filterController.toggleFilterList(event);
 	}
 
 	public selectValueFilterItem(event: Event): void {
 		const target = event.target as HTMLInputElement;
+		const filterType = target.dataset.filter as string;
 
-		if (target.checked) {
-			// this.filterController.addCurrentRangeFilter();
-			// const sort = this.sortController.getCurrentSort();
-			// this.productController.supplySort(sort);
+		if (target.checked) {			
+			this.addValueFilter(filterType as ValueFilterType);
+		} else {
+			this.removeValueFilter(filterType as ValueFilterType);
 		}
 	}
 
-	public addValueFilter(filter: ValueFilter<ValueFilterType>): void {
-		this.filterController.addCurrentValueFilter(filter);
-		const currentValueFilters = this.filterController.getCurrentValueFilters();
-		this.productController.supplyFilters(currentValueFilters);
+	public addValueFilter(filterType: ValueFilterType): void {		
+		const filter = this.filterController.getValueFilter(filterType);
+		this.productController.addCurrentValueFilter(filter);
 	}
 
-	public removeValueFilter(filter: ValueFilter<ValueFilterType>) {
-
+	public removeValueFilter(filterType: ValueFilterType): void {
+		this.productController.removeCurrentValueFilter(filterType);
 	}
+
+	/* end filter */
 
 	public search(): void {
 		const searchInput = document.querySelector('.search__input') as HTMLInputElement;
 		const request = searchInput.value;
-		console.log(request)
 
 		if (request) {
 			const displayedProducts = this.productController.getDisplayedProducts();
@@ -115,7 +118,5 @@ export class AppController {
 	public clearSearch(): void {
 		this.searchController.clearSearch();
 		this.displayProducts();
-	}
-
-	
+	}	
 }
