@@ -55,26 +55,19 @@ export class AppController {
 		}
 	}
 
+	/* sort */
+
 	public toggleSortList(event: Event): void {
 		this.sortController.toggleSortList(event);
 	}
 
 	public selectSortItem(event: Event): void {
-		this.sortController.selectSort(event);
-		const sort = this.sortController.getCurrentSort();
-		this.productController.supplySort(sort);
-	}
+		const target = event.target as HTMLElement;
+		const sortType = target.dataset.sort as string;
 
-	private supplySort(): void {
-		const sort = this.sortController.getCurrentSort();
-		this.productController.supplySort(sort);
+		const sort = this.sortController.getSort(+sortType);
+		this.productController.setCurrentSort(sort);
 	}
-
-	public displayProducts(): void {
-		this.supplySort();
-	}
-
-	/* filters */
 
 	public toggleFilterList(event: Event): void {
 		this.filterController.toggleFilterList(event);
@@ -117,6 +110,7 @@ export class AppController {
 
 	public clearSearch(): void {
 		this.searchController.clearSearch();
-		this.displayProducts();
+		//this.displayProducts();
+		//add all filters and sort
 	}	
 }

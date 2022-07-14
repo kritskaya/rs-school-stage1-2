@@ -42,11 +42,6 @@ export class ProductController {
 		this.view.removeInCartBadge(productElement);
 	}
 
-	public supplySort(sort: Sort): void {
-		this.service.supplySort(sort);
-		this.displayProducts();
-	}
-
 	public displayProducts(): void {
 		this.view.displayProducts(this.service.getDisplayedProducts());
 	}
@@ -58,6 +53,24 @@ export class ProductController {
 	public setDisplayedProducts(products: Product[]): void {
 		this.service.setDisplayedProducts(products);
 	}
+
+	/* sort */
+
+	public getCurrentSort(): Sort {
+		return this.service.getCurrentSort();
+	}
+
+	public setCurrentSort(sort: Sort): void {
+		this.service.setCurrentSort(sort);
+		this.displayProducts();
+	}
+	
+	// public supplySort(sort: Sort): void {
+	// 	this.service.supplySort(sort);
+	// 	this.displayProducts();
+	// }
+
+	/* end sort */
 
 	/* filters */
 

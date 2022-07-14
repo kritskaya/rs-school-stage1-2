@@ -16,20 +16,7 @@ export class SortController {
 		this.view.toggleSortList(event);
 	}
 
-	public selectSort(event: Event): void {
-		const target = event.target as HTMLElement;
-		const sortType = target.dataset.sort as string;
-
-		this.setCurrentSort(+sortType);
+	public getSort(sortType: SortType): Sort {
+		return this.service.getSort(sortType);
 	}
-
-	public setCurrentSort(sortType: SortType) {
-		this.service.setCurrentSort(sortType);
-	}
-
-
-	public getCurrentSort(): Sort {
-		return this.service.getCurrentSort();
-	}
-
 }

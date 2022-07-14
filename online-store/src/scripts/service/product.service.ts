@@ -3,6 +3,7 @@ import { Product, ProductPDO } from '../model/product.model';
 import { RangeFilter, RangeFilterType } from '../model/range.filter.model';
 import { Sort } from '../model/sort.model';
 import { ValueFilter, ValueFilterType } from '../model/value.filter.model';
+import { SortType } from './sort.service';
 
 export class ProductService {
 
@@ -12,10 +13,14 @@ export class ProductService {
 	private currentValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
 	private currentRangeFilters: Map<RangeFilterType, RangeFilter>;
 
+	private currentSort: Sort;
+
 	constructor() {
 		this.products = [];
 		this.currentValueFilters = new Map();
 		this.currentRangeFilters = new Map();
+
+		//this.currentSort = this.sorts.get(SortType.AscPopular) as Sort;
 
 		for (let i = 0; i < productsData.length; i++) {
 			const id = productsData[i].id;
@@ -46,6 +51,42 @@ export class ProductService {
 	public getDisplayedProducts(): Product[] {
 		return this.displayedProducts;
 	}
+
+	/* sort */
+
+	public getCurrentSort(): Sort {
+		return this.currentSort;
+	}
+
+	public setCurrentSort(sort: Sort): void {
+		this.currentSort = sort;
+		this.supplySort();
+	}
+
+	public supplySort(): void {
+		type Keys = keyof Product;
+
+		const sort = this.currentSort;
+
+		this.displayedProducts = this.products.slice();
+
+		this.displayedProducts.sort((item1, item2) => {
+			const sortField = sort.getField() as Keys;
+			if (!sort.isAsc())
+				[item1, item2] = [item2, item1];
+				
+			if (item1[sortField] > item2[sortField]) {
+				return 1;
+			}
+			if (item1[sortField] < item2[sortField]) {
+				return -1;
+			}
+			
+			return 0;
+		});
+	}
+
+	/* end sort */
 
 	/* filters */
 	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
@@ -126,24 +167,5 @@ export class ProductService {
 		return this.products.find((i) => i.getId() === id) as Product;
 	}
 
-	public supplySort(sort: Sort): void {
-		type Keys = keyof Product;
-
-		this.displayedProducts = this.products.slice();
-
-		this.displayedProducts.sort((item1, item2) => {
-			const sortField = sort.getField() as Keys;
-			if (!sort.isAsc())
-				[item1, item2] = [item2, item1];
-				
-			if (item1[sortField] > item2[sortField]) {
-				return 1;
-			}
-			if (item1[sortField] < item2[sortField]) {
-				return -1;
-			}
-			
-			return 0;
-		});
-	}
+	
 }
