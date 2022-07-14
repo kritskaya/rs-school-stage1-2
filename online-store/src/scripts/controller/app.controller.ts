@@ -1,4 +1,5 @@
 import { Sort } from "../model/sort.model";
+import { SizeFilterType, ValueFilter, ValueFilterType } from "../model/value.filter.model";
 import { FilterController } from "./filter.controller";
 import { OrderController } from "./order.controller";
 import { ProductController } from "./product.controller";
@@ -58,7 +59,7 @@ export class AppController {
 		this.sortController.toggleSortList(event);
 	}
 
-	public selectSort(event: Event): void {
+	public selectSortItem(event: Event): void {
 		this.sortController.selectSort(event);
 		const sort = this.sortController.getCurrentSort();
 		this.productController.supplySort(sort);
@@ -71,6 +72,30 @@ export class AppController {
 
 	public displayProducts(): void {
 		this.supplySort();
+	}
+
+	public toggleFilterList(event: Event): void {
+		this.filterController.toggleFilterList(event);
+	}
+
+	public selectValueFilterItem(event: Event): void {
+		const target = event.target as HTMLInputElement;
+
+		if (target.checked) {
+			// this.filterController.addCurrentRangeFilter();
+			// const sort = this.sortController.getCurrentSort();
+			// this.productController.supplySort(sort);
+		}
+	}
+
+	public addValueFilter(filter: ValueFilter<ValueFilterType>): void {
+		this.filterController.addCurrentValueFilter(filter);
+		const currentValueFilters = this.filterController.getCurrentValueFilters();
+		this.productController.supplyFilters(currentValueFilters);
+	}
+
+	public removeValueFilter(filter: ValueFilter<ValueFilterType>) {
+
 	}
 
 	public search(): void {
@@ -92,7 +117,5 @@ export class AppController {
 		this.displayProducts();
 	}
 
-	public toggleFilterList(event: Event): void {
-		this.filterController.toggleFilterList(event);
-	}
+	
 }

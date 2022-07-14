@@ -31,10 +31,10 @@ export class App {
 			});
 
 		document
-			.querySelectorAll('.action-list__input')
+			.querySelectorAll('.action-list__input[type="radio"]')
 			.forEach((btn) =>
 				btn.addEventListener('input', (e) => {
-					this.controller.selectSort(e);
+					this.controller.selectSortItem(e);
 				})
 			);	
 
@@ -64,6 +64,15 @@ export class App {
 			.forEach((btn) =>
 				btn.addEventListener('click', (e) => {
 					this.controller.toggleFilterList(e);
+				})
+			);
+
+		document
+			.querySelectorAll('.action-list__input[type="checkbox"]')
+			.forEach((btn) =>
+				btn.addEventListener('input', (e) => {
+					this.controller.selectSortItem(e);
+					
 				})
 			);
 	}

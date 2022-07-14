@@ -1,5 +1,6 @@
 import { Product, ProductPDO } from "../model/product.model";
 import { Sort } from "../model/sort.model";
+import { ValueFilter, ValueFilterType } from "../model/value.filter.model";
 import { ProductService } from "../service/product.service";
 import { ProductView } from "../view/product/product.view";
 
@@ -55,5 +56,10 @@ export class ProductController {
 
 	public setDisplayedProducts(products: Product[]): void {
 		this.service.setDisplayedProducts(products);
+	}
+
+	public supplyFilters(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>): void {
+		this.service.supplyFilters(filters);
+		this.displayProducts();
 	}
 }

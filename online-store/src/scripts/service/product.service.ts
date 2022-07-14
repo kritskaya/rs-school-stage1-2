@@ -1,6 +1,7 @@
 import productsData from '../../assets/json/products.json';
-import { Product } from '../model/product.model';
+import { Product, ProductPDO } from '../model/product.model';
 import { Sort } from '../model/sort.model';
+import { ValueFilter, ValueFilterType } from '../model/value.filter.model';
 
 export class ProductService {
 
@@ -64,6 +65,26 @@ export class ProductService {
 			}
 			
 			return 0;
+		});
+	}
+
+	public supplyFilters(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>): void {
+		type keys = keyof Product;
+
+		this.displayedProducts = this.products.slice();
+
+		filters.forEach((filter, type) => {
+			this.displayedProducts.filter((item) => {
+				const filterField = filter.getField() as keys;
+				const filterValue = filter.getValue();
+				const productFieldValue = item[filterField];
+				console.log(productFieldValue);
+
+				if (typeof productFieldValue === 'string') {
+					return productFieldValue === filterValue;
+				}
+				
+			})
 		});
 	}
 }
