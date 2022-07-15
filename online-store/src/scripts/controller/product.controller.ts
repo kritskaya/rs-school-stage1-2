@@ -1,5 +1,6 @@
 import { Product, ProductPDO } from "../model/product.model";
 import { RangeFilter, RangeFilterType } from "../model/range.filter.model";
+import { Search } from "../model/search.model";
 import { Sort } from "../model/sort.model";
 import { ValueFilter, ValueFilterType } from "../model/value.filter.model";
 import { ProductService } from "../service/product.service";
@@ -65,11 +66,6 @@ export class ProductController {
 		this.displayProducts();
 	}
 	
-	// public supplySort(sort: Sort): void {
-	// 	this.service.supplySort(sort);
-	// 	this.displayProducts();
-	// }
-
 	/* end sort */
 
 	/* filters */
@@ -92,5 +88,19 @@ export class ProductController {
 		this.service.addCurrentRangeFilter(filter);
 	}
 
-	/* end filtrers*/
+	/* end filters*/
+
+	/* search */
+
+	public addSearchFilter(request: string): void {
+		this.service.setCurrentSearch(new Search(request));
+		this.displayProducts();
+	}
+
+	public clearSearchFilter() {
+		this.service.clearSearchFilter();
+		this.displayProducts();
+	}
+
+	/* end search */
 }

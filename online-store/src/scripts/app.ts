@@ -8,6 +8,9 @@ export class App {
 	}
 
 	public start(): void {
+
+		/* order */
+
 		document
 			.getElementById('cart-btn')
 			?.addEventListener('click', (e) => {
@@ -22,6 +25,10 @@ export class App {
 					this.controller.toggleOrderItem(e);
 				})
 			);
+		
+		/* end order */
+
+		/* sort */
 
 		document
 			.querySelector('.sort-btn')
@@ -37,27 +44,10 @@ export class App {
 					this.controller.selectSortItem(e);
 				})
 			);	
-
-		document
-			.querySelector('.search__btn_start')
-			?.addEventListener('click', () => {
-				this.controller.search();
-			});
-
-		document
-			.querySelector('.search__input')
-			?.addEventListener('keydown', (e) => {
-				const event = e as KeyboardEvent;
-				if (event.key === 'Enter') {
-					this.controller.search();
-				}
-			});
-
-		document
-			.querySelector('.search__btn_clear')
-			?.addEventListener('click', () => {
-				this.controller.clearSearch();
-			});
+		
+		/* end sort */	
+		
+		/* filter */
 
 		document
 			.querySelectorAll('.filter-btn')
@@ -74,5 +64,32 @@ export class App {
 					this.controller.selectValueFilterItem(e);
 				})
 			);
+
+		/* filter end */
+
+		/* search */
+
+		document
+			.querySelector('.search__btn_start')
+			?.addEventListener('click', () => {
+				this.controller.addSearchFilter();
+			});
+
+		document
+			.querySelector('.search__input')
+			?.addEventListener('keydown', (e) => {
+				const event = e as KeyboardEvent;
+				if (event.key === 'Enter') {
+					this.controller.addSearchFilter();
+				}
+			});
+
+		document
+			.querySelector('.search__btn_clear')
+			?.addEventListener('click', () => {
+				this.controller.clearSearchFilter();
+			});
+
+		/* search end */
 	}
 }

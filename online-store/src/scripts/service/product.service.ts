@@ -1,6 +1,7 @@
 import productsData from '../../assets/json/products.json';
 import { Product, ProductPDO } from '../model/product.model';
 import { RangeFilter, RangeFilterType } from '../model/range.filter.model';
+import { Search } from '../model/search.model';
 import { Sort } from '../model/sort.model';
 import { ValueFilter, ValueFilterType } from '../model/value.filter.model';
 import { SortType } from './sort.service';
@@ -14,6 +15,7 @@ export class ProductService {
 	private currentRangeFilters: Map<RangeFilterType, RangeFilter>;
 
 	private currentSort: Sort;
+	private currentSearch: Search;
 
 	constructor() {
 		this.products = [];
@@ -48,8 +50,16 @@ export class ProductService {
 		return this.products;
 	} 
 
+	public getProduct(id: string): Product {
+		return this.products.find((i) => i.getId() === id) as Product;
+	}
+
 	public getDisplayedProducts(): Product[] {
 		return this.displayedProducts;
+	}
+
+	public setDisplayedProducts(products: Product[]): void {
+		this.displayedProducts = products;
 	}
 
 	/* sort */
@@ -89,6 +99,7 @@ export class ProductService {
 	/* end sort */
 
 	/* filters */
+
 	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
 		this.currentValueFilters.set(filter.getValue(), filter);
 		this.supplyFilters();
@@ -159,13 +170,38 @@ export class ProductService {
 
 	/* end filters */
 	
-	public setDisplayedProducts(products: Product[]): void {
-		this.displayedProducts = products;
-	} 
-
-	public getProduct(id: string): Product {
-		return this.products.find((i) => i.getId() === id) as Product;
+	/* search */
+	
+	public setCurrentSearch(search: Search): void {
+		this.currentSearch = search;
+		this.supplySearchFilter();
 	}
 
+	public getCurrentSearch(): Search {
+		return this.currentSearch;
+	}
+
+	public clearSearchFilter() {
+		this.currentSearch = new Search('');
+		this.supplySearchFilter();
+	}
+
+	public supplySearchFilter() {
+
+		const products = this.displayedProducts;
+
+		if (this.currentSearch.getRequest()) {
+			this.displayedProducts = products.filter((item) => {
+				const request = this.currentSearch.getRequest().toLowerCase();
+
+				const nameResult = item.getName().indexOf(request);
+				const titleRequest = item.getDescription().indexOf(request);
+
+				return nameResult >= 0 || titleRequest >= 0;
+			})
+		}	
+	}
+
+	/* end search */	
 	
 }

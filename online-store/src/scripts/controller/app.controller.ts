@@ -95,22 +95,22 @@ export class AppController {
 
 	/* end filter */
 
-	public search(): void {
+	/* search */
+
+	public addSearchFilter(): void {
 		const searchInput = document.querySelector('.search__input') as HTMLInputElement;
 		const request = searchInput.value;
 
 		if (request) {
+			this.productController.addSearchFilter(request);
 			const displayedProducts = this.productController.getDisplayedProducts();
-			const searchResult = this.searchController.startSearch(request, displayedProducts);
-
-			this.productController.setDisplayedProducts(searchResult);
-			this.productController.displayProducts();
+			this.searchController.startSearch(request, displayedProducts);
 		}
 	}
 
-	public clearSearch(): void {
+	public clearSearchFilter(): void {
 		this.searchController.clearSearch();
-		//this.displayProducts();
-		//add all filters and sort
 	}	
+
+	/* end search */
 }
