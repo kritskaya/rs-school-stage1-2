@@ -26,24 +26,24 @@ export class OrderController {
 	public toggleOrderList(): void {
 		this.view.toggleOrderList();
 
-		this.clickHandler = this.clickOutsideOrderHandler.bind(this);
+		// this.clickHandler = this.clickOutsideOrderHandler.bind(this);
 
-		if (this.view.getCartContainer().classList.contains('active')) {
-			document.addEventListener('click', this.clickHandler);
-		} 
+		// if (this.view.getCartContainer().classList.contains('active')) {
+		// 	document.addEventListener('click', this.clickHandler);
+		// } 
 	}
 
 	private clickOutsideOrderHandler(event: Event): void {
-		event.stopImmediatePropagation();
+		// event.stopImmediatePropagation();
 
-		const target = event.target as Element;
-		if (!target.closest('.cart__list') && 
-			!target.closest('.cart__btn') &&
-			!target.closest('.product__btn') &&
-			!target.closest('.cart-item__remove-btn')) {
-			this.view.toggleOrderList();
-			document.removeEventListener('click', this.clickHandler);
-		}
+		// const target = event.target as Element;
+		// if (!target.closest('.cart__list') && 
+		// 	!target.closest('.cart__btn') &&
+		// 	!target.closest('.product__btn') &&
+		// 	!target.closest('.cart-item__remove-btn')) {
+		// 	this.view.toggleOrderList();
+		// 	document.removeEventListener('click', this.clickHandler);
+		// }
 	}
 
 	// public toggleOrderItem(event: Event): void {
