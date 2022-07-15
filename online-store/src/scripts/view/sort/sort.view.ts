@@ -28,9 +28,6 @@ export class SortView {
 			this.root.append(sortItem);
 		});
 
-		// const firstRadioElement = this.root.children[0].querySelector(`[type="radio"]`) as HTMLInputElement;
-		// firstRadioElement.checked = true;
-
 		parent.append(this.root);
 	}
 
@@ -40,8 +37,7 @@ export class SortView {
 		return element
 	}
 
-	public toggleSortList(event: Event): void {
-		const target = event.target as HTMLElement;
+	public toggleSortList(target: HTMLElement): void {
 		const sortBtn = target.closest('.sort-btn') as HTMLElement;
 		sortBtn.classList.toggle('actions__item_active');
 

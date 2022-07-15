@@ -10,15 +10,28 @@ export class App {
 
 	public start(): void {
 
-		
-
 		/* sort */
 
 		document
 			.querySelector('.sort-btn')
 			?.addEventListener('click', (e) => {
-				this.controller.toggleSortList(e);
+				const target = e.target as HTMLElement
+
+				// close already opened
+				const opened = document.querySelector('.actions__item_active') as HTMLElement;
+				if (opened) {
+					this.controller.toggleFilterList(opened);
+				}
+				
+				this.controller.toggleSortList(target);
 				e.stopImmediatePropagation();
+
+				this.clickHandler = this.clickOutsideActionHandler.bind(this);
+
+				const listElement = target.nextElementSibling as HTMLElement;
+				if (listElement.classList.contains('active')) {
+					document.addEventListener('click', this.clickHandler);
+				}
 			});
 
 		document
@@ -37,7 +50,29 @@ export class App {
 			.querySelectorAll('.filter-btn')
 			.forEach((btn) =>
 				btn.addEventListener('click', (e) => {
-					this.controller.toggleFilterList(e);
+					const target = e.target as HTMLElement;
+
+					// close already opened
+					const opened = document.querySelector('.actions__item_active') as HTMLElement;
+					if (opened) {
+						if (opened.classList.contains('sort-btn')) {
+							this.controller.toggleSortList(opened);
+						} else {
+							this.controller.toggleFilterList(opened);
+						}
+						
+					}
+
+					this.controller.toggleFilterList(target);
+					e.stopImmediatePropagation();
+
+					this.clickHandler = this.clickOutsideActionHandler.bind(this);
+
+					const listElement = target.nextElementSibling as HTMLElement;
+
+					if (listElement.classList.contains('active')) {
+						document.addEventListener('click', this.clickHandler);
+					}
 				})
 			);
 
@@ -98,16 +133,17 @@ export class App {
 				btn.addEventListener('click', (e) => {
 					this.controller.toggleOrderItem(e);
 					e.stopImmediatePropagation();
-					
 				})
 			);
 
 		/* end order */
+
+		
 	}
 
 	// private clickOutsideOrderHandler(event: Event, classes: string[],  callback: () => void): void {
 	private clickOutsideOrderHandler(event: Event): void {
-		//event.stopImmediatePropagation();
+		event.stopImmediatePropagation();
 
 		const target = event.target as Element;
 
@@ -127,20 +163,25 @@ export class App {
 			!target.closest('.cart__btn') &&
 			!target.closest('.product__btn') &&
 			!target.closest('.cart-item__remove-btn')) {
-			//this.view.toggleOrderList();
 			this.controller.toggleOrderList();
 			document.removeEventListener('click', this.clickHandler);
 		}
 	}
 
 	private clickOutsideActionHandler(event: Event): void {
-		//event.stopImmediatePropagation();
-
-		const target = event.target as Element;
+		event.stopImmediatePropagation();
+		
+		const target = event.target as HTMLElement;
+		const btn = document.querySelector('.actions__item_active') as HTMLElement;
 
 		if (!target.closest('.action__container')) {
-			//this.view.toggleOrderList();
-			this.controller.toggleOrderList();
+			
+			if (btn.classList.contains('sort-btn')) {
+				this.controller.toggleSortList(btn);
+			} else if (btn.classList.contains('filter-btn')) {
+				this.controller.toggleFilterList(btn);
+			}
+			
 			document.removeEventListener('click', this.clickHandler);
 		}
 	}

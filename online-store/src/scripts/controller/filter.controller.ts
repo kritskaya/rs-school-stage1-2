@@ -12,8 +12,8 @@ export class FilterController {
 		this.view = new FilterView(this.service.getAllValueFilters());
 	}
 
-	public toggleFilterList(event: Event): void {
-		this.view.toggleFilterList(event);
+	public toggleFilterList(target: HTMLElement): void {
+		this.view.toggleFilterList(target);
 	}
 
 	public getValueFilter(type: ValueFilterType): ValueFilter<ValueFilterType> {

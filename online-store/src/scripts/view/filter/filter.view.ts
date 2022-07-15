@@ -39,8 +39,7 @@ export class FilterView {
 		return element
 	}
 
-	public toggleFilterList(event: Event): void {
-		const target = event.target as HTMLElement;
+	public toggleFilterList(target: HTMLElement): void {
 		const filterBtn = target.closest('.filter-btn') as HTMLElement;
 		filterBtn.classList.toggle('actions__item_active');
 

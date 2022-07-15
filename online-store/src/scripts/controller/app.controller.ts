@@ -57,8 +57,8 @@ export class AppController {
 
 	/* sort */
 
-	public toggleSortList(event: Event): void {
-		this.sortController.toggleSortList(event);
+	public toggleSortList(target: HTMLElement): void {
+		this.sortController.toggleSortList(target);
 	}
 
 	public selectSortItem(event: Event): void {
@@ -69,8 +69,12 @@ export class AppController {
 		this.productController.setCurrentSort(sort);
 	}
 
-	public toggleFilterList(event: Event): void {
-		this.filterController.toggleFilterList(event);
+	/* end sort */
+
+	/* filter */
+
+	public toggleFilterList(target: HTMLElement): void {
+		this.filterController.toggleFilterList(target);
 	}
 
 	public selectValueFilterItem(event: Event): void {

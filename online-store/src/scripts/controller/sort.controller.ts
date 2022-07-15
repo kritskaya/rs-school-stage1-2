@@ -12,8 +12,8 @@ export class SortController {
 		this.view.initialSort();
 	}
 
-	public toggleSortList(event: Event): void {
-		this.view.toggleSortList(event);
+	public toggleSortList(target: HTMLElement): void {
+		this.view.toggleSortList(target);
 	}
 
 	public getSort(sortType: SortType): Sort {
