@@ -21,6 +21,7 @@ export class ProductService {
 		this.products = [];
 		this.currentValueFilters = new Map();
 		this.currentRangeFilters = new Map();
+		this.currentSearch = new Search('');
 
 		//this.currentSort = this.sorts.get(SortType.AscPopular) as Sort;
 
@@ -70,7 +71,8 @@ export class ProductService {
 
 	public setCurrentSort(sort: Sort): void {
 		this.currentSort = sort;
-		this.supplySort();
+		//this.supplySort();
+		this.supplyAllConditions();
 	}
 
 	public supplySort(): void {
@@ -102,12 +104,14 @@ export class ProductService {
 
 	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
 		this.currentValueFilters.set(filter.getValue(), filter);
-		this.supplyFilters();
+		//this.supplyValueFilters();
+		this.supplyAllConditions();
 	}
 
 	public removeCurrentValueFilter(filterType: ValueFilterType): void {
 		this.currentValueFilters.delete(filterType);
-		this.supplyFilters();
+		//this.supplyValueFilters();
+		this.supplyAllConditions();
 	}
 
 	public getCurrentValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
@@ -116,20 +120,18 @@ export class ProductService {
 
 	public addCurrentRangeFilter(filter: RangeFilter): void {
 		this.currentRangeFilters.set(filter.getField() as RangeFilterType, filter);
-		this.supplyFilters();
+		//this.supplyFilters();
 	}
 
-	public supplyFilters(): void {
+	public supplyValueFilters(): void {
 		type keys = keyof Product;
 
-		this.displayedProducts = this.products.slice();
+		//this.displayedProducts = this.products.slice();
 
 		const sameFilterTypes = new Set();
 		const filters = this.currentValueFilters;
-		console.log(this.currentValueFilters)
 
 		filters.forEach((item) => sameFilterTypes.add(item.getField()));
-		console.log(sameFilterTypes);
 
 		sameFilterTypes.forEach((type) => {
 			const values: string[] = [];
@@ -140,7 +142,6 @@ export class ProductService {
 				}
 			})
 
-			console.log(values);
 			this.displayedProducts = this.displayedProducts.filter((product) => {
 				const productFilterFieldValue = product[type as keys];
 
@@ -203,5 +204,13 @@ export class ProductService {
 	}
 
 	/* end search */	
+
+	public supplyAllConditions() {
+		
+		this.supplySort();
+		this.supplyValueFilters();
+		this.supplySearchFilter();
+
+	}
 	
 }
