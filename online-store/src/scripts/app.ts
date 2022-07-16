@@ -91,6 +91,12 @@ export class App {
 		priceRange.noUiSlider?.on('end', () => {
 			this.controller.addRangeFilter(priceRange.noUiSlider?.get() as number[], 
 				RangeFilterType.Price);
+		});
+
+		const quantityRange = document.getElementById('quantity-range') as target;
+		quantityRange.noUiSlider?.on('end', () => {
+			this.controller.addRangeFilter(quantityRange.noUiSlider?.get() as number[], 
+				RangeFilterType.Quantity);
 		})
 		/* filter end */
 

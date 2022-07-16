@@ -89,12 +89,14 @@
 	border: 1px solid #ff4d4d;
 	border-radius: 5px;
 	background-color: #ffe6e6;
+	display: none;
 	opacity: 0;
 	transform: translateX(-50%);
 	transition: opacity 0.5s;
 }
 
 .order-error.active {
+	display: block;
 	opacity: 1;
 	transition: opacity 0.5s;
 }

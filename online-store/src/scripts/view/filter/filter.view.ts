@@ -10,6 +10,7 @@ export class FilterView {
 		this.renderPriceFilter();
 		this.renderColorFilter(filters);
 		this.renderMaterialFilter(filters);
+		this.renderQuantityFilter();
 	}
 
 	private renderSizeFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
@@ -118,6 +119,36 @@ export class FilterView {
 			range: {
 				'min': 0,
 				'max': 50000,
+			}
+		});
+		
+		root.append(filterItem);
+		parent.append(root);
+	}
+
+	private renderQuantityFilter() {
+		const parent = document.getElementById('quantity-container') as HTMLElement;
+		const root = this.createElement('ul', 'action__container action-list range-container');
+		
+		const filterItem = this.createElement('li', 'action-list__item');
+		filterItem.id = 'quantity-range';
+		
+		noUiSlider.create(filterItem, {
+			start: [2, 10],
+			connect: true,
+			step: 1,
+			format: {
+				to: function (value) {
+					return +(+value).toFixed(0);
+				},
+				from: function (value) {
+					return +(+value).toFixed(0);
+				}
+		  },
+			tooltips: [true, true],
+			range: {
+				'min': 0,
+				'max': 50,
 			}
 		});
 		

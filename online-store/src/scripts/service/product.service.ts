@@ -4,7 +4,6 @@ import { RangeFilter, RangeFilterType } from '../model/range.filter.model';
 import { Search } from '../model/search.model';
 import { Sort } from '../model/sort.model';
 import { ValueFilter, ValueFilterType } from '../model/value.filter.model';
-import { SortType } from './sort.service';
 
 export class ProductService {
 
@@ -22,7 +21,8 @@ export class ProductService {
 		this.currentValueFilters = new Map();
 
 		this.currentRangeFilters = new Map();
-		this.currentRangeFilters.set(RangeFilterType.Price, new RangeFilter(0, 50000, 'price'))
+		this.currentRangeFilters.set(RangeFilterType.Price, new RangeFilter(0, 50000, 'price'));
+		this.currentRangeFilters.set(RangeFilterType.Quantity, new RangeFilter(0, 50, 'quantity'));
 		
 		this.currentSearch = new Search('');
 
