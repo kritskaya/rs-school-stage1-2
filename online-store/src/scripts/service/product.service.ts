@@ -153,6 +153,13 @@ export class ProductService {
 
 				if (typeof productFilterFieldValue === 'string') {
 					return values.includes(productFilterFieldValue)
+				} else if (Array.isArray(productFilterFieldValue)) {
+					
+					const arrayItem = productFilterFieldValue.find((item) => {
+						return values.includes(item);
+					});
+					
+					return arrayItem ? true: false;
 				}
 			})
 		})
