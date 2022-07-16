@@ -59,14 +59,16 @@ export class ProductView {
 
 			this.root.append(product);
 		}
+
+		const messageElement = this.createElement('div', 'order-error')
+		messageElement.textContent = 'Извините, все слоты заполнены';
+		document.body.append(messageElement);
 	}
 
-	protected createElement(tag: string, className: string): HTMLElement {
-		const element = document.createElement(tag);
-		element.className = className;
-		return element;
-	}
-
+	public getRootContainer(): HTMLElement {
+		return this.root;
+	} 
+	
 	public addInCartBadge(element: HTMLElement): void {
 		let inCart = element.querySelector('.product__in-cart') as HTMLElement;
 		
@@ -84,12 +86,14 @@ export class ProductView {
 		} 
 	}
 
-	public getRootContainer(): HTMLElement {
-		return this.root;
-	} 
+	public noAvailableSlot(): void {
+		const error = document.querySelector('.order-error') as HTMLElement;
+		error.classList.add('active');
 
-	public displayProducts(sortProducts: Product[]) {
+		setTimeout(() => error.classList.remove('active'), 3000);
+	}
 
+	public displayProducts(sortProducts: Product[]): void {
 		// sort
 		sortProducts.forEach((item) => {
 			const id = item.getId();
@@ -110,6 +114,12 @@ export class ProductView {
 				element.style.display = 'none';
 			}
 		});
+	}
+
+	protected createElement(tag: string, className: string): HTMLElement {
+		const element = document.createElement(tag);
+		element.className = className;
+		return element;
 	}
 	
 }

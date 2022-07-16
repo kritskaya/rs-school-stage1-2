@@ -37,8 +37,13 @@ export class AppController {
 	}
 
 	public addToOrder(event: Event): void {
-		this.orderController.addToOrder(event);
-		this.productController.addInCartBadge(event);
+		
+		
+		
+			this.orderController.addToOrder(event);
+			this.productController.addInCartBadge(event);
+		
+		
 	}
 
 	public removeFromOrder(event: Event): void {
@@ -55,9 +60,16 @@ export class AppController {
 			isRemoveBtn.classList.remove('cart-btn_remove');
 			//this.productContoller.removeInCartBadge(event);
 		} else {
-			this.addToOrder(event);
-			const isAddBtn = target.closest('.cart-btn') as HTMLElement;
-			isAddBtn.classList.add('cart-btn_remove');
+			
+			const order = this.orderController.getCounter() as HTMLElement;
+
+			if (Number(order.textContent) < 5) {
+				this.addToOrder(event);
+				const isAddBtn = target.closest('.cart-btn') as HTMLElement;
+				isAddBtn.classList.add('cart-btn_remove');
+			} else {
+				this.productController.noAvailableSlot();
+			}
 		}
 	}
 

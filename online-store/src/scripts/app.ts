@@ -142,7 +142,6 @@ export class App {
 				btn.addEventListener('click', (e) => {
 					e.stopImmediatePropagation();
 					this.controller.toggleOrderItem(e);
-					
 				})
 			);
 

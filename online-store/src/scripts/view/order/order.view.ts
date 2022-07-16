@@ -78,26 +78,24 @@ export class OrderView {
 		parent.append(this.counter);
 	}
 
-	protected createElement(tag: string, className: string): HTMLElement {
-		const element = document.createElement(tag);
-		element.className = className;
-		return element
+	public getCartContainer(): HTMLElement {
+		return this.root;
+	}
+
+	public getCounter(): HTMLElement {
+		return this.counter;
 	}
 	
 	public toggleOrderList(): void {
 		this.root.classList.toggle('active');
 	}
 
-	public getCartContainer(): HTMLElement {
-		return this.root;
-	}
-
+	
 	public addToOrder(product: Product): HTMLElement {
 		return this.renderOrderItem(product);
 	}
 
 	public removeFromOrder(productElement: HTMLElement): void {
-		
 		const id = productElement.dataset.id;
 		const card = document.querySelector(`.product[data-id="${id}"]`) as HTMLElement;
 		const btn = card.querySelector('.cart-btn') as HTMLElement;
@@ -110,9 +108,6 @@ export class OrderView {
 
 		productElement.remove();
 
-		// btn.dispatchEvent(new Event('click'));
-		// console.log(id)
-
 		const quantity = this.counter.textContent as string;
 		this.counter.textContent = `${+quantity - 1}`;
 		
@@ -122,4 +117,9 @@ export class OrderView {
 		}
 	}
 
+	protected createElement(tag: string, className: string): HTMLElement {
+		const element = document.createElement(tag);
+		element.className = className;
+		return element
+	}
 }

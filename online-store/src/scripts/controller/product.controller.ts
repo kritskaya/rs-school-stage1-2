@@ -43,6 +43,10 @@ export class ProductController {
 		this.view.removeInCartBadge(productElement);
 	}
 
+	public noAvailableSlot(): void {
+		this.view.noAvailableSlot();
+	}
+
 	public displayProducts(): void {
 		this.view.displayProducts(this.service.getDisplayedProducts());
 	}

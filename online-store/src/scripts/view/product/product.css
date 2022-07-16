@@ -72,10 +72,29 @@
 }
 
 .cart-btn_remove {
-	background-color: red;
+	background-color: #ff6600;
 }
 
 .product__in-cart {
 	margin-top: -50px;
 	margin-left: 50px;
+}
+
+.order-error {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 1000;
+	padding: 25px;
+	border: 1px solid #ff4d4d;
+	border-radius: 5px;
+	background-color: #ffe6e6;
+	opacity: 0;
+	transform: translateX(-50%);
+	transition: opacity 0.5s;
+}
+
+.order-error.active {
+	opacity: 1;
+	transition: opacity 0.5s;
 }

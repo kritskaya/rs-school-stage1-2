@@ -13,6 +13,10 @@ export class OrderController {
 		this.view = new OrderView(this.service.getOrder());
 	}
 
+	public getCounter(): HTMLElement {
+		return this.view.getCounter();
+	}
+
 	public loadFromStorage(): void {
 		const storage = JSON.parse(localStorage.getItem('order') as string);
 		
@@ -24,41 +28,8 @@ export class OrderController {
 	}
 
 	public toggleOrderList(): void {
-		this.view.toggleOrderList();
-
-		// this.clickHandler = this.clickOutsideOrderHandler.bind(this);
-
-		// if (this.view.getCartContainer().classList.contains('active')) {
-		// 	document.addEventListener('click', this.clickHandler);
-		// } 
+		this.view.toggleOrderList(); 
 	}
-
-	private clickOutsideOrderHandler(event: Event): void {
-		// event.stopImmediatePropagation();
-
-		// const target = event.target as Element;
-		// if (!target.closest('.cart__list') && 
-		// 	!target.closest('.cart__btn') &&
-		// 	!target.closest('.product__btn') &&
-		// 	!target.closest('.cart-item__remove-btn')) {
-		// 	this.view.toggleOrderList();
-		// 	document.removeEventListener('click', this.clickHandler);
-		// }
-	}
-
-	// public toggleOrderItem(event: Event): void {
-	// 	const target = event.target as HTMLElement;
-
-	// 	const isRemoveBtn = target.closest('.cart-btn_remove');
-	// 	if (isRemoveBtn) {
-	// 		this.removeFromOrder(event);
-	// 		isRemoveBtn.classList.remove('cart-btn_remove');
-	// 	} else {
-	// 		this.addToOrder(event);
-	// 		const isAddBtn = target.closest('.cart-btn') as HTMLElement;
-	// 		isAddBtn.classList.add('cart-btn_remove');
-	// 	}
-	// }
 
 	public addToOrder(event: Event): void {
 		const target = event.currentTarget as HTMLElement;
