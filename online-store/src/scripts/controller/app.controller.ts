@@ -1,5 +1,7 @@
+import { RangeFilter } from "../model/range.filter.model";
 import { Sort } from "../model/sort.model";
 import { SizeFilterType, ValueFilter, ValueFilterType } from "../model/value.filter.model";
+import { SortType } from "../service/sort.service";
 import { FilterController } from "./filter.controller";
 import { OrderController } from "./order.controller";
 import { ProductController } from "./product.controller";
@@ -15,7 +17,11 @@ export class AppController {
 
 	constructor() {
 		this.sortController = new SortController();
+		const sort = this.sortController.getSort(SortType.AscPopular);
+		
 		this.productController = new ProductController();
+		this.productController.setCurrentSort(sort);
+
 		this.orderController = new OrderController();
 		this.searchController = new SearchController();
 		this.filterController = new FilterController();
@@ -95,6 +101,11 @@ export class AppController {
 
 	public removeValueFilter(filterType: ValueFilterType): void {
 		this.productController.removeCurrentValueFilter(filterType);
+	}
+
+	public addRangeFilter(range: number[], type: string): void {		
+		const filter = new RangeFilter(range[0], range[1], type);
+		this.productController.addCurrentRangeFilter(filter);
 	}
 
 	/* end filter */

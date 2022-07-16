@@ -18,14 +18,6 @@ export class RangeFilter {
 		return this.max;
 	}
 
-	public setMin(value: number): void {
-		this.min = value;
-	}
-
-	public setMax(value: number) {
-		this.max = value;
-	}
-
 	public getField(): string {
 		return this.field;
 	}

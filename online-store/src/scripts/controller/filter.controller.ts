@@ -19,4 +19,8 @@ export class FilterController {
 	public getValueFilter(type: ValueFilterType): ValueFilter<ValueFilterType> {
 		return this.service.getValueFilter(type) as ValueFilter<ValueFilterType>;
 	}
+
+	public getRangeFilter(type: RangeFilterType): RangeFilter {
+		return this.getRangeFilter(type) as RangeFilter;
+	}
 }

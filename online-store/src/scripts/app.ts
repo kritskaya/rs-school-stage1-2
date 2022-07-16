@@ -1,4 +1,6 @@
+import { target } from "nouislider";
 import { AppController } from "./controller/app.controller";
+import { RangeFilterType } from "./model/range.filter.model";
 
 export class App {
 	private controller: AppController;
@@ -84,6 +86,11 @@ export class App {
 				})
 			);
 
+		const priceRange = document.getElementById('price-range') as target;
+		priceRange.noUiSlider?.on('end', () => {
+			this.controller.addRangeFilter(priceRange.noUiSlider?.get() as number[], 
+				RangeFilterType.Price);
+		})
 		/* filter end */
 
 		/* search */

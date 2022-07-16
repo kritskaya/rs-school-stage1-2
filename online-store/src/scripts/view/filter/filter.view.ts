@@ -1,10 +1,13 @@
 import { ValueFilter, ValueFilterType, SizeFilterType } from "../../model/value.filter.model";
+import noUiSlider, { target } from 'nouislider';
+import 'nouislider/dist/nouislider.css';
 import './filter.css';
 
 export class FilterView {
 
 	constructor(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
 		this.renderSizeFilter(filters);
+		this.renderPriceFilter();
 	}
 
 	private renderSizeFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
@@ -30,6 +33,36 @@ export class FilterView {
 			}
 		});
 
+		parent.append(root);
+	}
+
+	private renderPriceFilter() {
+		const parent = document.getElementById('price-container') as HTMLElement;
+		const root = this.createElement('ul', 'action__container action-list range-container');
+		
+		const filterItem = this.createElement('li', 'action-list__item');
+		filterItem.id = 'price-range';
+		
+		noUiSlider.create(filterItem, {
+			start: [5000, 18000],
+			connect: true,
+			step: 100,
+			format: {
+				to: function (value) {
+					return +(+value).toFixed(0);
+				},
+				from: function (value) {
+					return +(+value).toFixed(0);
+				}
+		  },
+			tooltips: [true, true],
+			range: {
+				'min': 0,
+				'max': 50000,
+			}
+		});
+		
+		root.append(filterItem);
 		parent.append(root);
 	}
 

@@ -86,6 +86,11 @@ export class ProductController {
 
 	public addCurrentRangeFilter(filter: RangeFilter): void {
 		this.service.addCurrentRangeFilter(filter);
+		this.displayProducts();
+	}
+
+	public getCurrentRangeFilters(): Map<RangeFilterType, RangeFilter> {
+		return this.service.getCurrentRangeFilters();
 	}
 
 	/* end filters*/

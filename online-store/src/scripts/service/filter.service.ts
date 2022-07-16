@@ -4,16 +4,10 @@ import { Product } from "../model/product.model";
 
 export class FilterService {
 	private allValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
-	private allRangeFilters: Map<RangeFilterType, RangeFilter>;
-	// private currentValueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>;
-	// private currentRangeFilters: Map<RangeFilterType, RangeFilter>;
-
+	
 	constructor() {
 		this.allValueFilters = new Map();
-		this.allRangeFilters = new Map();
-		// this.currentValueFilters = new Map();
-		// this.currentRangeFilters = new Map();
-
+		
 		// creating size filters
 		this.allValueFilters.set(SizeFilterType.Size60x120, 
 			new ValueFilter('60 x 120 см', 'size' as keyof Product, SizeFilterType.Size60x120));
@@ -33,9 +27,5 @@ export class FilterService {
 
 	public getValueFilter(type: ValueFilterType): ValueFilter<ValueFilterType> {
 		return this.allValueFilters.get(type) as ValueFilter<ValueFilterType>;
-	}
-	
-	public getAllRangeFilters(): Map<RangeFilterType, RangeFilter> {
-		return this.allRangeFilters;
 	}
 }

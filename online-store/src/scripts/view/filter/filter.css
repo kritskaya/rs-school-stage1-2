@@ -7,3 +7,42 @@
 	background-color: #000;
 	background-clip: content-box;
 }
+
+.range-container {
+	height: 80px;
+}
+
+.range-container .noUi-target {
+	padding: 30px 0;
+	border: none;
+	background: none;
+	box-shadow: none;
+}
+
+.range-container .noUi-connects {
+	height: 10px;
+	background: #FAFAFA;
+	border-radius: 4px;
+	border: 1px solid #D3D3D3;
+}
+
+.range-container .noUi-connect {
+	background-color: #808080;
+}
+
+.range-container .noUi-handle {
+	height: 18px;
+	width: 18px;
+	top: -5px;
+	right: -9px; /* half the width */
+	border-radius: 9px;
+}
+
+.range-container .noUi-handle::before,
+.range-container .noUi-handle::after {
+	display: none;
+}
+
+.range-container .noUi-tooltip {
+	border: none;
+}

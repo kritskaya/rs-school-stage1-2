@@ -20,10 +20,11 @@ export class ProductService {
 	constructor() {
 		this.products = [];
 		this.currentValueFilters = new Map();
-		this.currentRangeFilters = new Map();
-		this.currentSearch = new Search('');
 
-		//this.currentSort = this.sorts.get(SortType.AscPopular) as Sort;
+		this.currentRangeFilters = new Map();
+		this.currentRangeFilters.set(RangeFilterType.Price, new RangeFilter(0, 50000, 'price'))
+		
+		this.currentSearch = new Search('');
 
 		for (let i = 0; i < productsData.length; i++) {
 			const id = productsData[i].id;
@@ -120,7 +121,12 @@ export class ProductService {
 
 	public addCurrentRangeFilter(filter: RangeFilter): void {
 		this.currentRangeFilters.set(filter.getField() as RangeFilterType, filter);
-		//this.supplyFilters();
+
+		this.supplyAllConditions();
+	}
+
+	public getCurrentRangeFilters(): Map<RangeFilterType, RangeFilter> {
+		return this.currentRangeFilters;
 	}
 
 	public supplyValueFilters(): void {
@@ -169,6 +175,25 @@ export class ProductService {
 		// console.log(this.displayedProducts);
 	}
 
+	public supplyRangeFilters(): void {
+		type keys = keyof Product;
+
+		const filters = this.currentRangeFilters;
+
+		filters.forEach((filter) => {
+			this.displayedProducts = this.displayedProducts.filter((product) => {
+				const fieldName = filter.getField() as keys;
+				const maxValue = filter.getMax();
+				const minValue = filter.getMin();
+
+				if (+product[fieldName] <= maxValue && +product[fieldName] >= minValue) {
+					return product;
+				}
+			})
+		})
+
+	}
+
 	/* end filters */
 	
 	/* search */
@@ -209,6 +234,7 @@ export class ProductService {
 		
 		this.supplySort();
 		this.supplyValueFilters();
+		this.supplyRangeFilters();
 		this.supplySearchFilter();
 
 	}
