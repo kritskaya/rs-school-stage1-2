@@ -17,17 +17,17 @@ export class App {
 		document
 			.querySelector('.sort-btn')
 			?.addEventListener('click', (e) => {
+				e.stopImmediatePropagation();
 				const target = e.target as HTMLElement
 
 				// close already opened
-				const opened = document.querySelector('.actions__item_active') as HTMLElement;
+				const opened = document.querySelector('.filter-btn.actions__item_active') as HTMLElement;
 				if (opened) {
 					this.controller.toggleFilterList(opened);
 				}
 				
 				this.controller.toggleSortList(target);
-				e.stopImmediatePropagation();
-
+				
 				this.clickHandler = this.clickOutsideActionHandler.bind(this);
 
 				const listElement = target.nextElementSibling as HTMLElement;
@@ -52,22 +52,23 @@ export class App {
 			.querySelectorAll('.filter-btn')
 			.forEach((btn) =>
 				btn.addEventListener('click', (e) => {
+					e.stopImmediatePropagation();
 					const target = e.target as HTMLElement;
 
 					// close already opened
 					const opened = document.querySelector('.actions__item_active') as HTMLElement;
-					if (opened) {
+					const current = target.closest('.filter-btn');
+					
+					if (opened && opened !== current) {
 						if (opened.classList.contains('sort-btn')) {
 							this.controller.toggleSortList(opened);
 						} else {
 							this.controller.toggleFilterList(opened);
 						}
-						
 					}
-
+					
 					this.controller.toggleFilterList(target);
-					e.stopImmediatePropagation();
-
+					
 					this.clickHandler = this.clickOutsideActionHandler.bind(this);
 
 					const listElement = target.nextElementSibling as HTMLElement;
@@ -181,14 +182,14 @@ export class App {
 		const target = event.target as HTMLElement;
 		const btn = document.querySelector('.actions__item_active') as HTMLElement;
 
-		if (!target.closest('.action__container')) {
+		if (!target.closest('.action__container')
+			&& !target.closest('.filter-btn')) {
 			
 			if (btn.classList.contains('sort-btn')) {
 				this.controller.toggleSortList(btn);
 			} else if (btn.classList.contains('filter-btn')) {
 				this.controller.toggleFilterList(btn);
 			}
-			
 			document.removeEventListener('click', this.clickHandler);
 		}
 	}

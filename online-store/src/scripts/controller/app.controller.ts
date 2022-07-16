@@ -80,6 +80,7 @@ export class AppController {
 	/* filter */
 
 	public toggleFilterList(target: HTMLElement): void {
+		//console.log(target);
 		this.filterController.toggleFilterList(target);
 	}
 
