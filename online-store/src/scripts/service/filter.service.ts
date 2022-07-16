@@ -1,4 +1,4 @@
-import { ValueFilter, ValueFilterType, SizeFilterType} from "../model/value.filter.model";
+import { ValueFilter, ValueFilterType, SizeFilterType, ColorFilterType} from "../model/value.filter.model";
 import { RangeFilterType, RangeFilter } from "../model/range.filter.model";
 import { Product } from "../model/product.model";
 
@@ -19,6 +19,22 @@ export class FilterService {
 			new ValueFilter('160 x 200 см', 'size' as keyof Product, SizeFilterType.Size160x200));
 		this.allValueFilters.set(SizeFilterType.Size180x200, 
 			new ValueFilter('180 x 200 см', 'size' as keyof Product, SizeFilterType.Size180x200));
+
+		// creating color filters
+		this.allValueFilters.set(ColorFilterType.White, 
+			new ValueFilter('белый', 'color' as keyof Product, ColorFilterType.White));
+		this.allValueFilters.set(ColorFilterType.Beige, 
+			new ValueFilter('бежевый', 'color' as keyof Product, ColorFilterType.Beige));
+		this.allValueFilters.set(ColorFilterType.Rose, 
+			new ValueFilter('розовый', 'color' as keyof Product, ColorFilterType.Rose));
+		this.allValueFilters.set(ColorFilterType.Grey, 
+			new ValueFilter('серый', 'color' as keyof Product, ColorFilterType.Grey));
+		this.allValueFilters.set(ColorFilterType.Brown, 
+			new ValueFilter('коричневый', 'color' as keyof Product, ColorFilterType.Brown));
+		this.allValueFilters.set(ColorFilterType.Black, 
+			new ValueFilter('чёрный', 'color' as keyof Product, ColorFilterType.Black));
+
+		
 	}
 
 	public getAllValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {

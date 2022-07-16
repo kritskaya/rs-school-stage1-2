@@ -1,4 +1,4 @@
-import { ValueFilter, ValueFilterType, SizeFilterType } from "../../model/value.filter.model";
+import { ValueFilter, ValueFilterType, SizeFilterType, ColorFilterType } from "../../model/value.filter.model";
 import noUiSlider, { target } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import './filter.css';
@@ -8,6 +8,7 @@ export class FilterView {
 	constructor(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
 		this.renderSizeFilter(filters);
 		this.renderPriceFilter();
+		this.renderColorFilter(filters);
 	}
 
 	private renderSizeFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
@@ -29,6 +30,37 @@ export class FilterView {
 				filterLabel.textContent = item.getTitle();
 	
 				filterItem.append(filterChkbox, filterLabel);
+				root.append(filterItem);
+			}
+		});
+
+		parent.append(root);
+	}
+
+	private renderColorFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
+		const parent = document.getElementById('color-container') as HTMLElement;
+		const root = this.createElement('ul', 'action__container action-list');
+		const colors = ['#ffffff', '#ffcc99', '#ff99cc', '#666666', '#663300', '#000000'];
+		let start: number = 0;
+		
+		filters.forEach((item, key) => {	
+			const keyInType = (Object.values(ColorFilterType) as string[]).includes(key);	
+			if (keyInType) {
+				const filterItem = this.createElement('li', 'action-list__item');
+
+				const colorElement = this.createElement('div', 'action-list__color');
+				colorElement.style.backgroundColor = colors[start++];
+
+				const filterChkbox = this.createElement('input', 'action-list__input') as HTMLInputElement;
+				filterChkbox.type = 'checkbox';
+				filterChkbox.id = `${item.getField()}-${item.getValue()}-filter-input`;
+				filterChkbox.dataset.filter = key.toString();
+	
+				const filterLabel = this.createElement('label', 'action-list__label filter-label') as HTMLLabelElement;
+				filterLabel.htmlFor = filterChkbox.id;
+				filterLabel.textContent = item.getTitle();
+	
+				filterItem.append(colorElement, filterChkbox, filterLabel);
 				root.append(filterItem);
 			}
 		});

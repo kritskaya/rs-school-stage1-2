@@ -19,12 +19,14 @@
 }
 
 .action-list__item {
+	display: flex;
 	padding: 15px;
 }
 
 .action-list__label {
 	display: flex;
 	justify-content: space-between;
+	flex-grow: 1;
 	cursor: pointer;
 }
 
