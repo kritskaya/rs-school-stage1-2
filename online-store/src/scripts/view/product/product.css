@@ -90,13 +90,19 @@
 	border-radius: 5px;
 	background-color: #ffe6e6;
 	display: none;
-	opacity: 0;
 	transform: translateX(-50%);
-	transition: opacity 0.5s;
 }
 
 .order-error.active {
 	display: block;
-	opacity: 1;
-	transition: opacity 0.5s;
+	animation: show-in 0.5s;
+}
+
+@keyframes show-in {
+	0% {
+		opacity: 0%;
+	}
+	100% {
+		opacity: 100%;
+	}
 }

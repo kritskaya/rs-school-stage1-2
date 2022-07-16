@@ -62,16 +62,14 @@ export class AppController {
 		} else {
 			
 			const order = this.orderController.getCounter();
-
 			
-				if (!order || Number(order.textContent) < 5) {
-					this.addToOrder(event);
-					const isAddBtn = target.closest('.cart-btn') as HTMLElement;
-					isAddBtn.classList.add('cart-btn_remove');
-				} else {
-					this.productController.noAvailableSlot();
-				}
-			
+			if (!order || Number(order.textContent) < 5) {
+				this.addToOrder(event);
+				const isAddBtn = target.closest('.cart-btn') as HTMLElement;
+				isAddBtn.classList.add('cart-btn_remove');
+			} else {
+				this.productController.noAvailableSlot();
+			}
 		}
 	}
 
