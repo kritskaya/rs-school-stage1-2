@@ -222,8 +222,10 @@ export class ProductService {
 
 				const nameResult = item.getName().indexOf(request);
 				const titleRequest = item.getDescription().indexOf(request);
+				const color = item.getColor().indexOf(request);
+				const material = item.getMaterial().findIndex((m) => m.indexOf(request) > -1);
 
-				return nameResult >= 0 || titleRequest >= 0;
+				return nameResult >= 0 || titleRequest >= 0 || color >= 0 || material >= 0;
 			})
 		}	
 	}
