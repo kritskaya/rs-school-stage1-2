@@ -124,8 +124,9 @@ export class App {
 		document
 			.getElementById('cart-btn')
 			?.addEventListener('click', (e) => {
-				this.controller.toggleOrderList();
 				e.stopImmediatePropagation();
+				this.controller.toggleOrderList();
+				
 
 				this.clickHandler = this.clickOutsideOrderHandler.bind(this);
 				// this.clickHandler = this.clickOutsideOrderHandler.bind(this, e, ['cart__list2', 'cart__btn', 'product__btn', 'cart-item__remove-btn'], () => this.controller.toggleOrderList());
@@ -139,14 +140,13 @@ export class App {
 			.querySelectorAll('.product__btn')
 			.forEach((btn) =>
 				btn.addEventListener('click', (e) => {
-					this.controller.toggleOrderItem(e);
 					e.stopImmediatePropagation();
+					this.controller.toggleOrderItem(e);
+					
 				})
 			);
 
 		/* end order */
-
-		
 	}
 
 	// private clickOutsideOrderHandler(event: Event, classes: string[],  callback: () => void): void {
@@ -154,13 +154,10 @@ export class App {
 		event.stopImmediatePropagation();
 
 		const target = event.target as Element;
-
-		// console.log(target);
-
+	
 		// const rightElement = classes.find(className => {
 		// 	target.closest(`.${className}`) !== null;
 		// });
-
 		
 		// if(!rightElement) {
 		// 	callback();

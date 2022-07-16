@@ -97,7 +97,21 @@ export class OrderView {
 	}
 
 	public removeFromOrder(productElement: HTMLElement): void {
+		
+		const id = productElement.dataset.id;
+		const card = document.querySelector(`.product[data-id="${id}"]`) as HTMLElement;
+		const btn = card.querySelector('.cart-btn') as HTMLElement;
+		const badgeInCart = card.querySelector('.product__in-cart') as HTMLElement;
+
+		if (badgeInCart) {
+			badgeInCart.remove();
+			btn.classList.remove('cart-btn_remove');
+		}
+
 		productElement.remove();
+
+		// btn.dispatchEvent(new Event('click'));
+		// console.log(id)
 
 		const quantity = this.counter.textContent as string;
 		this.counter.textContent = `${+quantity - 1}`;

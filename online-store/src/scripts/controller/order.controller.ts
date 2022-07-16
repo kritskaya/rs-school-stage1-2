@@ -76,6 +76,7 @@ export class OrderController {
 	private clickRemoveCartBtnHandler(element: HTMLElement) {
 		const removeBtn = element.querySelector('.cart-item__remove-btn') as HTMLElement;
 		removeBtn.addEventListener('click', (e) => {
+			e.stopImmediatePropagation();
 			this.removeFromOrder(e);
 		});
 	}
