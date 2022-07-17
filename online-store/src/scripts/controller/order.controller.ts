@@ -18,13 +18,17 @@ export class OrderController {
 	}
 
 	public loadFromStorage(): void {
-		const storage = JSON.parse(localStorage.getItem('order') as string);
-		
-		storage.forEach((item: ProductPDO) => {
-			const storageItem = this.service.addProduct(item.id);
-			const storageElement = this.view.addToOrder(storageItem);
-			this.clickRemoveCartBtnHandler(storageElement);
-		});
+		const jsonOrder = localStorage.getItem('order');
+
+		if  (jsonOrder) {
+			const order = JSON.parse(jsonOrder);
+
+			order.forEach((item: ProductPDO) => {
+				const storageItem = this.service.addProduct(item.id);
+				const storageElement = this.view.addToOrder(storageItem);
+				this.clickRemoveCartBtnHandler(storageElement);
+			});
+		}		
 	}
 
 	public toggleOrderList(): void {

@@ -15,10 +15,16 @@ export class SearchView {
 		this.result = this.createElement('p', 'search-results__info');
 	}
 
+	public getSearchInput(): HTMLInputElement {
+		return this.searchInput;
+	}
+
 	public showSearchInfo(request: string, quantity: number): void {
-		this.requestTitle.textContent = `Результаты поиска: ${request}`;
-		this.result.textContent = quantity ? `Найдено ${quantity} товаров` : this.noFoundMessage;
-		this.root.append(this.requestTitle, this.result);
+		if (request) {
+			this.requestTitle.textContent = `Результаты поиска: ${request}`;
+			this.result.textContent = quantity ? `Найдено ${quantity} товаров` : this.noFoundMessage;
+			this.root.append(this.requestTitle, this.result);
+		}		
 	}
 
 	public clearSearchInfo(): void {

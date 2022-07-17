@@ -207,7 +207,7 @@ export class ProductService {
 	
 	public setCurrentSearch(search: Search): void {
 		this.currentSearch = search;
-		this.supplySearchFilter();
+		this.supplyAllConditions();
 	}
 
 	public getCurrentSearch(): Search {
@@ -216,12 +216,14 @@ export class ProductService {
 
 	public clearSearchFilter() {
 		this.currentSearch = new Search('');
-		this.supplySearchFilter();
+		this.supplyAllConditions();
 	}
 
 	public supplySearchFilter() {
 
 		const products = this.displayedProducts;
+
+		console.log(this.currentSearch)
 
 		if (this.currentSearch.getRequest()) {
 			this.displayedProducts = products.filter((item) => {
@@ -246,6 +248,15 @@ export class ProductService {
 		this.supplyRangeFilters();
 		this.supplySearchFilter();
 
+		this.saveToLocalStorage();
+	}
+
+	private saveToLocalStorage() {
+		//console.log(this.currentSearch);
+		// localStorage.setItem('sort', JSON.stringify(this.currentSort));
+		// localStorage.setItem('search', JSON.stringify(this.currentSearch.getRequest()));
+		// localStorage.setItem('range-filters', JSON.stringify(this.currentRangeFilters));
+		// localStorage.setItem('value-filters', JSON.stringify(this.currentRangeFilters));
 	}
 	
 }

@@ -17,16 +17,30 @@ export class ProductController {
 	}
 
 	public loadFromStorage(): void {
-		const storage = JSON.parse(localStorage.getItem('order') as string);
+		const jsonOrder = localStorage.getItem('order');
 		
-		storage.forEach((item: ProductPDO) => {
-			const root = this.view.getRootContainer();
-			const element = root.querySelector(`[data-id="${item.id}"]`) as HTMLElement;
-			const btn = element.querySelector('.product__btn') as HTMLElement;
-			btn.classList.add('cart-btn_remove');
+		if (jsonOrder) {
+			const order = JSON.parse(jsonOrder);
 			
-			this.view.addInCartBadge(element);
-		});
+			order.forEach((item: ProductPDO) => {
+				const root = this.view.getRootContainer();
+				const element = root.querySelector(`[data-id="${item.id}"]`) as HTMLElement;
+				const btn = element.querySelector('.product__btn') as HTMLElement;
+				btn.classList.add('cart-btn_remove');
+				
+				this.view.addInCartBadge(element);
+			});
+		}
+		
+		const jsonSearch = localStorage.getItem('search');
+
+		if (jsonSearch) {
+			const request = JSON.parse(jsonSearch);
+			this.addSearchFilter(request);
+		} else {
+			this.addSearchFilter('');
+		}
+
 	}
 
 	public addInCartBadge(event: Event) {
@@ -104,12 +118,15 @@ export class ProductController {
 	public addSearchFilter(request: string): void {
 		this.service.setCurrentSearch(new Search(request));
 		this.displayProducts();
+		localStorage.setItem('search', JSON.stringify(request));
 	}
 
 	public clearSearchFilter() {
 		this.service.clearSearchFilter();
 		this.displayProducts();
+		localStorage.removeItem('search');
 	}
 
 	/* end search */
+
 }

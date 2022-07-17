@@ -26,10 +26,12 @@ export class AppController {
 		this.searchController = new SearchController();
 		this.filterController = new FilterController();
 
-		if (localStorage.getItem('order')) {
-			this.orderController.loadFromStorage();
-			this.productController.loadFromStorage();
-		}
+		this.orderController.loadFromStorage();
+		this.productController.loadFromStorage();
+		
+		const products = this.productController.getDisplayedProducts();
+		this.searchController.loadFromStorage(products);
+		
 	}
 
 	public toggleOrderList(): void {
@@ -37,13 +39,8 @@ export class AppController {
 	}
 
 	public addToOrder(event: Event): void {
-		
-		
-		
-			this.orderController.addToOrder(event);
-			this.productController.addInCartBadge(event);
-		
-		
+		this.orderController.addToOrder(event);
+		this.productController.addInCartBadge(event);
 	}
 
 	public removeFromOrder(event: Event): void {
@@ -138,6 +135,7 @@ export class AppController {
 
 	public clearSearchFilter(): void {
 		this.searchController.clearSearch();
+		this.productController.addSearchFilter('');
 	}	
 
 	/* end search */

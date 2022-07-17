@@ -32,17 +32,17 @@ export class OrderService {
 			keywords, description, image, popular);
 
 		this.order.addItem(item);
-		this.save();
+		this.saveToLocalStorage();
 		
 		return item;
 	}
 
 	public removeProduct(id: string) {
 		this.order.removeItem(id);
-		this.save();
+		this.saveToLocalStorage();
 	}
 
-	private save() {
+	private saveToLocalStorage() {
 		localStorage.setItem('order', JSON.stringify(this.order.getOrder()));
 	}
 

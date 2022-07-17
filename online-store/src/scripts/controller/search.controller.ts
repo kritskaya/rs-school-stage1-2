@@ -18,4 +18,15 @@ export class SearchController {
 	public clearSearch(): void {
 		this.view.clearSearchInfo();
 	}
+
+	public loadFromStorage(products: Product[]): void {
+		const jsonSearch = localStorage.getItem('search');
+
+		if (jsonSearch) {
+			const request = JSON.parse(jsonSearch);			
+			this.view.showSearchInfo(request, products.length);
+
+			this.view.getSearchInput().value = request;
+		}	
+	}
 }
