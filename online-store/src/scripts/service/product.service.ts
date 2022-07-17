@@ -223,8 +223,6 @@ export class ProductService {
 
 		const products = this.displayedProducts;
 
-		console.log(this.currentSearch)
-
 		if (this.currentSearch.getRequest()) {
 			this.displayedProducts = products.filter((item) => {
 				const request = this.currentSearch.getRequest().toLowerCase();

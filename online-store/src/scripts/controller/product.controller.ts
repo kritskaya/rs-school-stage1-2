@@ -41,6 +41,15 @@ export class ProductController {
 			this.addSearchFilter('');
 		}
 
+		const jsonSort = localStorage.getItem('sort');
+
+		if (jsonSort) {
+			const sort = JSON.parse(jsonSort);
+			//this.setCurrentSort(new Sort(sort.title, sort.field, sort.));
+			this.service.setCurrentSort(new Sort(sort.title, sort.field, sort.asc));
+			this.displayProducts();
+		}
+
 	}
 
 	public addInCartBadge(event: Event) {
@@ -82,6 +91,10 @@ export class ProductController {
 	public setCurrentSort(sort: Sort): void {
 		this.service.setCurrentSort(sort);
 		this.displayProducts();
+	}
+
+	public saveToStorage(sort: Sort) {
+		localStorage.setItem('sort', JSON.stringify(sort));
 	}
 	
 	/* end sort */

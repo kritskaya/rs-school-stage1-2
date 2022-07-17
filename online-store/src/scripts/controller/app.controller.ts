@@ -28,9 +28,13 @@ export class AppController {
 
 		this.orderController.loadFromStorage();
 		this.productController.loadFromStorage();
+		if (!this.productController.getCurrentSort()) {
+			this.productController.setCurrentSort(sort);
+		}
 		
 		const products = this.productController.getDisplayedProducts();
 		this.searchController.loadFromStorage(products);
+		this.sortController.loadFromStorage();
 		
 	}
 
@@ -82,6 +86,7 @@ export class AppController {
 
 		const sort = this.sortController.getSort(+sortType);
 		this.productController.setCurrentSort(sort);
+		this.productController.saveToStorage(sort)
 	}
 
 	/* end sort */

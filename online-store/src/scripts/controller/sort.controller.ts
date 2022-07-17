@@ -19,4 +19,20 @@ export class SortController {
 	public getSort(sortType: SortType): Sort {
 		return this.service.getSort(sortType);
 	}
+
+	public loadFromStorage() {
+		const jsonSort = localStorage.getItem('sort');
+
+		if (jsonSort) {
+			const sort = JSON.parse(jsonSort);
+			
+			document.querySelectorAll(`.sort-label`)
+				.forEach((label) => {
+					if (label.textContent === sort.title) {
+						const input = label.previousElementSibling as HTMLInputElement;
+						input.checked = true;
+					}
+				})
+		}
+	}
 }
