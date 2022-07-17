@@ -119,6 +119,14 @@ export class ProductService {
 		return this.currentValueFilters;
 	}
 
+	public setCurrentFilters(valueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>, 
+		rangeFilters: Map<RangeFilterType, RangeFilter>): void {
+		this.currentValueFilters = valueFilters;
+		this.currentRangeFilters = rangeFilters;
+
+		this.supplyAllConditions();
+	}
+
 	public addCurrentRangeFilter(filter: RangeFilter): void {
 		this.currentRangeFilters.set(filter.getField() as RangeFilterType, filter);
 

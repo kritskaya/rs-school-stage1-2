@@ -104,7 +104,7 @@ export class FilterView {
 		filterItem.id = 'price-range';
 		
 		noUiSlider.create(filterItem, {
-			start: [5000, 18000],
+			start: [0, 50000],
 			connect: true,
 			step: 100,
 			format: {
@@ -134,7 +134,7 @@ export class FilterView {
 		filterItem.id = 'quantity-range';
 		
 		noUiSlider.create(filterItem, {
-			start: [2, 10],
+			start: [0, 50],
 			connect: true,
 			step: 1,
 			format: {

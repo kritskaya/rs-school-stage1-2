@@ -49,7 +49,6 @@ export class ProductController {
 			this.service.setCurrentSort(new Sort(sort.title, sort.field, sort.asc));
 			this.displayProducts();
 		}
-
 	}
 
 	public addInCartBadge(event: Event) {
@@ -104,20 +103,32 @@ export class ProductController {
 	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
 		this.service.addCurrentValueFilter(filter);
 		this.displayProducts();
+		const itemsForStore = Array.from(this.service.getCurrentValueFilters().values());
+		localStorage.setItem('value-filters', JSON.stringify(itemsForStore));
 	}
 
 	public removeCurrentValueFilter(filterType: ValueFilterType): void {
 		this.service.removeCurrentValueFilter(filterType);
 		this.displayProducts();
+		const itemsForStore = Array.from(this.service.getCurrentValueFilters().values());
+		localStorage.setItem('value-filters', JSON.stringify(itemsForStore));
 	}
 
 	public getCurrentValueFilters(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
 		return this.service.getCurrentValueFilters();
 	}
 
+	public setCurrentFilters(valueFilters: Map<ValueFilterType, ValueFilter<ValueFilterType>>, 
+		rangeFilters: Map<RangeFilterType, RangeFilter>): void {
+		this.service.setCurrentFilters(valueFilters, rangeFilters);
+		this.displayProducts();
+	}
+
 	public addCurrentRangeFilter(filter: RangeFilter): void {
 		this.service.addCurrentRangeFilter(filter);
 		this.displayProducts();
+		const itemsForStore = Array.from(this.service.getCurrentRangeFilters().values());
+		localStorage.setItem('range-filters', JSON.stringify(itemsForStore));
 	}
 
 	public getCurrentRangeFilters(): Map<RangeFilterType, RangeFilter> {

@@ -36,6 +36,9 @@ export class AppController {
 		this.searchController.loadFromStorage(products);
 		this.sortController.loadFromStorage();
 		
+		const valueFilters = this.filterController.loadValueFiltersFromStorage();
+		const rangeFilters = this.filterController.loadRangeFiltersFromStorage();
+		this.productController.setCurrentFilters(valueFilters, rangeFilters);
 	}
 
 	public toggleOrderList(): void {

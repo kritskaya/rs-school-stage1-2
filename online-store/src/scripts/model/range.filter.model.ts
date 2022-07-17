@@ -22,3 +22,9 @@ export class RangeFilter {
 		return this.field;
 	}
 }
+
+export type RangeFilterPDO = {
+	min: string;
+	max: string;
+	field: string;
+}

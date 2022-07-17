@@ -44,3 +44,9 @@ export class ValueFilter<T> {
 		return this.value;
 	}
 }
+
+export type ValueFilterPDO = {
+	title: string;
+	field: string;
+	value: string;
+}
