@@ -97,7 +97,14 @@ export class App {
 		quantityRange.noUiSlider?.on('end', () => {
 			this.controller.addRangeFilter(quantityRange.noUiSlider?.get() as number[], 
 				RangeFilterType.Quantity);
-		})
+		});
+
+		document
+			.getElementById('clear-filters-btn')
+			?.addEventListener('click', () => {
+				this.controller.clearAllFilters();
+			});
+
 		/* filter end */
 
 		/* search */

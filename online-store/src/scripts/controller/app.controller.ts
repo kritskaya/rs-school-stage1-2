@@ -126,6 +126,11 @@ export class AppController {
 		this.productController.addCurrentRangeFilter(filter);
 	}
 
+	public clearAllFilters() {
+		this.productController.clearAllFilters();
+		this.filterController.clearAllFilters();
+	}
+
 	/* end filter */
 
 	/* search */

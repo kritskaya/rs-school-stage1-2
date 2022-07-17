@@ -135,6 +135,13 @@ export class ProductController {
 		return this.service.getCurrentRangeFilters();
 	}
 
+	public clearAllFilters() {
+		this.service.clearAllFilters();
+		this.displayProducts();
+		localStorage.removeItem('value-filters');
+		localStorage.removeItem('range-filters');
+	}
+
 	/* end filters*/
 
 	/* search */

@@ -137,6 +137,13 @@ export class ProductService {
 		return this.currentRangeFilters;
 	}
 
+	public clearAllFilters() {
+		this.currentValueFilters.clear();
+		this.currentRangeFilters.clear()
+
+		this.supplyAllConditions();
+	}
+
 	public supplyValueFilters(): void {
 		type keys = keyof Product;
 

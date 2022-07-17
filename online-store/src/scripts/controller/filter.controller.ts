@@ -25,6 +25,10 @@ export class FilterController {
 		return this.getRangeFilter(type) as RangeFilter;
 	}
 
+	public clearAllFilters() {
+		this.view.clearAllFilters();
+	}
+
 	public loadValueFiltersFromStorage(): Map<ValueFilterType, ValueFilter<ValueFilterType>> {
 		const jsonValueFilters = localStorage.getItem('value-filters');
 		const loaded =  new Map();
@@ -37,7 +41,7 @@ export class FilterController {
 				const value = item.value;
 				loaded.set(value, new ValueFilter(title, field, value));
 
-				const input = document.querySelector(`input[data-filter=${value}]`) as HTMLInputElement;
+				const input = document.querySelector(`input[data-filter="${value}"]`) as HTMLInputElement;
 				input.checked = true;
 			})
 		}

@@ -156,6 +156,23 @@ export class FilterView {
 		parent.append(root);
 	}
 
+	public clearAllFilters() {
+		const allCheckboxes = document.querySelectorAll(`.action-list__input[type="checkbox"]`);
+		allCheckboxes.forEach((checkbox) => {
+			(checkbox as HTMLInputElement).checked = false;
+		});
+
+		const allRangeContainers = document.querySelectorAll(`.range-container`);
+		allRangeContainers.forEach((container) => {
+			const rangeSlider = container.firstElementChild as target;
+			if (rangeSlider.noUiSlider) {
+				const starts = rangeSlider.noUiSlider.options.start as number[];
+				const [min, max] = starts;
+				rangeSlider.noUiSlider.set([min, max]);
+			}
+		});		
+	}
+
 	protected createElement(tag: string, className: string): HTMLElement {
 		const element = document.createElement(tag);
 		element.className = className;
