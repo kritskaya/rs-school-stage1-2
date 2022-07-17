@@ -37,10 +37,10 @@ export class ProductView {
 			popular.textContent = `Популярный: ${products[i].getPopular()}`;
 
 			const materials = this.createElement('p', 'product__materials');
-			materials.textContent = `Материалы: ${products[i].getMaterial()}`;
+			materials.textContent = `Материалы: ${products[i].getMaterial().join(', ')}`;
 
 			const price = this.createElement('p', 'product__price');
-			price.textContent = `${products[i].getPrice()}`;
+			price.textContent = `${products[i].getPrice()} P`;
 
 			const btn = this.createElement('button', 'product__btn cart-btn');
 			btn.title = 'Добавить в корзину';

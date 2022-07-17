@@ -54,6 +54,7 @@
 
 .product__materials {
 	height: 34px;
+	margin-bottom: 15px;
 	line-height: 20px;
 }
 
@@ -105,4 +106,7 @@
 	100% {
 		opacity: 100%;
 	}
+}
+
+@media (max-width: 1000px) {
 }
