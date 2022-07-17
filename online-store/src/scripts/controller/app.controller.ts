@@ -14,6 +14,7 @@ export class AppController {
 	private sortController: SortController;
 	private searchController: SearchController;
 	private filterController: FilterController;
+	private static CART_LIMIT: number = 20;
 
 	constructor() {
 		this.sortController = new SortController();
@@ -67,7 +68,7 @@ export class AppController {
 			
 			const order = this.orderController.getCounter();
 			
-			if (!order || Number(order.textContent) < 5) {
+			if (!order || Number(order.textContent) < AppController.CART_LIMIT) {
 				this.addToOrder(event);
 				const isAddBtn = target.closest('.cart-btn') as HTMLElement;
 				isAddBtn.classList.add('cart-btn_remove');
