@@ -107,6 +107,11 @@ export class ProductView {
 	}
 
 	public displayProducts(sortProducts: Product[]): void {
+		const noProductsError = this.root.querySelector('.products__error');
+		if (noProductsError) {
+			noProductsError.remove();
+		}
+		
 		// sort
 		sortProducts.forEach((item) => {
 			const id = item.getId();
@@ -127,6 +132,15 @@ export class ProductView {
 				element.style.display = 'none';
 			}
 		});
+
+		if (!sortProducts.length) {
+			
+			const noProducts = this.createElement('p', 'products__error');
+			noProducts.textContent = 'Извините, совпадений не обнаружено';
+
+			this.root.prepend(noProducts);
+		}
+		
 	}
 
 	protected createElement(tag: string, className: string): HTMLElement {

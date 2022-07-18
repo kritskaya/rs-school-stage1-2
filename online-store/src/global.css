@@ -234,6 +234,10 @@ input, button {
 	gap: 40px;
 }
 
+.products__error {
+	font-size: 16px;
+}
+
 .footer {
 	padding: 20px;
 	border-top: 1px solid #dfdfdf;
