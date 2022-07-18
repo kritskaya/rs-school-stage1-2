@@ -74,4 +74,9 @@ export class OrderController {
 		this.service.removeProduct(id);
 		this.view.removeFromOrder(productElement);
 	}
+
+	public clearOrder(): void {
+		this.service.clearOrder();
+		this.view.removeAllFromOrder();
+	}
 }

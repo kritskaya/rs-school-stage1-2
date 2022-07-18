@@ -190,7 +190,8 @@ input, button {
 }
 
 .actions__item,
-.actions__btn {
+.actions__btn,
+.header__clear-btn {
 	position: relative;
 	padding: 13px 45px 13px 26px;
 	border: 1px solid transparent;
@@ -202,7 +203,8 @@ input, button {
 	transition: border 0.3s;
 }
 
-.actions__btn {
+.actions__btn,
+.header__clear-btn {
 	padding-right: 26px;
 }
 

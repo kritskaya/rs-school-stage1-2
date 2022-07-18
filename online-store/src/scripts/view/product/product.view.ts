@@ -86,6 +86,19 @@ export class ProductView {
 		} 
 	}
 
+	public removeAllBadges(): void {
+		const cards = document.querySelectorAll(`.product`);
+		cards.forEach((card) => {
+			const btn = card.querySelector('.cart-btn') as HTMLElement;
+			const badgeInCart = card.querySelector('.product__in-cart') as HTMLElement;
+
+			if (badgeInCart) {
+				badgeInCart.remove();
+				btn.classList.remove('cart-btn_remove');
+			}
+		});	
+	}
+
 	public noAvailableSlot(): void {
 		const error = document.querySelector('.order-error') as HTMLElement;
 		error.classList.add('active');

@@ -65,6 +65,10 @@ export class ProductController {
 		this.view.removeInCartBadge(productElement);
 	}
 
+	public removeAllBadges(): void {
+		this.view.removeAllBadges();
+	}
+
 	public noAvailableSlot(): void {
 		this.view.noAvailableSlot();
 	}
@@ -149,13 +153,13 @@ export class ProductController {
 	public addSearchFilter(request: string): void {
 		this.service.setCurrentSearch(new Search(request));
 		this.displayProducts();
-		localStorage.setItem('search', JSON.stringify(request));
+		//localStorage.setItem('search', JSON.stringify(request));
 	}
 
 	public clearSearchFilter() {
 		this.service.clearSearchFilter();
 		this.displayProducts();
-		localStorage.removeItem('search');
+		//localStorage.removeItem('search');
 	}
 
 	/* end search */

@@ -158,6 +158,12 @@ export class App {
 				})
 			);
 
+		document
+			.querySelector('.header__clear-btn')
+			?.addEventListener('click', (e) => {
+				this.controller.clearSettings();
+			});
+
 		/* end order */
 	}
 

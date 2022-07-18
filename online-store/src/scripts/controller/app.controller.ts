@@ -33,8 +33,8 @@ export class AppController {
 			this.productController.setCurrentSort(sort);
 		}
 		
-		const products = this.productController.getDisplayedProducts();
-		this.searchController.loadFromStorage(products);
+		// const products = this.productController.getDisplayedProducts();
+		// this.searchController.loadFromStorage(products);
 		this.sortController.loadFromStorage();
 		
 		const valueFilters = this.filterController.loadValueFiltersFromStorage();
@@ -63,7 +63,6 @@ export class AppController {
 		if (isRemoveBtn) {
 			this.removeFromOrder(event);
 			isRemoveBtn.classList.remove('cart-btn_remove');
-			//this.productContoller.removeInCartBadge(event);
 		} else {
 			
 			const order = this.orderController.getCounter();
@@ -78,6 +77,26 @@ export class AppController {
 		}
 	}
 
+	public clearSettings() {
+		localStorage.clear();
+
+		// sort
+		const sort = this.sortController.getSort(SortType.AscPopular);
+		this.productController.setCurrentSort(sort);
+
+		// filters
+		this.clearAllFilters();
+
+		// search
+		//this.clearSearchFilter();
+
+		// order
+		this.orderController.clearOrder();
+		this.productController.removeAllBadges();
+
+		localStorage.clear();
+	}
+
 	/* sort */
 
 	public toggleSortList(target: HTMLElement): void {
@@ -90,7 +109,7 @@ export class AppController {
 
 		const sort = this.sortController.getSort(+sortType);
 		this.productController.setCurrentSort(sort);
-		this.productController.saveToStorage(sort)
+		this.productController.saveToStorage(sort);
 	}
 
 	/* end sort */

@@ -42,6 +42,10 @@ export class OrderService {
 		this.saveToLocalStorage();
 	}
 
+	public clearOrder(): void {
+		this.order.removeAllItems();
+	}
+
 	private saveToLocalStorage() {
 		localStorage.setItem('order', JSON.stringify(this.order.getOrder()));
 	}

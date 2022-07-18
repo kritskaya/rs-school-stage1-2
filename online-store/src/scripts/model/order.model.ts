@@ -24,4 +24,8 @@ export class Order {
 			}
 		}
 	}
+
+	public removeAllItems(): void {
+		this.products = [];
+	}
 }
