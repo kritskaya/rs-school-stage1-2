@@ -5,9 +5,11 @@
 	display: none;
 	min-width: 320px;
 	width: auto;
+	max-height: 500px;
 	padding: 15px;
 	border: 1px solid #dfdfdf;
 	border-radius: 10px;
+	overflow-y: auto;
 	background-color: #fff;
 }
 
