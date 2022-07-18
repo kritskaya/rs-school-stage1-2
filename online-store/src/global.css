@@ -208,6 +208,10 @@ input, button {
 	padding-right: 26px;
 }
 
+.header__clear-btn {
+	align-self: center;
+}
+
 .actions__item::after {
 	content: '';
 	position: absolute;
