@@ -88,13 +88,13 @@ export class App {
 			);
 
 		const priceRange = document.getElementById('price-range') as target;
-		priceRange.noUiSlider?.on('end', () => {
+		priceRange.noUiSlider?.on('set', () => {
 			this.controller.addRangeFilter(priceRange.noUiSlider?.get() as number[], 
 				RangeFilterType.Price);
 		});
 
 		const quantityRange = document.getElementById('quantity-range') as target;
-		quantityRange.noUiSlider?.on('end', () => {
+		quantityRange.noUiSlider?.on('set', () => {
 			this.controller.addRangeFilter(quantityRange.noUiSlider?.get() as number[], 
 				RangeFilterType.Quantity);
 		});

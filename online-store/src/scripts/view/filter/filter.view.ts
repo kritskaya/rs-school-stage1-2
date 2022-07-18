@@ -115,7 +115,7 @@ export class FilterView {
 					return +(+value).toFixed(0);
 				}
 		  },
-			tooltips: [true, true],
+		  	tooltips: [true, true],
 			range: {
 				'min': 0,
 				'max': 50000,
@@ -144,7 +144,7 @@ export class FilterView {
 				from: function (value) {
 					return +(+value).toFixed(0);
 				}
-		  },
+		 	},
 			tooltips: [true, true],
 			range: {
 				'min': 0,
