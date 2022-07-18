@@ -170,7 +170,12 @@ export class FilterView {
 				const [min, max] = starts;
 				rangeSlider.noUiSlider.set([min, max]);
 			}
-		});		
+		});	
+		
+		const btns = document.querySelectorAll('.filter-btn');
+		btns.forEach((btn) => {
+			btn.classList.remove('filter-btn_active');
+		})
 	}
 
 	protected createElement(tag: string, className: string): HTMLElement {
@@ -185,5 +190,37 @@ export class FilterView {
 
 		const filterList = filterBtn.nextElementSibling as HTMLElement;
 		filterList.classList.toggle('active');
+	}
+
+	public addActiveValueFilterState(container: HTMLElement): void {
+		const checked = container.querySelectorAll('input:checked');
+		if (checked.length) {
+			const btn = container.previousElementSibling as HTMLElement;
+			btn.classList.add('filter-btn_active');
+		}
+	}
+
+	public removeActiveValueFilterState(container: HTMLElement): void {
+		const checked = container.querySelectorAll('input:checked');
+		if (!checked.length) {
+			const btn = container.previousElementSibling as HTMLElement;
+			btn.classList.remove('filter-btn_active');
+		}
+	}
+
+	public toggleActiveRangeFilterState(container: HTMLElement): void {
+		const rangeSlider = container.querySelector('.noUi-target') as target;
+		if (rangeSlider.noUiSlider) {
+			const starts = rangeSlider.noUiSlider.options.start as number[];
+			const [min, max] = starts;
+			const [start, end] = rangeSlider.noUiSlider.get() as number[];
+			const btn = container.previousElementSibling as HTMLElement;
+
+			if (start !== min || end !== max) {
+				btn.classList.add('filter-btn_active');
+			} else {
+				btn.classList.remove('filter-btn_active');
+			}
+		}
 	}
 }

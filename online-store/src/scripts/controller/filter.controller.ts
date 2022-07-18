@@ -43,6 +43,7 @@ export class FilterController {
 
 				const input = document.querySelector(`input[data-filter="${value}"]`) as HTMLInputElement;
 				input.checked = true;
+				this.addActiveValueFilterState(value as ValueFilterType);
 			})
 		}
 		
@@ -63,9 +64,30 @@ export class FilterController {
 
 				const slider = document.getElementById(field + "-range") as target;
 				slider.noUiSlider?.set([min, max]);
+
+				this.addActiveRangeFilterState(field as RangeFilterType);
 			})
 		}
 		console.log(loaded);
 		return loaded;
+	}
+
+	public addActiveValueFilterState(filterType: ValueFilterType): void {
+		const filterElement = document.querySelector(`[data-filter="${filterType}"]`) as HTMLElement;
+		const container = (filterElement.parentElement as HTMLElement).parentElement as HTMLElement;
+		this.view.addActiveValueFilterState(container);
+	}
+
+	public removeActiveValueFilterState(filterType: ValueFilterType): void {
+		const filterElement = document.querySelector(`[data-filter="${filterType}"]`) as HTMLElement;
+		const container = (filterElement.parentElement as HTMLElement).parentElement as HTMLElement;
+		this.view.removeActiveValueFilterState(container);
+	}
+
+	public addActiveRangeFilterState(type: RangeFilterType): void {
+		const filterElement = document.getElementById(type + "-range") as HTMLElement;
+		const container = filterElement.parentElement as HTMLElement;
+		
+		this.view.toggleActiveRangeFilterState(container);
 	}
 }
