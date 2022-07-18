@@ -13,6 +13,7 @@ export class SearchView {
 		this.searchInput = document.querySelector('.search__input') as HTMLInputElement;
 		this.requestTitle = this.createElement('h2', 'search-results__title');
 		this.result = this.createElement('p', 'search-results__info');
+		this.searchInput.focus();
 	}
 
 	public getSearchInput(): HTMLInputElement {
