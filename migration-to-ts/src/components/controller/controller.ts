@@ -3,7 +3,7 @@ import { NewsData, SourcesData } from '../types/types';
 
 class AppController extends AppLoader {
     public getSources(callback: (data?: SourcesData) => void): void {
-        super.getResp<SourcesData>(
+        super.getResp(
             {
                 endpoint: 'sources',
             },
@@ -21,7 +21,7 @@ class AppController extends AppLoader {
                 const sourceName = target?.textContent as string;
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp<NewsData>(
+                    super.getResp(
                         {
                             endpoint: 'everything',
                             options: {
