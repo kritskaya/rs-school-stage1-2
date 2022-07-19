@@ -11,7 +11,7 @@ class AppController extends AppLoader {
         );
     }
 
-    public getNews(e: Event, callback: (data?: NewsData) => void): void {
+    public getNews(e: Event, callback: (data?: NewsData, source?: string) => void): void {
         let target: HTMLElement = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
