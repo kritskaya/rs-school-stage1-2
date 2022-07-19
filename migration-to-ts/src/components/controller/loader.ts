@@ -53,7 +53,7 @@ class Loader {
     private load<T>(
         method: string,
         endpoint: string,
-        callback: (data?: T, source?: string) => void,
+        callback: (data: T, source?: string) => void,
         options = {},
         source?: string
     ): void {
