@@ -17,21 +17,23 @@ class AppController extends AppLoader {
 
         while (target !== newsContainer) {
             if (target?.classList.contains('content__link')) {
-                const sourceId = target?.getAttribute('data-source-id') as string;
-                const sourceName = target?.textContent as string;
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
-                        {
-                            endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
-                                pageSize: '10',
+                const sourceId = target?.getAttribute('data-source-id');
+                const sourceName = target?.textContent;
+                if (sourceId && sourceName) {
+                    if (newsContainer.getAttribute('data-source') !== sourceId) {
+                        newsContainer.setAttribute('data-source', sourceId);
+                        super.getResp(
+                            {
+                                endpoint: 'everything',
+                                options: {
+                                    sources: sourceId,
+                                    pageSize: '10',
+                                },
+                                source: sourceName,
                             },
-                            source: sourceName,
-                        },
-                        callback
-                    );
+                            callback
+                        );
+                    }
                 }
                 return;
             }
