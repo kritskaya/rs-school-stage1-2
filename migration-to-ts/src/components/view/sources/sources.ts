@@ -14,74 +14,80 @@ class Sources {
         };
 
         const fragment = document.createDocumentFragment();
-        const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
+        const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
 
         Object.entries(alphabet).forEach((entry) => {
             const sourceClone = sourceItemTemp?.content.cloneNode(true) as HTMLElement;
 
-            const label: HTMLElement = sourceClone.querySelector('.nav__label') as HTMLElement;
-            label.textContent = entry[0];
-            label.setAttribute('for', entry[0].toLowerCase());
+            const label = sourceClone.querySelector<HTMLElement>('.nav__label');
+            if (label) {
+                label.textContent = entry[0];
+                label.setAttribute('for', entry[0].toLowerCase()); 
+            
+                const input = sourceClone.querySelector<HTMLElement>('.nav__input');
+                if (input) {
+                    input.id = entry[0].toLowerCase();
+                }
+                
+                const flags = sourceClone.querySelector<HTMLElement>('.nav__flags');
+                if (flags) {
+                    entry[1].forEach((letter) => {
+                        const flag = document.createElement('li');
+                        flag.className = 'nav__flag flag';
+                        flag.textContent = letter;
 
-            const input: HTMLElement = sourceClone.querySelector('.nav__input') as HTMLElement;
-            input.id = entry[0].toLowerCase();
+                        const content = sourceClone.querySelector<HTMLElement>('.content');
+                        if (content) {
+                            label.addEventListener('click', () => {
+                                content.innerHTML = '';
+                                content.style.display = '';
+                                flags.querySelectorAll<HTMLElement>('.flag')?.forEach((item) => {
+                                    item.classList.remove('active');
+                                });
+                            });
 
-            const flags: HTMLElement = sourceClone.querySelector('.nav__flags') as HTMLElement;
-            entry[1].forEach((letter) => {
-                const flag = document.createElement('li');
-                flag.className = 'nav__flag flag';
-                flag.textContent = letter;
+                            flag.addEventListener('click', () => {
+                                flags.querySelectorAll<HTMLElement>('.flag')?.forEach((item) => {
+                                    item.classList.remove('active');
+                                });
+                                flag.classList.add('active');
 
-                const content: HTMLElement = sourceClone.querySelector('.content') as HTMLElement;
+                                const filtered = data.filter((item) => item.name[0].toLowerCase() === letter);
 
-                label.addEventListener('click', () => {
-                    content.innerHTML = '';
-                    content.style.display = '';
-                    flags.querySelectorAll('.flag')?.forEach((item) => {
-                        item.classList.remove('active');
+                                content.innerHTML = '';
+                                content.style.display = 'grid';
+
+                                if (!filtered.length) {
+                                    const contentItem = document.createElement('li');
+                                    contentItem.className = 'content__item';
+                                    contentItem.textContent = 'Sources not found';
+                                    content.append(contentItem);
+                                }
+
+                                filtered.forEach((item) => {
+                                    const contentItem = document.createElement('li');
+                                    contentItem.className = 'content__item';
+
+                                    const contentLink = document.createElement('a');
+                                    contentLink.href = '#';
+                                    contentLink.className = 'content__link';
+                                    contentLink.textContent = item.name;
+                                    contentLink.setAttribute('data-source-id', item.id);
+                                    contentItem.append(contentLink);
+
+                                    content.append(contentItem);
+                                });
+                            });
+                        }
+
+                        flags.append(flag);
                     });
-                });
-
-                flag.addEventListener('click', () => {
-                    flags.querySelectorAll('.flag')?.forEach((item) => {
-                        item.classList.remove('active');
-                    });
-                    flag.classList.add('active');
-
-                    const filtered = data.filter((item) => item.name[0].toLowerCase() === letter);
-
-                    content.innerHTML = '';
-                    content.style.display = 'grid';
-
-                    if (!filtered.length) {
-                        const contentItem = document.createElement('li');
-                        contentItem.className = 'content__item';
-                        contentItem.textContent = 'Sources not found';
-                        content.append(contentItem);
-                    }
-
-                    filtered.forEach((item) => {
-                        const contentItem = document.createElement('li');
-                        contentItem.className = 'content__item';
-
-                        const contentLink = document.createElement('a');
-                        contentLink.href = '#';
-                        contentLink.className = 'content__link';
-                        contentLink.textContent = item.name;
-                        contentLink.setAttribute('data-source-id', item.id);
-                        contentItem.append(contentLink);
-
-                        content.append(contentItem);
-                    });
-                });
-
-                flags.append(flag);
-            });
-
+                }
+            }
             fragment.append(sourceClone);
         });
 
-        document.querySelector('.sources')?.append(fragment);
+        document.querySelector<HTMLElement>('.sources')?.append(fragment);
     }
 }
 

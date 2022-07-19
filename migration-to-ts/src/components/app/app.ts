@@ -13,7 +13,7 @@ class App {
 
     public start(): void {
         document
-            .querySelector('.sources')
+            .querySelector<Element>('.sources')
             ?.addEventListener('click', (e) =>
                 this.controller.getNews(e, (data?: NewsData, source?: string) =>
                     this.view.drawNews(data as NewsData, source as string)
