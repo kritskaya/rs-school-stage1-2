@@ -1,12 +1,14 @@
 import { Sort } from "../../model/sort.model";
 import { SortType } from "../../service/sort.service";
+import { BaseView } from "../BaseView";
 import './sort.css';
 
-export class SortView {
+export class SortView extends BaseView {
 
 	private root: HTMLElement;
 
 	constructor(sorts: Map<SortType, Sort>) {
+		super();
 		const parent = document.getElementById('sort-container') as HTMLElement;
 
 		this.root = this.createElement('ul', 'action__container action-list');
@@ -29,12 +31,6 @@ export class SortView {
 		});
 
 		parent.append(this.root);
-	}
-
-	protected createElement(tag: string, className: string): HTMLElement {
-		const element = document.createElement(tag);
-		element.className = className;
-		return element
 	}
 
 	public toggleSortList(target: HTMLElement): void {
