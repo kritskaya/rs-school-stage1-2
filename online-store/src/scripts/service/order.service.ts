@@ -49,5 +49,4 @@ export class OrderService {
 	private saveToLocalStorage() {
 		localStorage.setItem('order', JSON.stringify(this.order.getOrder()));
 	}
-
 }

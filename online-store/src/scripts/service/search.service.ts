@@ -4,6 +4,7 @@ export class SearchService {
 	private searchHistory: Search[];
 
 	constructor() {
-		// for future needs
+		// for the future needs
+		this.searchHistory = [];
 	}
 }

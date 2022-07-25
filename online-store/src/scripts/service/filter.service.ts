@@ -1,5 +1,4 @@
 import { ValueFilter, ValueFilterType, SizeFilterType, ColorFilterType, MaterialFilterType} from "../model/value.filter.model";
-import { RangeFilterType, RangeFilter } from "../model/range.filter.model";
 import { Product } from "../model/product.model";
 
 export class FilterService {

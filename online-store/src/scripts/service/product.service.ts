@@ -1,5 +1,5 @@
 import productsData from '../../assets/json/products.json';
-import { Product, ProductPDO } from '../model/product.model';
+import { Product } from '../model/product.model';
 import { RangeFilter, RangeFilterType } from '../model/range.filter.model';
 import { Search } from '../model/search.model';
 import { Sort } from '../model/sort.model';
@@ -72,7 +72,6 @@ export class ProductService {
 
 	public setCurrentSort(sort: Sort): void {
 		this.currentSort = sort;
-		//this.supplySort();
 		this.supplyAllConditions();
 	}
 
@@ -105,13 +104,11 @@ export class ProductService {
 
 	public addCurrentValueFilter(filter: ValueFilter<ValueFilterType>): void {
 		this.currentValueFilters.set(filter.getValue(), filter);
-		//this.supplyValueFilters();
 		this.supplyAllConditions();
 	}
 
 	public removeCurrentValueFilter(filterType: ValueFilterType): void {
 		this.currentValueFilters.delete(filterType);
-		//this.supplyValueFilters();
 		this.supplyAllConditions();
 	}
 
@@ -147,8 +144,6 @@ export class ProductService {
 	public supplyValueFilters(): void {
 		type keys = keyof Product;
 
-		//this.displayedProducts = this.products.slice();
-
 		const sameFilterTypes = new Set();
 		const filters = this.currentValueFilters;
 
@@ -177,24 +172,8 @@ export class ProductService {
 					return arrayItem ? true: false;
 				}
 			})
-		})
+		});
 
-		// filters.forEach((filter, type) => {
-		// 	this.displayedProducts = this.displayedProducts.filter((item) => {
-		// 		const filterField = filter.getField() as keys;
-		// 		const filterValue = filter.getValue();
-		// 		const productFieldValue = item[filterField];
-		// 		//console.log(item.getId(), productFieldValue);
-
-		// 		if (typeof productFieldValue === 'string') {
-
-		// 			return productFieldValue === filterValue;
-		// 		}
-				
-		// 	})
-		// });
-
-		// console.log(this.displayedProducts);
 	}
 
 	public supplyRangeFilters(): void {
@@ -212,8 +191,7 @@ export class ProductService {
 					return product;
 				}
 			})
-		})
-
+		});
 	}
 
 	/* end filters */
@@ -248,7 +226,7 @@ export class ProductService {
 				const material = item.getMaterial().findIndex((m) => m.indexOf(request) > -1);
 
 				return nameResult >= 0 || titleRequest >= 0 || color >= 0 || material >= 0;
-			})
+			});
 		}	
 	}
 
@@ -260,16 +238,6 @@ export class ProductService {
 		this.supplyValueFilters();
 		this.supplyRangeFilters();
 		this.supplySearchFilter();
-
-		this.saveToLocalStorage();
-	}
-
-	private saveToLocalStorage() {
-		//console.log(this.currentSearch);
-		// localStorage.setItem('sort', JSON.stringify(this.currentSort));
-		// localStorage.setItem('search', JSON.stringify(this.currentSearch.getRequest()));
-		// localStorage.setItem('range-filters', JSON.stringify(this.currentRangeFilters));
-		// localStorage.setItem('value-filters', JSON.stringify(this.currentRangeFilters));
 	}
 	
 }

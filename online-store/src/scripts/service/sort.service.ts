@@ -19,7 +19,6 @@ export class SortService {
 		this.sorts.set(SortType.DescPrice, new Sort('Цена: по убыванию', 'price' as keyof Product, false));
 		this.sorts.set(SortType.AscQuantity, new Sort('На складе: по возрастанию', 'quantity' as keyof Product, true));
 		this.sorts.set(SortType.DescQuantity, new Sort('На складе: по убыванию', 'quantity' as keyof Product, false));
-
 	}
 
 	public getSort(sortType: SortType): Sort {
