@@ -18,17 +18,20 @@ export class ProductController {
 
 	public loadFromStorage(): void {
 		const jsonOrder = localStorage.getItem('order');
-		
+
 		if (jsonOrder) {
 			const order = JSON.parse(jsonOrder);
-			
+
 			order.forEach((item: ProductPDO) => {
 				const root = this.view.getRootContainer();
-				const element = root.querySelector(`[data-id="${item.id}"]`) as HTMLElement;
-				const btn = element.querySelector('.product__btn') as HTMLElement;
-				btn.classList.add('cart-btn_remove');
+				const element = root.querySelector<HTMLElement>(`[data-id="${item.id}"]`);
 				
-				this.view.addInCartBadge(element);
+				if (element) {
+					const btn = element.querySelector<HTMLElement>('.product__btn');
+					btn?.classList.add('cart-btn_remove');
+
+					this.view.addInCartBadge(element);
+				}
 			});
 		}
 		
@@ -45,7 +48,6 @@ export class ProductController {
 
 		if (jsonSort) {
 			const sort = JSON.parse(jsonSort);
-			//this.setCurrentSort(new Sort(sort.title, sort.field, sort.));
 			this.service.setCurrentSort(new Sort(sort.title, sort.field, sort.asc));
 			this.displayProducts();
 		}
@@ -53,16 +55,20 @@ export class ProductController {
 
 	public addInCartBadge(event: Event) {
 		const target = event.currentTarget as HTMLElement;
-		const productElement = target.parentElement as HTMLElement;
+		const productElement = target.parentElement;
 
-		this.view.addInCartBadge(productElement);
+		if (productElement) {
+			this.view.addInCartBadge(productElement);
+		}
 	}
 
 	public removeInCartBadge(event: Event) {
 		const target = event.currentTarget as HTMLElement;
-		const productElement = target.parentElement as HTMLElement;
+		const productElement = target.parentElement;
 
-		this.view.removeInCartBadge(productElement);
+		if (productElement) {
+			this.view.removeInCartBadge(productElement);
+		}
 	}
 
 	public removeAllBadges(): void {
@@ -153,15 +159,12 @@ export class ProductController {
 	public addSearchFilter(request: string): void {
 		this.service.setCurrentSearch(new Search(request));
 		this.displayProducts();
-		//localStorage.setItem('search', JSON.stringify(request));
 	}
 
 	public clearSearchFilter() {
 		this.service.clearSearchFilter();
 		this.displayProducts();
-		//localStorage.removeItem('search');
 	}
 
 	/* end search */
-
 }

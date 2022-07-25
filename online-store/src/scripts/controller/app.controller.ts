@@ -1,6 +1,5 @@
 import { RangeFilter, RangeFilterType } from "../model/range.filter.model";
-import { Sort } from "../model/sort.model";
-import { SizeFilterType, ValueFilter, ValueFilterType } from "../model/value.filter.model";
+import { ValueFilterType } from "../model/value.filter.model";
 import { SortType } from "../service/sort.service";
 import { FilterController } from "./filter.controller";
 import { OrderController } from "./order.controller";
@@ -14,7 +13,7 @@ export class AppController {
 	private sortController: SortController;
 	private searchController: SearchController;
 	private filterController: FilterController;
-	private static CART_LIMIT: number = 20;
+	private static CART_LIMIT = 20;
 
 	constructor() {
 		this.sortController = new SortController();
@@ -33,8 +32,6 @@ export class AppController {
 			this.productController.setCurrentSort(sort);
 		}
 		
-		// const products = this.productController.getDisplayedProducts();
-		// this.searchController.loadFromStorage(products);
 		this.sortController.loadFromStorage();
 		
 		const valueFilters = this.filterController.loadValueFiltersFromStorage();
@@ -52,7 +49,7 @@ export class AppController {
 	}
 
 	public removeFromOrder(event: Event): void {
-		const itemToRemoveBadge = this.orderController.removeFromOrder(event);
+		this.orderController.removeFromOrder(event);
 		this.productController.removeInCartBadge(event);
 	}
 
@@ -69,8 +66,8 @@ export class AppController {
 			
 			if (!order || Number(order.textContent) < AppController.CART_LIMIT) {
 				this.addToOrder(event);
-				const isAddBtn = target.closest('.cart-btn') as HTMLElement;
-				isAddBtn.classList.add('cart-btn_remove');
+				const isAddBtn = target.closest<HTMLElement>('.cart-btn');
+				isAddBtn?.classList.add('cart-btn_remove');
 			} else {
 				this.productController.noAvailableSlot();
 			}
@@ -87,9 +84,6 @@ export class AppController {
 		// filters
 		this.clearAllFilters();
 
-		// search
-		//this.clearSearchFilter();
-
 		// order
 		this.orderController.clearOrder();
 		this.productController.removeAllBadges();
@@ -105,11 +99,13 @@ export class AppController {
 
 	public selectSortItem(event: Event): void {
 		const target = event.target as HTMLElement;
-		const sortType = target.dataset.sort as string;
+		const sortType = target.dataset.sort;
 
-		const sort = this.sortController.getSort(+sortType);
-		this.productController.setCurrentSort(sort);
-		this.productController.saveToStorage(sort);
+		if (sortType) {
+			const sort = this.sortController.getSort(+sortType);
+			this.productController.setCurrentSort(sort);
+			this.productController.saveToStorage(sort);
+		}
 	}
 
 	/* end sort */
@@ -117,18 +113,19 @@ export class AppController {
 	/* filter */
 
 	public toggleFilterList(target: HTMLElement): void {
-		//console.log(target);
 		this.filterController.toggleFilterList(target);
 	}
 
 	public selectValueFilterItem(event: Event): void {
 		const target = event.target as HTMLInputElement;
-		const filterType = target.dataset.filter as string;
+		const filterType = target.dataset.filter;
 
-		if (target.checked) {			
-			this.addValueFilter(filterType as ValueFilterType);
-		} else {
-			this.removeValueFilter(filterType as ValueFilterType);
+		if (filterType) {
+			if (target.checked) {			
+				this.addValueFilter(filterType as ValueFilterType);
+			} else {
+				this.removeValueFilter(filterType as ValueFilterType);
+			}
 		}
 	}
 
@@ -159,8 +156,8 @@ export class AppController {
 	/* search */
 
 	public addSearchFilter(): void {
-		const searchInput = document.querySelector('.search__input') as HTMLInputElement;
-		const request = searchInput.value;
+		const searchInput = document.querySelector<HTMLInputElement>('.search__input');
+		const request = searchInput?.value;
 
 		if (request) {
 			this.productController.addSearchFilter(request);

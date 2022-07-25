@@ -18,11 +18,11 @@ export class FilterController {
 	}
 
 	public getValueFilter(type: ValueFilterType): ValueFilter<ValueFilterType> {
-		return this.service.getValueFilter(type) as ValueFilter<ValueFilterType>;
+		return this.service.getValueFilter(type);
 	}
 
 	public getRangeFilter(type: RangeFilterType): RangeFilter {
-		return this.getRangeFilter(type) as RangeFilter;
+		return this.getRangeFilter(type);
 	}
 
 	public clearAllFilters() {
@@ -41,10 +41,13 @@ export class FilterController {
 				const value = item.value;
 				loaded.set(value, new ValueFilter(title, field, value));
 
-				const input = document.querySelector(`input[data-filter="${value}"]`) as HTMLInputElement;
-				input.checked = true;
-				this.addActiveValueFilterState(value as ValueFilterType);
-			})
+				const input = document.querySelector<HTMLInputElement>(`input[data-filter="${value}"]`);
+				
+				if (input) {
+					input.checked = true;
+					this.addActiveValueFilterState(value as ValueFilterType);
+				}
+			});
 		}
 		
 		return loaded;
@@ -73,21 +76,28 @@ export class FilterController {
 	}
 
 	public addActiveValueFilterState(filterType: ValueFilterType): void {
-		const filterElement = document.querySelector(`[data-filter="${filterType}"]`) as HTMLElement;
-		const container = (filterElement.parentElement as HTMLElement).parentElement as HTMLElement;
-		this.view.addActiveValueFilterState(container);
+		const filterElement = document.querySelector<HTMLElement>(`[data-filter="${filterType}"]`);
+		
+		const container = filterElement?.parentElement?.parentElement as HTMLElement;
+		if (container) {
+			this.view.addActiveValueFilterState(container);
+		}
 	}
 
 	public removeActiveValueFilterState(filterType: ValueFilterType): void {
-		const filterElement = document.querySelector(`[data-filter="${filterType}"]`) as HTMLElement;
-		const container = (filterElement.parentElement as HTMLElement).parentElement as HTMLElement;
-		this.view.removeActiveValueFilterState(container);
+		const filterElement = document.querySelector<HTMLElement>(`[data-filter="${filterType}"]`);
+		const container = filterElement?.parentElement?.parentElement as HTMLElement;
+		if (container) {
+			this.view.removeActiveValueFilterState(container);
+		}
 	}
 
 	public addActiveRangeFilterState(type: RangeFilterType): void {
-		const filterElement = document.getElementById(type + "-range") as HTMLElement;
-		const container = filterElement.parentElement as HTMLElement;
+		const filterElement = document.getElementById(type + "-range");
+		const container = filterElement?.parentElement;
 		
-		this.view.toggleActiveRangeFilterState(container);
+		if (container) {
+			this.view.toggleActiveRangeFilterState(container);
+		}
 	}
 }

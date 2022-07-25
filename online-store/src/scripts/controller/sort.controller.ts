@@ -26,11 +26,14 @@ export class SortController {
 		if (jsonSort) {
 			const sort = JSON.parse(jsonSort);
 			
-			document.querySelectorAll(`.sort-label`)
+			document.querySelectorAll<HTMLElement>(`.sort-label`)
 				.forEach((label) => {
 					if (label.textContent === sort.title) {
-						const input = label.previousElementSibling as HTMLInputElement;
-						input.checked = true;
+						const input = label.previousElementSibling;
+						
+						if (input) {
+							(input as HTMLInputElement).checked = true;
+						}
 					}
 				})
 		}
