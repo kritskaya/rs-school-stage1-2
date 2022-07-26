@@ -22,13 +22,13 @@ class Sources {
             const label = sourceClone.querySelector<HTMLElement>('.nav__label');
             if (label) {
                 label.textContent = entry[0];
-                label.setAttribute('for', entry[0].toLowerCase()); 
-            
+                label.setAttribute('for', entry[0].toLowerCase());
+
                 const input = sourceClone.querySelector<HTMLElement>('.nav__input');
                 if (input) {
                     input.id = entry[0].toLowerCase();
                 }
-                
+
                 const flags = sourceClone.querySelector<HTMLElement>('.nav__flags');
                 if (flags) {
                     entry[1].forEach((letter) => {
