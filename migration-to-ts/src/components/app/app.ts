@@ -15,7 +15,7 @@ class App {
         document.querySelector<Element>('.sources')?.addEventListener('click', (e) =>
             this.controller.getNews(e, (data, source) => {
                 if (data && source) {
-                    this.view.drawNews(data as NewsData, source as string);
+                    this.view.drawNews(data, source);
                 }
             })
         );
