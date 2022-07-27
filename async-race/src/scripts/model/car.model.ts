@@ -1,9 +1,19 @@
+export interface ICar {
+	id: number;
+	name: string;
+	color: string;
+}
+
 export class Car {
-	constructor (
-		private id: number,
-		private name: string,
-		private color: string
-	) {}
+	private id: number;
+	private name: string;
+	private color: string;
+
+	constructor (id: number, name: string, color: string) {
+		this.id = id;
+		this.name = name;
+		this.color = color;
+	}
 
 	public getId(): number {
 		return this.id;
