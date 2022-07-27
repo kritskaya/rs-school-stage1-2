@@ -19,21 +19,19 @@ class AppController extends AppLoader {
             if (target?.classList.contains('content__link')) {
                 const sourceId = target?.getAttribute('data-source-id');
                 const sourceName = target?.textContent;
-                if (sourceId && sourceName) {
-                    if (newsContainer.getAttribute('data-source') !== sourceId) {
-                        newsContainer.setAttribute('data-source', sourceId);
-                        super.getResp(
-                            {
-                                endpoint: 'everything',
-                                options: {
-                                    sources: sourceId,
-                                    pageSize: '10',
-                                },
-                                source: sourceName,
+                if (sourceId && sourceName && newsContainer.getAttribute('data-source') !== sourceId) {
+                    newsContainer.setAttribute('data-source', sourceId);
+                    super.getResp(
+                        {
+                            endpoint: 'everything',
+                            options: {
+                                sources: sourceId,
+                                pageSize: '10',
                             },
-                            callback
-                        );
-                    }
+                            source: sourceName,
+                        },
+                        callback
+                    );
                 }
                 return;
             }
