@@ -20,69 +20,64 @@ class Sources {
             const sourceClone = sourceItemTemp?.content.cloneNode(true) as HTMLElement;
 
             const label = sourceClone.querySelector<HTMLElement>('.nav__label');
-            if (label) {
+            const input = sourceClone.querySelector<HTMLElement>('.nav__input');
+            const flags = sourceClone.querySelector<HTMLElement>('.nav__flags');
+            const content = sourceClone.querySelector<HTMLElement>('.content');
+
+            if (label && input && flags && content) {
                 label.textContent = entry[0];
                 label.setAttribute('for', entry[0].toLowerCase());
 
-                const input = sourceClone.querySelector<HTMLElement>('.nav__input');
-                if (input) {
-                    input.id = entry[0].toLowerCase();
-                }
+                input.id = entry[0].toLowerCase();
 
-                const flags = sourceClone.querySelector<HTMLElement>('.nav__flags');
-                if (flags) {
-                    entry[1].forEach((letter) => {
-                        const flag = document.createElement('li');
-                        flag.className = 'nav__flag flag';
-                        flag.textContent = letter;
+                entry[1].forEach((letter) => {
+                    const flag = document.createElement('li');
+                    flag.className = 'nav__flag flag';
+                    flag.textContent = letter;
 
-                        const content = sourceClone.querySelector<HTMLElement>('.content');
-                        if (content) {
-                            label.addEventListener('click', () => {
-                                content.innerHTML = '';
-                                content.style.display = '';
-                                flags.querySelectorAll<HTMLElement>('.flag')?.forEach((item) => {
-                                    item.classList.remove('active');
-                                });
-                            });
+                    label.addEventListener('click', () => {
+                        content.innerHTML = '';
+                        content.style.display = '';
+                        flags.querySelectorAll<HTMLElement>('.flag')?.forEach((item) => {
+                            item.classList.remove('active');
+                        });
+                    });
 
-                            flag.addEventListener('click', () => {
-                                flags.querySelectorAll<HTMLElement>('.flag')?.forEach((item) => {
-                                    item.classList.remove('active');
-                                });
-                                flag.classList.add('active');
+                    flag.addEventListener('click', () => {
+                        flags.querySelectorAll<HTMLElement>('.flag')?.forEach((item) => {
+                            item.classList.remove('active');
+                        });
+                        flag.classList.add('active');
 
-                                const filtered = data.filter((item) => item.name[0].toLowerCase() === letter);
+                        const filtered = data.filter((item) => item.name[0].toLowerCase() === letter);
 
-                                content.innerHTML = '';
-                                content.style.display = 'grid';
+                        content.innerHTML = '';
+                        content.style.display = 'grid';
 
-                                if (!filtered.length) {
-                                    const contentItem = document.createElement('li');
-                                    contentItem.className = 'content__item';
-                                    contentItem.textContent = 'Sources not found';
-                                    content.append(contentItem);
-                                }
-
-                                filtered.forEach((item) => {
-                                    const contentItem = document.createElement('li');
-                                    contentItem.className = 'content__item';
-
-                                    const contentLink = document.createElement('a');
-                                    contentLink.href = '#';
-                                    contentLink.className = 'content__link';
-                                    contentLink.textContent = item.name;
-                                    contentLink.setAttribute('data-source-id', item.id);
-                                    contentItem.append(contentLink);
-
-                                    content.append(contentItem);
-                                });
-                            });
+                        if (!filtered.length) {
+                            const contentItem = document.createElement('li');
+                            contentItem.className = 'content__item';
+                            contentItem.textContent = 'Sources not found';
+                            content.append(contentItem);
                         }
 
-                        flags.append(flag);
+                        filtered.forEach((item) => {
+                            const contentItem = document.createElement('li');
+                            contentItem.className = 'content__item';
+
+                            const contentLink = document.createElement('a');
+                            contentLink.href = '#';
+                            contentLink.className = 'content__link';
+                            contentLink.textContent = item.name;
+                            contentLink.setAttribute('data-source-id', item.id);
+                            contentItem.append(contentLink);
+
+                            content.append(contentItem);
+                        });
                     });
-                }
+
+                    flags.append(flag);
+                });
             }
             fragment.append(sourceClone);
         });
