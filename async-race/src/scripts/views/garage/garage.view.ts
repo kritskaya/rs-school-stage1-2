@@ -3,6 +3,9 @@ import './garage.css';
 
 export class GarageView {
 
+  private page: HTMLElement;
+  private garage: HTMLElement;
+
 	public renderGaragePage(cars: ICar[]): void{
 		const page = `
 		<section class="garage-page" id="garage-page">
@@ -15,6 +18,9 @@ export class GarageView {
 
     document.body.innerHTML = '';
     document.body.insertAdjacentHTML('beforeend', page);
+    
+    this.page = document.getElementById('garage-page')!;
+    this.garage = document.getElementById('garage')!;
 	}
 
 	public renderCarBlock(): string {
