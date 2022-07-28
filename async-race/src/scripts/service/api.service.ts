@@ -86,7 +86,7 @@ export class ApiService {
     return json;
   }
 
-  public async getWinners(page = 1, limit = 10, sort?: string, order?: string): Promise<JSON[]> {
+  public async getWinners(page = 1, limit = 10, sort?: string, order?: string): Promise<IWinner[]> {
     const response = await fetch(`${this.winner}?_page=${page}&_limit=${limit}${(sort && order) ? `&_sort=${sort}&_order=${order}` : ''}`);
     const data = await response.json();
     const json = await Promise.all(data.map(async (item: IWinner) => Object.assign(item, { car: await this.getCar(item.id) })));
@@ -94,7 +94,7 @@ export class ApiService {
     return json;
   }
 
-  public async getWinner(id: number): Promise<JSON> {
+  public async getWinner(id: number): Promise<IWinner> {
 
     const response = await fetch(`${this.winner}/${id}`);
     const data = await response.json();

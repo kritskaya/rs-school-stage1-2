@@ -1,0 +1,17 @@
+*, *::after, *::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+ 
+body {
+	padding: 40px;
+}
+ 
+button {
+	padding: 3px;
+}
+ 
+.btn {
+	min-width: 70px;
+}

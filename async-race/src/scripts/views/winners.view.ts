@@ -1,31 +1,81 @@
+import { IWinner } from '../model/winner.nodel';
 import './winners.css';
 
 export class WinnersView {
 
-  public renderCar(color: string): string {
+  public renderWinnerPage(winners: IWinner[]): void {
+    const page = `
+    <section class="winners">
+      <div class="winners__header">
+        <h2 class="winners__title">Winners</h2>
+        <p class="winners__quantity">(3)</p>
+      </div>
+      <div class="winners__pages">
+        <p class="winners__page">Page</p><p class="page-number">#1</p>
+      </div>
+      ${this.renderWinnerTable(winners)}
+    </section>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', page);
+  }
+
+  public renderWinnerTable(winners: IWinner[]): string {
     return `
-    <div class="winner__car">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-    viewBox="0 0 395.024 395.024" style="enable-background:new 0 0 395.024 395.024;" xml:space="preserve">
-        <g>
-        <path style="fill:${color};" d="M394.91,229.818l-4.136-42.421c-1.995-20.467-13.039-38.638-29.933-49.721 
-          c2.857-2.144,4.471-5.75,3.888-9.527c-0.842-5.459-5.946-9.205-11.408-8.358l-23.06,3.558
-          c-47.529-17.26-127.164-26.702-235.951,27.036c-10.438,5.155-21.633,8.53-33.275,10.029c-24.36,3.136-41.809,12.833-51.86,28.822
-          c-16.428,26.133-5.878,58.798-5.421,60.176c1.357,4.09,5.182,6.851,9.491,6.851h33.208c4.426,16.642,19.619,28.942,37.635,28.942
-          s33.209-12.3,37.635-28.942H293.33c4.426,16.642,19.619,28.942,37.635,28.942s33.209-12.3,37.635-28.942h2.319
-          c6.786,0,13.293-2.883,17.853-7.908C393.332,243.327,395.569,236.572,394.91,229.818z M349.908,246.262
-          c0,10.445-8.498,18.942-18.943,18.942c-10.445,0-18.943-8.497-18.943-18.942c0-10.445,8.498-18.943,18.943-18.943
-          C341.41,227.319,349.908,235.817,349.908,246.262z M103.032,246.262c0,10.445-8.498,18.942-18.943,18.942
-          s-18.943-8.497-18.943-18.942c0-10.445,8.498-18.943,18.943-18.943S103.032,235.817,103.032,246.262z M368.601,236.262
-          c-4.426-16.643-19.619-28.943-37.635-28.943s-33.209,12.301-37.635,28.943H121.724c-4.426-16.643-19.619-28.943-37.635-28.943
-          s-33.209,12.301-37.635,28.943H21.136c-1.572-8.758-2.728-24.221,5.029-36.474c6.732-10.635,19.323-17.209,37.424-19.539
-          c13.839-1.782,27.155-5.797,39.579-11.934c102.926-50.841,177.047-41.996,220.72-26.003c0.961,0.561,2.018,0.96,3.132,1.176
-          c7.254,2.804,13.612,5.781,19.055,8.665c13.978,7.407,23.247,21.308,24.795,37.184l4.136,42.422
-          c0.153,1.574-0.589,2.653-1.045,3.156c-0.457,0.503-1.458,1.347-3.041,1.347H368.601z"/>
-        </g>
-      </svg>
+    <div class="winners__table winner-table">
+      <div class="winner-table__headers headers">
+        <p class="winner-table__header winners__number">N ↑</p>
+        <p class="winner-table__header winners__car">Car ↑</p>
+        <p class="winner-table__header winners__name">Name ↑</p>
+        <p class="winner-table__header winners__wins">Wins ↑</p>
+        <p class="winner-table__header winners__time">Best time ↑</p>
+      </div>
+      ${ winners.map((winner) => this.renderWinnerRow(winner)).join('') }
     </div>
-  `;
+    ${this.renderPagination()}
+    `;
+  }
+
+  public renderWinnerRow(winner: IWinner): string {
+    console.log('jgkfjg',winner.car.color);
+    return `
+    <div class="winner-table__row">
+      <p class="winner-table__cell">${winner.id}</p>
+      <p class="winner-table__cell">
+        ${this.renderCarImg(winner.car.color)}
+      </p>
+      <p class="winner-table__cell">${winner.car?.name}</p>
+      <p class="winner-table__cell">${winner.wins}</p>
+      <p class="winner-table__cell">${winner.time}</p>
+    </div>
+    `;
+  }
+
+  public renderPagination(): string {
+    return `
+    <div class="winners__btns">
+      <button class="winners__btn btn">Prev</button>
+      <button class="winners__btn btn">Next</button>
+    </div>
+    `;
+  }
+
+  public renderCarImg(color: string): string {
+    return `
+    <svg class="winner-table__img" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    viewBox="0 0 17.485 15" style="enable-background:new 0 0 17.485 15;" xml:space="preserve">
+    <g>
+      <g>
+        <path style="fill:${color};" d="M17.477,8.149c-0.079-0.739-3.976-0.581-3.976-0.581L11.853,5.23H4.275L3.168,7.567H0v2.404
+          l2.029,0.682c0.123-0.836,0.843-1.48,1.711-1.48c0.939,0,1.704,0.751,1.73,1.685l6.62,0.041c0.004-0.951,0.779-1.726,1.733-1.726
+          c0.854,0,1.563,0.623,1.704,1.439l1.479-0.17C17.006,10.442,17.556,8.887,17.477,8.149z M4.007,7.568l0.746-1.771h2.864
+          l0.471,1.771H4.007z M8.484,7.568L8.01,5.797h3.67l1.137,1.771H8.484z"/>
+        <circle style="fill:${color};" cx="3.759" cy="10.966" r="1.289"/>
+        <circle style="fill:${color};" cx="13.827" cy="10.9" r="1.29"/>
+      </g>
+    </g>
+    </svg>
+    `;
   }
 
 }

@@ -6,10 +6,12 @@ export class App {
   public async start(): Promise<void> {
     const body = document.querySelector('body');
 
+    const api = new ApiService();
+    const winners = await api.getWinners();
+    console.log('winners', winners);
+
     const view = new WinnersView();
-    const car =  document.createElement('div');
-    car.innerHTML = view.renderCar('#cccccc');
-    body?.append(car);
+    view.renderWinnerPage(winners)
 
 
     // const cars = await api.getCars();

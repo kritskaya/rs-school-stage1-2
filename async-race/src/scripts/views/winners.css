@@ -1,3 +1,39 @@
-.winner__car {
+.winners__header {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.winners__pages {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 5px;
+  font-size: 20px;
+}
+
+.winners__title,
+.winners__quantity {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.winner-table__headers,
+.winner-table__row {
+  display: grid;
+  grid-template-columns: repeat(5, 75px);
+}
+
+.winner-table__header {
+  cursor: pointer;
+}
+
+.winner-table__cell {
+  align-self: center;
+}
+
+.winner-table__img {
   width: 30px;
+}
+
+.winners__btns {
+  margin-top: 40px;
 }
