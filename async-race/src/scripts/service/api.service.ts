@@ -1,5 +1,5 @@
-import { ICar } from './model/car.model';
-import { IWinner } from './model/winner.nodel';
+import { ICar } from '../model/car.model';
+import { IWinner } from '../model/winner.nodel';
 
 export class ApiService {
   private base = 'http://127.0.0.1:3000';
@@ -103,7 +103,7 @@ export class ApiService {
     return json;
   }
 
-  public async createWinner(item: ICar): Promise<JSON> {
+  public async createWinner(item: IWinner): Promise<JSON> {
     const params = {
       method: 'POST',
       body: JSON.stringify(item),

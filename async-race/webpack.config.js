@@ -42,11 +42,11 @@ module.exports = ( {mode} ) => {
 					template: path.resolve(__dirname, './src/index.html'),
 				}
 			),
-			// new CopyPlugin({
-         //    patterns: [
-         //      { from: "./src/assets", to: "./assets" },
-         //    ],
-        	// }), 
+			new CopyPlugin({
+            patterns: [
+              { from: "./src/assets", to: "./assets" },
+            ],
+        	}), 
 		],
 	}
 };
