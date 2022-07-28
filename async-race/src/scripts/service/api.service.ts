@@ -7,7 +7,7 @@ export class ApiService {
   private engine = `${this.base}/engine`;
   private winner = `${this.base}/winners`;
 
-  public async getCars(page = 1, limit = 7): Promise<JSON> {
+  public async getCars(page = 1, limit = 7): Promise<ICar[]> {
     const response = await fetch(`${this.garage}?_page=${page}&_limit${limit}`);
     const JSON = await response.json();
     return JSON;

@@ -1,5 +1,6 @@
 import { ApiService } from './service/api.service';
-import { WinnersView } from './views/winners.view';
+import { GarageView } from './views/garage/garage.view';
+import { WinnersView } from './views/winners/winners.view';
 
 export class App {
 
@@ -7,11 +8,15 @@ export class App {
     const body = document.querySelector('body');
 
     const api = new ApiService();
-    const winners = await api.getWinners();
-    console.log('winners', winners);
+    const cars = await api.getCars();
+    console.log(cars);
 
-    const view = new WinnersView();
-    view.renderWinnerPage(winners)
+    const view = new GarageView();
+    view.renderGaragePage(cars);
+
+    // const view = new WinnersView();
+    // view.renderWinnerPage(winners)
+
 
 
     // const cars = await api.getCars();

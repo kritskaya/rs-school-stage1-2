@@ -1,4 +1,4 @@
-import { IWinner } from '../model/winner.nodel';
+import { IWinner } from '../../model/winner.nodel';
 import './winners.css';
 
 export class WinnersView {
@@ -17,6 +17,7 @@ export class WinnersView {
     </section>
     `;
 
+    document.body.innerHTML = '';
     document.body.insertAdjacentHTML('beforeend', page);
   }
 

@@ -1,0 +1,58 @@
+.car-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.car-block__row {
+  display: flex;
+  gap: 10px;
+}
+
+.garage-page__body {
+  margin-top: 40px;
+}
+
+.race {
+  padding-bottom: 60px;
+}
+
+.race__row {
+  padding-top: 20px;
+  border-bottom: 3px dashed #000;
+}
+
+.car__header {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 10px;
+}
+
+.car__btn_remove {
+  margin-right: 15px;
+}
+
+.row__body {
+  display: flex;
+}
+
+.car__btns {
+  margin-right: 20px;
+}
+
+.car__img {
+  width: 50px;
+}
+
+.car__race-line {
+  display: flex;
+  padding-right: 50px;
+  justify-content: space-between;
+  flex-grow: 1;
+  border: 1px solid #000;
+}
+
+.race__flag {
+  width: 30px;
+}
