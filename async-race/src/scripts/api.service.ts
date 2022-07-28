@@ -1,55 +1,146 @@
-import { Car, ICar } from "./model/car.model";
+import { ICar } from './model/car.model';
+import { IWinner } from './model/winner.nodel';
 
 export class ApiService {
-	private base: string = 'http://127.0.0.1:3000';
-	private garage: string = `${this.base}/garage`;
+  private base = 'http://127.0.0.1:3000';
+  private garage = `${this.base}/garage`;
+  private engine = `${this.base}/engine`;
+  private winner = `${this.base}/winners`;
 
-	public async getCars(page: number = 1, limit: number = 7) {
-		const response = await fetch(`${this.garage}?_page=${page}&_limit${limit}`);
-		const cars = await response.json();
-		return cars;
-	}
+  public async getCars(page = 1, limit = 7): Promise<JSON> {
+    const response = await fetch(`${this.garage}?_page=${page}&_limit${limit}`);
+    const JSON = await response.json();
+    return JSON;
+  }
 
-	public async getCar(id: number): Promise<ICar> {
-		const response = await fetch(`${this.garage}/${id}`);
-		const car = await response.json();
-		return car;
-	}
+  public async getCar(id: number): Promise<ICar> {
+    const response = await fetch(`${this.garage}/${id}`);
+    const json = await response.json();
+    return json;
+  }
 
-	public async createCar(item: Omit<ICar, "id">) {
-		const params = {
-			method: 'POST',
-			body: JSON.stringify(item),
-			headers: {
-				'Content-type': 'application/json'
-			}
-		}
-		const response = await fetch(this.garage, params);
-		const car = await response.json();
-		return car;
-	}
+  public async createCar(item: Omit<ICar, 'id'>): Promise<JSON> {
+    const params = {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
 
-	public async deleteCar(id: number): Promise<number> {
-		const params = {
-			method: 'DELETE',
-		}
-		const response = await fetch(`${this.garage}/${id}`, params);
-		const data = await response.json();
-		const code = await response.status;
-		return code;
-	}
+    const response = await fetch(this.garage, params);
+    const json = await response.json();
+    return json;
+  }
 
-	public async updateCar(id: number, item: Omit<ICar, 'id'>): Promise<number> {
-		const params = {
-			method: 'PUT',
-			body: JSON.stringify(item),
-			headers: {
-				'Content-type': 'application/json'
-			}
-		}
+  public async deleteCar(id: number): Promise<JSON> {
+    const params = {
+      method: 'DELETE',
+    };
+    const response = await fetch(`${this.garage}/${id}`, params);
+    const json = await response.json();
+    return json;
+  }
 
-		const response = await fetch(`${this.garage}/${id}`, params);
-		const code = await response.status;
-		return code;
-	}
+  public async updateCar(id: number, item: Omit<ICar, 'id'>): Promise<JSON> {
+    const params = {
+      method: 'PUT',
+      body: JSON.stringify(item),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+
+    const response = await fetch(`${this.garage}/${id}`, params);
+    const json = await response.json();
+    return json;
+  }
+
+  public async startEngine(id: number): Promise<JSON> {
+    const params = {
+      method: 'PATCH',
+    };
+
+    const response = await fetch(`${this.engine}?id=${id}&status=started`, params);
+    const json = await response.json();
+    return json;
+  }
+
+  public async stopEngine(id: number): Promise<JSON> {
+    const params = {
+      method: 'PATCH',
+    };
+
+    const response = await fetch(`${this.engine}?id=${id}&status=stopped`, params);
+    const json = await response.json();
+    return json;
+  }
+
+  public async driveCar(id: number): Promise<JSON> {
+    const params = {
+      method: 'PATCH',
+    };
+
+    const response = await fetch(`${this.engine}?id=${id}&status=drive`, params);
+    const json = await response.json();
+    return json;
+  }
+
+  public async getWinners(page = 1, limit = 10, sort?: string, order?: string): Promise<JSON[]> {
+    const response = await fetch(`${this.winner}?_page=${page}&_limit=${limit}${(sort && order) ? `&_sort=${sort}&_order=${order}` : ''}`);
+    const data = await response.json();
+    const json = await Promise.all(data.map(async (item: IWinner) => Object.assign(item, { car: await this.getCar(item.id) })));
+    
+    return json;
+  }
+
+  public async getWinner(id: number): Promise<JSON> {
+
+    const response = await fetch(`${this.winner}/${id}`);
+    const data = await response.json();
+    const json = await Object.assign(data, { car: await this.getCar(id) });
+
+    return json;
+  }
+
+  public async createWinner(item: ICar): Promise<JSON> {
+    const params = {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+
+    const response = await fetch(`${this.winner}`, params);
+    const json = await response.json();
+
+    return json;
+  }
+
+  public async deleteWinner(id: number): Promise<JSON> {
+    const params = {
+      method: 'DELETE',
+    };
+
+    const response = await fetch(`${this.winner}/${id}`, params);
+    const json = await response.json();
+
+    return json;
+  }
+
+  public async updateWinner(id: number, item: Omit<IWinner, 'id'>): Promise<JSON> {
+    const params = {
+      method: 'PUT',
+      body: JSON.stringify(item),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await fetch(`${this.winner}/${id}`, params);
+    const json = await response.json();
+
+    return json;
+  }
 }

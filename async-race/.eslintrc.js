@@ -1,22 +1,39 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import", "@typescript-eslint"],
+  "extends": [
+    "airbnb-typescript"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "no-debugger": "off",
+    "no-console": 0,
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-explicit-any": 2,
+    '@typescript-eslint/lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterSingleLine: true },
+    ]
+  },
+  "overrides": [
+    {
+      "files": ['*.ts', '*.tsx'], 
+      
+      "parserOptions": {
+        "project": ['./tsconfig.json'], // Specify it only for TypeScript files
+      },
+      "rules": {
+        "react/jsx-filename-extension": ['off']
+      }
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "airbnb-typescript"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "@typescript-eslint/no-explicit-any": 2
-    }
+  ],
 }
