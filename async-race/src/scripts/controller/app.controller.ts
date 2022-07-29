@@ -1,22 +1,25 @@
 import { ApiService } from "../service/api.service";
+import { AppService } from "../service/app.service";
 import { GarageView } from "../views/garage/garage.view";
 import { WinnersView } from "../views/winners/winners.view";
 
 export class AppController {
 
   private api: ApiService;
+  private service: AppService;
   private garageView: GarageView;
   private winnerView: WinnersView;
 
   constructor() {
     this.api = new ApiService();
+    this.service = new AppService();
     this.garageView = new GarageView();
     this.winnerView = new WinnersView();
   }
 
   public async renderApp(): Promise<void> {
-    const cars = await this.api.getCars();
-    this.garageView.renderMain(cars);
+    const { cars, amount } = await this.api.getCars();
+    this.garageView.renderMain(cars, amount);
 
     const winners = await this.api.getWinners();
     this.winnerView.renderWinnerPage(winners);
@@ -59,6 +62,20 @@ export class AppController {
           this.updateCar(+id);
         }
       }
+
+      if (target.classList.contains('btn_next')) {
+        const currentPage = this.service.getGaragePage();
+        const {cars, amount} = await this.api.getCars(currentPage + 1);
+        this.garageView.updateGarageView(cars, currentPage + 1, amount);
+        this.service.setGaragePage(currentPage + 1);
+      }
+
+      if (target.classList.contains('btn_prev')) {
+        const currentPage = this.service.getGaragePage();
+        const {cars, amount} = await this.api.getCars(currentPage - 1);
+        this.garageView.updateGarageView(cars, currentPage - 1, amount);
+        this.service.setGaragePage(currentPage - 1);
+      }
     });
   }
 
@@ -71,9 +88,11 @@ export class AppController {
       const color = colorElement.value;
 
       await this.api.createCar({ name, color });
-      const cars = await this.api.getCars();
+
+      const currentPage = this.service.getGaragePage();
+      const {cars, amount} = await this.api.getCars(currentPage);
       
-      this.garageView.updateGarageView(cars);
+      this.garageView.updateGarageView(cars, currentPage, amount);
       nameElement.value = '';
       colorElement.value = '#000000';
     }
@@ -82,9 +101,11 @@ export class AppController {
   public async removeCar(id: number): Promise<void> {
     await this.api.deleteCar(id);
     await this.api.deleteWinner(id);
-    const cars = await this.api.getCars();
+
+    const currentPage = this.service.getGaragePage();
+    const { cars, amount } = await this.api.getCars(currentPage);
       
-    this.garageView.updateGarageView(cars);
+    this.garageView.updateGarageView(cars, currentPage, amount);
   }
 
   public async selectCar(id: number): Promise<void> {
@@ -109,9 +130,11 @@ export class AppController {
       const color = colorElement.value;
 
       await this.api.updateCar(id, {name, color});
-      const cars = await this.api.getCars();
+
+      const currentPage = this.service.getGaragePage();
+      const { cars, amount } = await this.api.getCars(currentPage);
         
-      this.garageView.updateGarageView(cars);
+      this.garageView.updateGarageView(cars, currentPage, amount);
       nameElement.value = '';
       colorElement.value = '#000000';
     }

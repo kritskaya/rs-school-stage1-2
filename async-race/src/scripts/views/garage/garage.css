@@ -13,8 +13,26 @@
   gap: 10px;
 }
 
+.garage__header {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.garage__title,
+.garage__quantity {
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .garage-page__body {
   margin-top: 40px;
+}
+
+.garage__pages {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 5px;
+  font-size: 20px;
 }
 
 .race {

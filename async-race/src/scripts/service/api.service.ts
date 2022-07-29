@@ -7,10 +7,14 @@ export class ApiService {
   private engine = `${this.base}/engine`;
   private winner = `${this.base}/winners`;
 
-  public async getCars(page = 1, limit = 7): Promise<ICar[]> {
-    const response = await fetch(`${this.garage}?_page=${page}&_limit${limit}`);
-    const JSON = await response.json();
-    return JSON;
+  public async getCars(page = 1, limit = 7): Promise<{ cars: ICar[], amount: number}> {
+    const response = await fetch(`${this.garage}?_page=${page}&_limit=${limit}`);
+    const cars = await response.json();
+    const amount = response.headers.get('X-Total-Count') || 0;
+    return {
+      cars,
+      amount: +amount
+    };
   }
 
   public async getCar(id: number): Promise<ICar> {

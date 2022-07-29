@@ -3,10 +3,12 @@ import './garage.css';
 
 export class GarageView {
 
-  private page: HTMLElement;
+  private root: HTMLElement;
   private garage: HTMLElement;
+  private page: HTMLElement;
+  private PAGE_LIMIT = 7;
 
-  public renderMain(cars: ICar[]) {
+  public renderMain(cars: ICar[], amount: number) {
     const main = `
     <main class="main" id="main">
       <nav class="nav">
@@ -18,14 +20,14 @@ export class GarageView {
 
     document.body.insertAdjacentHTML('beforeend', main);
     
-    this.renderGaragePage(cars);
+    this.renderGaragePage(cars, amount);
   }
 
-	public renderGaragePage(cars: ICar[]): void{
+	public renderGaragePage(cars: ICar[], amount: number): void{
 		const page = `
 		<section class="garage-page" id="garage-page">
     	${this.renderCarBlock()}
-      ${this.renderGarageBody(cars)}
+      ${this.renderGarageBody(cars, 1, amount)}
 		</section>
 		`;
 
@@ -34,8 +36,9 @@ export class GarageView {
     if (main) {
       main.insertAdjacentHTML('beforeend', page);
       
-      this.page = document.getElementById('garage-page')!;
+      this.root = document.getElementById('garage-page')!;
       this.garage = document.getElementById('garage')!;
+      this.page = document.getElementById('garage-page-number')!;
     }
 	}
 
@@ -60,17 +63,20 @@ export class GarageView {
 		`;
 	}
 
-  public renderGarageBody(cars: ICar[]): string {
+  public renderGarageBody(cars: ICar[], page = 1, amount: number): string {
     return `
     <div class="garage garage-page__body" id="garage">
       <div class="garage__header">
         <h2 class="garage__title ">Garage</h2>
-        <p class="garage__quantity">${cars.length}</p>
+        <p class="garage__quantity">(${amount})</p>
+      </div>
+      <div class="garage__pages">
+        <p class="garage__page-title">Page</p><p id="garage-page-number">#${page}</p>
       </div>
       <div class="race" id="race">
         ${cars.map((car) => this.renderRaceRow(car)).join('')}
       </div>
-      ${this.renderPagination()}
+      ${this.renderPagination(amount, page)}
     </div>
     `;
   }
@@ -115,11 +121,11 @@ export class GarageView {
     `;
   }
 
-  public renderPagination(): string {
+  public renderPagination(amount: number, current = 1): string {
     return `
     <div class="pagination">
-      <button class="btn btn_prev">Prev</button>
-      <button class="btn btn_next">Next</button>
+      <button class="btn btn_prev" ${current === 1 ? 'disabled' : ''}>Prev</button>
+      <button class="btn btn_next" ${current * this.PAGE_LIMIT >= amount ? 'disabled' : ''}>Next</button>
     </div>
     `;
   }
@@ -129,11 +135,11 @@ export class GarageView {
     document.getElementById('garage-page')!.style.display = 'block';
   }
 
-  public updateGarageView(cars: ICar[]): void {
+  public updateGarageView(cars: ICar[], page: number, amount: number): void {
     this.garage.remove();
 
-    const garage = this.renderGarageBody(cars);
-    this.page.insertAdjacentHTML('beforeend', garage);
+    const garage = this.renderGarageBody(cars, page, amount);
+    this.root.insertAdjacentHTML('beforeend', garage);
 
     this.garage = document.getElementById('garage')!;
   }
