@@ -16,6 +16,7 @@ export class WinnersView {
         <p class="winners__page">Page</p><p class="page-number">#1</p>
       </div>
       ${this.renderWinnerTable(winners)}
+      ${this.renderPagination()}
     </section>
     `;
 
@@ -31,7 +32,7 @@ export class WinnersView {
 
   public renderWinnerTable(winners: IWinner[]): string {
     return `
-    <div class="winners__table winner-table">
+    <div class="winners__table winner-table" id="winner-table">
       <div class="winner-table__headers headers">
         <p class="winner-table__header winners__number">N ↑</p>
         <p class="winner-table__header winners__car">Car ↑</p>
@@ -41,12 +42,10 @@ export class WinnersView {
       </div>
       ${ winners.map((winner) => this.renderWinnerRow(winner)).join('') }
     </div>
-    ${this.renderPagination()}
     `;
   }
 
   public renderWinnerRow(winner: IWinner): string {
-    console.log('jgkfjg',winner.car.color);
     return `
     <div class="winner-table__row">
       <p class="winner-table__cell">${winner.id}</p>
@@ -91,10 +90,14 @@ export class WinnersView {
     document.getElementById('garage-page')!.style.display = 'none';
     document.getElementById('winners-page')!.style.display = 'block';
 
-    this.root.lastElementChild?.remove();
+    this.updateWinnersView(winners);
+  }
+
+  public updateWinnersView(winners: IWinner[]) {
+    document.getElementById('winner-table')?.remove();
     
     const winnerTable = this.renderWinnerTable(winners);
-    this.root.insertAdjacentHTML('beforeend', winnerTable);
+    this.root.lastElementChild?.insertAdjacentHTML('beforebegin', winnerTable);
   }
 
 }

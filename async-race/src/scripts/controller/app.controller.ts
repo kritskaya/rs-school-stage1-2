@@ -34,7 +34,23 @@ export class AppController {
         const winners = await this.api.getWinners();
         this.winnerView.showWinnersPage(winners);
       }
+
+      if (target.classList.contains('btn_create-car')) {
+        this.createCar();
+      }
     });
+  }
+
+  public async createCar() {
+    const name = document.querySelector<HTMLInputElement>('#create-car-name')?.value;
+    const color = document.querySelector<HTMLInputElement>('#create-car-color')?.value;
+
+    if (name && color) {
+      await this.api.createCar({ name, color });
+      const cars = await this.api.getCars();
+      
+      this.garageView.updateGarageView(cars);
+    }
   }
 
   

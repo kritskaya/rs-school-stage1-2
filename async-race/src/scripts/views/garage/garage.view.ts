@@ -1,4 +1,4 @@
-import { ICar } from "../../model/car.model";
+import { Car, ICar } from "../../model/car.model";
 import './garage.css';
 
 export class GarageView {
@@ -45,14 +45,14 @@ export class GarageView {
 		return `
 		<div class="car-block">
 			<div class="car-block__row car-block__row_create">
-        <input class="car-block__input" type="text">
-        <input class="car-block__color" type="color">
-        <button class="car-block__btn btn">Create</button>
+        <input class="car-block__input" type="text" id="create-car-name">
+        <input class="car-block__color" type="color" id="create-car-color">
+        <button class="car-block__btn btn btn_create-car">Create</button>
 			</div>
 			<div class="car-block__row car-block__row_update">
         <input class="car-block__input" type="text">
         <input class="car-block__color" type="color">
-        <button class="car-block__btn btn">Update</button>
+        <button class="car-block__btn btn btn_update-car">Update</button>
 			</div>
 
 			<div class="car-block__btns">
@@ -64,7 +64,7 @@ export class GarageView {
 
   public renderGarageBody(cars: ICar[]): string {
     return `
-      <div class="garage__header"></div>
+      <div class="garage__header">
         <h2 class="garage__title ">Garage</h2>
         <p class="garage__quantity">${cars.length}</p>
       </div>
@@ -127,5 +127,14 @@ export class GarageView {
   public showGaragePage(): void {
     document.getElementById('winners-page')!.style.display = 'none';
     document.getElementById('garage-page')!.style.display = 'block';
+  }
+
+  public updateGarageView(cars: ICar[]): void {
+    this.garage.remove();
+
+    const garage = this.renderGarageBody(cars);
+    this.page.insertAdjacentHTML('beforeend', garage);
+
+    this.garage = document.getElementById('garage')!;
   }
 }
