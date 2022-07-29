@@ -38,6 +38,13 @@ export class AppController {
       if (target.classList.contains('btn_create-car')) {
         this.createCar();
       }
+
+      if (target.classList.contains('car__btn_remove')) {
+        const id = target.dataset.id;
+        if (id) {
+          this.removeCar(+id);
+        }
+      }
     });
   }
 
@@ -53,7 +60,13 @@ export class AppController {
     }
   }
 
-  
+  public async removeCar(id: number) {
+    await this.api.deleteCar(id);
+    await this.api.deleteWinner(id);
+    const cars = await this.api.getCars();
+      
+    this.garageView.updateGarageView(cars);
+  }
   
   
 }

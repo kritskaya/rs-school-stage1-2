@@ -25,9 +25,7 @@ export class GarageView {
 		const page = `
 		<section class="garage-page" id="garage-page">
     	${this.renderCarBlock()}
-      <div class="garage garage-page__body" id="garage">
-        ${this.renderGarageBody(cars)}
-      </div>
+      ${this.renderGarageBody(cars)}
 		</section>
 		`;
 
@@ -64,6 +62,7 @@ export class GarageView {
 
   public renderGarageBody(cars: ICar[]): string {
     return `
+    <div class="garage garage-page__body" id="garage">
       <div class="garage__header">
         <h2 class="garage__title ">Garage</h2>
         <p class="garage__quantity">${cars.length}</p>
@@ -72,6 +71,7 @@ export class GarageView {
         ${cars.map((car) => this.renderRaceRow(car)).join('')}
       </div>
       ${this.renderPagination()}
+    </div>
     `;
   }
 
@@ -79,8 +79,8 @@ export class GarageView {
     return `
     <div class="race__row car">
       <div class="car__header">
-        <button class="car__btn_select btn">Select</button>
-        <button class="car__btn_remove btn">Remove</button>
+        <button class="car__btn_select btn" data-id="${car.id}">Select</button>
+        <button class="car__btn_remove btn" data-id="${car.id}">Remove</button>
         <p class="car__name">${car.name}</p>
       </div>
       <div class="row__body">
