@@ -6,6 +6,21 @@ export class GarageView {
   private page: HTMLElement;
   private garage: HTMLElement;
 
+  public renderMain(cars: ICar[]) {
+    const main = `
+    <main class="main" id="main">
+      <nav class="nav">
+        <button class="nav__btn_garage btn">Garage</button>
+        <button class="nav__btn_winners btn">Winners</button>
+      </nav>
+    </main>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', main);
+    
+    this.renderGaragePage(cars);
+  }
+
 	public renderGaragePage(cars: ICar[]): void{
 		const page = `
 		<section class="garage-page" id="garage-page">
@@ -16,11 +31,14 @@ export class GarageView {
 		</section>
 		`;
 
-    document.body.innerHTML = '';
-    document.body.insertAdjacentHTML('beforeend', page);
-    
-    this.page = document.getElementById('garage-page')!;
-    this.garage = document.getElementById('garage')!;
+    const main = document.getElementById('main');
+
+    if (main) {
+      main.insertAdjacentHTML('beforeend', page);
+      
+      this.page = document.getElementById('garage-page')!;
+      this.garage = document.getElementById('garage')!;
+    }
 	}
 
 	public renderCarBlock(): string {
@@ -104,5 +122,10 @@ export class GarageView {
       <button class="btn btn_next">Next</button>
     </div>
     `;
+  }
+
+  public showGaragePage(): void {
+    document.getElementById('winners-page')!.style.display = 'none';
+    document.getElementById('garage-page')!.style.display = 'block';
   }
 }

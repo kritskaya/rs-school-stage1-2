@@ -1,18 +1,24 @@
+import { AppController } from './controller/app.controller';
 import { ApiService } from './service/api.service';
 import { GarageView } from './views/garage/garage.view';
 import { WinnersView } from './views/winners/winners.view';
 
 export class App {
+  private controller: AppController;
 
   public async start(): Promise<void> {
     const body = document.querySelector('body');
 
-    const api = new ApiService();
-    const cars = await api.getCars();
-    console.log(cars);
+    this.controller = new AppController();
+    this.controller.renderApp();
+    this.controller.clickEventHadler();
 
-    const view = new GarageView();
-    view.renderGaragePage(cars);
+    // const api = new ApiService();
+    // const cars = await api.getCars();
+    // console.log(cars);
+
+    // const view = new GarageView();
+    // view.renderGaragePage(cars);
 
     // const view = new WinnersView();
     // view.renderWinnerPage(winners)

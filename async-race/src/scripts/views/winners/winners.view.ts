@@ -2,13 +2,15 @@ import { IWinner } from '../../model/winner.nodel';
 import './winners.css';
 
 export class WinnersView {
+  private root: HTMLElement;
+  private counter: HTMLElement;
 
   public renderWinnerPage(winners: IWinner[]): void {
     const page = `
-    <section class="winners">
+    <section class="winners" id="winners-page">
       <div class="winners__header">
         <h2 class="winners__title">Winners</h2>
-        <p class="winners__quantity">(3)</p>
+        <p class="winners__quantity" id="winners-quantity">(3)</p>
       </div>
       <div class="winners__pages">
         <p class="winners__page">Page</p><p class="page-number">#1</p>
@@ -17,8 +19,14 @@ export class WinnersView {
     </section>
     `;
 
-    document.body.innerHTML = '';
-    document.body.insertAdjacentHTML('beforeend', page);
+    const main = document.getElementById('main');
+
+    if (main) {
+      main.insertAdjacentHTML('beforeend', page);
+
+      this.root = document.getElementById("winners-page")!;
+      this.counter = document.getElementById("winners-quantity")!;
+    }
   }
 
   public renderWinnerTable(winners: IWinner[]): string {
@@ -77,6 +85,16 @@ export class WinnersView {
     </g>
     </svg>
     `;
+  }
+
+  public showWinnersPage(winners: IWinner[]): void {
+    document.getElementById('garage-page')!.style.display = 'none';
+    document.getElementById('winners-page')!.style.display = 'block';
+
+    this.root.lastElementChild?.remove();
+    
+    const winnerTable = this.renderWinnerTable(winners);
+    this.root.insertAdjacentHTML('beforeend', winnerTable);
   }
 
 }
