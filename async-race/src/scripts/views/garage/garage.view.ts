@@ -48,8 +48,8 @@ export class GarageView {
         <button class="car-block__btn btn btn_create-car">Create</button>
 			</div>
 			<div class="car-block__row car-block__row_update">
-        <input class="car-block__input" type="text">
-        <input class="car-block__color" type="color">
+        <input class="car-block__input" type="text" id="update-car-name">
+        <input class="car-block__color" type="color" id="update-car-color">
         <button class="car-block__btn btn btn_update-car">Update</button>
 			</div>
 

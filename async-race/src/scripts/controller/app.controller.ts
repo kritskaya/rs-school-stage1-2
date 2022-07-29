@@ -14,7 +14,7 @@ export class AppController {
     this.winnerView = new WinnersView();
   }
 
-  public async renderApp() {
+  public async renderApp(): Promise<void> {
     const cars = await this.api.getCars();
     this.garageView.renderMain(cars);
 
@@ -45,28 +45,75 @@ export class AppController {
           this.removeCar(+id);
         }
       }
+
+      if (target.classList.contains('car__btn_select')) {
+        const id = target.dataset.id;
+        if (id) {
+          this.selectCar(+id);
+        }
+      }
+
+      if (target.classList.contains('btn_update-car')) {
+        const id = target.dataset.id;
+        if (id) {
+          this.updateCar(+id);
+        }
+      }
     });
   }
 
-  public async createCar() {
-    const name = document.querySelector<HTMLInputElement>('#create-car-name')?.value;
-    const color = document.querySelector<HTMLInputElement>('#create-car-color')?.value;
+  public async createCar(): Promise<void> {
+    const nameElement = document.querySelector<HTMLInputElement>('#create-car-name');
+    const colorElement = document.querySelector<HTMLInputElement>('#create-car-color');
 
-    if (name && color) {
+    if (nameElement && colorElement) {
+      const name = nameElement.value;
+      const color = colorElement.value;
+
       await this.api.createCar({ name, color });
       const cars = await this.api.getCars();
       
       this.garageView.updateGarageView(cars);
+      nameElement.value = '';
+      colorElement.value = '#000000';
     }
   }
 
-  public async removeCar(id: number) {
+  public async removeCar(id: number): Promise<void> {
     await this.api.deleteCar(id);
     await this.api.deleteWinner(id);
     const cars = await this.api.getCars();
       
     this.garageView.updateGarageView(cars);
   }
-  
-  
+
+  public async selectCar(id: number): Promise<void> {
+    const nameElement = document.querySelector<HTMLInputElement>('#update-car-name');
+    const colorElement = document.querySelector<HTMLInputElement>('#update-car-color');
+    const btn = colorElement?.nextElementSibling;
+
+    if (nameElement && colorElement && btn) {
+      const car = await this.api.getCar(id);
+      nameElement.value = car.name;
+      colorElement.value = car.color;
+      (<HTMLElement>btn).dataset.id = `${car.id}`;
+    }
+  }
+
+  public async updateCar(id: number): Promise<void> {
+    const nameElement = document.querySelector<HTMLInputElement>('#update-car-name');
+    const colorElement = document.querySelector<HTMLInputElement>('#update-car-color');
+
+    if (nameElement && colorElement) {
+      const name = nameElement.value;
+      const color = colorElement.value;
+
+      await this.api.updateCar(id, {name, color});
+      const cars = await this.api.getCars();
+        
+      this.garageView.updateGarageView(cars);
+      nameElement.value = '';
+      colorElement.value = '#000000';
+    }
+  }  
 }
