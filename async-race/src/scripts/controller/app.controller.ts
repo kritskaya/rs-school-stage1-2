@@ -76,6 +76,13 @@ export class AppController {
         this.garageView.updateGarageView(cars, currentPage - 1, amount);
         this.service.setGaragePage(currentPage - 1);
       }
+
+      if (target.classList.contains('car__btn_start')) {
+        const id = target.dataset.id;
+        if (id) {
+          await this.startDrivingCar(+id);
+        }
+      }
     });
   }
 
@@ -139,4 +146,58 @@ export class AppController {
       colorElement.value = '#000000';
     }
   }  
+
+  public async startDrivingCar(id: number): Promise<void> {
+    const { velocity, distance } = await this.api.startEngine(id);
+    const time = Math.round(distance / velocity);
+
+    const carElement = document.getElementById(`car-${id}`)!;
+    const flagElement = document.getElementById(`flag-${id}`)!;
+
+    const pxDistance = this.getDistanceBeetween(carElement, flagElement);
+    
+    const animationId = this.animation(carElement, pxDistance, time);
+    this.service.setAnimationFrameId(id, animationId);
+
+    const { success } = await this.api.driveCar(id);
+    
+    if (!success) {
+      const currentId = this.service.getAnimationFrameId(id);
+      window.cancelAnimationFrame(currentId);
+    }
+  }
+
+  public getDistanceBeetween(car: HTMLElement, flag: HTMLElement) {
+		const carLeft = car.getBoundingClientRect().left;
+    const flagRight = flag.getBoundingClientRect().right;
+
+    return Math.floor(flagRight - carLeft);
+	}
+
+  public animation(car: HTMLElement, distance: number, time: number): number {
+    let startTime: number;
+    let frameId: number;
+
+    const id = +car.id.split('-')[1];
+    console.log('car', id);
+
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      
+      const frameTime = timestamp - startTime;
+      
+      const currentDistance = Math.round(distance / time * frameTime);
+
+      car.style.transform = `translateX(${Math.min(distance, currentDistance)}px)`;
+
+      if (currentDistance < distance) {
+        frameId = window.requestAnimationFrame(step);
+        this.service.setAnimationFrameId(id, frameId);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(step);
+
+    return frameId;
+  }
 }

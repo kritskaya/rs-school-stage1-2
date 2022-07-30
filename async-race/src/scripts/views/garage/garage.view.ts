@@ -91,21 +91,21 @@ export class GarageView {
       </div>
       <div class="row__body">
         <div class="car__btns">
-          <button class="car__btn_start">A</button>
-          <button class="car__btn_start">B</button>
+          <button class="car__btn_start" data-id="${car.id}">A</button>
+          <button class="car__btn_stop" data-id="${car.id}">B</button>
         </div>
         <div class="car__race-line">
-          ${this.renderCarImg(car.color)}
-          <img class="race__flag" src="./assets/svg/flag.svg" alt="flag">
+          ${this.renderCarImg(car.color, car.id)}
+          <img class="race__flag" id="flag-${car.id}" src="./assets/svg/flag.svg" alt="flag">
         </div>
       </div>
     </div>
     `;
   }
 
-  public renderCarImg(color: string): string {
+  public renderCarImg(color: string, id: number): string {
     return `
-    <svg class="car__img" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <svg class="car__img" id="car-${id}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
     viewBox="0 0 17.485 15" style="enable-background:new 0 0 17.485 15;" xml:space="preserve">
     <g>
       <g>

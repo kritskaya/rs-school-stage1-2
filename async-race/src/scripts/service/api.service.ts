@@ -60,7 +60,7 @@ export class ApiService {
     return json;
   }
 
-  public async startEngine(id: number): Promise<JSON> {
+  public async startEngine(id: number): Promise<{ velocity: number, distance: number}> {
     const params = {
       method: 'PATCH',
     };
@@ -80,12 +80,15 @@ export class ApiService {
     return json;
   }
 
-  public async driveCar(id: number): Promise<JSON> {
+  public async driveCar(id: number): Promise<{ success: boolean }> {
     const params = {
       method: 'PATCH',
     };
 
     const response = await fetch(`${this.engine}?id=${id}&status=drive`, params);
+    
+    if (response.status !== 200) return { success: false };
+    
     const json = await response.json();
     return json;
   }
