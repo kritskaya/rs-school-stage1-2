@@ -1,3 +1,4 @@
+import { ICar } from "../model/car.model";
 import { ApiService } from "../service/api.service";
 import { AppService } from "../service/app.service";
 import { GarageView } from "../views/garage/garage.view";
@@ -83,6 +84,12 @@ export class AppController {
           await this.startDrivingCar(+id);
         }
       }
+
+      if (target.classList.contains('btn_start-race')) {
+        const currentPage = this.service.getGaragePage();
+        const {cars} = await this.api.getCars(currentPage - 1);
+        await this.startRace(cars);
+      }
     });
   }
 
@@ -147,9 +154,10 @@ export class AppController {
     }
   }  
 
-  public async startDrivingCar(id: number): Promise<void> {
+  public async startDrivingCar(id: number): Promise<number> {
     const { velocity, distance } = await this.api.startEngine(id);
     const time = Math.round(distance / velocity);
+    console.log('id', id, 'time', time);
 
     const carElement = document.getElementById(`car-${id}`)!;
     const flagElement = document.getElementById(`flag-${id}`)!;
@@ -165,6 +173,8 @@ export class AppController {
       const currentId = this.service.getAnimationFrameId(id);
       window.cancelAnimationFrame(currentId);
     }
+
+    return time;
   }
 
   public getDistanceBeetween(car: HTMLElement, flag: HTMLElement) {
@@ -179,8 +189,7 @@ export class AppController {
     let frameId: number;
 
     const id = +car.id.split('-')[1];
-    console.log('car', id);
-
+    
     const step = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       
@@ -199,5 +208,12 @@ export class AppController {
     frameId = window.requestAnimationFrame(step);
 
     return frameId;
+  }
+
+  public async startRace(cars: ICar[]): Promise<void> {
+    const promises = cars.map((car) => this.startDrivingCar(car.id));
+
+    Promise.any(promises)
+    .then((res: number) => console.log('time', res));
   }
 }
