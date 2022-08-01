@@ -171,6 +171,10 @@ export class AppController {
     const time = Math.round(distance / velocity);
     console.log('id', id, 'time', time);
 
+    const stopBtn = document.querySelector<HTMLInputElement>(`.car__btn_stop[data-id="${id}"]`);
+    if (stopBtn) {
+      stopBtn.disabled = false;
+    }
     const carElement = document.getElementById(`car-${id}`)!;
     const flagElement = document.getElementById(`flag-${id}`)!;
 
@@ -185,6 +189,10 @@ export class AppController {
       const currentId = this.service.getAnimationFrameId(id);
       window.cancelAnimationFrame(currentId);
       throw new Error('Car was broken');
+    }
+
+    if (stopBtn) {
+      stopBtn.disabled = true;
     }
 
     return {id, time};

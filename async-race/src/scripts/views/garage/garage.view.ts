@@ -93,7 +93,7 @@ export class GarageView {
       <div class="row__body">
         <div class="car__btns">
           <button class="car__btn_start" data-id="${car.id}">A</button>
-          <button class="car__btn_stop" data-id="${car.id}">B</button>
+          <button class="car__btn_stop" data-id="${car.id}" disabled>B</button>
         </div>
         <div class="car__race-line">
           ${this.renderCarImg(car.color, car.id)}
