@@ -136,14 +136,18 @@ export class AppController {
       nameElement.value = car.name;
       colorElement.value = car.color;
       (<HTMLElement>btn).dataset.id = `${car.id}`;
+      nameElement.disabled = false;
+      colorElement.disabled = false;
+      (<HTMLInputElement>btn).disabled = false;
     }
   }
 
   public async updateCar(id: number): Promise<void> {
     const nameElement = document.querySelector<HTMLInputElement>('#update-car-name');
     const colorElement = document.querySelector<HTMLInputElement>('#update-car-color');
+    const btn = colorElement?.nextElementSibling;
 
-    if (nameElement && colorElement) {
+    if (nameElement && colorElement && btn) {
       const name = nameElement.value;
       const color = colorElement.value;
 
@@ -155,6 +159,10 @@ export class AppController {
       this.garageView.updateGarageView(cars, currentPage, amount);
       nameElement.value = '';
       colorElement.value = '#000000';
+
+      nameElement.disabled = true;
+      colorElement.disabled = true;
+      (<HTMLInputElement>btn).disabled = true;
     }
   }  
 
