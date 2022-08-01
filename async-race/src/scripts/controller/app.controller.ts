@@ -90,6 +90,10 @@ export class AppController {
         const {cars} = await this.api.getCars(currentPage - 1);
         await this.startRace(cars);
       }
+
+      if (target.classList.contains('btn_generate')) {
+        await this.generateRandomCars();
+      }
     });
   }
 
@@ -232,5 +236,38 @@ export class AppController {
       const wins = 1;
       await this.api.createWinner({id, wins, time, car})
     }
+  }
+
+  public generateCarName(): string {
+    const models = ['BMW', 'Toyota', 'Opel', 'Renault', 'Peugeot', 'Lada', 'Audi', 'Ford', 'Mazda', 'Ferarri'];
+    const types = ['X3', 'X5', 'Camri', 'Corola', 'Astra', 'Duster', 'Vesta', 'A6', 'Focus', '3', '6', 'roma'];
+
+    const model = models[Math.floor(Math.random() * models.length)];
+    const type = types[Math.floor(Math.random() * types.length)];
+
+    return `${model} ${type}`;
+  }
+
+  public generateColor(): string {
+    const MAX_COLOR = 16777215;
+    const color = Math.floor(Math.random() * MAX_COLOR);
+    
+    return `#${color.toString(16)}`;
+  }
+
+  public async generateRandomCars() {
+    const CAR_QUANTITY = 100;
+
+    for (let i = 0; i < CAR_QUANTITY; i += 1) {
+      const name = this.generateCarName();
+      const color = this.generateColor();
+
+      await this.api.createCar({ name, color });      
+    }
+
+    const currentPage = this.service.getGaragePage();
+    const {cars, amount} = await this.api.getCars(currentPage);
+
+    this.garageView.updateGarageView(cars, currentPage, amount);
   }
 }
