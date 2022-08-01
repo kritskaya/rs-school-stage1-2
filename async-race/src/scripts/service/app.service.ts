@@ -33,7 +33,4 @@ export class AppService {
 	public setAnimationFrameId(carId: number, frameId: number) {
 		this.animationFrameId[carId] = frameId;
 	}
-
-
-	
 }

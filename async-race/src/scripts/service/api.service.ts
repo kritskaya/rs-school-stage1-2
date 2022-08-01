@@ -101,13 +101,17 @@ export class ApiService {
     return json;
   }
 
-  public async getWinner(id: number): Promise<IWinner> {
+  public async getWinner(id: number): Promise<IWinner | null> {
 
     const response = await fetch(`${this.winner}/${id}`);
-    const data = await response.json();
-    const json = await Object.assign(data, { car: await this.getCar(id) });
+    const json = await response.json();
+    
+    if (response.status === 200) {
+      const data = await Object.assign(json, { car: await this.getCar(id) });
+      return data;
+    }
 
-    return json;
+    return null;
   }
 
   public async createWinner(item: IWinner): Promise<JSON> {

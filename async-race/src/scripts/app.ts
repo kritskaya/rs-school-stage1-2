@@ -62,7 +62,7 @@ export class App {
     // const newW = await api.createWinner({ id: 2, wins: 2, time: 2 });
     // console.log('new', newW);
 
-    //const updWinner = await api.updateWinner(3, { wins: 2, time: 10 });
-    //console.log('upd winner', updWinner);
+    // const updWinner = await api.updateWinner(3, { wins: 2, time: 10 });
+    // console.log('upd winner', updWinner);
   }
 }

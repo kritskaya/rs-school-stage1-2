@@ -154,7 +154,7 @@ export class AppController {
     }
   }  
 
-  public async startDrivingCar(id: number): Promise<number> {
+  public async startDrivingCar(id: number): Promise<{id: number, time: number}> {
     const { velocity, distance } = await this.api.startEngine(id);
     const time = Math.round(distance / velocity);
     console.log('id', id, 'time', time);
@@ -172,9 +172,10 @@ export class AppController {
     if (!success) {
       const currentId = this.service.getAnimationFrameId(id);
       window.cancelAnimationFrame(currentId);
+      throw new Error('Car was broken');
     }
 
-    return time;
+    return {id, time};
   }
 
   public getDistanceBeetween(car: HTMLElement, flag: HTMLElement) {
@@ -213,7 +214,23 @@ export class AppController {
   public async startRace(cars: ICar[]): Promise<void> {
     const promises = cars.map((car) => this.startDrivingCar(car.id));
 
-    Promise.any(promises)
-    .then((res: number) => console.log('time', res));
+    const { id, time } = await Promise.any(promises);
+    if (id && time) {
+      this.addWinner(id, time);
+    }
+  }
+
+  public async addWinner(id: number, time: number): Promise<void> {
+    time = Math.floor(time / 100) / 10;
+    const winner = await this.api.getWinner(id);
+    const car = await this.api.getCar(id);    
+    
+    if (winner) {
+      const wins =  winner.wins + 1;
+      await this.api.updateWinner(id, {wins, time, car});
+    } else {
+      const wins = 1;
+      await this.api.createWinner({id, wins, time, car})
+    }
   }
 }
