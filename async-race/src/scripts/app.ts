@@ -1,14 +1,9 @@
 import { AppController } from './controller/app.controller';
-import { ApiService } from './service/api.service';
-import { GarageView } from './views/garage/garage.view';
-import { WinnersView } from './views/winners/winners.view';
 
 export class App {
   private controller: AppController;
 
   public async start(): Promise<void> {
-    const body = document.querySelector('body');
-
     this.controller = new AppController();
     this.controller.renderApp();
     this.controller.clickEventHadler();

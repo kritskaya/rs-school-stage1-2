@@ -5,10 +5,10 @@ export class WinnersView {
   private PAGE_LIMIT = 10;
   private root: HTMLElement;
 
-  public renderWinnerPage(winners: IWinner[], page = 1, amount: number): void {
+  public renderWinnerPage(winners: IWinner[], amount: number, page = 1): void {
     const pageElement = `
-    <section id="winners-page">
-      ${this.renderWinnerBlock(winners, page, amount)}
+    <section class="winners" id="winners-page">
+      ${this.renderWinnerBlock(winners, amount, page)}
     </section>
     `;
 
@@ -21,9 +21,9 @@ export class WinnersView {
     }
   }
 
-  public renderWinnerBlock(winners: IWinner[], page = 1, amount: number) {
+  public renderWinnerBlock(winners: IWinner[], amount: number, page = 1) {
     return `
-    <div class="winners" id="winners">
+    <div class="winners__block" id="winners">
       <div class="winners__header">
         <h2 class="winners__title">Winners</h2>
         <p class="winners__quantity" id="winners-quantity">(${amount})</p>
@@ -67,7 +67,6 @@ export class WinnersView {
   }
 
   public renderPagination(amount: number, current = 1): string {
-    console.log(current, amount)
     return `
     <div class="winners__btns">
       <button class="winners__btn btn btn_prev-winners" ${current === 1 ? 'disabled' : ''}>Prev</button>
@@ -103,7 +102,7 @@ export class WinnersView {
 
   public updateWinnersView(winners: IWinner[], page: number, amount: number) {
     document.getElementById('winners')?.remove();
-    const winnersBlock = this.renderWinnerBlock(winners, page, amount);
+    const winnersBlock = this.renderWinnerBlock(winners, amount, page);
 
     this.root.insertAdjacentHTML('beforeend', winnersBlock);
   }

@@ -7,13 +7,13 @@ export class ApiService {
   private engine = `${this.base}/engine`;
   private winner = `${this.base}/winners`;
 
-  public async getCars(page = 1, limit = 7): Promise<{ cars: ICar[], amount: number}> {
+  public async getCars(page = 1, limit = 7): Promise<{ cars: ICar[], amount: number }> {
     const response = await fetch(`${this.garage}?_page=${page}&_limit=${limit}`);
     const cars = await response.json();
     const amount = response.headers.get('X-Total-Count') || 0;
     return {
       cars,
-      amount: +amount
+      amount: +amount,
     };
   }
 
@@ -60,7 +60,7 @@ export class ApiService {
     return json;
   }
 
-  public async startEngine(id: number): Promise<{ velocity: number, distance: number}> {
+  public async startEngine(id: number): Promise<{ velocity: number, distance: number }> {
     const params = {
       method: 'PATCH',
     };
@@ -101,7 +101,7 @@ export class ApiService {
     const amount = response.headers.get('X-Total-Count') || 0;
     return {
       winners,
-      amount: +amount
+      amount: +amount,
     };
   }
 

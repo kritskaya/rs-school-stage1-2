@@ -1,8 +1,8 @@
-import { Car, ICar } from "../model/car.model";
-import { ApiService } from "../service/api.service";
-import { AppService } from "../service/app.service";
-import { GarageView } from "../views/garage/garage.view";
-import { WinnersView } from "../views/winners/winners.view";
+import { ICar } from '../model/car.model';
+import { ApiService } from '../service/api.service';
+import { AppService } from '../service/app.service';
+import { GarageView } from '../views/garage/garage.view';
+import { WinnersView } from '../views/winners/winners.view';
 
 export class AppController {
 
@@ -68,21 +68,21 @@ export class AppController {
 
       if (target.classList.contains('btn_next')) {
         const currentPage = this.service.getGaragePage();
-        const {cars, amount} = await this.api.getCars(currentPage + 1);
+        const { cars, amount } = await this.api.getCars(currentPage + 1);
         this.garageView.updateGarageView(cars, currentPage + 1, amount);
         this.service.setGaragePage(currentPage + 1);
       }
 
       if (target.classList.contains('btn_prev')) {
         const currentPage = this.service.getGaragePage();
-        const {cars, amount} = await this.api.getCars(currentPage - 1);
+        const { cars, amount } = await this.api.getCars(currentPage - 1);
         this.garageView.updateGarageView(cars, currentPage - 1, amount);
         this.service.setGaragePage(currentPage - 1);
       }
 
       if (target.classList.contains('btn_next-winners')) {
         const currentPage = this.service.getWinnersPage();
-        const {winners, amount} = await this.api.getWinners(currentPage + 1);
+        const { winners, amount } = await this.api.getWinners(currentPage + 1);
        
         this.winnerView.updateWinnersView(winners, currentPage + 1, amount);
         this.service.setWinnersPage(currentPage + 1);
@@ -90,7 +90,7 @@ export class AppController {
 
       if (target.classList.contains('btn_prev-winners')) {
         const currentPage = this.service.getWinnersPage();
-        const {winners, amount} = await this.api.getWinners(currentPage - 1);
+        const { winners, amount } = await this.api.getWinners(currentPage - 1);
         this.winnerView.updateWinnersView(winners, currentPage - 1, amount);
         this.service.setWinnersPage(currentPage - 1);
       }
@@ -99,6 +99,7 @@ export class AppController {
         const id = target.dataset.id;
         if (id) {
           try {
+            this.moveCarToStart(+id);
             await this.startDrivingCar(+id);
           } catch (err) {
             console.log((<Error>err).message);
@@ -110,19 +111,20 @@ export class AppController {
         const id = target.dataset.id;
         if (id) {
           await this.stopDrivingCar(+id);
+          this.moveCarToStart(+id);
           console.log(`Car ${id} was stopped`);
         }
       }
 
       if (target.classList.contains('btn_start-race')) {
         const currentPage = this.service.getGaragePage();
-        const {cars} = await this.api.getCars(currentPage);
+        const { cars } = await this.api.getCars(currentPage);
         await this.startRace(cars);
       }
 
       if (target.classList.contains('btn_stop-race')) {
         const currentPage = this.service.getGaragePage();
-        const {cars} = await this.api.getCars(currentPage - 1);
+        const { cars } = await this.api.getCars(currentPage - 1);
         await this.stopRace(cars);
       }
 
@@ -143,7 +145,7 @@ export class AppController {
       await this.api.createCar({ name, color });
 
       const currentPage = this.service.getGaragePage();
-      const {cars, amount} = await this.api.getCars(currentPage);
+      const { cars, amount } = await this.api.getCars(currentPage);
       
       this.garageView.updateGarageView(cars, currentPage, amount);
       nameElement.value = '';
@@ -186,7 +188,7 @@ export class AppController {
       const name = nameElement.value;
       const color = colorElement.value;
 
-      await this.api.updateCar(id, {name, color});
+      await this.api.updateCar(id, { name, color });
 
       const currentPage = this.service.getGaragePage();
       const { cars, amount } = await this.api.getCars(currentPage);
@@ -199,13 +201,17 @@ export class AppController {
       colorElement.disabled = true;
       (<HTMLInputElement>btn).disabled = true;
     }
-  }  
+  }
+  
+  public moveCarToStart(id: number) {
+    const carElement = document.getElementById(`car-${id}`)!;
+    carElement.style.transform = 'translateX(0)';
+  }
 
-  public async startDrivingCar(id: number): Promise<{id: number, time: number}> {
+  public async startDrivingCar(id: number): Promise<{ id: number, time: number }> {
     const { velocity, distance } = await this.api.startEngine(id);
     const time = Math.round(distance / velocity);
-    console.log('id', id, 'time', time);
-
+    
     const startBtn = document.querySelector<HTMLInputElement>(`.car__btn_start[data-id="${id}"]`);
     const stopBtn = document.querySelector<HTMLInputElement>(`.car__btn_stop[data-id="${id}"]`);
     
@@ -215,8 +221,6 @@ export class AppController {
     
       const carElement = document.getElementById(`car-${id}`)!;
       const flagElement = document.getElementById(`flag-${id}`)!;
-
-      carElement.style.transform = 'translateX(0)';
 
       const pxDistance = this.getDistanceBeetween(carElement, flagElement);
       
@@ -228,20 +232,17 @@ export class AppController {
       if (!success) {
         const currentId = this.service.getAnimationFrameId(id);
         window.cancelAnimationFrame(currentId);
-        stopBtn!.disabled = true;
-        startBtn!.disabled =  false;
-        throw new Error(`Car was broken`);
+        
+        throw new Error(`Car ${id} was broken`);
       }
-
-      stopBtn.disabled = true;
-      startBtn.disabled = false;
     }
 
-    return {id, time};
+    return { id, time };
   }
 
   public async stopDrivingCar(id: number) {
     const carElement = document.getElementById(`car-${id}`)!;
+    
     await this.api.stopEngine(id);
     
     const animationId = this.service.getAnimationFrameId(id);
@@ -249,15 +250,21 @@ export class AppController {
       window.cancelAnimationFrame(animationId);
     }
 
-    carElement.style.transform = 'translateX(0)';
+    const startBtn = document.querySelector<HTMLInputElement>(`.car__btn_start[data-id="${id}"]`);
+    const stopBtn = document.querySelector<HTMLInputElement>(`.car__btn_stop[data-id="${id}"]`);
+
+    if (startBtn && stopBtn) {
+      stopBtn.disabled = true;
+      startBtn.disabled = false;
+    }
   }
 
   public getDistanceBeetween(car: HTMLElement, flag: HTMLElement) {
-		const carLeft = car.getBoundingClientRect().left;
+    const carLeft = car.getBoundingClientRect().left;
     const flagRight = flag.getBoundingClientRect().right;
 
     return Math.floor(flagRight - carLeft);
-	}
+  }
 
   public animation(car: HTMLElement, distance: number, time: number): number {
     let startTime: number;
@@ -286,6 +293,7 @@ export class AppController {
   }
 
   public async startRace(cars: ICar[]): Promise<void> {
+    cars.forEach((car) => this.moveCarToStart(car.id));
     const promises = cars.map((car) => this.startDrivingCar(car.id));
 
     const { id, time } = await Promise.any(promises);
@@ -295,9 +303,9 @@ export class AppController {
   }
 
   public async stopRace(cars: ICar[]): Promise<void> {
-    const promises = cars.map((car) => this.stopDrivingCar(car.id));
+    const promises = cars.map(async (car) => await this.stopDrivingCar(car.id));
 
-    await Promise.all(promises);
+    cars.forEach((car) => this.moveCarToStart(car.id));
   }
 
   public async addWinner(id: number, time: number): Promise<void> {
@@ -307,10 +315,10 @@ export class AppController {
     
     if (winner) {
       const wins =  winner.wins + 1;
-      await this.api.updateWinner(id, {wins, time, car});
+      await this.api.updateWinner(id, { wins, time, car });
     } else {
       const wins = 1;
-      await this.api.createWinner({id, wins, time, car})
+      await this.api.createWinner({ id, wins, time, car });
     }
   }
 
@@ -342,7 +350,7 @@ export class AppController {
     }
 
     const currentPage = this.service.getGaragePage();
-    const {cars, amount} = await this.api.getCars(currentPage);
+    const { cars, amount } = await this.api.getCars(currentPage);
 
     this.garageView.updateGarageView(cars, currentPage, amount);
   }

@@ -1,4 +1,4 @@
-import { Car, ICar } from "../../model/car.model";
+import { ICar } from '../../model/car.model';
 import './garage.css';
 
 export class GarageView {
@@ -23,13 +23,13 @@ export class GarageView {
     this.renderGaragePage(cars, amount);
   }
 
-	public renderGaragePage(cars: ICar[], amount: number): void{
-		const page = `
-		<section class="garage-page" id="garage-page">
-    	${this.renderCarBlock()}
-      ${this.renderGarageBody(cars, 1, amount)}
-		</section>
-		`;
+  public renderGaragePage(cars: ICar[], amount: number): void {
+    const page = `
+    <section class="garage-page" id="garage-page">
+      ${this.renderCarBlock()}
+      ${this.renderGarageBody(cars, amount, 1)}
+    </section>
+    `;
 
     const main = document.getElementById('main');
 
@@ -40,32 +40,32 @@ export class GarageView {
       this.garage = document.getElementById('garage')!;
       this.page = document.getElementById('garage-page-number')!;
     }
-	}
+  }
 
-	public renderCarBlock(): string {
-		return `
-		<div class="car-block">
-			<div class="car-block__row car-block__row_create">
+  public renderCarBlock(): string {
+    return `
+    <div class="car-block">
+      <div class="car-block__row car-block__row_create">
         <input class="car-block__input" type="text" id="create-car-name">
         <input class="car-block__color" type="color" id="create-car-color">
         <button class="car-block__btn btn btn_create-car">Create</button>
-			</div>
-			<div class="car-block__row car-block__row_update">
+      </div>
+      <div class="car-block__row car-block__row_update">
         <input class="car-block__input" type="text" id="update-car-name" disabled>
         <input class="car-block__color" type="color" id="update-car-color" disabled>
         <button class="car-block__btn btn btn_update-car" disabled>Update</button>
-			</div>
+      </div>
 
-			<div class="car-block__btns">
-			  <button class="car-block__btn btn btn_start-race">Start Race</button>
+      <div class="car-block__btns">
+        <button class="car-block__btn btn btn_start-race">Start Race</button>
         <button class="car-block__btn btn btn_stop-race">Stop Race</button>
         <button class="car-block__btn btn btn_generate" id>Generate cars</button>
-			</div>
-		</div>
-		`;
-	}
+      </div>
+    </div>
+    `;
+  }
 
-  public renderGarageBody(cars: ICar[], page = 1, amount: number): string {
+  public renderGarageBody(cars: ICar[], amount: number, page = 1): string {
     return `
     <div class="garage garage-page__body" id="garage">
       <div class="garage__header">
@@ -140,7 +140,7 @@ export class GarageView {
   public updateGarageView(cars: ICar[], page: number, amount: number): void {
     this.garage.remove();
 
-    const garage = this.renderGarageBody(cars, page, amount);
+    const garage = this.renderGarageBody(cars, amount, page);
     this.root.insertAdjacentHTML('beforeend', garage);
 
     this.garage = document.getElementById('garage')!;
