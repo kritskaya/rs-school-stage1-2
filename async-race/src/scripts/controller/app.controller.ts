@@ -209,6 +209,14 @@ export class AppController {
   }
 
   public async startDrivingCar(id: number): Promise<{ id: number, time: number }> {
+    const selectBtn = document.querySelector<HTMLInputElement>(`.car__btn_select[data-id="${id}"]`);
+    const removeBtn = document.querySelector<HTMLInputElement>(`.car__btn_remove[data-id="${id}"]`);
+
+    if (selectBtn && removeBtn) {
+      selectBtn.disabled = true;
+      removeBtn.disabled = true;
+    }
+
     const { velocity, distance } = await this.api.startEngine(id);
     const time = Math.round(distance / velocity);
     
@@ -256,6 +264,14 @@ export class AppController {
     if (startBtn && stopBtn) {
       stopBtn.disabled = true;
       startBtn.disabled = false;
+    }
+
+    const selectBtn = document.querySelector<HTMLInputElement>(`.car__btn_select[data-id="${id}"]`);
+    const removeBtn = document.querySelector<HTMLInputElement>(`.car__btn_remove[data-id="${id}"]`);
+
+    if (selectBtn && removeBtn) {
+      selectBtn.disabled = false;
+      removeBtn.disabled = false;
     }
   }
 
