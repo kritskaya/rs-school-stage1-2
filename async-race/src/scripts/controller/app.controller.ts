@@ -298,8 +298,15 @@ export class AppController {
 
     const { id, time } = await Promise.any(promises);
     if (id && time) {
-      this.addWinner(id, time);
+      await this.addWinner(id, time);
+
+      const winnerIndex = cars.findIndex((car) => car.id === id);
+      const restPromises = [...promises.slice(0, winnerIndex), ...promises.slice(winnerIndex + 1, promises.length)];
+      await Promise.allSettled(restPromises);
     }
+
+    const resetBtn = document.querySelector<HTMLInputElement>('.btn_stop-race')!;
+    resetBtn.disabled = false;
   }
 
   public async stopRace(cars: ICar[]): Promise<void> {

@@ -58,7 +58,7 @@ export class GarageView {
 
       <div class="car-block__btns">
         <button class="car-block__btn btn btn_start-race">Start Race</button>
-        <button class="car-block__btn btn btn_stop-race">Stop Race</button>
+        <button class="car-block__btn btn btn_stop-race" disabled>Stop Race</button>
         <button class="car-block__btn btn btn_generate" id>Generate cars</button>
       </div>
     </div>
