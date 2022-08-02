@@ -37,6 +37,7 @@ export class WinnersView {
   }
 
   public renderWinnerTable(winners: IWinner[]): string {
+    let rowNumber = 0;
     return `
     <div class="winners__table winner-table" id="winner-table">
       <div class="winner-table__headers headers">
@@ -46,15 +47,15 @@ export class WinnersView {
         <p class="winner-table__header winners__wins">Wins</p>
         <p class="winner-table__header winners__time">Best time</p>
       </div>
-      ${ winners.map((winner) => this.renderWinnerRow(winner)).join('') }
+      ${ winners.map((winner) => this.renderWinnerRow(winner, ++rowNumber)).join('') }
     </div>
     `;
   }
 
-  public renderWinnerRow(winner: IWinner): string {
+  public renderWinnerRow(winner: IWinner, rowNumber: number): string {
     return `
     <div class="winner-table__row">
-      <p class="winner-table__cell">${winner.id}</p>
+      <p class="winner-table__cell">${rowNumber}</p>
       <p class="winner-table__cell">
         ${this.renderCarImg(winner.car.color)}
       </p>
