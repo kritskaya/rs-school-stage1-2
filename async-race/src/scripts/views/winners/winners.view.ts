@@ -17,7 +17,6 @@ export class WinnersView {
     if (main) {
       main.insertAdjacentHTML('beforeend', pageElement);
       this.root = document.getElementById('winners-page')!;
-      //document.getElementById('winners-page')!.style.display = 'block';
     }
   }
 
@@ -41,11 +40,11 @@ export class WinnersView {
     return `
     <div class="winners__table winner-table" id="winner-table">
       <div class="winner-table__headers headers">
-        <p class="winner-table__header winners__number">N ↑</p>
-        <p class="winner-table__header winners__car">Car ↑</p>
-        <p class="winner-table__header winners__name">Name ↑</p>
-        <p class="winner-table__header winners__wins">Wins ↑</p>
-        <p class="winner-table__header winners__time">Best time ↑</p>
+        <p class="winner-table__header winners__number">N</p>
+        <p class="winner-table__header winners__car">Car</p>
+        <p class="winner-table__header winners__name">Name</p>
+        <p class="winner-table__header winners__wins">Wins</p>
+        <p class="winner-table__header winners__time">Best time</p>
       </div>
       ${ winners.map((winner) => this.renderWinnerRow(winner)).join('') }
     </div>

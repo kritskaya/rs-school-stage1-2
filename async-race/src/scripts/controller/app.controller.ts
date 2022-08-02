@@ -67,32 +67,19 @@ export class AppController {
       }
 
       if (target.classList.contains('btn_next')) {
-        const currentPage = this.service.getGaragePage();
-        const { cars, amount } = await this.api.getCars(currentPage + 1);
-        this.garageView.updateGarageView(cars, currentPage + 1, amount);
-        this.service.setGaragePage(currentPage + 1);
+        await this.getNextCars();
       }
 
       if (target.classList.contains('btn_prev')) {
-        const currentPage = this.service.getGaragePage();
-        const { cars, amount } = await this.api.getCars(currentPage - 1);
-        this.garageView.updateGarageView(cars, currentPage - 1, amount);
-        this.service.setGaragePage(currentPage - 1);
+        await this.getPreviousCars();
       }
 
       if (target.classList.contains('btn_next-winners')) {
-        const currentPage = this.service.getWinnersPage();
-        const { winners, amount } = await this.api.getWinners(currentPage + 1);
-       
-        this.winnerView.updateWinnersView(winners, currentPage + 1, amount);
-        this.service.setWinnersPage(currentPage + 1);
+        await this.getNextWinners();
       }
 
       if (target.classList.contains('btn_prev-winners')) {
-        const currentPage = this.service.getWinnersPage();
-        const { winners, amount } = await this.api.getWinners(currentPage - 1);
-        this.winnerView.updateWinnersView(winners, currentPage - 1, amount);
-        this.service.setWinnersPage(currentPage - 1);
+        await this.getPreviousWinners();
       }
 
       if (target.classList.contains('car__btn_start')) {
@@ -131,7 +118,32 @@ export class AppController {
       if (target.classList.contains('btn_generate')) {
         await this.generateRandomCars();
       }
+
+      if (target.classList.contains('winners__wins')) {
+        await this.sortByWins();
+      }
     });
+  }
+
+  public async sortByWins() {
+    const PAGE_LIMIT = 10
+
+    const page = this.service.getWinnersPage();
+    const order = this.service.getOrder() || 'ASC';
+
+    const { winners, amount: winAmount } = await this.api.getWinners(page, PAGE_LIMIT, 'wins', order);
+    this.winnerView.showWinnersPage(winners, page, winAmount);
+
+    const header = document.querySelector<HTMLElement>('.winners__wins')!;
+    
+    if (order === 'ASC') {
+      header.textContent = 'Wins ↑';
+      this.service.setOrder('DESC');
+    } else {
+      header.textContent = 'Wins ↓';
+      this.service.setOrder('ASC');
+    }
+
   }
 
   public async createCar(): Promise<void> {
@@ -154,6 +166,7 @@ export class AppController {
   }
 
   public async removeCar(id: number): Promise<void> {
+
     await this.api.deleteCar(id);
     await this.api.deleteWinner(id);
 
@@ -343,6 +356,36 @@ export class AppController {
       const wins = 1;
       await this.api.createWinner({ id, wins, time, car });
     }
+  }
+
+  public async getNextCars() {
+    const currentPage = this.service.getGaragePage();
+    const { cars, amount } = await this.api.getCars(currentPage + 1);
+    this.garageView.updateGarageView(cars, currentPage + 1, amount);
+    this.service.setGaragePage(currentPage + 1);
+  }
+
+  public async getPreviousCars() {
+    const currentPage = this.service.getGaragePage();
+    const { cars, amount } = await this.api.getCars(currentPage - 1);
+    this.garageView.updateGarageView(cars, currentPage - 1, amount);
+    this.service.setGaragePage(currentPage - 1);
+  }
+
+  public async getNextWinners() {
+    const currentPage = this.service.getWinnersPage();
+    const { winners, amount } = await this.api.getWinners(currentPage + 1);
+   
+    this.winnerView.updateWinnersView(winners, currentPage + 1, amount);
+    this.service.setWinnersPage(currentPage + 1);
+  }
+
+  public async getPreviousWinners() {
+    const currentPage = this.service.getWinnersPage();
+    const { winners, amount } = await this.api.getWinners(currentPage - 1);
+    
+    this.winnerView.updateWinnersView(winners, currentPage - 1, amount);
+    this.service.setWinnersPage(currentPage - 1);
   }
 
   public generateCarName(): string {

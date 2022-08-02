@@ -23,10 +23,11 @@
 .winner-table__headers,
 .winner-table__row {
   display: grid;
-  grid-template-columns: repeat(5, 75px);
+  grid-template-columns: 40px 50px 180px 75px 75px;
 }
 
-.winner-table__header {
+.winners__wins,
+.winners__time {
   cursor: pointer;
 }
 
