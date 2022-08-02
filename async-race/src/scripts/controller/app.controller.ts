@@ -28,7 +28,76 @@ export class AppController {
     this.winnerView.renderWinnerPage(winners, 1, winAmount);
   }
 
-  public clickEventHadler(): void {
+  public garageEventHandler(): void {
+    document.body.addEventListener('click', async (event) => {
+      const target = event.target as HTMLElement;
+      if (target.classList.contains('car__btn_select')) {
+        const id = target.dataset.id;
+        if (id) {
+          this.selectCar(+id);
+        }
+      }
+      
+      if (target.classList.contains('btn_update-car')) {
+        const id = target.dataset.id;
+        if (id) {
+          this.updateCar(+id);
+        }
+      }
+      
+      if (target.classList.contains('btn_next')) {
+        await this.getNextCars();
+      }
+      if (target.classList.contains('btn_prev')) {
+        await this.getPreviousCars();
+      }
+      
+      if (target.classList.contains('car__btn_start')) {
+        const id = target.dataset.id;
+        if (id) {
+          try {
+            this.moveCarToStart(+id);
+            await this.startDrivingCar(+id);
+          } catch (err) {
+            console.log((<Error>err).message);
+          }
+        }
+      }
+      
+      if (target.classList.contains('car__btn_stop')) {
+        const id = target.dataset.id;
+        if (id) {
+          await this.stopDrivingCar(+id);
+          this.moveCarToStart(+id);
+          console.log(`Car ${id} was stopped`);
+        }
+      }
+    });
+  }
+
+  public winnersEventHandler() {
+    document.body.addEventListener('click', async (event) => {
+      const target = event.target as HTMLElement;
+      
+      if (target.classList.contains('winners__wins')) {
+        await this.sortByWins();
+      }
+
+      if (target.classList.contains('winners__time')) {
+        await this.sortByTime();
+      }
+
+      if (target.classList.contains('btn_next-winners')) {
+        await this.getNextWinners();
+      }
+
+      if (target.classList.contains('btn_prev-winners')) {
+        await this.getPreviousWinners();
+      }
+    });
+  }
+
+  public generalEventHadler(): void {
     document.body.addEventListener('click', async (event) => {
       const target = event.target as HTMLElement;
 
@@ -53,56 +122,56 @@ export class AppController {
         }
       }
 
-      if (target.classList.contains('car__btn_select')) {
-        const id = target.dataset.id;
-        if (id) {
-          this.selectCar(+id);
-        }
-      }
+      // if (target.classList.contains('car__btn_select')) {
+      //   const id = target.dataset.id;
+      //   if (id) {
+      //     this.selectCar(+id);
+      //   }
+      // }
 
-      if (target.classList.contains('btn_update-car')) {
-        const id = target.dataset.id;
-        if (id) {
-          this.updateCar(+id);
-        }
-      }
+      // if (target.classList.contains('btn_update-car')) {
+      //   const id = target.dataset.id;
+      //   if (id) {
+      //     this.updateCar(+id);
+      //   }
+      // }
 
-      if (target.classList.contains('btn_next')) {
-        await this.getNextCars();
-      }
+      // if (target.classList.contains('btn_next')) {
+      //   await this.getNextCars();
+      // }
 
-      if (target.classList.contains('btn_prev')) {
-        await this.getPreviousCars();
-      }
+      // if (target.classList.contains('btn_prev')) {
+      //   await this.getPreviousCars();
+      // }
 
-      if (target.classList.contains('btn_next-winners')) {
-        await this.getNextWinners();
-      }
+      // if (target.classList.contains('btn_next-winners')) {
+      //   await this.getNextWinners();
+      // }
 
-      if (target.classList.contains('btn_prev-winners')) {
-        await this.getPreviousWinners();
-      }
+      // if (target.classList.contains('btn_prev-winners')) {
+      //   await this.getPreviousWinners();
+      // }
 
-      if (target.classList.contains('car__btn_start')) {
-        const id = target.dataset.id;
-        if (id) {
-          try {
-            this.moveCarToStart(+id);
-            await this.startDrivingCar(+id);
-          } catch (err) {
-            console.log((<Error>err).message);
-          }
-        }
-      }
+      // if (target.classList.contains('car__btn_start')) {
+      //   const id = target.dataset.id;
+      //   if (id) {
+      //     try {
+      //       this.moveCarToStart(+id);
+      //       await this.startDrivingCar(+id);
+      //     } catch (err) {
+      //       console.log((<Error>err).message);
+      //     }
+      //   }
+      // }
 
-      if (target.classList.contains('car__btn_stop')) {
-        const id = target.dataset.id;
-        if (id) {
-          await this.stopDrivingCar(+id);
-          this.moveCarToStart(+id);
-          console.log(`Car ${id} was stopped`);
-        }
-      }
+      // if (target.classList.contains('car__btn_stop')) {
+      //   const id = target.dataset.id;
+      //   if (id) {
+      //     await this.stopDrivingCar(+id);
+      //     this.moveCarToStart(+id);
+      //     console.log(`Car ${id} was stopped`);
+      //   }
+      // }
 
       if (target.classList.contains('btn_start-race')) {
         const currentPage = this.service.getGaragePage();
@@ -120,13 +189,13 @@ export class AppController {
         await this.generateRandomCars();
       }
 
-      if (target.classList.contains('winners__wins')) {
-        await this.sortByWins();
-      }
+      // if (target.classList.contains('winners__wins')) {
+      //   await this.sortByWins();
+      // }
 
-      if (target.classList.contains('winners__time')) {
-        await this.sortByTime();
-      }
+      // if (target.classList.contains('winners__time')) {
+      //   await this.sortByTime();
+      // }
     });
   }
 

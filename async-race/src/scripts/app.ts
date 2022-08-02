@@ -5,8 +5,11 @@ export class App {
 
   public async start(): Promise<void> {
     this.controller = new AppController();
-    this.controller.renderApp();
-    this.controller.clickEventHadler();
+    await this.controller.renderApp();
+    
+    this.controller.garageEventHandler();
+    this.controller.winnersEventHandler();
+    this.controller.generalEventHadler();
 
     // const api = new ApiService();
     // const cars = await api.getCars();
