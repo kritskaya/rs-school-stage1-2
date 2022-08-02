@@ -2,32 +2,39 @@ import { IWinner } from '../../model/winner.nodel';
 import './winners.css';
 
 export class WinnersView {
+  private PAGE_LIMIT = 10;
   private root: HTMLElement;
-  private counter: HTMLElement;
 
-  public renderWinnerPage(winners: IWinner[]): void {
-    const page = `
-    <section class="winners" id="winners-page">
-      <div class="winners__header">
-        <h2 class="winners__title">Winners</h2>
-        <p class="winners__quantity" id="winners-quantity">(3)</p>
-      </div>
-      <div class="winners__pages">
-        <p class="winners__page">Page</p><p class="page-number">#1</p>
-      </div>
-      ${this.renderWinnerTable(winners)}
-      ${this.renderPagination()}
+  public renderWinnerPage(winners: IWinner[], page = 1, amount: number): void {
+    const pageElement = `
+    <section id="winners-page">
+      ${this.renderWinnerBlock(winners, page, amount)}
     </section>
     `;
 
     const main = document.getElementById('main');
 
     if (main) {
-      main.insertAdjacentHTML('beforeend', page);
-
-      this.root = document.getElementById("winners-page")!;
-      this.counter = document.getElementById("winners-quantity")!;
+      main.insertAdjacentHTML('beforeend', pageElement);
+      this.root = document.getElementById('winners-page')!;
+      //document.getElementById('winners-page')!.style.display = 'block';
     }
+  }
+
+  public renderWinnerBlock(winners: IWinner[], page = 1, amount: number) {
+    return `
+    <div class="winners" id="winners">
+      <div class="winners__header">
+        <h2 class="winners__title">Winners</h2>
+        <p class="winners__quantity" id="winners-quantity">(${amount})</p>
+      </div>
+      <div class="winners__pages">
+        <p class="winners__page">Page</p><p class="page-number">#${page}</p>
+      </div>
+      ${this.renderWinnerTable(winners)}
+      ${this.renderPagination(amount, page)}
+    </div>
+    `;
   }
 
   public renderWinnerTable(winners: IWinner[]): string {
@@ -59,11 +66,12 @@ export class WinnersView {
     `;
   }
 
-  public renderPagination(): string {
+  public renderPagination(amount: number, current = 1): string {
+    console.log(current, amount)
     return `
     <div class="winners__btns">
-      <button class="winners__btn btn">Prev</button>
-      <button class="winners__btn btn">Next</button>
+      <button class="winners__btn btn btn_prev-winners" ${current === 1 ? 'disabled' : ''}>Prev</button>
+      <button class="winners__btn btn btn_next-winners" ${current * this.PAGE_LIMIT >= amount ? 'disabled' : ''}>Next</button>
     </div>
     `;
   }
@@ -86,18 +94,18 @@ export class WinnersView {
     `;
   }
 
-  public showWinnersPage(winners: IWinner[]): void {
+  public showWinnersPage(winners: IWinner[], page: number, amount: number): void {
     document.getElementById('garage-page')!.style.display = 'none';
     document.getElementById('winners-page')!.style.display = 'block';
 
-    this.updateWinnersView(winners);
+    this.updateWinnersView(winners, page, amount);
   }
 
-  public updateWinnersView(winners: IWinner[]) {
-    document.getElementById('winner-table')?.remove();
-    
-    const winnerTable = this.renderWinnerTable(winners);
-    this.root.lastElementChild?.insertAdjacentHTML('beforebegin', winnerTable);
+  public updateWinnersView(winners: IWinner[], page: number, amount: number) {
+    document.getElementById('winners')?.remove();
+    const winnersBlock = this.renderWinnerBlock(winners, page, amount);
+
+    this.root.insertAdjacentHTML('beforeend', winnersBlock);
   }
 
 }

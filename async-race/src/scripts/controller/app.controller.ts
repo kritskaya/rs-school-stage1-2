@@ -22,8 +22,9 @@ export class AppController {
     const { cars, amount } = await this.api.getCars();
     this.garageView.renderMain(cars, amount);
 
-    const winners = await this.api.getWinners();
-    this.winnerView.renderWinnerPage(winners);
+    const { winners, amount: winAmount } = await this.api.getWinners();
+    
+    this.winnerView.renderWinnerPage(winners, 1, winAmount);
   }
 
   public clickEventHadler(): void {
@@ -35,8 +36,9 @@ export class AppController {
       }
 
       if (target.classList.contains('nav__btn_winners')) {
-        const winners = await this.api.getWinners();
-        this.winnerView.showWinnersPage(winners);
+        const currentPage = this.service.getWinnersPage();
+        const { winners, amount: winAmount } = await this.api.getWinners(currentPage);
+        this.winnerView.showWinnersPage(winners, currentPage, winAmount);
       }
 
       if (target.classList.contains('btn_create-car')) {
@@ -76,6 +78,21 @@ export class AppController {
         const {cars, amount} = await this.api.getCars(currentPage - 1);
         this.garageView.updateGarageView(cars, currentPage - 1, amount);
         this.service.setGaragePage(currentPage - 1);
+      }
+
+      if (target.classList.contains('btn_next-winners')) {
+        const currentPage = this.service.getWinnersPage();
+        const {winners, amount} = await this.api.getWinners(currentPage + 1);
+       
+        this.winnerView.updateWinnersView(winners, currentPage + 1, amount);
+        this.service.setWinnersPage(currentPage + 1);
+      }
+
+      if (target.classList.contains('btn_prev-winners')) {
+        const currentPage = this.service.getWinnersPage();
+        const {winners, amount} = await this.api.getWinners(currentPage - 1);
+        this.winnerView.updateWinnersView(winners, currentPage - 1, amount);
+        this.service.setWinnersPage(currentPage - 1);
       }
 
       if (target.classList.contains('car__btn_start')) {

@@ -93,12 +93,16 @@ export class ApiService {
     return json;
   }
 
-  public async getWinners(page = 1, limit = 10, sort?: string, order?: string): Promise<IWinner[]> {
+  public async getWinners(page = 1, limit = 10, sort?: string, order?: string): Promise<{ winners: IWinner[], amount: number }> {
     const response = await fetch(`${this.winner}?_page=${page}&_limit=${limit}${(sort && order) ? `&_sort=${sort}&_order=${order}` : ''}`);
     const data = await response.json();
-    const json = await Promise.all(data.map(async (item: IWinner) => Object.assign(item, { car: await this.getCar(item.id) })));
+    const winners = await Promise.all(data.map(async (item: IWinner) => Object.assign(item, { car: await this.getCar(item.id) })));
     
-    return json;
+    const amount = response.headers.get('X-Total-Count') || 0;
+    return {
+      winners,
+      amount: +amount
+    };
   }
 
   public async getWinner(id: number): Promise<IWinner | null> {
