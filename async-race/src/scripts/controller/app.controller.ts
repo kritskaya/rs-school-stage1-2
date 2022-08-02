@@ -1,4 +1,5 @@
 import { ICar } from '../model/car.model';
+import { SortOrder, SortType } from '../model/winner.nodel';
 import { ApiService } from '../service/api.service';
 import { AppService } from '../service/app.service';
 import { GarageView } from '../views/garage/garage.view';
@@ -122,6 +123,10 @@ export class AppController {
       if (target.classList.contains('winners__wins')) {
         await this.sortByWins();
       }
+
+      if (target.classList.contains('winners__time')) {
+        await this.sortByTime();
+      }
     });
   }
 
@@ -129,19 +134,39 @@ export class AppController {
     const PAGE_LIMIT = 10
 
     const page = this.service.getWinnersPage();
-    const order = this.service.getOrder() || 'ASC';
+    const order = this.service.getOrder() || SortOrder.ASC;
 
-    const { winners, amount: winAmount } = await this.api.getWinners(page, PAGE_LIMIT, 'wins', order);
+    const { winners, amount: winAmount } = await this.api.getWinners(page, PAGE_LIMIT, SortType.WINS, order);
     this.winnerView.showWinnersPage(winners, page, winAmount);
 
     const header = document.querySelector<HTMLElement>('.winners__wins')!;
     
-    if (order === 'ASC') {
+    if (order === SortOrder.ASC) {
       header.textContent = 'Wins ↑';
-      this.service.setOrder('DESC');
+      this.service.setOrder(SortOrder.DESC);
     } else {
       header.textContent = 'Wins ↓';
-      this.service.setOrder('ASC');
+      this.service.setOrder(SortOrder.ASC);
+    }
+  }
+
+  public async sortByTime() {
+    const PAGE_LIMIT = 10
+
+    const page = this.service.getWinnersPage();
+    const order = this.service.getOrder() || SortOrder.ASC;
+
+    const { winners, amount: winAmount } = await this.api.getWinners(page, PAGE_LIMIT, SortType.TIME, order);
+    this.winnerView.showWinnersPage(winners, page, winAmount);
+
+    const header = document.querySelector<HTMLElement>('.winners__time')!;
+    
+    if (order === SortOrder.ASC) {
+      header.textContent = 'Best time ↑';
+      this.service.setOrder(SortOrder.DESC);
+    } else {
+      header.textContent = 'Best time ↓';
+      this.service.setOrder(SortOrder.ASC);
     }
 
   }
