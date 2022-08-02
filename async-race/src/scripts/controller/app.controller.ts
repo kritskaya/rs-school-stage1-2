@@ -103,6 +103,12 @@ export class AppController {
         await this.startRace(cars);
       }
 
+      if (target.classList.contains('btn_stop-race')) {
+        const currentPage = this.service.getGaragePage();
+        const {cars} = await this.api.getCars(currentPage - 1);
+        await this.stopRace(cars);
+      }
+
       if (target.classList.contains('btn_generate')) {
         await this.generateRandomCars();
       }
@@ -183,29 +189,35 @@ export class AppController {
     const time = Math.round(distance / velocity);
     console.log('id', id, 'time', time);
 
+    const startBtn = document.querySelector<HTMLInputElement>(`.car__btn_start[data-id="${id}"]`);
     const stopBtn = document.querySelector<HTMLInputElement>(`.car__btn_stop[data-id="${id}"]`);
-    if (stopBtn) {
+    
+    if (startBtn && stopBtn) {
       stopBtn.disabled = false;
-    }
-    const carElement = document.getElementById(`car-${id}`)!;
-    const flagElement = document.getElementById(`flag-${id}`)!;
-
-    const pxDistance = this.getDistanceBeetween(carElement, flagElement);
+      startBtn.disabled = true;
     
-    const animationId = this.animation(carElement, pxDistance, time);
-    this.service.setAnimationFrameId(id, animationId);
+      const carElement = document.getElementById(`car-${id}`)!;
+      const flagElement = document.getElementById(`flag-${id}`)!;
 
-    const { success } = await this.api.driveCar(id);
-    
-    if (!success) {
-      const currentId = this.service.getAnimationFrameId(id);
-      window.cancelAnimationFrame(currentId);
-      stopBtn!.disabled = true;
-      throw new Error('Car was broken');
-    }
+      carElement.style.transform = 'translateX(0)';
 
-    if (stopBtn) {
+      const pxDistance = this.getDistanceBeetween(carElement, flagElement);
+      
+      const animationId = this.animation(carElement, pxDistance, time);
+      this.service.setAnimationFrameId(id, animationId);
+
+      const { success } = await this.api.driveCar(id);
+      
+      if (!success) {
+        const currentId = this.service.getAnimationFrameId(id);
+        window.cancelAnimationFrame(currentId);
+        stopBtn!.disabled = true;
+        startBtn!.disabled =  false;
+        throw new Error(`Car was broken`);
+      }
+
       stopBtn.disabled = true;
+      startBtn.disabled = false;
     }
 
     return {id, time};
@@ -263,6 +275,12 @@ export class AppController {
     if (id && time) {
       this.addWinner(id, time);
     }
+  }
+
+  public async stopRace(cars: ICar[]): Promise<void> {
+    const promises = cars.map((car) => this.stopDrivingCar(car.id));
+
+    await Promise.all(promises);
   }
 
   public async addWinner(id: number, time: number): Promise<void> {
