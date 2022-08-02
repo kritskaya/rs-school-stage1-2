@@ -99,7 +99,7 @@ export class AppController {
 
       if (target.classList.contains('btn_start-race')) {
         const currentPage = this.service.getGaragePage();
-        const {cars} = await this.api.getCars(currentPage - 1);
+        const {cars} = await this.api.getCars(currentPage);
         await this.startRace(cars);
       }
 
