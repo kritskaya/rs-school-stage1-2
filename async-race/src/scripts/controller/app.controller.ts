@@ -1,4 +1,4 @@
-import { ICar } from "../model/car.model";
+import { Car, ICar } from "../model/car.model";
 import { ApiService } from "../service/api.service";
 import { AppService } from "../service/app.service";
 import { GarageView } from "../views/garage/garage.view";
@@ -81,7 +81,19 @@ export class AppController {
       if (target.classList.contains('car__btn_start')) {
         const id = target.dataset.id;
         if (id) {
-          await this.startDrivingCar(+id);
+          try {
+            await this.startDrivingCar(+id);
+          } catch (err) {
+            console.log((<Error>err).message);
+          }
+        }
+      }
+
+      if (target.classList.contains('car__btn_stop')) {
+        const id = target.dataset.id;
+        if (id) {
+          await this.stopDrivingCar(+id);
+          console.log(`Car ${id} was stopped`);
         }
       }
 
@@ -188,6 +200,7 @@ export class AppController {
     if (!success) {
       const currentId = this.service.getAnimationFrameId(id);
       window.cancelAnimationFrame(currentId);
+      stopBtn!.disabled = true;
       throw new Error('Car was broken');
     }
 
@@ -196,6 +209,18 @@ export class AppController {
     }
 
     return {id, time};
+  }
+
+  public async stopDrivingCar(id: number) {
+    const carElement = document.getElementById(`car-${id}`)!;
+    await this.api.stopEngine(id);
+    
+    const animationId = this.service.getAnimationFrameId(id);
+    if (animationId) {
+      window.cancelAnimationFrame(animationId);
+    }
+
+    carElement.style.transform = 'translateX(0)';
   }
 
   public getDistanceBeetween(car: HTMLElement, flag: HTMLElement) {
