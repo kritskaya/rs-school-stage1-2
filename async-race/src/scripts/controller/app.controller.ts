@@ -111,7 +111,7 @@ export class AppController {
 
       if (target.classList.contains('btn_stop-race')) {
         const currentPage = this.service.getGaragePage();
-        const { cars } = await this.api.getCars(currentPage - 1);
+        const { cars } = await this.api.getCars(currentPage);
         await this.stopRace(cars);
       }
 
@@ -322,6 +322,9 @@ export class AppController {
   }
 
   public async startRace(cars: ICar[]): Promise<void> {
+    const raceBtn = document.querySelector<HTMLInputElement>('.btn_start-race')!;
+    raceBtn.disabled = true;
+
     cars.forEach((car) => this.moveCarToStart(car.id));
     const promises = cars.map((car) => this.startDrivingCar(car.id));
 
@@ -342,6 +345,11 @@ export class AppController {
     const promises = cars.map(async (car) => await this.stopDrivingCar(car.id));
 
     cars.forEach((car) => this.moveCarToStart(car.id));
+
+    const resetBtn = document.querySelector<HTMLInputElement>('.btn_stop-race')!;
+    resetBtn.disabled = true;
+    const raceBtn = document.querySelector<HTMLInputElement>('.btn_start-race')!;
+    raceBtn.disabled = false;
   }
 
   public async addWinner(id: number, time: number): Promise<void> {
