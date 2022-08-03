@@ -122,57 +122,6 @@ export class AppController {
         }
       }
 
-      // if (target.classList.contains('car__btn_select')) {
-      //   const id = target.dataset.id;
-      //   if (id) {
-      //     this.selectCar(+id);
-      //   }
-      // }
-
-      // if (target.classList.contains('btn_update-car')) {
-      //   const id = target.dataset.id;
-      //   if (id) {
-      //     this.updateCar(+id);
-      //   }
-      // }
-
-      // if (target.classList.contains('btn_next')) {
-      //   await this.getNextCars();
-      // }
-
-      // if (target.classList.contains('btn_prev')) {
-      //   await this.getPreviousCars();
-      // }
-
-      // if (target.classList.contains('btn_next-winners')) {
-      //   await this.getNextWinners();
-      // }
-
-      // if (target.classList.contains('btn_prev-winners')) {
-      //   await this.getPreviousWinners();
-      // }
-
-      // if (target.classList.contains('car__btn_start')) {
-      //   const id = target.dataset.id;
-      //   if (id) {
-      //     try {
-      //       this.moveCarToStart(+id);
-      //       await this.startDrivingCar(+id);
-      //     } catch (err) {
-      //       console.log((<Error>err).message);
-      //     }
-      //   }
-      // }
-
-      // if (target.classList.contains('car__btn_stop')) {
-      //   const id = target.dataset.id;
-      //   if (id) {
-      //     await this.stopDrivingCar(+id);
-      //     this.moveCarToStart(+id);
-      //     console.log(`Car ${id} was stopped`);
-      //   }
-      // }
-
       if (target.classList.contains('btn_start-race')) {
         const currentPage = this.service.getGaragePage();
         const { cars } = await this.api.getCars(currentPage);
@@ -182,20 +131,12 @@ export class AppController {
       if (target.classList.contains('btn_stop-race')) {
         const currentPage = this.service.getGaragePage();
         const { cars } = await this.api.getCars(currentPage);
-        await this.stopRace(cars);
+        await this.resetRace(cars);
       }
 
       if (target.classList.contains('btn_generate')) {
         await this.generateRandomCars();
       }
-
-      // if (target.classList.contains('winners__wins')) {
-      //   await this.sortByWins();
-      // }
-
-      // if (target.classList.contains('winners__time')) {
-      //   await this.sortByTime();
-      // }
     });
   }
 
@@ -440,8 +381,10 @@ export class AppController {
     resetBtn.disabled = false;
   }
 
-  public async stopRace(cars: ICar[]): Promise<void> {
+  public async resetRace(cars: ICar[]): Promise<void> {
     const promises = cars.map(async (car) => await this.stopDrivingCar(car.id));
+
+    await Promise.all(promises);
 
     cars.forEach((car) => this.moveCarToStart(car.id));
 
