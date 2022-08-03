@@ -4,12 +4,12 @@
 
 .winners__header {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .winners__pages {
   display: flex;
-  margin-bottom: 20px;
+  padding-bottom: 10px;
   gap: 5px;
   font-size: 20px;
 }
@@ -20,10 +20,21 @@
   font-weight: bold;
 }
 
+.winners__table {
+  display: inline-block;  
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
 .winner-table__headers,
 .winner-table__row {
   display: grid;
+  padding: 5px 0;
   grid-template-columns: 40px 50px 180px 75px 75px;
+}
+
+.winner-table__headers {
+  border-bottom: 2px solid #fff;
 }
 
 .winners__wins,

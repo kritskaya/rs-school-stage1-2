@@ -6,7 +6,9 @@
  
 body {
 	position: relative;
-	padding: 40px;
+	padding: 20px;
+	background-color: #000;
+	color: #fff;
 }
  
 button {
