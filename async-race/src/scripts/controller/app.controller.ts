@@ -141,7 +141,7 @@ export class AppController {
   }
 
   public async sortByWins() {
-    const PAGE_LIMIT = 10
+    const PAGE_LIMIT = 10;
 
     const page = this.service.getWinnersPage();
     const order = this.service.getOrder() || SortOrder.ASC;
@@ -161,7 +161,7 @@ export class AppController {
   }
 
   public async sortByTime() {
-    const PAGE_LIMIT = 10
+    const PAGE_LIMIT = 10;
 
     const page = this.service.getWinnersPage();
     const order = this.service.getOrder() || SortOrder.ASC;
@@ -297,8 +297,6 @@ export class AppController {
   }
 
   public async stopDrivingCar(id: number) {
-    const carElement = document.getElementById(`car-${id}`)!;
-    
     await this.api.stopEngine(id);
     
     const animationId = this.service.getAnimationFrameId(id);
@@ -382,8 +380,7 @@ export class AppController {
   }
 
   public async resetRace(cars: ICar[]): Promise<void> {
-    const promises = cars.map(async (car) => await this.stopDrivingCar(car.id));
-
+    const promises = cars.map((car) => this.stopDrivingCar(car.id));
     await Promise.all(promises);
 
     cars.forEach((car) => this.moveCarToStart(car.id));
