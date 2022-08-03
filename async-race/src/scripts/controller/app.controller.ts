@@ -422,13 +422,18 @@ export class AppController {
     cars.forEach((car) => this.moveCarToStart(car.id));
     const promises = cars.map((car) => this.startDrivingCar(car.id));
 
-    const { id, time } = await Promise.any(promises);
-    if (id && time) {
-      await this.addWinner(id, time);
+    try {
+      const { id, time } = await Promise.any(promises);
+      if (id && time) {
+        await this.addWinner(id, time);
 
-      const winnerIndex = cars.findIndex((car) => car.id === id);
-      const restPromises = [...promises.slice(0, winnerIndex), ...promises.slice(winnerIndex + 1, promises.length)];
-      await Promise.allSettled(restPromises);
+        const winnerIndex = cars.findIndex((car) => car.id === id);
+        const restPromises = [...promises.slice(0, winnerIndex), ...promises.slice(winnerIndex + 1, promises.length)];
+        await Promise.allSettled(restPromises);
+      }
+    } catch (err) {
+      console.log('All cars were broken');
+      await this.addWinner();
     }
 
     const resetBtn = document.querySelector<HTMLInputElement>('.btn_stop-race')!;
@@ -452,28 +457,36 @@ export class AppController {
     }
   }
 
-  public async addWinner(id: number, time: number): Promise<void> {
-    time = Math.floor(time / 100) / 10;
-    const winner = await this.api.getWinner(id);
-    const car = await this.api.getCar(id);    
-    
-    if (winner) {
-      const wins =  winner.wins + 1;
-      await this.api.updateWinner(id, { wins, time, car });
-    } else {
-      const wins = 1;
-      await this.api.createWinner({ id, wins, time, car });
-    }
+  public async addWinner(id?: number, time?: number): Promise<void> {
+    if (id && time) {
+      time = Math.floor(time / 100) / 10;
+      const winner = await this.api.getWinner(id);
+      const car = await this.api.getCar(id);    
+      
+      if (winner) {
+        const wins =  winner.wins + 1;
+        await this.api.updateWinner(id, { wins, time, car });
+      } else {
+        const wins = 1;
+        await this.api.createWinner({ id, wins, time, car });
+      }
 
-    this.addWinnerMessage(car, time);
+      this.addWinnerMessage(car, time);
+    } else {
+      this.addWinnerMessage();
+    }
   }
 
-  public addWinnerMessage(car: ICar, time: number) {
+  public addWinnerMessage(car?: ICar, time?: number) {
     const messageElement = document.getElementById('message');
 
     if (messageElement) {
       messageElement.style.display = 'block';
-      messageElement.textContent = `Winner car: ${car.name} ${time}`;
+      if (car && time) {
+        messageElement.textContent = `Winner car: ${car.name}. Result: ${time}s`;
+      } else {
+        messageElement.textContent = 'No winner! All cars were broken';
+      }
     }
   }
 
