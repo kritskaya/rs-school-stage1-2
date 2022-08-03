@@ -444,6 +444,12 @@ export class AppController {
     resetBtn.disabled = true;
     const raceBtn = document.querySelector<HTMLInputElement>('.btn_start-race')!;
     raceBtn.disabled = false;
+
+    const messageElement = document.getElementById('message');
+
+    if (messageElement) {
+      messageElement.style.display = 'none';
+    }
   }
 
   public async addWinner(id: number, time: number): Promise<void> {
@@ -457,6 +463,17 @@ export class AppController {
     } else {
       const wins = 1;
       await this.api.createWinner({ id, wins, time, car });
+    }
+
+    this.addWinnerMessage(car, time);
+  }
+
+  public addWinnerMessage(car: ICar, time: number) {
+    const messageElement = document.getElementById('message');
+
+    if (messageElement) {
+      messageElement.style.display = 'block';
+      messageElement.textContent = `Winner car: ${car.name} ${time}`;
     }
   }
 

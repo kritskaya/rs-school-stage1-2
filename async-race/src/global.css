@@ -5,6 +5,7 @@
 }
  
 body {
+	position: relative;
 	padding: 40px;
 }
  

@@ -78,6 +78,7 @@ export class GarageView {
       <div class="race" id="race">
         ${cars.map((car) => this.renderRaceRow(car)).join('')}
       </div>
+      <div class="message" id="message"></div>
       ${this.renderPagination(amount, page)}
     </div>
     `;

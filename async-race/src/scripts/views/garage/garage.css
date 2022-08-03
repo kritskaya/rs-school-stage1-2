@@ -78,3 +78,14 @@
 .race__flag {
   width: 30px;
 }
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: none;
+  font-size: 30px;
+  color: red;
+  transform: translateX(-50%);
+  border: 1px solid #000;
+}
