@@ -1,5 +1,5 @@
 .nav {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .car-block {
@@ -14,12 +14,12 @@
 }
 
 .car-block__btns {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .garage__header {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .garage__title,
@@ -29,7 +29,7 @@
 }
 
 .garage-page__body {
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .garage__pages {
@@ -41,13 +41,13 @@
 }
 
 .race {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 2px solid #fff;
 }
 
 .race__row {
-  padding-top: 20px;
+  padding-top: 10px;
   border-bottom: 3px dashed #339933;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .car__img {
-  width: 50px;
+  width: 40px;
 }
 
 .car__race-line {
