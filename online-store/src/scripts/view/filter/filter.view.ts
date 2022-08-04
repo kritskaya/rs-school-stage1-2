@@ -2,10 +2,12 @@ import { ValueFilter, ValueFilterType, SizeFilterType, ColorFilterType, Material
 import noUiSlider, { target } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import './filter.css';
+import { BaseView } from "../BaseView";
 
-export class FilterView {
+export class FilterView extends BaseView {
 
 	constructor(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
+		super();
 		this.renderSizeFilter(filters);
 		this.renderPriceFilter();
 		this.renderColorFilter(filters);
@@ -157,12 +159,12 @@ export class FilterView {
 	}
 
 	public clearAllFilters() {
-		const allCheckboxes = document.querySelectorAll(`.action-list__input[type="checkbox"]`);
+		const allCheckboxes = document.querySelectorAll<HTMLInputElement>(`.action-list__input[type="checkbox"]`);
 		allCheckboxes.forEach((checkbox) => {
-			(checkbox as HTMLInputElement).checked = false;
+			checkbox.checked = false;
 		});
 
-		const allRangeContainers = document.querySelectorAll(`.range-container`);
+		const allRangeContainers = document.querySelectorAll<HTMLElement>(`.range-container`);
 		allRangeContainers.forEach((container) => {
 			const rangeSlider = container.firstElementChild as target;
 			if (rangeSlider.noUiSlider) {
@@ -178,22 +180,19 @@ export class FilterView {
 		})
 	}
 
-	protected createElement(tag: string, className: string): HTMLElement {
-		const element = document.createElement(tag);
-		element.className = className;
-		return element
-	}
-
 	public toggleFilterList(target: HTMLElement): void {
-		const filterBtn = target.closest('.filter-btn') as HTMLElement;
-		filterBtn.classList.toggle('actions__item_active');
+		const filterBtn = target.closest<HTMLElement>('.filter-btn');
+		filterBtn?.classList.toggle('actions__item_active');
 
-		const filterList = filterBtn.nextElementSibling as HTMLElement;
-		filterList.classList.toggle('active');
+		if (filterBtn) {
+			const filterList = filterBtn.nextElementSibling as HTMLElement;
+			filterList.classList.toggle('active');
+		}
 	}
 
 	public addActiveValueFilterState(container: HTMLElement): void {
-		const checked = container.querySelectorAll('input:checked');
+		const checked = container.querySelectorAll<HTMLElement>('input:checked');
+
 		if (checked.length) {
 			const btn = container.previousElementSibling as HTMLElement;
 			btn.classList.add('filter-btn_active');
@@ -201,7 +200,8 @@ export class FilterView {
 	}
 
 	public removeActiveValueFilterState(container: HTMLElement): void {
-		const checked = container.querySelectorAll('input:checked');
+		const checked = container.querySelectorAll<HTMLElement>('input:checked');
+
 		if (!checked.length) {
 			const btn = container.previousElementSibling as HTMLElement;
 			btn.classList.remove('filter-btn_active');
@@ -209,8 +209,9 @@ export class FilterView {
 	}
 
 	public toggleActiveRangeFilterState(container: HTMLElement): void {
-		const rangeSlider = container.querySelector('.noUi-target') as target;
-		if (rangeSlider.noUiSlider) {
+		const rangeSlider = container.querySelector<target>('.noUi-target');
+		
+		if (rangeSlider?.noUiSlider) {
 			const starts = rangeSlider.noUiSlider.options.start as number[];
 			const [min, max] = starts;
 			const [start, end] = rangeSlider.noUiSlider.get() as number[];

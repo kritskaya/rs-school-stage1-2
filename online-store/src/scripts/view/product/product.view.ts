@@ -70,16 +70,14 @@ export class ProductView {
 	} 
 	
 	public addInCartBadge(element: HTMLElement): void {
-		let inCart = element.querySelector('.product__in-cart') as HTMLElement;
-		
-		inCart = document.createElement('p');
+		let inCart = document.createElement('p');
 		inCart.className = 'product__in-cart';
 		inCart.textContent = 'Товар в корзине';
 		element.append(inCart);
 	}
 
 	public removeInCartBadge(element: HTMLElement): void {
-		let inCart = element.querySelector('.product__in-cart') as HTMLElement;
+		let inCart = element.querySelector<HTMLElement>('.product__in-cart');
 
 		if (inCart) {
 			inCart.remove();
@@ -87,12 +85,12 @@ export class ProductView {
 	}
 
 	public removeAllBadges(): void {
-		const cards = document.querySelectorAll(`.product`);
+		const cards = document.querySelectorAll<HTMLElement>(`.product`);
 		cards.forEach((card) => {
-			const btn = card.querySelector('.cart-btn') as HTMLElement;
-			const badgeInCart = card.querySelector('.product__in-cart') as HTMLElement;
+			const btn = card.querySelector<HTMLElement>('.cart-btn');
+			const badgeInCart = card.querySelector<HTMLElement>('.product__in-cart');
 
-			if (badgeInCart) {
+			if (badgeInCart && btn) {
 				badgeInCart.remove();
 				btn.classList.remove('cart-btn_remove');
 			}
@@ -100,14 +98,17 @@ export class ProductView {
 	}
 
 	public noAvailableSlot(): void {
-		const error = document.querySelector('.order-error') as HTMLElement;
-		error.classList.add('active');
+		const error = document.querySelector<HTMLElement>('.order-error');
 
-		setTimeout(() => error.classList.remove('active'), 3000);
+		if (error) {
+			error.classList.add('active');
+
+			setTimeout(() => error.classList.remove('active'), 3000);
+		}
 	}
 
 	public displayProducts(sortProducts: Product[]): void {
-		const noProductsError = this.root.querySelector('.products__error');
+		const noProductsError = this.root.querySelector<HTMLElement>('.products__error');
 		if (noProductsError) {
 			noProductsError.remove();
 		}
@@ -115,8 +116,11 @@ export class ProductView {
 		// sort
 		sortProducts.forEach((item) => {
 			const id = item.getId();
-			const displayedItem = this.root.querySelector(`.product[data-id="${id}"]`) as HTMLElement;
-			this.root.append(displayedItem);
+			const displayedItem = this.root.querySelector<HTMLElement>(`.product[data-id="${id}"]`);
+
+			if (displayedItem) {
+				this.root.append(displayedItem);
+			}
 		});
 
 		// search + filters
@@ -134,7 +138,6 @@ export class ProductView {
 		});
 
 		if (!sortProducts.length) {
-			
 			const noProducts = this.createElement('p', 'products__error');
 			noProducts.textContent = 'Извините, совпадений не обнаружено';
 

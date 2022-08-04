@@ -1,7 +1,7 @@
-import { Search } from "../../model/search.model";
+import { BaseView } from "../BaseView";
 import "./search.css";
 
-export class SearchView {
+export class SearchView extends BaseView {
 	private root: HTMLElement;
 	private searchInput: HTMLInputElement;
 	private requestTitle: HTMLElement;
@@ -9,8 +9,9 @@ export class SearchView {
 	private noFoundMessage: string = 'По Вашему запросу ничего не найдено';
 
 	constructor() {
-		this.root = document.getElementById('search-results') as HTMLElement;
-		this.searchInput = document.querySelector('.search__input') as HTMLInputElement;
+		super();
+		this.root = document.getElementById('search-results')!;
+		this.searchInput = document.querySelector<HTMLInputElement>('.search__input')!;
 		this.requestTitle = this.createElement('h2', 'search-results__title');
 		this.result = this.createElement('p', 'search-results__info');
 		this.searchInput.focus();

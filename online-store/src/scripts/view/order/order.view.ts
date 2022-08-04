@@ -7,7 +7,7 @@ export class OrderView {
 	private counter: HTMLElement;
 
 	constructor(order: Order) {
-		const parent = document.getElementById('cart-container') as HTMLElement;
+		const parent = document.getElementById('cart-container')!;
 
 		const products = order.getOrder();
 
@@ -25,14 +25,15 @@ export class OrderView {
 	}
 
 	private renderOrderItem(product: Product): HTMLElement {
-		const itemPresence = this.root.querySelector('.cart-item__img')
+		const itemPresence = this.root.querySelector<HTMLElement>('.cart-item__img');
+
 		if (!itemPresence) {
 			this.root.innerHTML = '';
 			this.renderCounter();
 			this.counter.textContent = '0';
 		}
 
-		const quantity = this.counter.textContent as string;
+		const quantity = this.counter.textContent!;
 		this.counter.textContent = `${+quantity + 1}`;
 
 		const item = this.createElement('li', 'cart__item cart-item');
@@ -72,10 +73,12 @@ export class OrderView {
 	}
 
 	private renderCounter() {
-		const parent = document.getElementById('cart-container') as HTMLElement;
+		const parent = document.getElementById('cart-container');
 
-		this.counter = this.createElement('div', 'cart__info');
-		parent.append(this.counter);
+		if (parent) {
+			this.counter = this.createElement('div', 'cart__info');
+			parent.append(this.counter);
+		}
 	}
 
 	public getCartContainer(): HTMLElement {
@@ -97,11 +100,11 @@ export class OrderView {
 
 	public removeFromOrder(productElement: HTMLElement): void {
 		const id = productElement.dataset.id;
-		const card = document.querySelector(`.product[data-id="${id}"]`) as HTMLElement;
-		const btn = card.querySelector('.cart-btn') as HTMLElement;
-		const badgeInCart = card.querySelector('.product__in-cart') as HTMLElement;
+		const card = document.querySelector<HTMLElement>(`.product[data-id="${id}"]`);
+		const btn = card?.querySelector<HTMLElement>('.cart-btn');
+		const badgeInCart = card?.querySelector<HTMLElement>('.product__in-cart');
 
-		if (badgeInCart) {
+		if (badgeInCart && btn) {
 			badgeInCart.remove();
 			btn.classList.remove('cart-btn_remove');
 		}

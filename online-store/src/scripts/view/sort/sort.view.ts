@@ -34,14 +34,20 @@ export class SortView extends BaseView {
 	}
 
 	public toggleSortList(target: HTMLElement): void {
-		const sortBtn = target.closest('.sort-btn') as HTMLElement;
-		sortBtn.classList.toggle('actions__item_active');
+		const sortBtn = target.closest<HTMLElement>('.sort-btn');
 
-		this.root.classList.toggle('active');
+		if (sortBtn) {
+			sortBtn.classList.toggle('actions__item_active');
+
+			this.root.classList.toggle('active');
+		}
 	}
 
 	public initialSort(): void {
-		const firstSortItem = document.querySelector(`.action-list__input[data-sort="0"]`) as HTMLInputElement;
-		firstSortItem.checked = true;
+		const firstSortItem = document.querySelector<HTMLInputElement>(`.action-list__input[data-sort="0"]`);
+		
+		if (firstSortItem) {
+			firstSortItem.checked = true;
+		}
 	}
 }
