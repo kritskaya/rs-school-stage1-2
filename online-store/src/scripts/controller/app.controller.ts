@@ -56,7 +56,7 @@ export class AppController {
 	public toggleOrderItem(event: Event): void {
 		const target = event.target as HTMLElement;
 
-		const isRemoveBtn = target.closest('.cart-btn_remove');
+		const isRemoveBtn = target.closest<HTMLElement>('.cart-btn_remove');
 		if (isRemoveBtn) {
 			this.removeFromOrder(event);
 			isRemoveBtn.classList.remove('cart-btn_remove');
@@ -118,13 +118,13 @@ export class AppController {
 
 	public selectValueFilterItem(event: Event): void {
 		const target = event.target as HTMLInputElement;
-		const filterType = target.dataset.filter;
+		const filterType = target.dataset.filter as ValueFilterType;
 
 		if (filterType) {
 			if (target.checked) {			
-				this.addValueFilter(filterType as ValueFilterType);
+				this.addValueFilter(filterType);
 			} else {
-				this.removeValueFilter(filterType as ValueFilterType);
+				this.removeValueFilter(filterType);
 			}
 		}
 	}
