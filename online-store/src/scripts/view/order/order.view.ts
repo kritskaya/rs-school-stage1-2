@@ -7,7 +7,7 @@ export class OrderView {
 	private counter: HTMLElement;
 
 	constructor(order: Order) {
-		const parent = document.getElementById('cart-container')!;
+		const parent = document.getElementById('cart-container');
 
 		const products = order.getOrder();
 
@@ -21,7 +21,9 @@ export class OrderView {
 			this.renderOrderItem(product);
 		});
 
-		parent.append(this.root);
+		if (parent) {
+			parent.append(this.root);
+		}
 	}
 
 	private renderOrderItem(product: Product): HTMLElement {
@@ -33,8 +35,10 @@ export class OrderView {
 			this.counter.textContent = '0';
 		}
 
-		const quantity = this.counter.textContent!;
-		this.counter.textContent = `${+quantity + 1}`;
+		const quantity = this.counter.textContent;
+		if (quantity) {
+			this.counter.textContent = `${+quantity + 1}`;
+		}
 
 		const item = this.createElement('li', 'cart__item cart-item');
 		item.dataset.id = product.getId();

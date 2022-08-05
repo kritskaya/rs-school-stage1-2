@@ -70,14 +70,14 @@ export class ProductView {
 	} 
 	
 	public addInCartBadge(element: HTMLElement): void {
-		let inCart = document.createElement('p');
+		const inCart = document.createElement('p');
 		inCart.className = 'product__in-cart';
 		inCart.textContent = 'Товар в корзине';
 		element.append(inCart);
 	}
 
 	public removeInCartBadge(element: HTMLElement): void {
-		let inCart = element.querySelector<HTMLElement>('.product__in-cart');
+		const inCart = element.querySelector<HTMLElement>('.product__in-cart');
 
 		if (inCart) {
 			inCart.remove();

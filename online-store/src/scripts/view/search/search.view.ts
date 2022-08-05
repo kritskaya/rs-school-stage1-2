@@ -6,15 +6,24 @@ export class SearchView extends BaseView {
 	private searchInput: HTMLInputElement;
 	private requestTitle: HTMLElement;
 	private result: HTMLElement;
-	private noFoundMessage: string = 'По Вашему запросу ничего не найдено';
+	private noFoundMessage = 'По Вашему запросу ничего не найдено';
 
 	constructor() {
 		super();
-		this.root = document.getElementById('search-results')!;
-		this.searchInput = document.querySelector<HTMLInputElement>('.search__input')!;
+
+		const rootElement = document.getElementById('search-results');
+		if (rootElement) {
+			this.root = rootElement;
+		}
+		
 		this.requestTitle = this.createElement('h2', 'search-results__title');
 		this.result = this.createElement('p', 'search-results__info');
-		this.searchInput.focus();
+		
+		const searchElement = document.querySelector<HTMLInputElement>('.search__input');
+		if (searchElement) {
+			this.searchInput = searchElement;
+			this.searchInput.focus();
+		}
 	}
 
 	public getSearchInput(): HTMLInputElement {

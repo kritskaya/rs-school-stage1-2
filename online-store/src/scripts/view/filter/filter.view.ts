@@ -45,7 +45,7 @@ export class FilterView extends BaseView {
 		const parent = document.getElementById('color-container') as HTMLElement;
 		const root = this.createElement('ul', 'action__container action-list');
 		const colors = ['#ffffff', '#ffcc99', '#ff99cc', '#666666', '#663300', '#000000'];
-		let start: number = 0;
+		let start = 0;
 		
 		filters.forEach((item, key) => {	
 			const keyInType = (Object.values(ColorFilterType) as string[]).includes(key);	
@@ -116,8 +116,8 @@ export class FilterView extends BaseView {
 				from: function (value) {
 					return +(+value).toFixed(0);
 				}
-		  },
-		  	tooltips: [true, true],
+			},
+				tooltips: [true, true],
 			range: {
 				'min': 0,
 				'max': 50000,
@@ -146,7 +146,7 @@ export class FilterView extends BaseView {
 				from: function (value) {
 					return +(+value).toFixed(0);
 				}
-		 	},
+			},
 			tooltips: [true, true],
 			range: {
 				'min': 0,
