@@ -9,7 +9,7 @@ export class Order {
 		this.products = [];
 	}
 
-	public getOrder(): Product[] {
+	public getProducts(): Product[] {
 		return this.products;
 	}
 

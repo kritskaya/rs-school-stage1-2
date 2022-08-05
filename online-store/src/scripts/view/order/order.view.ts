@@ -9,7 +9,7 @@ export class OrderView {
 	constructor(order: Order) {
 		const parent = document.getElementById('cart-container');
 
-		const products = order.getOrder();
+		const products = order.getProducts();
 
 		this.root = this.createElement('ul', 'cart__list');
 		
