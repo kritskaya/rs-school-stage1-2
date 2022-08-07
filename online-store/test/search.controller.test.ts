@@ -1,11 +1,6 @@
 import { SearchController } from "../src/scripts/controller/search.controller";
 import productsData from '../src/assets/json/products.json';
 
-beforeEach(() => {
-  
-  
-});
-
 describe('test sort controller', () => {
   describe('test startSearch method', () => {  
     document.body.innerHTML = `
@@ -19,8 +14,8 @@ describe('test sort controller', () => {
     it ('should add info about search for word "кровати"', () => {
       const request = 'кровати';
 
-      const searchBlock = document.getElementById('search-results')!;
-      const infoBlock = searchBlock.lastElementChild!;
+      const searchBlock = document.getElementById('search-results');
+      const infoBlock = searchBlock?.lastElementChild;
 
       const products = productsData.filter((item) => {
         const nameResult = item.name.indexOf(request);
@@ -32,8 +27,10 @@ describe('test sort controller', () => {
 
       controller.startSearch('кровати', products.length);
 
-      expect(window.getComputedStyle(searchBlock).display).toBe('block');
-      expect(infoBlock.textContent).toBe(`Найдено ${products.length} товаров`);
+      if (infoBlock) {
+        expect(window.getComputedStyle(searchBlock).display).toBe('block');
+        expect(infoBlock.textContent).toBe(`Найдено ${products.length} товаров`);
+      }
     });
   });
 
@@ -51,11 +48,11 @@ describe('test sort controller', () => {
     it ('should remove info about last search', () => {
       controller.clearSearch();
       
-      const searchBlock = document.getElementById('search-results')!;
-      const input = document.querySelector<HTMLInputElement>('.search__input')!;
+      const searchBlock = document.getElementById('search-results');
+      const input = document.querySelector<HTMLInputElement>('.search__input');
 
-      expect(searchBlock.children.length).toBe(0);
-      expect(input.value).toBe('');
+      expect(searchBlock?.children.length).toBe(0);
+      expect(input?.value).toBe('');
     });
   });
 });

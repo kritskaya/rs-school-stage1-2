@@ -13,11 +13,12 @@ describe('test order controller', () => {
 
     it ('should open order list', () => {
       const controller = new OrderController();
-      const orderList = document.querySelector<HTMLElement>('.cart__list')!;
+      const orderList = document.querySelector<HTMLElement>('.cart__list');
 
       controller.toggleOrderList();
-
-      expect(window.getComputedStyle(orderList).display).toBe('block');
+      if (orderList) {
+        expect(window.getComputedStyle(orderList).display).toBe('block');
+      }
     });
   });
 
@@ -54,8 +55,8 @@ describe('test order controller', () => {
       const btn = document.querySelector<HTMLElement>('.product__btn');
       controller.addToOrder({currentTarget: btn} as MouseEvent);
 
-      const list = document.querySelector<HTMLElement>('.cart__list')!;
-      const lastItem = list.lastElementChild;
+      const list = document.querySelector<HTMLElement>('.cart__list');
+      const lastItem = list?.lastElementChild;
       
       expect(lastItem).not.toBe(null);
       expect((<HTMLElement>lastItem).dataset.id).toBe('70458953');
@@ -96,8 +97,8 @@ describe('test order controller', () => {
       controller.addToOrder({currentTarget: btn} as MouseEvent);
       controller.removeFromOrder({target: btn} as MouseEvent);
 
-      const list = document.querySelector<HTMLElement>('.cart__list')!;
-      const item = list.querySelector<HTMLElement>('.cart-item[data-id="70458953"]');
+      const list = document.querySelector<HTMLElement>('.cart__list');
+      const item = list?.querySelector<HTMLElement>('.cart-item[data-id="70458953"]');
       
       expect(item).toBe(null);
     });
@@ -137,9 +138,9 @@ describe('test order controller', () => {
       controller.addToOrder({currentTarget: btn} as MouseEvent);
       controller.clearOrder();
 
-      const list = document.querySelector<HTMLElement>('.cart__list')!;
-      expect(list.children.length).toBe(1);
-      expect(list.firstChild?.textContent).toBe('Корзина пуста');
+      const list = document.querySelector<HTMLElement>('.cart__list');
+      expect(list?.children.length).toBe(1);
+      expect(list?.firstChild?.textContent).toBe('Корзина пуста');
     });
   });
 })

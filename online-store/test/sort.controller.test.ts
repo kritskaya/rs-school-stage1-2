@@ -12,13 +12,17 @@ describe('test sort controller', () => {
 
   describe('test toggleSortList method', () => {  
     it ('should open sort list', () => {
-      const btn = document.querySelector<HTMLElement>('.sort-btn')!;
-      controller.toggleSortList(btn);
+      const btn = document.querySelector<HTMLElement>('.sort-btn');
+      if (btn) {
+        controller.toggleSortList(btn);
+      }
 
-      const list  = document.querySelector<HTMLElement>('.action-list')!;
+      const list  = document.querySelector<HTMLElement>('.action-list');
 
-      expect(list.classList.contains('active')).toBe(true);
-      expect(window.getComputedStyle(list).display).toBe('block');
+      if (list) {
+        expect(list.classList.contains('active')).toBe(true);
+        expect(window.getComputedStyle(list).display).toBe('block');
+      }
     });
   });
 

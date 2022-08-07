@@ -1,4 +1,3 @@
-import { Product } from "../model/product.model";
 import { SearchService } from "../service/search.service";
 import { SearchView } from "../view/search/search.view";
 

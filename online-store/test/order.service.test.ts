@@ -1,10 +1,8 @@
 import { OrderService } from "../src/scripts/service/order.service";
 
-const service = new OrderService();
-
 describe('test addProduct method', () => {
   const service = new OrderService();
-  let count = service.getOrder().getProducts().length;
+  const count = service.getOrder().getProducts().length;
   service.addProduct('09406519');
 
   it('add one new item to order', () => {
@@ -26,7 +24,7 @@ describe('test removeProduct method', () => {
   const service = new OrderService();
   
   service.addProduct('09406519');
-  let count = service.getOrder().getProducts().length;
+  const count = service.getOrder().getProducts().length;
   service.removeProduct('09406519');
 
   it('remove previous item from order', () => {
