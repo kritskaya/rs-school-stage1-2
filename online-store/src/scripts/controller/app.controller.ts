@@ -162,7 +162,7 @@ export class AppController {
 		if (request) {
 			this.productController.addSearchFilter(request);
 			const displayedProducts = this.productController.getDisplayedProducts();
-			this.searchController.startSearch(request, displayedProducts);
+			this.searchController.startSearch(request, displayedProducts.length);
 		}
 	}
 

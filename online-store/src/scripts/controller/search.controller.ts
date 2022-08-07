@@ -11,22 +11,11 @@ export class SearchController {
 		this.view = new SearchView();
 	}
 
-	public startSearch(request: string, products: Product[]): void {
-		this.view.showSearchInfo(request, products.length);
+	public startSearch(request: string, count: number): void {
+		this.view.showSearchInfo(request, count);
 	}
 
 	public clearSearch(): void {
 		this.view.clearSearchInfo();
-	}
-
-	public loadFromStorage(products: Product[]): void {
-		const jsonSearch = localStorage.getItem('search');
-
-		if (jsonSearch) {
-			const request = JSON.parse(jsonSearch);			
-			this.view.showSearchInfo(request, products.length);
-
-			this.view.getSearchInput().value = request;
-		}	
 	}
 }
