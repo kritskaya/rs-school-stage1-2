@@ -215,8 +215,10 @@ export class AppController {
     const nameElement = document.querySelector<HTMLInputElement>('#update-car-name');
     const colorElement = document.querySelector<HTMLInputElement>('#update-car-color');
     const btn = colorElement?.nextElementSibling;
+    
+    const removeBtn = document.querySelector<HTMLInputElement>(`.car__btn_remove[data-id="${id}"]`);
 
-    if (nameElement && colorElement && btn) {
+    if (nameElement && colorElement && btn && removeBtn) {
       const car = await this.api.getCar(id);
       nameElement.value = car.name;
       colorElement.value = car.color;
@@ -224,6 +226,7 @@ export class AppController {
       nameElement.disabled = false;
       colorElement.disabled = false;
       (<HTMLInputElement>btn).disabled = false;
+      removeBtn.disabled = true;
     }
   }
 
