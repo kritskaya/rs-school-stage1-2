@@ -106,7 +106,7 @@ export class AppController {
       }
 
       if (target.classList.contains('nav__btn_winners')) {
-        const currentPage = this.service.getWinnersPage();
+        const currentPage = this.service.winnersPage;
         const { winners, amount: winAmount } = await this.api.getWinners(currentPage);
         this.winnerView.showWinnersPage(winners, currentPage, winAmount);
       }
@@ -123,13 +123,13 @@ export class AppController {
       }
 
       if (target.classList.contains('btn_start-race')) {
-        const currentPage = this.service.getGaragePage();
+        const currentPage = this.service.garagePage;
         const { cars } = await this.api.getCars(currentPage);
         await this.startRace(cars);
       }
 
       if (target.classList.contains('btn_stop-race')) {
-        const currentPage = this.service.getGaragePage();
+        const currentPage = this.service.garagePage;
         const { cars } = await this.api.getCars(currentPage);
         await this.resetRace(cars);
       }
@@ -143,8 +143,8 @@ export class AppController {
   public async sortByWins() {
     const PAGE_LIMIT = 10;
 
-    const page = this.service.getWinnersPage();
-    const order = this.service.getOrder() || SortOrder.ASC;
+    const page = this.service.winnersPage;
+    const order = this.service.order || SortOrder.ASC;
 
     const { winners, amount: winAmount } = await this.api.getWinners(page, PAGE_LIMIT, SortType.WINS, order);
     this.winnerView.showWinnersPage(winners, page, winAmount);
@@ -153,18 +153,18 @@ export class AppController {
     
     if (order === SortOrder.ASC) {
       header.textContent = 'Wins ↑';
-      this.service.setOrder(SortOrder.DESC);
+      this.service.order = SortOrder.DESC;
     } else {
       header.textContent = 'Wins ↓';
-      this.service.setOrder(SortOrder.ASC);
+      this.service.order = SortOrder.ASC;
     }
   }
 
   public async sortByTime() {
     const PAGE_LIMIT = 10;
 
-    const page = this.service.getWinnersPage();
-    const order = this.service.getOrder() || SortOrder.ASC;
+    const page = this.service.winnersPage;
+    const order = this.service.order || SortOrder.ASC;
 
     const { winners, amount: winAmount } = await this.api.getWinners(page, PAGE_LIMIT, SortType.TIME, order);
     this.winnerView.showWinnersPage(winners, page, winAmount);
@@ -173,10 +173,10 @@ export class AppController {
     
     if (order === SortOrder.ASC) {
       header.textContent = 'Best time ↑';
-      this.service.setOrder(SortOrder.DESC);
+      this.service.order = SortOrder.DESC;
     } else {
       header.textContent = 'Best time ↓';
-      this.service.setOrder(SortOrder.ASC);
+      this.service.order = SortOrder.ASC;
     }
 
   }
@@ -191,7 +191,7 @@ export class AppController {
 
       await this.api.createCar({ name, color });
 
-      const currentPage = this.service.getGaragePage();
+      const currentPage = this.service.garagePage;
       const { cars, amount } = await this.api.getCars(currentPage);
       
       this.garageView.updateGarageView(cars, currentPage, amount);
@@ -205,7 +205,7 @@ export class AppController {
     await this.api.deleteCar(id);
     await this.api.deleteWinner(id);
 
-    const currentPage = this.service.getGaragePage();
+    const currentPage = this.service.garagePage;
     const { cars, amount } = await this.api.getCars(currentPage);
       
     this.garageView.updateGarageView(cars, currentPage, amount);
@@ -241,7 +241,7 @@ export class AppController {
 
       await this.api.updateCar(id, { name, color });
 
-      const currentPage = this.service.getGaragePage();
+      const currentPage = this.service.garagePage;
       const { cars, amount } = await this.api.getCars(currentPage);
         
       this.garageView.updateGarageView(cars, currentPage, amount);
@@ -434,33 +434,33 @@ export class AppController {
   }
 
   public async getNextCars() {
-    const currentPage = this.service.getGaragePage();
+    const currentPage = this.service.garagePage;
     const { cars, amount } = await this.api.getCars(currentPage + 1);
     this.garageView.updateGarageView(cars, currentPage + 1, amount);
-    this.service.setGaragePage(currentPage + 1);
+    this.service.garagePage = currentPage + 1;
   }
 
   public async getPreviousCars() {
-    const currentPage = this.service.getGaragePage();
+    const currentPage = this.service.garagePage;
     const { cars, amount } = await this.api.getCars(currentPage - 1);
     this.garageView.updateGarageView(cars, currentPage - 1, amount);
-    this.service.setGaragePage(currentPage - 1);
+    this.service.garagePage = currentPage - 1;
   }
 
   public async getNextWinners() {
-    const currentPage = this.service.getWinnersPage();
+    const currentPage = this.service.winnersPage;
     const { winners, amount } = await this.api.getWinners(currentPage + 1);
    
     this.winnerView.updateWinnersView(winners, currentPage + 1, amount);
-    this.service.setWinnersPage(currentPage + 1);
+    this.service.winnersPage = currentPage + 1;
   }
 
   public async getPreviousWinners() {
-    const currentPage = this.service.getWinnersPage();
+    const currentPage = this.service.winnersPage;
     const { winners, amount } = await this.api.getWinners(currentPage - 1);
     
     this.winnerView.updateWinnersView(winners, currentPage - 1, amount);
-    this.service.setWinnersPage(currentPage - 1);
+    this.service.winnersPage = currentPage - 1;
   }
 
   public generateCarName(): string {
@@ -490,7 +490,7 @@ export class AppController {
       await this.api.createCar({ name, color });      
     }
 
-    const currentPage = this.service.getGaragePage();
+    const currentPage = this.service.garagePage;
     const { cars, amount } = await this.api.getCars(currentPage);
 
     this.garageView.updateGarageView(cars, currentPage, amount);

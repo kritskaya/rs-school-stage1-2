@@ -1,10 +1,10 @@
 export class AppService {
 
-  private garagePage: number;
-  private winnersPage: number;
-  private sort: string;
-  private order: string;
-  animationFrameId: { [index: number]: number };
+  private _garagePage: number;
+  private _winnersPage: number;
+  private _sort: string;
+  private _order: string;
+  private animationFrameId: { [index: number]: number } ;
 
   constructor() {
     this.garagePage = 1;
@@ -14,36 +14,36 @@ export class AppService {
     this.animationFrameId = {};
   }
 
-  public getGaragePage(): number {
-    return this.garagePage;
+  public get garagePage(): number {
+    return this._garagePage;
   }
 
-  public setGaragePage(page: number) {
-    this.garagePage = page;
+  public set garagePage(page: number) {
+    this._garagePage = page;
   }
 
-  public getWinnersPage(): number {
-    return this.winnersPage;
+  public get winnersPage(): number {
+    return this._winnersPage;
   }
 
-  public setWinnersPage(page: number) {
-    this.winnersPage = page;
+  public set winnersPage(page: number) {
+    this._winnersPage = page;
   }
 
-  public getSort(): string {
-    return this.sort;
+  public get sort(): string {
+    return this._sort;
   }
 
-  public setSort(sort: string): void {
-    this.sort = sort;
+  public set sort(sort: string) {
+    this._sort = sort;
   }
 
-  public getOrder(): string {
-    return this.order;
+  public get order(): string {
+    return this._order;
   }
 
-  public setOrder(order: string): void {
-    this.order = order;
+  public set order(order: string) {
+    this._order = order;
   }
 
   public getAnimationFrameId(carId: number): number {
