@@ -13,7 +13,7 @@ export class AppController {
   private winnerView: WinnersView;
 
   constructor() {
-    this.api = new ApiService();
+    this.api = new ApiService('http://127.0.0.1:3000');
     this.service = new AppService();
     this.garageView = new GarageView();
     this.winnerView = new WinnersView();

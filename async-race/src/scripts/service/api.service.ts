@@ -1,11 +1,14 @@
 import { ICar } from '../model/car.model';
 import { IWinner } from '../model/winner.nodel';
 
-export class ApiService {
-  private base = 'http://127.0.0.1:3000';
+export class ApiService{
   private garage = `${this.base}/garage`;
   private engine = `${this.base}/engine`;
   private winner = `${this.base}/winners`;
+
+  constructor(
+    private base: string
+  ) {}
 
   public async getCars(page = 1, limit = 7): Promise<{ cars: ICar[], amount: number }> {
     const response = await fetch(`${this.garage}?_page=${page}&_limit=${limit}`);
