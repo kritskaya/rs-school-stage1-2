@@ -22,11 +22,11 @@ export class ApiService{
 
   public async getCar(id: number): Promise<ICar> {
     const response = await fetch(`${this.garage}/${id}`);
-    const json: ICar = await response.json();
-    return json;
+    const car: ICar = await response.json();
+    return car;
   }
 
-  public async createCar(item: Omit<ICar, 'id'>): Promise<JSON> {
+  public async createCar(item: Omit<ICar, 'id'>): Promise<{ name: string, color: string, id: number }> {
     const params = {
       method: 'POST',
       body: JSON.stringify(item),
@@ -36,20 +36,19 @@ export class ApiService{
     };
 
     const response = await fetch(this.garage, params);
-    const json: JSON = await response.json();
-    return json;
+    const newCar: { name: string, color: string, id: number } = await response.json();
+    return newCar;
   }
 
-  public async deleteCar(id: number): Promise<JSON> {
+  public async deleteCar(id: number): Promise<{}> {
     const params = {
       method: 'DELETE',
     };
     const response = await fetch(`${this.garage}/${id}`, params);
-    const json: JSON = await response.json();
-    return json;
+    return await response.json();
   }
 
-  public async updateCar(id: number, item: Omit<ICar, 'id'>): Promise<JSON> {
+  public async updateCar(id: number, item: Omit<ICar, 'id'>): Promise<{ name: string, color: string, id: number }> {
     const params = {
       method: 'PUT',
       body: JSON.stringify(item),
@@ -59,8 +58,8 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.garage}/${id}`, params);
-    const json: JSON = await response.json();
-    return json;
+    const car: { name: string, color: string, id: number } = await response.json();
+    return car;
   }
 
   public async startEngine(id: number): Promise<{ velocity: number, distance: number }> {
@@ -69,18 +68,18 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.engine}?id=${id}&status=started`, params);
-    const json: { velocity: number, distance: number } = await response.json();
-    return json;
+    const carData: { velocity: number, distance: number } = await response.json();
+    return carData;
   }
 
-  public async stopEngine(id: number): Promise<JSON> {
+  public async stopEngine(id: number): Promise<{ velocity: number, distance: number }> {
     const params = {
       method: 'PATCH',
     };
 
     const response = await fetch(`${this.engine}?id=${id}&status=stopped`, params);
-    const json: JSON = await response.json();
-    return json;
+    const carData: { velocity: number, distance: number } = await response.json();
+    return carData;
   }
 
   public async driveCar(id: number): Promise<{ success: boolean }> {
@@ -92,14 +91,14 @@ export class ApiService{
     
     if (response.status !== 200) return { success: false };
     
-    const json: { success: boolean } = await response.json();
-    return json;
+    const drivngStatus: { success: boolean } = await response.json();
+    return drivngStatus;
   }
 
   public async getWinners(page = 1, limit = 10, sort?: string, order?: string): Promise<{ winners: IWinner[], amount: number }> {
     const response = await fetch(`${this.winner}?_page=${page}&_limit=${limit}${(sort && order) ? `&_sort=${sort}&_order=${order}` : ''}`);
-    const data = await response.json();
-    const winners = await Promise.all(data.map(async (item: IWinner) => Object.assign(item, { car: await this.getCar(item.id) })));
+    const winnersData: IWinner[] = await response.json();
+    const winners = await Promise.all(winnersData.map(async (item: IWinner) => Object.assign(item, { car: await this.getCar(item.id) })));
     
     const amount = response.headers.get('X-Total-Count') || 0;
     return {
@@ -114,14 +113,14 @@ export class ApiService{
     const json = await response.json();
     
     if (response.status === 200) {
-      const data: IWinner = await Object.assign(json, { car: await this.getCar(id) });
-      return data;
+      const winner: IWinner = await Object.assign(json, { car: await this.getCar(id) });
+      return winner;
     }
 
     return null;
   }
 
-  public async createWinner(item: IWinner): Promise<JSON> {
+  public async createWinner(item: IWinner): Promise<Omit<IWinner, 'car'>> {
     const params = {
       method: 'POST',
       body: JSON.stringify(item),
@@ -131,23 +130,21 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.winner}`, params);
-    const json: JSON = await response.json();
+    const winner: Omit<IWinner, 'car'> = await response.json();
 
-    return json;
+    return winner;
   }
 
-  public async deleteWinner(id: number): Promise<JSON> {
+  public async deleteWinner(id: number): Promise<{}> {
     const params = {
       method: 'DELETE',
     };
 
     const response = await fetch(`${this.winner}/${id}`, params);
-    const json: JSON = await response.json();
-
-    return json;
+    return await response.json();
   }
 
-  public async updateWinner(id: number, item: Omit<IWinner, 'id'>): Promise<JSON> {
+  public async updateWinner(id: number, item: Omit<IWinner, 'id'>): Promise<Omit<IWinner, 'car'>> {
     const params = {
       method: 'PUT',
       body: JSON.stringify(item),
@@ -157,8 +154,8 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.winner}/${id}`, params);
-    const json: JSON = await response.json();
+    const winner: Omit<IWinner, 'car'> = await response.json();
 
-    return json;
+    return winner;
   }
 }
