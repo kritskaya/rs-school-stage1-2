@@ -9,9 +9,8 @@ module.exports = {
     "sourceType": "module"
   },
   "env": {
-    "es6": true,
-    "browser": true,
-    "node": true
+    "es2020": true,
+    "browser": true
   },
   "rules": {
     "no-debugger": "off",
