@@ -22,7 +22,7 @@ export class ApiService{
 
   public async getCar(id: number): Promise<ICar> {
     const response = await fetch(`${this.garage}/${id}`);
-    const json = await response.json();
+    const json: ICar = await response.json();
     return json;
   }
 
@@ -36,7 +36,7 @@ export class ApiService{
     };
 
     const response = await fetch(this.garage, params);
-    const json = await response.json();
+    const json: JSON = await response.json();
     return json;
   }
 
@@ -45,7 +45,7 @@ export class ApiService{
       method: 'DELETE',
     };
     const response = await fetch(`${this.garage}/${id}`, params);
-    const json = await response.json();
+    const json: JSON = await response.json();
     return json;
   }
 
@@ -59,7 +59,7 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.garage}/${id}`, params);
-    const json = await response.json();
+    const json: JSON = await response.json();
     return json;
   }
 
@@ -69,7 +69,7 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.engine}?id=${id}&status=started`, params);
-    const json = await response.json();
+    const json: { velocity: number, distance: number } = await response.json();
     return json;
   }
 
@@ -79,7 +79,7 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.engine}?id=${id}&status=stopped`, params);
-    const json = await response.json();
+    const json: JSON = await response.json();
     return json;
   }
 
@@ -92,7 +92,7 @@ export class ApiService{
     
     if (response.status !== 200) return { success: false };
     
-    const json = await response.json();
+    const json: { success: boolean } = await response.json();
     return json;
   }
 
@@ -114,7 +114,7 @@ export class ApiService{
     const json = await response.json();
     
     if (response.status === 200) {
-      const data = await Object.assign(json, { car: await this.getCar(id) });
+      const data: IWinner = await Object.assign(json, { car: await this.getCar(id) });
       return data;
     }
 
@@ -131,7 +131,7 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.winner}`, params);
-    const json = await response.json();
+    const json: JSON = await response.json();
 
     return json;
   }
@@ -142,7 +142,7 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.winner}/${id}`, params);
-    const json = await response.json();
+    const json: JSON = await response.json();
 
     return json;
   }
@@ -157,7 +157,7 @@ export class ApiService{
     };
 
     const response = await fetch(`${this.winner}/${id}`, params);
-    const json = await response.json();
+    const json: JSON = await response.json();
 
     return json;
   }
