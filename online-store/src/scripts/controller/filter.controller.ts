@@ -33,23 +33,25 @@ export class FilterController {
 		const jsonValueFilters = localStorage.getItem('value-filters');
 		const loaded =  new Map();
 
-		if (jsonValueFilters) {
-			const filters = JSON.parse(jsonValueFilters);
-			filters.forEach((item: ValueFilterPDO) => {
-				const title = item.title;
-				const field = item.field;
-				const value = item.value;
-				loaded.set(value, new ValueFilter(title, field, value));
-
-				const input = document.querySelector<HTMLInputElement>(`input[data-filter="${value}"]`);
-				
-				if (input) {
-					input.checked = true;
-					this.addActiveValueFilterState(value as ValueFilterType);
-				}
-			});
+		if (!jsonValueFilters) {
+			return loaded;
 		}
 		
+		const filters = JSON.parse(jsonValueFilters);
+		filters.forEach((item: ValueFilterPDO) => {
+			const title = item.title;
+			const field = item.field;
+			const value = item.value;
+			loaded.set(value, new ValueFilter(title, field, value));
+
+			const input = document.querySelector<HTMLInputElement>(`input[data-filter="${value}"]`);
+			
+			if (input) {
+				input.checked = true;
+				this.addActiveValueFilterState(value as ValueFilterType);
+			}
+		});
+				
 		return loaded;
 	}
 
