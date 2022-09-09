@@ -7,7 +7,7 @@ export class RangeFilter {
 	constructor(
 		private min: number,
 		private max: number,
-		private field: string
+		private field: RangeFilterType
 	) {}
 	
 	public getMin(): number {
@@ -18,7 +18,7 @@ export class RangeFilter {
 		return this.max;
 	}
 
-	public getField(): string {
+	public getField(): RangeFilterType {
 		return this.field;
 	}
 }
@@ -26,5 +26,5 @@ export class RangeFilter {
 export type RangeFilterPDO = {
 	min: string;
 	max: string;
-	field: string;
+	field: RangeFilterType;
 }

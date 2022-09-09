@@ -70,7 +70,7 @@ export class FilterController {
 				const slider = document.getElementById(field + "-range") as target;
 				slider.noUiSlider?.set([min, max]);
 
-				this.addActiveRangeFilterState(field as RangeFilterType);
+				this.addActiveRangeFilterState(field);
 			})
 		}
 		console.log(loaded);

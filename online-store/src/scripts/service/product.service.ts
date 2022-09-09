@@ -21,8 +21,8 @@ export class ProductService {
 		this.currentValueFilters = new Map();
 
 		this.currentRangeFilters = new Map();
-		this.currentRangeFilters.set(RangeFilterType.Price, new RangeFilter(0, 50000, 'price'));
-		this.currentRangeFilters.set(RangeFilterType.Quantity, new RangeFilter(0, 50, 'quantity'));
+		this.currentRangeFilters.set(RangeFilterType.Price, new RangeFilter(0, 50000, RangeFilterType.Price));
+		this.currentRangeFilters.set(RangeFilterType.Quantity, new RangeFilter(0, 50, RangeFilterType.Quantity));
 		
 		this.currentSearch = new Search('');
 
@@ -167,7 +167,7 @@ export class ProductService {
 						return values.includes(item);
 					});
 					
-					return arrayItem ? true: false;
+					return Boolean(arrayItem);
 				}
 			})
 		});
@@ -175,13 +175,11 @@ export class ProductService {
 	}
 
 	public supplyRangeFilters(): void {
-		type keys = keyof Product;
-
 		const filters = this.currentRangeFilters;
 
 		filters.forEach((filter) => {
 			this.displayedProducts = this.displayedProducts.filter((product) => {
-				const fieldName = filter.getField() as keys;
+				const fieldName = filter.getField();
 				const maxValue = filter.getMax();
 				const minValue = filter.getMin();
 
