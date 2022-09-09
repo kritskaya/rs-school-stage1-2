@@ -26,20 +26,20 @@ export class ProductService {
 		
 		this.currentSearch = new Search('');
 
-		for (let i = 0; i < productsData.length; i++) {
-			const id = productsData[i].id;
-			const name = productsData[i].name;
-			const price = parseInt(productsData[i].price);
-			const color = productsData[i].color;
-			const quantity = parseInt(productsData[i].quantity);
-			const size = productsData[i].size;
-			const material = productsData[i].material;
-			const keywords = productsData[i].keywords;
-			const description = productsData[i].title;
-			const image = productsData[i].image;
-			const popular = productsData[i].popular;
+		for (const productData of productsData) {
+			const id = productData.id;
+			const name = productData.name;
+			const price = parseInt(productData.price);
+			const color = productData.color;
+			const quantity = parseInt(productData.quantity);
+			const size = productData.size;
+			const material = productData.material;
+			const keywords = productData.keywords;
+			const description = productData.title;
+			const image = productData.image;
+			const popular = productData.popular;
 
-			const p = new Product(id, name, price, color, quantity, size, material, 
+			const p = new Product(id, name, price, color, quantity, size, material,
 				keywords, description, image, popular);
 
 			this.products.push(p);
