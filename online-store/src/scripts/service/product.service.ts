@@ -76,14 +76,12 @@ export class ProductService {
 	}
 
 	public supplySort(): void {
-		type Keys = keyof Product;
-
 		const sort = this.currentSort;
 
 		this.displayedProducts = this.products.slice();
 
 		this.displayedProducts.sort((item1, item2) => {
-			const sortField = sort.getField() as Keys;
+			const sortField = sort.getField();
 			if (!sort.isAsc())
 				[item1, item2] = [item2, item1];
 				

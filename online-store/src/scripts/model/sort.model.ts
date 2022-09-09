@@ -12,7 +12,7 @@ export class Sort {
 		return this.title;
 	}
 
-	public getField(): string {
+	public getField(): keyof Product {
 		return this.field;
 	}
 
