@@ -51,6 +51,6 @@ export class FilterService {
 	}
 
 	public getValueFilter(type: ValueFilterType): ValueFilter<ValueFilterType> {
-		return this.allValueFilters.get(type) as ValueFilter<ValueFilterType>;
+		return this.allValueFilters.get(type)!;
 	}
 }

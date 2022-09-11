@@ -16,20 +16,21 @@ export class FilterView extends BaseView {
 	}
 
 	private renderSizeFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
-		const parent = document.getElementById('size-container') as HTMLElement;
 		const root = this.createElement('ul', 'action__container action-list filter-list');
+		const parent = document.getElementById('size-container');
+		if (!parent) return;
 		
 		filters.forEach((item, key) => {	
 			const keyInType = (Object.values(SizeFilterType) as string[]).includes(key);	
 			if (keyInType) {
 				const filterItem = this.createElement('li', 'action-list__item');
 
-				const filterChkbox = this.createElement('input', 'action-list__input') as HTMLInputElement;
+				const filterChkbox = <HTMLInputElement>this.createElement('input', 'action-list__input');
 				filterChkbox.type = 'checkbox';
 				filterChkbox.id = `${item.getField()}-${item.getValue()}-filter-input`;
 				filterChkbox.dataset.filter = key.toString();
 	
-				const filterLabel = this.createElement('label', 'action-list__label filter-label') as HTMLLabelElement;
+				const filterLabel = <HTMLLabelElement>this.createElement('label', 'action-list__label filter-label');
 				filterLabel.htmlFor = filterChkbox.id;
 				filterLabel.textContent = item.getTitle();
 	
@@ -42,7 +43,8 @@ export class FilterView extends BaseView {
 	}
 
 	private renderColorFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
-		const parent = document.getElementById('color-container') as HTMLElement;
+		const parent = document.getElementById('color-container');
+		if (!parent) return;
 		const root = this.createElement('ul', 'action__container action-list filter-list');
 		const colors = ['#ffffff', '#ffcc99', '#ff99cc', '#666666', '#663300', '#000000'];
 		let start = 0;
@@ -55,12 +57,12 @@ export class FilterView extends BaseView {
 				const colorElement = this.createElement('div', 'action-list__color');
 				colorElement.style.backgroundColor = colors[start++];
 
-				const filterChkbox = this.createElement('input', 'action-list__input') as HTMLInputElement;
+				const filterChkbox = <HTMLInputElement>this.createElement('input', 'action-list__input');
 				filterChkbox.type = 'checkbox';
 				filterChkbox.id = `${item.getField()}-${item.getValue()}-filter-input`;
 				filterChkbox.dataset.filter = key.toString();
 	
-				const filterLabel = this.createElement('label', 'action-list__label filter-label') as HTMLLabelElement;
+				const filterLabel = <HTMLLabelElement>this.createElement('label', 'action-list__label filter-label');
 				filterLabel.htmlFor = filterChkbox.id;
 				filterLabel.textContent = item.getTitle();
 	
@@ -73,7 +75,8 @@ export class FilterView extends BaseView {
 	}
 
 	private renderMaterialFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
-		const parent = document.getElementById('material-container') as HTMLElement;
+		const parent = document.getElementById('material-container');
+		if (!parent) return;
 		const root = this.createElement('ul', 'action__container action-list filter-list');
 		
 		filters.forEach((item, key) => {	
@@ -81,12 +84,12 @@ export class FilterView extends BaseView {
 			if (keyInType) {
 				const filterItem = this.createElement('li', 'action-list__item');
 
-				const filterChkbox = this.createElement('input', 'action-list__input') as HTMLInputElement;
+				const filterChkbox = <HTMLInputElement>this.createElement('input', 'action-list__input');
 				filterChkbox.type = 'checkbox';
 				filterChkbox.id = `${item.getField()}-${item.getValue()}-filter-input`;
 				filterChkbox.dataset.filter = key.toString();
 	
-				const filterLabel = this.createElement('label', 'action-list__label filter-label') as HTMLLabelElement;
+				const filterLabel = <HTMLLabelElement>this.createElement('label', 'action-list__label filter-label');
 				filterLabel.htmlFor = filterChkbox.id;
 				filterLabel.textContent = item.getTitle();
 	
@@ -99,8 +102,9 @@ export class FilterView extends BaseView {
 	}
 
 	private renderPriceFilter() {
-		const parent = document.getElementById('price-container') as HTMLElement;
 		const root = this.createElement('ul', 'action__container action-list range-container');
+		const parent = document.getElementById('price-container');
+		if (!parent) return;
 		
 		const filterItem = this.createElement('li', 'action-list__item');
 		filterItem.id = 'price-range';
@@ -129,8 +133,9 @@ export class FilterView extends BaseView {
 	}
 
 	private renderQuantityFilter() {
-		const parent = document.getElementById('quantity-container') as HTMLElement;
 		const root = this.createElement('ul', 'action__container action-list range-container');
+		const parent = document.getElementById('quantity-container');
+		if (!parent) return;
 		
 		const filterItem = this.createElement('li', 'action-list__item');
 		filterItem.id = 'quantity-range';
@@ -185,7 +190,9 @@ export class FilterView extends BaseView {
 		filterBtn?.classList.toggle('actions__item_active');
 
 		if (filterBtn) {
-			const filterList = filterBtn.nextElementSibling as HTMLElement;
+			const filterList = filterBtn.nextElementSibling;
+			if (!filterList) return;
+
 			filterList.classList.toggle('active');
 		}
 	}
@@ -194,7 +201,9 @@ export class FilterView extends BaseView {
 		const checked = container.querySelectorAll<HTMLElement>('input:checked');
 
 		if (checked.length) {
-			const btn = container.previousElementSibling as HTMLElement;
+			const btn = container.previousElementSibling;
+			if (!btn) return;
+
 			btn.classList.add('filter-btn_active');
 		}
 	}
@@ -203,7 +212,9 @@ export class FilterView extends BaseView {
 		const checked = container.querySelectorAll<HTMLElement>('input:checked');
 
 		if (!checked.length) {
-			const btn = container.previousElementSibling as HTMLElement;
+			const btn = container.previousElementSibling;
+			if (!btn) return;
+
 			btn.classList.remove('filter-btn_active');
 		}
 	}
@@ -215,7 +226,8 @@ export class FilterView extends BaseView {
 			const starts = rangeSlider.noUiSlider.options.start as number[];
 			const [min, max] = starts;
 			const [start, end] = rangeSlider.noUiSlider.get() as number[];
-			const btn = container.previousElementSibling as HTMLElement;
+			const btn = container.previousElementSibling;
+			if (!btn) return;
 
 			if (start !== min || end !== max) {
 				btn.classList.add('filter-btn_active');

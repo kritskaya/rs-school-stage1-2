@@ -32,7 +32,7 @@ export class SortController {
 						const input = label.previousElementSibling;
 						
 						if (input) {
-							(input as HTMLInputElement).checked = true;
+							(<HTMLInputElement>input).checked = true;
 						}
 					}
 				})

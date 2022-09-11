@@ -12,6 +12,7 @@ describe('test setCurrentSort method', () => {
   
   it ('should set on the first place the item with minimum price for sort by price in asc order', () => {
     sort = sortService.getSort(SortType.AscPrice);
+    if (!sort) return;
     service.setCurrentSort(sort);
     const minPrice = Math.min(...service.getProducts().map((item) => item.getPrice()));
     expect(service.getDisplayedProducts()[0].getPrice()).toBe(minPrice);
@@ -25,6 +26,7 @@ describe('test setCurrentSort method', () => {
 
   it ('should set on the first place the item with maximum quantity for sort by quantity in desc order', () => {
     sort = sortService.getSort(SortType.DescQuantity);
+    if (!sort) return;
     service.setCurrentSort(sort);
     const maxQuantity = Math.max(...service.getProducts().map((item) => item.getQuantity()));
     expect(service.getDisplayedProducts()[0].getQuantity()).toBe(maxQuantity);
@@ -41,6 +43,7 @@ describe('test addCurrentValueFilter method', () => {
   const service = new ProductService();
   const sortService = new SortService();
   const sort = sortService.getSort(SortType.AscPopular);
+  if (!sort) return;
   service.setCurrentSort(sort);
   const filterService = new FilterService();
   let filter;
@@ -93,6 +96,7 @@ describe('test addCurrentRangeFilter method', () => {
   const service = new ProductService();
   const sortService = new SortService();
   const sort = sortService.getSort(SortType.AscPopular);
+  if (!sort) return;
   service.setCurrentSort(sort);
 
   it ('should filter 3 items for price = [0; 10000]', () => {
@@ -137,6 +141,7 @@ describe('test setCurrentSearch method', () => {
   const service = new ProductService();
   const sortService = new SortService();
   const sort = sortService.getSort(SortType.AscPopular);
+  if (!sort) return;
   service.setCurrentSort(sort);
 
   it ('should return 1 item for search word "диван"', () => {
@@ -160,6 +165,7 @@ describe('test combine sort, filter and search method', () => {
   const sortService = new SortService();
   const filterService = new FilterService();
   const sort = sortService.getSort(SortType.DescPrice);
+  if (!sort) return;
   service.setCurrentSort(sort);
 
   it (`should return 1 item for search word "кровати,"

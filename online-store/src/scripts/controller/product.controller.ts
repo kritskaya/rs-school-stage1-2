@@ -54,8 +54,9 @@ export class ProductController {
 	}
 
 	public addInCartBadge(event: Event) {
-		const target = event.currentTarget as HTMLElement;
-		const productElement = target.parentElement;
+		const target = event.target as HTMLElement;
+		const productElement = target.closest<HTMLElement>('.products__item.product')
+		console.log(target);
 
 		if (productElement) {
 			this.view.addInCartBadge(productElement);
@@ -63,8 +64,8 @@ export class ProductController {
 	}
 
 	public removeInCartBadge(event: Event) {
-		const target = event.currentTarget as HTMLElement;
-		const productElement = target.parentElement;
+		const target = event.target as HTMLElement;
+		const productElement = target.closest<HTMLElement>('.products__item.product')
 
 		if (productElement) {
 			this.view.removeInCartBadge(productElement);

@@ -120,7 +120,7 @@ export class App {
 		.querySelector<HTMLElement>('.actions.section')
 		?.addEventListener('input', (e) => {
 			const target = e.target as HTMLElement;
-			console.log('filter')
+			
 			if (target.closest('.action-list__input[type="checkbox"]')) {
 				this.controller.selectValueFilterItem(e);
 			}

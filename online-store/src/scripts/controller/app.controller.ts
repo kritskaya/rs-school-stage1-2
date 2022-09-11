@@ -118,13 +118,13 @@ export class AppController {
 
 	public selectValueFilterItem(event: Event): void {
 		const target = event.target as HTMLInputElement;
-		const filterType = target.dataset.filter as ValueFilterType;
+		const filterType = target.dataset.filter;
 
 		if (filterType) {
-			if (target.checked) {			
-				this.addValueFilter(filterType);
+			if (target.checked) {
+				this.addValueFilter(<ValueFilterType>filterType);
 			} else {
-				this.removeValueFilter(filterType);
+				this.removeValueFilter(<ValueFilterType>filterType);
 			}
 		}
 	}
@@ -143,7 +143,7 @@ export class AppController {
 	public addRangeFilter(range: number[], type: RangeFilterType): void {		
 		const filter = new RangeFilter(range[0], range[1], type);
 		this.productController.addCurrentRangeFilter(filter);
-		this.filterController.addActiveRangeFilterState(type as RangeFilterType);
+		this.filterController.addActiveRangeFilterState(type);
 	}
 
 	public clearAllFilters() {

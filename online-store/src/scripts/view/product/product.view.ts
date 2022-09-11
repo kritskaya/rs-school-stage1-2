@@ -5,17 +5,18 @@ export class ProductView {
 	private root: HTMLElement;
 
 	constructor(products: Product[]) {
-		this.root = document.getElementById('product-container') as HTMLElement;
+		this.root = document.getElementById('product-container')!;
+		if (!this.root) return;
 
 		for (let i = 0; i < products.length; i++) 	{
-			const productImgs = this.createElement('a', 'product__imgs') as HTMLAnchorElement;
+			const productImgs = <HTMLAnchorElement>this.createElement('a', 'product__imgs');
 			productImgs.href = '#';
 			
-			const img = this.createElement('img', 'product__img')  as HTMLImageElement;
+			const img = <HTMLImageElement>this.createElement('img', 'product__img');
 			img.src = `./assets/img/products/${products[i].getImage()}.jpg`;
 			img.alt = 'product image';
 
-			const img2 = this.createElement('img', 'product__img_hover') as HTMLImageElement;
+			const img2 = <HTMLImageElement>this.createElement('img', 'product__img_hover');
 			img2.src = `./assets/img/products/${products[i].getImage()}_hover.jpg`;
 			img2.alt = 'product image';
 
@@ -45,7 +46,7 @@ export class ProductView {
 			const btn = this.createElement('button', 'product__btn cart-btn');
 			btn.title = 'Добавить в корзину';
 
-			const btnImg = this.createElement('img', 'cart-btn__img') as HTMLImageElement;
+			const btnImg = <HTMLImageElement>this.createElement('img', 'cart-btn__img');
 			btnImg.src = './assets/icon/shopping-cart.png';
 			btnImg.alt = 'add to cart'
 
@@ -126,7 +127,7 @@ export class ProductView {
 		// search + filters
 		const allProducts = this.root.children;
 		Array.from(allProducts).forEach((product) => {
-			const element = product as HTMLElement;
+			const element = <HTMLElement>product;
 			const id = element.dataset.id;
 			const visibleElement = sortProducts.find((item) => item.getId() === id);
 			

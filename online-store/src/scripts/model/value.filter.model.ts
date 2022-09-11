@@ -1,3 +1,5 @@
+import { Product } from './product.model';
+
 export enum SizeFilterType {
 	Size60x120 = "60x120",
 	Size80x200 = "80x200",
@@ -29,7 +31,8 @@ export type ValueFilterType = SizeFilterType | MaterialFilterType | ColorFilterT
 export class ValueFilter<T> {
 	constructor(
 		private title: string,
-		private field: string,
+		// private field: string,
+		private field: keyof Product,
 		private value: T
 	) {}
 
@@ -37,7 +40,8 @@ export class ValueFilter<T> {
 		return this.title;
 	}
 
-	public getField(): string {
+	// public getField(): string {
+		public getField(): keyof Product {
 		return this.field;
 	}
 
@@ -48,6 +52,7 @@ export class ValueFilter<T> {
 
 export type ValueFilterPDO = {
 	title: string;
-	field: string;
+	field: keyof Product;
+	//field: string;
 	value: string;
 }

@@ -24,6 +24,8 @@ export class OrderController {
 
 			order.forEach((item: ProductPDO) => {
 				const storageItem = this.service.addProduct(item.id);
+				if (!storageItem)  return;
+
 				const storageElement = this.view.addToOrder(storageItem);
 				this.clickRemoveCartBtnHandler(storageElement);
 			});
@@ -40,8 +42,10 @@ export class OrderController {
 		const productCard = target.closest<HTMLElement>('.products__item');
 		const id = productCard?.dataset.id;
 		
-		if (id) {
-			const newItem = this.service.addProduct(id);
+		if (!id)  return;
+
+		const newItem = this.service.addProduct(id);
+		if (newItem) {
 			const newElement = this.view.addToOrder(newItem);
 			this.clickRemoveCartBtnHandler(newElement);
 		}
@@ -71,7 +75,8 @@ export class OrderController {
 		}
 
 		if (productElement) {
-			const id = productElement.dataset.id as string;
+			const id = productElement.dataset.id;
+			if (!id) return;
 
 			this.service.removeProduct(id);
 			this.view.removeFromOrder(productElement);

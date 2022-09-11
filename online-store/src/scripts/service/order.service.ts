@@ -13,9 +13,10 @@ export class OrderService {
 		return this.order;
 	}
 	
-	public addProduct(productId: string): Product {
-		const product = productsData.find((item) => item.id === productId) as ProductPDO;
+	public addProduct(productId: string): Product | null {
+		const product = productsData.find((item) => item.id === productId);
 
+		if(!product) return null;
 		const id = product.id;
 		const name = product.name;
 		const price = parseInt(product.price);

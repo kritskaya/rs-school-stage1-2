@@ -43,7 +43,7 @@ export class OrderView {
 		const item = this.createElement('li', 'cart__item cart-item');
 		item.dataset.id = product.getId();
 			
-		const img = this.createElement('img', 'cart-item__img') as HTMLImageElement;
+		const img = <HTMLImageElement>this.createElement('img', 'cart-item__img');
 		img.src = `./assets/img/products/${product.getImage()}_hover.jpg`;
 		img.alt = 'order item img';
 
@@ -70,13 +70,13 @@ export class OrderView {
 		return item;
 	}
 
-	private renderNoOrder() {
+	private renderNoOrder(): void {
 		const noOrder = this.createElement('li', 'cart__item item');
 		noOrder.textContent = 'Корзина пуста';
 		this.root.append(noOrder);
 	}
 
-	private renderCounter() {
+	private renderCounter(): void {
 		const parent = document.getElementById('cart-container');
 
 		if (parent) {
@@ -115,7 +115,9 @@ export class OrderView {
 
 		productElement.remove();
 
-		const quantity = this.counter.textContent as string;
+		const quantity = this.counter.textContent;
+		if(!quantity) return;
+
 		this.counter.textContent = `${+quantity - 1}`;
 		
 		if (!this.root.firstElementChild) {
@@ -124,7 +126,7 @@ export class OrderView {
 		}
 	}
 
-	public removeAllFromOrder() {
+	public removeAllFromOrder(): void {
 		this.root.innerHTML = '';
 		this.renderNoOrder();
 		if (this.counter) {
@@ -135,6 +137,6 @@ export class OrderView {
 	protected createElement(tag: string, className: string): HTMLElement {
 		const element = document.createElement(tag);
 		element.className = className;
-		return element
+		return element;
 	}
 }

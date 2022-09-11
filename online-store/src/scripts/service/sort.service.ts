@@ -22,7 +22,11 @@ export class SortService {
 	}
 
 	public getSort(sortType: SortType): Sort {
-		return this.sorts.get(sortType) as Sort;
+		const sort =  this.sorts.get(sortType);
+		if (sort) {
+			return sort;
+		}
+		return new Sort('Сначала популярные', 'popular' as keyof Product, true);
 	}
 
 	public getSorts(): Map<SortType, Sort> {

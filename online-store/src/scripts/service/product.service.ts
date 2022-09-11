@@ -50,10 +50,6 @@ export class ProductService {
 	
 	public getProducts(): Product[] {
 		return this.products;
-	} 
-
-	public getProduct(id: string): Product {
-		return this.products.find((i) => i.getId() === id) as Product;
 	}
 
 	public getDisplayedProducts(): Product[] {
@@ -123,7 +119,7 @@ export class ProductService {
 	}
 
 	public addCurrentRangeFilter(filter: RangeFilter): void {
-		this.currentRangeFilters.set(filter.getField() as RangeFilterType, filter);
+		this.currentRangeFilters.set(filter.getField(), filter);
 
 		this.supplyAllConditions();
 	}
@@ -140,9 +136,7 @@ export class ProductService {
 	}
 
 	public supplyValueFilters(): void {
-		type keys = keyof Product;
-
-		const sameFilterTypes = new Set();
+		const sameFilterTypes = new Set<keyof Product>();
 		const filters = this.currentValueFilters;
 
 		filters.forEach((item) => sameFilterTypes.add(item.getField()));
@@ -157,7 +151,7 @@ export class ProductService {
 			})
 
 			this.displayedProducts = this.displayedProducts.filter((product) => {
-				const productFilterFieldValue = product[type as keys];
+				const productFilterFieldValue = product[type];
 
 				if (typeof productFilterFieldValue === 'string') {
 					return values.includes(productFilterFieldValue)

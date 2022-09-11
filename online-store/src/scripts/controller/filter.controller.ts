@@ -37,7 +37,7 @@ export class FilterController {
 			return loaded;
 		}
 		
-		const filters = JSON.parse(jsonValueFilters);
+		const filters: ValueFilterPDO[] = JSON.parse(jsonValueFilters);
 		filters.forEach((item: ValueFilterPDO) => {
 			const title = item.title;
 			const field = item.field;
@@ -73,7 +73,7 @@ export class FilterController {
 				this.addActiveRangeFilterState(field);
 			})
 		}
-		console.log(loaded);
+		
 		return loaded;
 	}
 
