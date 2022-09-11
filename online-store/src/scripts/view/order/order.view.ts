@@ -127,7 +127,9 @@ export class OrderView {
 	public removeAllFromOrder() {
 		this.root.innerHTML = '';
 		this.renderNoOrder();
-		this.counter.remove();
+		if (this.counter) {
+			this.counter.remove();
+		}
 	}
 
 	protected createElement(tag: string, className: string): HTMLElement {
