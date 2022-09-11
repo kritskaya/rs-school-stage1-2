@@ -1,5 +1,5 @@
 import { ColorFilterType, MaterialFilterType, SizeFilterType } from "../src/scripts/model/value.filter.model";
-import { RangeFilter } from "../src/scripts/model/range.filter.model";
+import { RangeFilter, RangeFilterType } from "../src/scripts/model/range.filter.model";
 import { FilterService } from "../src/scripts/service/filter.service";
 import { ProductService } from "../src/scripts/service/product.service";
 import { SortService, SortType } from "../src/scripts/service/sort.service";
@@ -98,7 +98,7 @@ describe('test addCurrentRangeFilter method', () => {
   it ('should filter 3 items for price = [0; 10000]', () => {
     const min = 0;
     const max = 10000;
-    service.addCurrentRangeFilter(new RangeFilter(min, max, 'price'));
+    service.addCurrentRangeFilter(new RangeFilter(min, max, RangeFilterType.Price));
 
     const products = service.getProducts().filter((item) => item.getPrice() <= max);
     expect(service.getDisplayedProducts()).toMatchObject(products);
@@ -108,7 +108,7 @@ describe('test addCurrentRangeFilter method', () => {
     service.clearAllFilters();
     const min = 10;
     const max = 15;
-    service.addCurrentRangeFilter(new RangeFilter(min, max, 'quantity'));
+    service.addCurrentRangeFilter(new RangeFilter(min, max, RangeFilterType.Quantity));
 
     const products = service.getProducts().filter((item) => 
       ((item.getQuantity() <= max) && (item.getQuantity() >= min)));
@@ -120,11 +120,11 @@ describe('test addCurrentRangeFilter method', () => {
 
     const minQuantity = 10;
     const maxQuantity = 15;
-    service.addCurrentRangeFilter(new RangeFilter(minQuantity, maxQuantity, 'quantity'));
+    service.addCurrentRangeFilter(new RangeFilter(minQuantity, maxQuantity, RangeFilterType.Quantity));
 
     const minPrice = 0;
     const maxPrice = 30000;
-    service.addCurrentRangeFilter(new RangeFilter(minPrice, maxPrice, 'price'));
+    service.addCurrentRangeFilter(new RangeFilter(minPrice, maxPrice, RangeFilterType.Price));
 
     const products = service.getProducts().filter((item) => 
       (item.getQuantity() <= maxQuantity && item.getQuantity() >= minQuantity
@@ -181,7 +181,7 @@ describe('test combine sort, filter and search method', () => {
 
     const min = 0;
     const max = 20;
-    service.addCurrentRangeFilter(new RangeFilter(min, max, 'quantity'));
+    service.addCurrentRangeFilter(new RangeFilter(min, max, RangeFilterType.Quantity));
 
     products = service.getDisplayedProducts().filter((item) => 
       (item.getQuantity() <= max && item.getQuantity() >= min));

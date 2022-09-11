@@ -140,7 +140,7 @@ export class AppController {
 		this.filterController.removeActiveValueFilterState(filterType);
 	}
 
-	public addRangeFilter(range: number[], type: string): void {		
+	public addRangeFilter(range: number[], type: RangeFilterType): void {		
 		const filter = new RangeFilter(range[0], range[1], type);
 		this.productController.addCurrentRangeFilter(filter);
 		this.filterController.addActiveRangeFilterState(type as RangeFilterType);
