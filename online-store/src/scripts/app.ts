@@ -72,21 +72,24 @@ export class App {
 
 	private selectSortItemEventHandler() {
 		document
-		.querySelectorAll<HTMLElement>('.action-list__input[type="radio"]')
-		.forEach((btn) =>
-			btn.addEventListener('input', (e) => {
+		.querySelector<HTMLElement>('.sort-list')
+		?.addEventListener('input', (e) => {
+			const target = e.target as HTMLElement;
+			
+			if (target.closest('.action-list__input[type="radio"]')) {
 				this.controller.selectSortItem(e);
-			})
-		);
+			}
+		});
 	}
 
 	private filterBtnClickHandler() {
 		document
-		.querySelectorAll<HTMLElement>('.filter-btn')
-		.forEach((btn) =>
-			btn.addEventListener('click', (e) => {
+		.querySelector<HTMLElement>('.actions.section')
+		?.addEventListener('click', (e) => {
 				e.stopImmediatePropagation();
 				const target = e.target as HTMLElement;
+
+				if (!target.closest('.filter-btn')) return;
 
 				// close already opened
 				const opened = document.querySelector<HTMLElement>('.actions__item_active');
@@ -109,18 +112,19 @@ export class App {
 				if (listElement.classList.contains('active')) {
 					document.addEventListener('click', this.clickHandler);
 				}
-			})
-		);
+			});
 	}
 
 	private selectFilterValueEventHandler() {
 		document
-		.querySelectorAll<HTMLElement>('.action-list__input[type="checkbox"]')
-		.forEach((btn) =>
-			btn.addEventListener('input', (e) => {
+		.querySelector<HTMLElement>('.actions.section')
+		?.addEventListener('input', (e) => {
+			const target = e.target as HTMLElement;
+			console.log('filter')
+			if (target.closest('.action-list__input[type="checkbox"]')) {
 				this.controller.selectValueFilterItem(e);
-			})
-		);
+			}
+		});
 	}
 
 	private priceRangeSetHandler() {
@@ -191,13 +195,14 @@ export class App {
 
 	private toggleProductBtnClickHandler() {
 		document
-			.querySelectorAll<HTMLElement>('.product__btn')
-			.forEach((btn) =>
-				btn.addEventListener('click', (e) => {
+			.querySelector<HTMLElement>('.products__grid')
+			?.addEventListener('click', (e) => {
 					e.stopImmediatePropagation();
-					this.controller.toggleOrderItem(e);
-				})
-			);
+					const target = e.target as HTMLElement;
+					if (target.closest('.product__btn')) {
+						this.controller.toggleOrderItem(e);
+					}
+			});
 	}
 
 	private clearSettingsBtnClickHandler() {

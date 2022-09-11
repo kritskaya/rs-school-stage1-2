@@ -17,7 +17,7 @@ export class FilterView extends BaseView {
 
 	private renderSizeFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
 		const parent = document.getElementById('size-container') as HTMLElement;
-		const root = this.createElement('ul', 'action__container action-list');
+		const root = this.createElement('ul', 'action__container action-list filter-list');
 		
 		filters.forEach((item, key) => {	
 			const keyInType = (Object.values(SizeFilterType) as string[]).includes(key);	
@@ -43,7 +43,7 @@ export class FilterView extends BaseView {
 
 	private renderColorFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
 		const parent = document.getElementById('color-container') as HTMLElement;
-		const root = this.createElement('ul', 'action__container action-list');
+		const root = this.createElement('ul', 'action__container action-list filter-list');
 		const colors = ['#ffffff', '#ffcc99', '#ff99cc', '#666666', '#663300', '#000000'];
 		let start = 0;
 		
@@ -74,7 +74,7 @@ export class FilterView extends BaseView {
 
 	private renderMaterialFilter(filters: Map<ValueFilterType, ValueFilter<ValueFilterType>>) {
 		const parent = document.getElementById('material-container') as HTMLElement;
-		const root = this.createElement('ul', 'action__container action-list');
+		const root = this.createElement('ul', 'action__container action-list filter-list');
 		
 		filters.forEach((item, key) => {	
 			const keyInType = (Object.values(MaterialFilterType) as string[]).includes(key);	

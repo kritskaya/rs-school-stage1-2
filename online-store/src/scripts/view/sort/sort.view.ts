@@ -11,7 +11,7 @@ export class SortView extends BaseView {
 		super();
 		const parent = document.getElementById('sort-container') as HTMLElement;
 
-		this.root = this.createElement('ul', 'action__container action-list');
+		this.root = this.createElement('ul', 'action__container action-list sort-list');
 
 		sorts.forEach((item, key) => {
 			const sortItem = this.createElement('li', 'action-list__item');

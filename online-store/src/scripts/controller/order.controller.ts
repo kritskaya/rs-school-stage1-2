@@ -35,11 +35,10 @@ export class OrderController {
 	}
 
 	public addToOrder(event: Event): void {
-		const target = event.currentTarget as HTMLElement;
-		const productElement = target.parentElement as HTMLElement;
+		const target = event.target as HTMLElement;
 		
-		const idElement = productElement.querySelector<HTMLElement>('.product__id');
-		const id = idElement?.textContent?.split(' ')[1];
+		const productCard = target.closest<HTMLElement>('.products__item');
+		const id = productCard?.dataset.id;
 		
 		if (id) {
 			const newItem = this.service.addProduct(id);
